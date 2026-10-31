@@ -23,7 +23,7 @@ func geometry(main) -> void:
 func verify() -> void:
  var main=load("res://main.tscn").instantiate();main.enable_opening=false;main.muted=true;root.add_child(main)
  main.duel.players[0].board=[unit("dawn_warden",1),unit("wolf",2),unit("village_leader",3),unit("squire",4),unit("moon_herald",5)]
- main.duel.players[1].board=[unit("rogue",11),unit("raven",12),unit("aether_summoner",13),unit("runic_familiar",14),unit("abascanto_guardian",15)]
+ main.duel.players[1].board=[unit("lightning_rogue",11),unit("raven",12),unit("aether_summoner",13),unit("runic_familiar",14),unit("abascanto_guardian",15)]
  main.duel.players[0].hand=["squire","squire","mage","mage","wolf","wolf","fireball","fireball"]
  main.duel.players[0].mana=10;main.duel.players[0].max_mana=10;main.duel.players[0].hp=15
  main.redraw();await settle();geometry(main)

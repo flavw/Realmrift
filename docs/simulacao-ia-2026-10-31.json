@@ -1,0 +1,3942 @@
+{
+  "decks": [
+    {
+      "cards": [
+        "squire",
+        "squire",
+        "sentinel",
+        "sentinel",
+        "wall_smith",
+        "wall_smith",
+        "warrior",
+        "warrior",
+        "wall_guard",
+        "moon_herald",
+        "iron_stance",
+        "iron_stance",
+        "wall_guard",
+        "moon_herald",
+        "bloodblade",
+        "abascanto_guardian",
+        "abascanto_guardian",
+        "generous_peasant",
+        "generous_peasant",
+        "bloodblade"
+      ],
+      "name": "Baluarte das Cicatrizes"
+    },
+    {
+      "cards": [
+        "dusk_scout",
+        "dusk_scout",
+        "raven",
+        "raven",
+        "lightning_rogue",
+        "lightning_rogue",
+        "mist_alchemist",
+        "mist_alchemist",
+        "moon_herald",
+        "messenger_hawk",
+        "shadow_step",
+        "shadow_step",
+        "moon_herald",
+        "messenger_hawk",
+        "wolf",
+        "gate_watcher",
+        "gate_watcher",
+        "street_urchin",
+        "street_urchin",
+        "venom_rooftop"
+      ],
+      "name": "Caçada das Brumas"
+    },
+    {
+      "cards": [
+        "mage",
+        "mage",
+        "aether_summoner",
+        "aether_summoner",
+        "runic_familiar",
+        "eclipse_channeler",
+        "eclipse_channeler",
+        "conductive_bolt",
+        "conductive_bolt",
+        "astral_flame",
+        "squire",
+        "squire",
+        "runic_familiar",
+        "astral_flame",
+        "fire_mage",
+        "fire_mage",
+        "fireball",
+        "magic_missiles",
+        "magic_missiles",
+        "wizard_apprentice"
+      ],
+      "name": "Círculo Arcano"
+    },
+    {
+      "cards": [
+        "cleric",
+        "cleric",
+        "dawn_warden",
+        "dawn_warden",
+        "dawn_oracle",
+        "dawn_oracle",
+        "farmer",
+        "farmer",
+        "restoring_light",
+        "vigor_vow",
+        "moon_herald",
+        "restoring_light",
+        "vigor_vow",
+        "life_pilgrim",
+        "dawn_devotee",
+        "dawn_devotee",
+        "dawn_acolyte",
+        "dawn_acolyte",
+        "moon_herald",
+        "dawn_paladin"
+      ],
+      "name": "Aurora Vital"
+    },
+    {
+      "cards": [
+        "horde_roar",
+        "horde_roar",
+        "zombie_helper",
+        "zombie_helper",
+        "moon_werewolf",
+        "moon_werewolf",
+        "marsh_troll",
+        "minotaur_brute",
+        "minotaur_brute",
+        "marsh_troll",
+        "necromancer_summoner",
+        "necromancer_summoner",
+        "goblin_raider",
+        "goblin_raider",
+        "wolf",
+        "wolf",
+        "brood_fungus",
+        "brood_fungus",
+        "scorpion_kobold",
+        "scorpion_kobold"
+      ],
+      "name": "Horda dos Ermos"
+    },
+    {
+      "cards": [
+        "moon_herald",
+        "moon_herald",
+        "generous_peasant",
+        "generous_peasant",
+        "farmer",
+        "farmer",
+        "wise_merchant",
+        "wise_merchant",
+        "harvest_ox",
+        "harvest_ox",
+        "peasant_uprising",
+        "village_leader",
+        "village_leader",
+        "gate_watcher",
+        "gate_watcher",
+        "squire",
+        "squire",
+        "life_pilgrim",
+        "life_pilgrim",
+        "village_reconstruction"
+      ],
+      "name": "União da Colheita"
+    }
+  ],
+  "draws": 0,
+  "first_wins": 155,
+  "method": "IA atual nos dois lados; mulligan troca custo 4 ou mais; 20 partidas por confronto; lados e iniciativa alternados.",
+  "pairs": [
+    {
+      "a": "Baluarte das Cicatrizes",
+      "a_wins": 17,
+      "b": "Caçada das Brumas",
+      "b_wins": 3,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 56,
+          "health": [
+            17,
+            -2
+          ],
+          "inverted": false,
+          "seed": 2026111100,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 54,
+          "health": [
+            3,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026111101,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 63,
+          "health": [
+            -2,
+            5
+          ],
+          "inverted": true,
+          "seed": 2026111102,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 57,
+          "health": [
+            0,
+            5
+          ],
+          "inverted": true,
+          "seed": 2026111103,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 36,
+          "health": [
+            0,
+            16
+          ],
+          "inverted": false,
+          "seed": 2026111104,
+          "starter": 0,
+          "turns": 12,
+          "winner": 1
+        },
+        {
+          "actions": 54,
+          "health": [
+            16,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026111105,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 51,
+          "health": [
+            -1,
+            17
+          ],
+          "inverted": true,
+          "seed": 2026111106,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 58,
+          "health": [
+            -1,
+            1
+          ],
+          "inverted": true,
+          "seed": 2026111107,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 54,
+          "health": [
+            17,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026111108,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 56,
+          "health": [
+            4,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026111109,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 31,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026111110,
+          "starter": 0,
+          "turns": 11,
+          "winner": 0
+        },
+        {
+          "actions": 54,
+          "health": [
+            10,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026111111,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 64,
+          "health": [
+            3,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026111112,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 60,
+          "health": [
+            9,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026111113,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 39,
+          "health": [
+            0,
+            13
+          ],
+          "inverted": true,
+          "seed": 2026111114,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 60,
+          "health": [
+            0,
+            12
+          ],
+          "inverted": true,
+          "seed": 2026111115,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 55,
+          "health": [
+            7,
+            -2
+          ],
+          "inverted": false,
+          "seed": 2026111116,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 45,
+          "health": [
+            15,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026111117,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 58,
+          "health": [
+            -3,
+            12
+          ],
+          "inverted": true,
+          "seed": 2026111118,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 61,
+          "health": [
+            -4,
+            14
+          ],
+          "inverted": true,
+          "seed": 2026111119,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        }
+      ],
+      "turns": 363,
+      "unfinished": 0
+    },
+    {
+      "a": "Baluarte das Cicatrizes",
+      "a_wins": 16,
+      "b": "Círculo Arcano",
+      "b_wins": 4,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 64,
+          "health": [
+            20,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026112100,
+          "starter": 0,
+          "turns": 27,
+          "winner": 0
+        },
+        {
+          "actions": 65,
+          "health": [
+            0,
+            15
+          ],
+          "inverted": false,
+          "seed": 2026112101,
+          "starter": 1,
+          "turns": 27,
+          "winner": 1
+        },
+        {
+          "actions": 60,
+          "health": [
+            -1,
+            15
+          ],
+          "inverted": true,
+          "seed": 2026112102,
+          "starter": 0,
+          "turns": 24,
+          "winner": 1
+        },
+        {
+          "actions": 36,
+          "health": [
+            0,
+            20
+          ],
+          "inverted": true,
+          "seed": 2026112103,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 81,
+          "health": [
+            1,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026112104,
+          "starter": 0,
+          "turns": 38,
+          "winner": 0
+        },
+        {
+          "actions": 45,
+          "health": [
+            17,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026112105,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 61,
+          "health": [
+            -1,
+            17
+          ],
+          "inverted": true,
+          "seed": 2026112106,
+          "starter": 0,
+          "turns": 26,
+          "winner": 1
+        },
+        {
+          "actions": 77,
+          "health": [
+            -1,
+            16
+          ],
+          "inverted": true,
+          "seed": 2026112107,
+          "starter": 1,
+          "turns": 35,
+          "winner": 1
+        },
+        {
+          "actions": 76,
+          "health": [
+            4,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026112108,
+          "starter": 0,
+          "turns": 38,
+          "winner": 0
+        },
+        {
+          "actions": 36,
+          "health": [
+            15,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026112109,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 70,
+          "health": [
+            12,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026112110,
+          "starter": 0,
+          "turns": 31,
+          "winner": 0
+        },
+        {
+          "actions": 63,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026112111,
+          "starter": 1,
+          "turns": 24,
+          "winner": 0
+        },
+        {
+          "actions": 37,
+          "health": [
+            19,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026112112,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 46,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026112113,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 52,
+          "health": [
+            0,
+            17
+          ],
+          "inverted": true,
+          "seed": 2026112114,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 63,
+          "health": [
+            11,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026112115,
+          "starter": 1,
+          "turns": 26,
+          "winner": 0
+        },
+        {
+          "actions": 64,
+          "health": [
+            14,
+            -2
+          ],
+          "inverted": false,
+          "seed": 2026112116,
+          "starter": 0,
+          "turns": 27,
+          "winner": 0
+        },
+        {
+          "actions": 41,
+          "health": [
+            20,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026112117,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        },
+        {
+          "actions": 47,
+          "health": [
+            0,
+            20
+          ],
+          "inverted": true,
+          "seed": 2026112118,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 65,
+          "health": [
+            -1,
+            8
+          ],
+          "inverted": true,
+          "seed": 2026112119,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        }
+      ],
+      "turns": 482,
+      "unfinished": 0
+    },
+    {
+      "a": "Baluarte das Cicatrizes",
+      "a_wins": 9,
+      "b": "Aurora Vital",
+      "b_wins": 11,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 71,
+          "health": [
+            13,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026113100,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 80,
+          "health": [
+            0,
+            14
+          ],
+          "inverted": false,
+          "seed": 2026113101,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 56,
+          "health": [
+            -3,
+            9
+          ],
+          "inverted": true,
+          "seed": 2026113102,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 47,
+          "health": [
+            20,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026113103,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 64,
+          "health": [
+            0,
+            20
+          ],
+          "inverted": false,
+          "seed": 2026113104,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 65,
+          "health": [
+            -2,
+            16
+          ],
+          "inverted": false,
+          "seed": 2026113105,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 59,
+          "health": [
+            -2,
+            8
+          ],
+          "inverted": true,
+          "seed": 2026113106,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 53,
+          "health": [
+            0,
+            15
+          ],
+          "inverted": true,
+          "seed": 2026113107,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 61,
+          "health": [
+            14,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026113108,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 44,
+          "health": [
+            0,
+            9
+          ],
+          "inverted": false,
+          "seed": 2026113109,
+          "starter": 1,
+          "turns": 13,
+          "winner": 1
+        },
+        {
+          "actions": 51,
+          "health": [
+            0,
+            20
+          ],
+          "inverted": true,
+          "seed": 2026113110,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 41,
+          "health": [
+            0,
+            20
+          ],
+          "inverted": true,
+          "seed": 2026113111,
+          "starter": 1,
+          "turns": 13,
+          "winner": 1
+        },
+        {
+          "actions": 59,
+          "health": [
+            0,
+            16
+          ],
+          "inverted": false,
+          "seed": 2026113112,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 49,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026113113,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 65,
+          "health": [
+            11,
+            -4
+          ],
+          "inverted": true,
+          "seed": 2026113114,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 52,
+          "health": [
+            11,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026113115,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 61,
+          "health": [
+            18,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026113116,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 60,
+          "health": [
+            0,
+            13
+          ],
+          "inverted": false,
+          "seed": 2026113117,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 38,
+          "health": [
+            18,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026113118,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 58,
+          "health": [
+            16,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026113119,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        }
+      ],
+      "turns": 367,
+      "unfinished": 0
+    },
+    {
+      "a": "Baluarte das Cicatrizes",
+      "a_wins": 13,
+      "b": "Horda dos Ermos",
+      "b_wins": 7,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 46,
+          "health": [
+            10,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026114100,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 29,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026114101,
+          "starter": 1,
+          "turns": 12,
+          "winner": 0
+        },
+        {
+          "actions": 44,
+          "health": [
+            17,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026114102,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 54,
+          "health": [
+            0,
+            15
+          ],
+          "inverted": true,
+          "seed": 2026114103,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 48,
+          "health": [
+            6,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026114104,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 66,
+          "health": [
+            0,
+            16
+          ],
+          "inverted": false,
+          "seed": 2026114105,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 50,
+          "health": [
+            0,
+            18
+          ],
+          "inverted": true,
+          "seed": 2026114106,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 46,
+          "health": [
+            -1,
+            20
+          ],
+          "inverted": true,
+          "seed": 2026114107,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 60,
+          "health": [
+            11,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026114108,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 52,
+          "health": [
+            -1,
+            13
+          ],
+          "inverted": false,
+          "seed": 2026114109,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 41,
+          "health": [
+            16,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026114110,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 66,
+          "health": [
+            0,
+            2
+          ],
+          "inverted": true,
+          "seed": 2026114111,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 28,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026114112,
+          "starter": 0,
+          "turns": 11,
+          "winner": 0
+        },
+        {
+          "actions": 56,
+          "health": [
+            0,
+            12
+          ],
+          "inverted": false,
+          "seed": 2026114113,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 60,
+          "health": [
+            16,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026114114,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 68,
+          "health": [
+            -1,
+            12
+          ],
+          "inverted": true,
+          "seed": 2026114115,
+          "starter": 1,
+          "turns": 25,
+          "winner": 1
+        },
+        {
+          "actions": 61,
+          "health": [
+            15,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026114116,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 46,
+          "health": [
+            13,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026114117,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 64,
+          "health": [
+            0,
+            8
+          ],
+          "inverted": true,
+          "seed": 2026114118,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 33,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026114119,
+          "starter": 1,
+          "turns": 12,
+          "winner": 0
+        }
+      ],
+      "turns": 343,
+      "unfinished": 0
+    },
+    {
+      "a": "Baluarte das Cicatrizes",
+      "a_wins": 12,
+      "b": "União da Colheita",
+      "b_wins": 8,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 49,
+          "health": [
+            0,
+            13
+          ],
+          "inverted": false,
+          "seed": 2026115100,
+          "starter": 0,
+          "turns": 14,
+          "winner": 1
+        },
+        {
+          "actions": 48,
+          "health": [
+            19,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026115101,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 55,
+          "health": [
+            15,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026115102,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 30,
+          "health": [
+            0,
+            20
+          ],
+          "inverted": true,
+          "seed": 2026115103,
+          "starter": 1,
+          "turns": 11,
+          "winner": 1
+        },
+        {
+          "actions": 34,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026115104,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 63,
+          "health": [
+            14,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026115105,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 34,
+          "health": [
+            16,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026115106,
+          "starter": 0,
+          "turns": 11,
+          "winner": 0
+        },
+        {
+          "actions": 47,
+          "health": [
+            8,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026115107,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        },
+        {
+          "actions": 42,
+          "health": [
+            20,
+            -2
+          ],
+          "inverted": false,
+          "seed": 2026115108,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 60,
+          "health": [
+            -2,
+            13
+          ],
+          "inverted": false,
+          "seed": 2026115109,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 66,
+          "health": [
+            7,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026115110,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 62,
+          "health": [
+            0,
+            14
+          ],
+          "inverted": true,
+          "seed": 2026115111,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 46,
+          "health": [
+            18,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026115112,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 78,
+          "health": [
+            1,
+            -2
+          ],
+          "inverted": false,
+          "seed": 2026115113,
+          "starter": 1,
+          "turns": 26,
+          "winner": 0
+        },
+        {
+          "actions": 43,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026115114,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 44,
+          "health": [
+            -1,
+            18
+          ],
+          "inverted": true,
+          "seed": 2026115115,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 52,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026115116,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 46,
+          "health": [
+            16,
+            -2
+          ],
+          "inverted": false,
+          "seed": 2026115117,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 34,
+          "health": [
+            20,
+            -2
+          ],
+          "inverted": true,
+          "seed": 2026115118,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 67,
+          "health": [
+            0,
+            2
+          ],
+          "inverted": true,
+          "seed": 2026115119,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        }
+      ],
+      "turns": 320,
+      "unfinished": 0
+    },
+    {
+      "a": "Caçada das Brumas",
+      "a_wins": 9,
+      "b": "Círculo Arcano",
+      "b_wins": 11,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 75,
+          "health": [
+            -1,
+            17
+          ],
+          "inverted": false,
+          "seed": 2026212100,
+          "starter": 0,
+          "turns": 34,
+          "winner": 1
+        },
+        {
+          "actions": 35,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026212101,
+          "starter": 1,
+          "turns": 12,
+          "winner": 0
+        },
+        {
+          "actions": 62,
+          "health": [
+            -1,
+            20
+          ],
+          "inverted": true,
+          "seed": 2026212102,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 76,
+          "health": [
+            1,
+            -3
+          ],
+          "inverted": true,
+          "seed": 2026212103,
+          "starter": 1,
+          "turns": 35,
+          "winner": 0
+        },
+        {
+          "actions": 73,
+          "health": [
+            0,
+            17
+          ],
+          "inverted": false,
+          "seed": 2026212104,
+          "starter": 0,
+          "turns": 34,
+          "winner": 1
+        },
+        {
+          "actions": 71,
+          "health": [
+            0,
+            13
+          ],
+          "inverted": false,
+          "seed": 2026212105,
+          "starter": 1,
+          "turns": 27,
+          "winner": 1
+        },
+        {
+          "actions": 78,
+          "health": [
+            9,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026212106,
+          "starter": 0,
+          "turns": 35,
+          "winner": 0
+        },
+        {
+          "actions": 75,
+          "health": [
+            6,
+            -2
+          ],
+          "inverted": true,
+          "seed": 2026212107,
+          "starter": 1,
+          "turns": 28,
+          "winner": 0
+        },
+        {
+          "actions": 61,
+          "health": [
+            0,
+            20
+          ],
+          "inverted": false,
+          "seed": 2026212108,
+          "starter": 0,
+          "turns": 26,
+          "winner": 1
+        },
+        {
+          "actions": 42,
+          "health": [
+            18,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026212109,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 38,
+          "health": [
+            0,
+            20
+          ],
+          "inverted": true,
+          "seed": 2026212110,
+          "starter": 0,
+          "turns": 14,
+          "winner": 1
+        },
+        {
+          "actions": 77,
+          "health": [
+            11,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026212111,
+          "starter": 1,
+          "turns": 34,
+          "winner": 0
+        },
+        {
+          "actions": 35,
+          "health": [
+            19,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026212112,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 76,
+          "health": [
+            0,
+            17
+          ],
+          "inverted": false,
+          "seed": 2026212113,
+          "starter": 1,
+          "turns": 34,
+          "winner": 1
+        },
+        {
+          "actions": 61,
+          "health": [
+            14,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026212114,
+          "starter": 0,
+          "turns": 23,
+          "winner": 0
+        },
+        {
+          "actions": 40,
+          "health": [
+            0,
+            20
+          ],
+          "inverted": true,
+          "seed": 2026212115,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 46,
+          "health": [
+            19,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026212116,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 33,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026212117,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        },
+        {
+          "actions": 41,
+          "health": [
+            0,
+            19
+          ],
+          "inverted": true,
+          "seed": 2026212118,
+          "starter": 0,
+          "turns": 14,
+          "winner": 1
+        },
+        {
+          "actions": 82,
+          "health": [
+            2,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026212119,
+          "starter": 1,
+          "turns": 30,
+          "winner": 0
+        }
+      ],
+      "turns": 475,
+      "unfinished": 0
+    },
+    {
+      "a": "Caçada das Brumas",
+      "a_wins": 15,
+      "b": "Aurora Vital",
+      "b_wins": 5,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 40,
+          "health": [
+            18,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026213100,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 63,
+          "health": [
+            -1,
+            1
+          ],
+          "inverted": false,
+          "seed": 2026213101,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 69,
+          "health": [
+            7,
+            -8
+          ],
+          "inverted": true,
+          "seed": 2026213102,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 62,
+          "health": [
+            7,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026213103,
+          "starter": 1,
+          "turns": 22,
+          "winner": 0
+        },
+        {
+          "actions": 62,
+          "health": [
+            19,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026213104,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 58,
+          "health": [
+            -2,
+            8
+          ],
+          "inverted": false,
+          "seed": 2026213105,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 61,
+          "health": [
+            0,
+            16
+          ],
+          "inverted": true,
+          "seed": 2026213106,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 66,
+          "health": [
+            -1,
+            15
+          ],
+          "inverted": true,
+          "seed": 2026213107,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 32,
+          "health": [
+            19,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026213108,
+          "starter": 0,
+          "turns": 11,
+          "winner": 0
+        },
+        {
+          "actions": 76,
+          "health": [
+            7,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026213109,
+          "starter": 1,
+          "turns": 24,
+          "winner": 0
+        },
+        {
+          "actions": 64,
+          "health": [
+            0,
+            12
+          ],
+          "inverted": true,
+          "seed": 2026213110,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 38,
+          "health": [
+            -1,
+            20
+          ],
+          "inverted": true,
+          "seed": 2026213111,
+          "starter": 1,
+          "turns": 13,
+          "winner": 1
+        },
+        {
+          "actions": 43,
+          "health": [
+            18,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026213112,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 52,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026213113,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        },
+        {
+          "actions": 46,
+          "health": [
+            0,
+            16
+          ],
+          "inverted": true,
+          "seed": 2026213114,
+          "starter": 0,
+          "turns": 14,
+          "winner": 1
+        },
+        {
+          "actions": 58,
+          "health": [
+            10,
+            -3
+          ],
+          "inverted": true,
+          "seed": 2026213115,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 47,
+          "health": [
+            14,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026213116,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 29,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026213117,
+          "starter": 1,
+          "turns": 12,
+          "winner": 0
+        },
+        {
+          "actions": 38,
+          "health": [
+            -1,
+            20
+          ],
+          "inverted": true,
+          "seed": 2026213118,
+          "starter": 0,
+          "turns": 12,
+          "winner": 1
+        },
+        {
+          "actions": 34,
+          "health": [
+            0,
+            20
+          ],
+          "inverted": true,
+          "seed": 2026213119,
+          "starter": 1,
+          "turns": 11,
+          "winner": 1
+        }
+      ],
+      "turns": 331,
+      "unfinished": 0
+    },
+    {
+      "a": "Caçada das Brumas",
+      "a_wins": 16,
+      "b": "Horda dos Ermos",
+      "b_wins": 4,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 56,
+          "health": [
+            11,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026214100,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 47,
+          "health": [
+            6,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026214101,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 47,
+          "health": [
+            0,
+            15
+          ],
+          "inverted": true,
+          "seed": 2026214102,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 52,
+          "health": [
+            0,
+            13
+          ],
+          "inverted": true,
+          "seed": 2026214103,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 43,
+          "health": [
+            15,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026214104,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 66,
+          "health": [
+            1,
+            -2
+          ],
+          "inverted": false,
+          "seed": 2026214105,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 51,
+          "health": [
+            -2,
+            15
+          ],
+          "inverted": true,
+          "seed": 2026214106,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 41,
+          "health": [
+            0,
+            14
+          ],
+          "inverted": true,
+          "seed": 2026214107,
+          "starter": 1,
+          "turns": 13,
+          "winner": 1
+        },
+        {
+          "actions": 42,
+          "health": [
+            6,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026214108,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 55,
+          "health": [
+            0,
+            4
+          ],
+          "inverted": false,
+          "seed": 2026214109,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 40,
+          "health": [
+            0,
+            18
+          ],
+          "inverted": true,
+          "seed": 2026214110,
+          "starter": 0,
+          "turns": 14,
+          "winner": 1
+        },
+        {
+          "actions": 46,
+          "health": [
+            5,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026214111,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        },
+        {
+          "actions": 38,
+          "health": [
+            9,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026214112,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 49,
+          "health": [
+            4,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026214113,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        },
+        {
+          "actions": 45,
+          "health": [
+            13,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026214114,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 31,
+          "health": [
+            0,
+            18
+          ],
+          "inverted": true,
+          "seed": 2026214115,
+          "starter": 1,
+          "turns": 11,
+          "winner": 1
+        },
+        {
+          "actions": 34,
+          "health": [
+            17,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026214116,
+          "starter": 0,
+          "turns": 11,
+          "winner": 0
+        },
+        {
+          "actions": 67,
+          "health": [
+            -1,
+            4
+          ],
+          "inverted": false,
+          "seed": 2026214117,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 38,
+          "health": [
+            -2,
+            15
+          ],
+          "inverted": true,
+          "seed": 2026214118,
+          "starter": 0,
+          "turns": 12,
+          "winner": 1
+        },
+        {
+          "actions": 29,
+          "health": [
+            0,
+            11
+          ],
+          "inverted": true,
+          "seed": 2026214119,
+          "starter": 1,
+          "turns": 11,
+          "winner": 1
+        }
+      ],
+      "turns": 296,
+      "unfinished": 0
+    },
+    {
+      "a": "Caçada das Brumas",
+      "a_wins": 10,
+      "b": "União da Colheita",
+      "b_wins": 10,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 49,
+          "health": [
+            0,
+            7
+          ],
+          "inverted": false,
+          "seed": 2026215100,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 41,
+          "health": [
+            20,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026215101,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        },
+        {
+          "actions": 44,
+          "health": [
+            0,
+            17
+          ],
+          "inverted": true,
+          "seed": 2026215102,
+          "starter": 0,
+          "turns": 14,
+          "winner": 1
+        },
+        {
+          "actions": 50,
+          "health": [
+            15,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026215103,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 32,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026215104,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 47,
+          "health": [
+            18,
+            -2
+          ],
+          "inverted": false,
+          "seed": 2026215105,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        },
+        {
+          "actions": 36,
+          "health": [
+            13,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026215106,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 51,
+          "health": [
+            15,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026215107,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 51,
+          "health": [
+            17,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026215108,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 50,
+          "health": [
+            0,
+            2
+          ],
+          "inverted": false,
+          "seed": 2026215109,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 34,
+          "health": [
+            15,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026215110,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 50,
+          "health": [
+            -2,
+            18
+          ],
+          "inverted": true,
+          "seed": 2026215111,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 55,
+          "health": [
+            17,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026215112,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 45,
+          "health": [
+            -2,
+            11
+          ],
+          "inverted": false,
+          "seed": 2026215113,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 49,
+          "health": [
+            13,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026215114,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 56,
+          "health": [
+            4,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026215115,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 63,
+          "health": [
+            8,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026215116,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 43,
+          "health": [
+            20,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026215117,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        },
+        {
+          "actions": 55,
+          "health": [
+            11,
+            -3
+          ],
+          "inverted": true,
+          "seed": 2026215118,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 36,
+          "health": [
+            0,
+            17
+          ],
+          "inverted": true,
+          "seed": 2026215119,
+          "starter": 1,
+          "turns": 11,
+          "winner": 1
+        }
+      ],
+      "turns": 306,
+      "unfinished": 0
+    },
+    {
+      "a": "Círculo Arcano",
+      "a_wins": 1,
+      "b": "Aurora Vital",
+      "b_wins": 19,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 56,
+          "health": [
+            -2,
+            19
+          ],
+          "inverted": false,
+          "seed": 2026313100,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 40,
+          "health": [
+            0,
+            20
+          ],
+          "inverted": false,
+          "seed": 2026313101,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 41,
+          "health": [
+            20,
+            -8
+          ],
+          "inverted": true,
+          "seed": 2026313102,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 39,
+          "health": [
+            20,
+            -2
+          ],
+          "inverted": true,
+          "seed": 2026313103,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 57,
+          "health": [
+            -4,
+            19
+          ],
+          "inverted": false,
+          "seed": 2026313104,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 52,
+          "health": [
+            -1,
+            20
+          ],
+          "inverted": false,
+          "seed": 2026313105,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 77,
+          "health": [
+            18,
+            -8
+          ],
+          "inverted": true,
+          "seed": 2026313106,
+          "starter": 0,
+          "turns": 27,
+          "winner": 0
+        },
+        {
+          "actions": 46,
+          "health": [
+            14,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026313107,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 50,
+          "health": [
+            -1,
+            16
+          ],
+          "inverted": false,
+          "seed": 2026313108,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 45,
+          "health": [
+            0,
+            19
+          ],
+          "inverted": false,
+          "seed": 2026313109,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 53,
+          "health": [
+            19,
+            -4
+          ],
+          "inverted": true,
+          "seed": 2026313110,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 37,
+          "health": [
+            19,
+            -4
+          ],
+          "inverted": true,
+          "seed": 2026313111,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        },
+        {
+          "actions": 48,
+          "health": [
+            0,
+            18
+          ],
+          "inverted": false,
+          "seed": 2026313112,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 65,
+          "health": [
+            -1,
+            20
+          ],
+          "inverted": false,
+          "seed": 2026313113,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 54,
+          "health": [
+            19,
+            -6
+          ],
+          "inverted": true,
+          "seed": 2026313114,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 47,
+          "health": [
+            16,
+            -4
+          ],
+          "inverted": true,
+          "seed": 2026313115,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 54,
+          "health": [
+            -1,
+            18
+          ],
+          "inverted": false,
+          "seed": 2026313116,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 71,
+          "health": [
+            -3,
+            11
+          ],
+          "inverted": false,
+          "seed": 2026313117,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 34,
+          "health": [
+            20,
+            -3
+          ],
+          "inverted": true,
+          "seed": 2026313118,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 102,
+          "health": [
+            0,
+            13
+          ],
+          "inverted": true,
+          "seed": 2026313119,
+          "starter": 1,
+          "turns": 37,
+          "winner": 1
+        }
+      ],
+      "turns": 409,
+      "unfinished": 0
+    },
+    {
+      "a": "Círculo Arcano",
+      "a_wins": 7,
+      "b": "Horda dos Ermos",
+      "b_wins": 13,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 59,
+          "health": [
+            0,
+            19
+          ],
+          "inverted": false,
+          "seed": 2026314100,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 69,
+          "health": [
+            19,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026314101,
+          "starter": 1,
+          "turns": 28,
+          "winner": 0
+        },
+        {
+          "actions": 38,
+          "health": [
+            19,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026314102,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 62,
+          "health": [
+            10,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026314103,
+          "starter": 1,
+          "turns": 22,
+          "winner": 0
+        },
+        {
+          "actions": 68,
+          "health": [
+            15,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026314104,
+          "starter": 0,
+          "turns": 27,
+          "winner": 0
+        },
+        {
+          "actions": 40,
+          "health": [
+            -2,
+            20
+          ],
+          "inverted": false,
+          "seed": 2026314105,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 51,
+          "health": [
+            0,
+            19
+          ],
+          "inverted": true,
+          "seed": 2026314106,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 50,
+          "health": [
+            18,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026314107,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 48,
+          "health": [
+            -2,
+            20
+          ],
+          "inverted": false,
+          "seed": 2026314108,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 49,
+          "health": [
+            0,
+            15
+          ],
+          "inverted": false,
+          "seed": 2026314109,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 66,
+          "health": [
+            0,
+            17
+          ],
+          "inverted": true,
+          "seed": 2026314110,
+          "starter": 0,
+          "turns": 28,
+          "winner": 1
+        },
+        {
+          "actions": 46,
+          "health": [
+            20,
+            -4
+          ],
+          "inverted": true,
+          "seed": 2026314111,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 49,
+          "health": [
+            18,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026314112,
+          "starter": 0,
+          "turns": 27,
+          "winner": 0
+        },
+        {
+          "actions": 92,
+          "health": [
+            7,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026314113,
+          "starter": 1,
+          "turns": 37,
+          "winner": 0
+        },
+        {
+          "actions": 50,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026314114,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 50,
+          "health": [
+            14,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026314115,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 48,
+          "health": [
+            0,
+            14
+          ],
+          "inverted": false,
+          "seed": 2026314116,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 54,
+          "health": [
+            -1,
+            17
+          ],
+          "inverted": false,
+          "seed": 2026314117,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 46,
+          "health": [
+            0,
+            15
+          ],
+          "inverted": true,
+          "seed": 2026314118,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 47,
+          "health": [
+            18,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026314119,
+          "starter": 1,
+          "turns": 22,
+          "winner": 0
+        }
+      ],
+      "turns": 436,
+      "unfinished": 0
+    },
+    {
+      "a": "Círculo Arcano",
+      "a_wins": 6,
+      "b": "União da Colheita",
+      "b_wins": 14,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 35,
+          "health": [
+            -4,
+            20
+          ],
+          "inverted": false,
+          "seed": 2026315100,
+          "starter": 0,
+          "turns": 14,
+          "winner": 1
+        },
+        {
+          "actions": 62,
+          "health": [
+            18,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026315101,
+          "starter": 1,
+          "turns": 24,
+          "winner": 0
+        },
+        {
+          "actions": 48,
+          "health": [
+            18,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026315102,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 35,
+          "health": [
+            19,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026315103,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 44,
+          "health": [
+            -2,
+            15
+          ],
+          "inverted": false,
+          "seed": 2026315104,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 57,
+          "health": [
+            15,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026315105,
+          "starter": 1,
+          "turns": 22,
+          "winner": 0
+        },
+        {
+          "actions": 44,
+          "health": [
+            19,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026315106,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 47,
+          "health": [
+            17,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026315107,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 81,
+          "health": [
+            16,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026315108,
+          "starter": 0,
+          "turns": 31,
+          "winner": 0
+        },
+        {
+          "actions": 35,
+          "health": [
+            0,
+            20
+          ],
+          "inverted": false,
+          "seed": 2026315109,
+          "starter": 1,
+          "turns": 13,
+          "winner": 1
+        },
+        {
+          "actions": 75,
+          "health": [
+            0,
+            5
+          ],
+          "inverted": true,
+          "seed": 2026315110,
+          "starter": 0,
+          "turns": 28,
+          "winner": 1
+        },
+        {
+          "actions": 58,
+          "health": [
+            12,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026315111,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 51,
+          "health": [
+            -4,
+            17
+          ],
+          "inverted": false,
+          "seed": 2026315112,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 78,
+          "health": [
+            1,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026315113,
+          "starter": 1,
+          "turns": 28,
+          "winner": 0
+        },
+        {
+          "actions": 31,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026315114,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 34,
+          "health": [
+            20,
+            -2
+          ],
+          "inverted": true,
+          "seed": 2026315115,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        },
+        {
+          "actions": 45,
+          "health": [
+            -5,
+            17
+          ],
+          "inverted": false,
+          "seed": 2026315116,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 31,
+          "health": [
+            -1,
+            19
+          ],
+          "inverted": false,
+          "seed": 2026315117,
+          "starter": 1,
+          "turns": 13,
+          "winner": 1
+        },
+        {
+          "actions": 57,
+          "health": [
+            12,
+            -3
+          ],
+          "inverted": true,
+          "seed": 2026315118,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 88,
+          "health": [
+            0,
+            4
+          ],
+          "inverted": true,
+          "seed": 2026315119,
+          "starter": 1,
+          "turns": 35,
+          "winner": 1
+        }
+      ],
+      "turns": 394,
+      "unfinished": 0
+    },
+    {
+      "a": "Aurora Vital",
+      "a_wins": 10,
+      "b": "Horda dos Ermos",
+      "b_wins": 10,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 62,
+          "health": [
+            0,
+            18
+          ],
+          "inverted": false,
+          "seed": 2026414100,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 35,
+          "health": [
+            0,
+            18
+          ],
+          "inverted": false,
+          "seed": 2026414101,
+          "starter": 1,
+          "turns": 13,
+          "winner": 1
+        },
+        {
+          "actions": 46,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026414102,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 35,
+          "health": [
+            0,
+            20
+          ],
+          "inverted": true,
+          "seed": 2026414103,
+          "starter": 1,
+          "turns": 13,
+          "winner": 1
+        },
+        {
+          "actions": 36,
+          "health": [
+            14,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026414104,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 51,
+          "health": [
+            19,
+            -4
+          ],
+          "inverted": false,
+          "seed": 2026414105,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 71,
+          "health": [
+            18,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026414106,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 54,
+          "health": [
+            -6,
+            19
+          ],
+          "inverted": true,
+          "seed": 2026414107,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 84,
+          "health": [
+            8,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026414108,
+          "starter": 0,
+          "turns": 25,
+          "winner": 0
+        },
+        {
+          "actions": 77,
+          "health": [
+            7,
+            -4
+          ],
+          "inverted": false,
+          "seed": 2026414109,
+          "starter": 1,
+          "turns": 24,
+          "winner": 0
+        },
+        {
+          "actions": 54,
+          "health": [
+            -4,
+            19
+          ],
+          "inverted": true,
+          "seed": 2026414110,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 43,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026414111,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        },
+        {
+          "actions": 33,
+          "health": [
+            0,
+            19
+          ],
+          "inverted": false,
+          "seed": 2026414112,
+          "starter": 0,
+          "turns": 12,
+          "winner": 1
+        },
+        {
+          "actions": 60,
+          "health": [
+            -3,
+            18
+          ],
+          "inverted": false,
+          "seed": 2026414113,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 62,
+          "health": [
+            -2,
+            14
+          ],
+          "inverted": true,
+          "seed": 2026414114,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 72,
+          "health": [
+            18,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026414115,
+          "starter": 1,
+          "turns": 22,
+          "winner": 0
+        },
+        {
+          "actions": 80,
+          "health": [
+            -1,
+            12
+          ],
+          "inverted": false,
+          "seed": 2026414116,
+          "starter": 0,
+          "turns": 26,
+          "winner": 1
+        },
+        {
+          "actions": 52,
+          "health": [
+            20,
+            -4
+          ],
+          "inverted": false,
+          "seed": 2026414117,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 58,
+          "health": [
+            -6,
+            19
+          ],
+          "inverted": true,
+          "seed": 2026414118,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 41,
+          "health": [
+            20,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026414119,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        }
+      ],
+      "turns": 368,
+      "unfinished": 0
+    },
+    {
+      "a": "Aurora Vital",
+      "a_wins": 10,
+      "b": "União da Colheita",
+      "b_wins": 10,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 79,
+          "health": [
+            -2,
+            17
+          ],
+          "inverted": false,
+          "seed": 2026415100,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 58,
+          "health": [
+            9,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026415101,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 72,
+          "health": [
+            0,
+            5
+          ],
+          "inverted": true,
+          "seed": 2026415102,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 69,
+          "health": [
+            14,
+            -5
+          ],
+          "inverted": true,
+          "seed": 2026415103,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 61,
+          "health": [
+            -1,
+            20
+          ],
+          "inverted": false,
+          "seed": 2026415104,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 57,
+          "health": [
+            0,
+            13
+          ],
+          "inverted": false,
+          "seed": 2026415105,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 46,
+          "health": [
+            19,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026415106,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 54,
+          "health": [
+            0,
+            18
+          ],
+          "inverted": true,
+          "seed": 2026415107,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 72,
+          "health": [
+            11,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026415108,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 41,
+          "health": [
+            -2,
+            16
+          ],
+          "inverted": false,
+          "seed": 2026415109,
+          "starter": 1,
+          "turns": 13,
+          "winner": 1
+        },
+        {
+          "actions": 64,
+          "health": [
+            -5,
+            19
+          ],
+          "inverted": true,
+          "seed": 2026415110,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 60,
+          "health": [
+            0,
+            9
+          ],
+          "inverted": true,
+          "seed": 2026415111,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 29,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026415112,
+          "starter": 0,
+          "turns": 11,
+          "winner": 0
+        },
+        {
+          "actions": 49,
+          "health": [
+            -1,
+            20
+          ],
+          "inverted": false,
+          "seed": 2026415113,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 60,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026415114,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 77,
+          "health": [
+            -3,
+            2
+          ],
+          "inverted": true,
+          "seed": 2026415115,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 70,
+          "health": [
+            -1,
+            10
+          ],
+          "inverted": false,
+          "seed": 2026415116,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 58,
+          "health": [
+            18,
+            -10
+          ],
+          "inverted": false,
+          "seed": 2026415117,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 50,
+          "health": [
+            0,
+            14
+          ],
+          "inverted": true,
+          "seed": 2026415118,
+          "starter": 0,
+          "turns": 14,
+          "winner": 1
+        },
+        {
+          "actions": 54,
+          "health": [
+            20,
+            -4
+          ],
+          "inverted": true,
+          "seed": 2026415119,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        }
+      ],
+      "turns": 350,
+      "unfinished": 0
+    },
+    {
+      "a": "Horda dos Ermos",
+      "a_wins": 10,
+      "b": "União da Colheita",
+      "b_wins": 10,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 57,
+          "health": [
+            15,
+            -2
+          ],
+          "inverted": false,
+          "seed": 2026515100,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 56,
+          "health": [
+            0,
+            18
+          ],
+          "inverted": false,
+          "seed": 2026515101,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 73,
+          "health": [
+            0,
+            4
+          ],
+          "inverted": true,
+          "seed": 2026515102,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 46,
+          "health": [
+            11,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026515103,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 38,
+          "health": [
+            0,
+            14
+          ],
+          "inverted": false,
+          "seed": 2026515104,
+          "starter": 0,
+          "turns": 14,
+          "winner": 1
+        },
+        {
+          "actions": 55,
+          "health": [
+            7,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026515105,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 38,
+          "health": [
+            18,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026515106,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 48,
+          "health": [
+            11,
+            -1
+          ],
+          "inverted": true,
+          "seed": 2026515107,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 37,
+          "health": [
+            0,
+            16
+          ],
+          "inverted": false,
+          "seed": 2026515108,
+          "starter": 0,
+          "turns": 14,
+          "winner": 1
+        },
+        {
+          "actions": 47,
+          "health": [
+            20,
+            -3
+          ],
+          "inverted": false,
+          "seed": 2026515109,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 60,
+          "health": [
+            -1,
+            14
+          ],
+          "inverted": true,
+          "seed": 2026515110,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 37,
+          "health": [
+            -1,
+            18
+          ],
+          "inverted": true,
+          "seed": 2026515111,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 52,
+          "health": [
+            20,
+            0
+          ],
+          "inverted": false,
+          "seed": 2026515112,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 34,
+          "health": [
+            20,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026515113,
+          "starter": 1,
+          "turns": 12,
+          "winner": 0
+        },
+        {
+          "actions": 33,
+          "health": [
+            20,
+            -2
+          ],
+          "inverted": true,
+          "seed": 2026515114,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 46,
+          "health": [
+            18,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026515115,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 58,
+          "health": [
+            9,
+            -1
+          ],
+          "inverted": false,
+          "seed": 2026515116,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 54,
+          "health": [
+            0,
+            17
+          ],
+          "inverted": false,
+          "seed": 2026515117,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 34,
+          "health": [
+            15,
+            0
+          ],
+          "inverted": true,
+          "seed": 2026515118,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 57,
+          "health": [
+            -1,
+            12
+          ],
+          "inverted": true,
+          "seed": 2026515119,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        }
+      ],
+      "turns": 322,
+      "unfinished": 0
+    }
+  ],
+  "played": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "total_turns": 5562,
+  "unfinished": 0,
+  "wins": [
+    67,
+    53,
+    29,
+    55,
+    44,
+    52
+  ]
+}

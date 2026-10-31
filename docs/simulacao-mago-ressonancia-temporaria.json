@@ -1,0 +1,4641 @@
+{
+  "draws": 0,
+  "first_wins": 107,
+  "games": 200,
+  "mage_index": 2,
+  "mage_wins": 139,
+  "method": "Ressonância até início do próximo turno do dono, vida mínima 1 na expiração; IA atual nos dois lados; 40 jogos por oponente; mesmas sementes, lados e iniciativa do ensaio anterior.",
+  "pairs": [
+    {
+      "draws": 0,
+      "games": [
+        {
+          "actions": 53,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 4,
+          "health": [
+            20,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318000,
+          "starter": 0,
+          "turns": 23,
+          "winner": 0
+        },
+        {
+          "actions": 74,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 5,
+          "health": [
+            0,
+            15
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318001,
+          "starter": 1,
+          "turns": 31,
+          "winner": 1
+        },
+        {
+          "actions": 46,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            10,
+            -3
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318002,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 52,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            18
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318003,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 64,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            12
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318004,
+          "starter": 0,
+          "turns": 24,
+          "winner": 1
+        },
+        {
+          "actions": 53,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 4,
+          "health": [
+            -1,
+            13
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318005,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 44,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 3,
+          "health": [
+            14,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318006,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 39,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -1,
+            20
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318007,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 63,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 4,
+          "health": [
+            -1,
+            13
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318008,
+          "starter": 0,
+          "turns": 24,
+          "winner": 1
+        },
+        {
+          "actions": 47,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            13,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318009,
+          "starter": 1,
+          "turns": 22,
+          "winner": 0
+        },
+        {
+          "actions": 56,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 4,
+          "health": [
+            13,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318010,
+          "starter": 0,
+          "turns": 23,
+          "winner": 0
+        },
+        {
+          "actions": 69,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            16
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318011,
+          "starter": 1,
+          "turns": 29,
+          "winner": 1
+        },
+        {
+          "actions": 38,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            19
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318012,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 44,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            17
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318013,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 59,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            11,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318014,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 51,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 2,
+          "health": [
+            15,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318015,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 49,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            6
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318016,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 54,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -2,
+            3
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318017,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 43,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 4,
+          "health": [
+            16,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318018,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 56,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            8,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318019,
+          "starter": 1,
+          "turns": 22,
+          "winner": 0
+        },
+        {
+          "actions": 40,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 5,
+          "health": [
+            0,
+            14
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318020,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 48,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            0,
+            19
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318021,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 59,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 6,
+          "health": [
+            17,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318022,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 69,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 3,
+          "health": [
+            4,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318023,
+          "starter": 1,
+          "turns": 28,
+          "winner": 0
+        },
+        {
+          "actions": 59,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 3,
+          "health": [
+            0,
+            5
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318024,
+          "starter": 0,
+          "turns": 26,
+          "winner": 1
+        },
+        {
+          "actions": 67,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            13,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318025,
+          "starter": 1,
+          "turns": 26,
+          "winner": 0
+        },
+        {
+          "actions": 49,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            16,
+            -2
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318026,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 47,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            18,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318027,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 50,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 5,
+          "health": [
+            0,
+            16
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318028,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 42,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            14,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318029,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 45,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            15,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318030,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 50,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            9,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318031,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 64,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 2,
+          "health": [
+            0,
+            9
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318032,
+          "starter": 0,
+          "turns": 24,
+          "winner": 1
+        },
+        {
+          "actions": 59,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 5,
+          "health": [
+            0,
+            14
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318033,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 55,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            13,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318034,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 57,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            11,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318035,
+          "starter": 1,
+          "turns": 26,
+          "winner": 0
+        },
+        {
+          "actions": 40,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            18,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318036,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 48,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            0,
+            10
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318037,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 46,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 5,
+          "health": [
+            14,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318038,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 67,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -5,
+            15
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610318039,
+          "starter": 1,
+          "turns": 31,
+          "winner": 1
+        }
+      ],
+      "mage_wins": 31,
+      "opponent": "Baluarte das Cicatrizes",
+      "opponent_class": 0.0,
+      "opponent_wins": 9,
+      "previous_mage_wins": 34.0,
+      "unfinished": 0
+    },
+    {
+      "draws": 0,
+      "games": [
+        {
+          "actions": 61,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            -1,
+            7
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418000,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 56,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            19,
+            -1
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418001,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 49,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            19,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418002,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 58,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            10,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418003,
+          "starter": 1,
+          "turns": 24,
+          "winner": 0
+        },
+        {
+          "actions": 72,
+          "burns": 0,
+          "fatigue": [
+            1,
+            0
+          ],
+          "fire_uses": 3,
+          "health": [
+            0,
+            7
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 2
+          },
+          "seed": 202610418004,
+          "starter": 0,
+          "turns": 26,
+          "winner": 1
+        },
+        {
+          "actions": 58,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 9,
+          "health": [
+            0,
+            12
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418005,
+          "starter": 1,
+          "turns": 25,
+          "winner": 1
+        },
+        {
+          "actions": 36,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            -2,
+            18
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418006,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 47,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            16,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418007,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 57,
+          "burns": 2,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 4,
+          "health": [
+            0,
+            12
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418008,
+          "starter": 0,
+          "turns": 24,
+          "winner": 1
+        },
+        {
+          "actions": 46,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 5,
+          "health": [
+            0,
+            3
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418009,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 63,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 4,
+          "health": [
+            13,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418010,
+          "starter": 0,
+          "turns": 25,
+          "winner": 0
+        },
+        {
+          "actions": 39,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            18,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 1,
+            "loot": 0
+          },
+          "seed": 202610418011,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 44,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            16,
+            -1
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 2
+          },
+          "seed": 202610418012,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 55,
+          "burns": 0,
+          "fatigue": [
+            1,
+            0
+          ],
+          "fire_uses": 3,
+          "health": [
+            19,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 1,
+            "loot": 1
+          },
+          "seed": 202610418013,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 58,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 3,
+          "health": [
+            16,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418014,
+          "starter": 0,
+          "turns": 25,
+          "winner": 0
+        },
+        {
+          "actions": 47,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            13,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418015,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 52,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 3,
+          "health": [
+            -1,
+            18
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418016,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 50,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            11
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418017,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 54,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 2,
+          "health": [
+            6,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418018,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 53,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            13,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 1,
+            "loot": 0
+          },
+          "seed": 202610418019,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 50,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 2,
+          "health": [
+            0,
+            20
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418020,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 42,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            14
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418021,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 62,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 2,
+          "health": [
+            10,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 2
+          },
+          "seed": 202610418022,
+          "starter": 0,
+          "turns": 25,
+          "winner": 0
+        },
+        {
+          "actions": 54,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 3,
+          "health": [
+            4,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418023,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 55,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            -1,
+            14
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418024,
+          "starter": 0,
+          "turns": 24,
+          "winner": 1
+        },
+        {
+          "actions": 63,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 4,
+          "health": [
+            -1,
+            12
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418025,
+          "starter": 1,
+          "turns": 25,
+          "winner": 1
+        },
+        {
+          "actions": 39,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            14,
+            -2
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418026,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 46,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            6,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418027,
+          "starter": 1,
+          "turns": 22,
+          "winner": 0
+        },
+        {
+          "actions": 49,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 6,
+          "health": [
+            -2,
+            13
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418028,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 47,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -1,
+            13
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418029,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 63,
+          "burns": 0,
+          "fatigue": [
+            0,
+            1
+          ],
+          "fire_uses": 3,
+          "health": [
+            9,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 2
+          },
+          "seed": 202610418030,
+          "starter": 0,
+          "turns": 29,
+          "winner": 0
+        },
+        {
+          "actions": 47,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            19,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418031,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 35,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            14
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418032,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 53,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 5,
+          "health": [
+            0,
+            8
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 1,
+            "loot": 0
+          },
+          "seed": 202610418033,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 49,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            15,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418034,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 40,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            12,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418035,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 41,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            20,
+            -1
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418036,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 50,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -1,
+            16
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418037,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 74,
+          "burns": 0,
+          "fatigue": [
+            0,
+            1
+          ],
+          "fire_uses": 7,
+          "health": [
+            6,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 1
+          },
+          "seed": 202610418038,
+          "starter": 0,
+          "turns": 31,
+          "winner": 0
+        },
+        {
+          "actions": 45,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            13,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610418039,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        }
+      ],
+      "mage_wins": 35,
+      "opponent": "Caçada das Brumas",
+      "opponent_class": 3.0,
+      "opponent_wins": 5,
+      "previous_mage_wins": 36.0,
+      "unfinished": 0
+    },
+    {
+      "draws": 0,
+      "games": [
+        {
+          "actions": 59,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            -5,
+            9
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519000,
+          "starter": 0,
+          "turns": 24,
+          "winner": 1
+        },
+        {
+          "actions": 38,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            18
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519001,
+          "starter": 1,
+          "turns": 13,
+          "winner": 1
+        },
+        {
+          "actions": 58,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            13,
+            -2
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519002,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 67,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -1,
+            12
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519003,
+          "starter": 1,
+          "turns": 29,
+          "winner": 1
+        },
+        {
+          "actions": 58,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            14,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519004,
+          "starter": 0,
+          "turns": 25,
+          "winner": 0
+        },
+        {
+          "actions": 67,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 2,
+          "health": [
+            14,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519005,
+          "starter": 1,
+          "turns": 24,
+          "winner": 0
+        },
+        {
+          "actions": 52,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            19,
+            -7
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519006,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 31,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            19,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519007,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 63,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -1,
+            15
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519008,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 30,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            20
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519009,
+          "starter": 1,
+          "turns": 11,
+          "winner": 1
+        },
+        {
+          "actions": 57,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            9
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519010,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 55,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            19,
+            -8
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519011,
+          "starter": 1,
+          "turns": 22,
+          "winner": 0
+        },
+        {
+          "actions": 48,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -4,
+            20
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519012,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 91,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 11,
+          "health": [
+            11,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519013,
+          "starter": 1,
+          "turns": 32,
+          "winner": 0
+        },
+        {
+          "actions": 70,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            16,
+            -2
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519014,
+          "starter": 0,
+          "turns": 23,
+          "winner": 0
+        },
+        {
+          "actions": 62,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            20,
+            -1
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519015,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 57,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -1,
+            18
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519016,
+          "starter": 0,
+          "turns": 24,
+          "winner": 1
+        },
+        {
+          "actions": 67,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 3,
+          "health": [
+            12,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519017,
+          "starter": 1,
+          "turns": 24,
+          "winner": 0
+        },
+        {
+          "actions": 53,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            20
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519018,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 48,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 5,
+          "health": [
+            -1,
+            17
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519019,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 61,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 2,
+          "health": [
+            17,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519020,
+          "starter": 0,
+          "turns": 23,
+          "winner": 0
+        },
+        {
+          "actions": 52,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            15,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519021,
+          "starter": 1,
+          "turns": 22,
+          "winner": 0
+        },
+        {
+          "actions": 78,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            15,
+            -5
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519022,
+          "starter": 0,
+          "turns": 31,
+          "winner": 0
+        },
+        {
+          "actions": 38,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            20,
+            -2
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519023,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        },
+        {
+          "actions": 47,
+          "burns": 1,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            20,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519024,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 48,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            19
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519025,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 53,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            17
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519026,
+          "starter": 0,
+          "turns": 24,
+          "winner": 1
+        },
+        {
+          "actions": 51,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            18,
+            -1
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519027,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 58,
+          "burns": 6,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 10,
+          "health": [
+            12,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519028,
+          "starter": 0,
+          "turns": 29,
+          "winner": 0
+        },
+        {
+          "actions": 52,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -8,
+            19
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519029,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 45,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            18,
+            -2
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519030,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 49,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            0,
+            16
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519031,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 53,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 5,
+          "health": [
+            19,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519032,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 46,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 2,
+          "health": [
+            0,
+            18
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519033,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 56,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            20,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519034,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 56,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            14
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519035,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 38,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -1,
+            18
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519036,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 50,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -2,
+            19
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519037,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 47,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            0,
+            19
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519038,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 55,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            0,
+            14
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610519039,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        }
+      ],
+      "mage_wins": 18,
+      "opponent": "Aurora Vital",
+      "opponent_class": 4.0,
+      "opponent_wins": 22,
+      "previous_mage_wins": 24.0,
+      "unfinished": 0
+    },
+    {
+      "draws": 0,
+      "games": [
+        {
+          "actions": 56,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            0,
+            18
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520000,
+          "starter": 0,
+          "turns": 24,
+          "winner": 1
+        },
+        {
+          "actions": 54,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            18,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520001,
+          "starter": 1,
+          "turns": 24,
+          "winner": 0
+        },
+        {
+          "actions": 50,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            18
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520002,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 30,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            18,
+            -1
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520003,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        },
+        {
+          "actions": 43,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            18,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520004,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 35,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -2,
+            20
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520005,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 37,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            20,
+            -1
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520006,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 54,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 7,
+          "health": [
+            -1,
+            18
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520007,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 47,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            18,
+            -2
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520008,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 56,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -1,
+            17
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520009,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 40,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            20,
+            -2
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520010,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 35,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            19
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520011,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 41,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            18,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520012,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 61,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -2,
+            12
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520013,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 46,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            20,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520014,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 66,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 8,
+          "health": [
+            0,
+            16
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520015,
+          "starter": 1,
+          "turns": 25,
+          "winner": 1
+        },
+        {
+          "actions": 61,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 3,
+          "health": [
+            17,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520016,
+          "starter": 0,
+          "turns": 27,
+          "winner": 0
+        },
+        {
+          "actions": 52,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            10,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520017,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 72,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            16
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520018,
+          "starter": 0,
+          "turns": 26,
+          "winner": 1
+        },
+        {
+          "actions": 45,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 5,
+          "health": [
+            -1,
+            17
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520019,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 62,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            -1,
+            12
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520020,
+          "starter": 0,
+          "turns": 24,
+          "winner": 1
+        },
+        {
+          "actions": 72,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -2,
+            18
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520021,
+          "starter": 1,
+          "turns": 25,
+          "winner": 1
+        },
+        {
+          "actions": 64,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 7,
+          "health": [
+            -1,
+            17
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520022,
+          "starter": 0,
+          "turns": 26,
+          "winner": 1
+        },
+        {
+          "actions": 33,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            17
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520023,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 52,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 10,
+          "health": [
+            17,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520024,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 48,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            18
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520025,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 65,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            0,
+            17
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520026,
+          "starter": 0,
+          "turns": 26,
+          "winner": 1
+        },
+        {
+          "actions": 85,
+          "burns": 0,
+          "fatigue": [
+            1,
+            1
+          ],
+          "fire_uses": 12,
+          "health": [
+            -1,
+            8
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520027,
+          "starter": 1,
+          "turns": 35,
+          "winner": 1
+        },
+        {
+          "actions": 62,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            14,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520028,
+          "starter": 0,
+          "turns": 25,
+          "winner": 0
+        },
+        {
+          "actions": 73,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 2,
+          "health": [
+            8,
+            -2
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520029,
+          "starter": 1,
+          "turns": 32,
+          "winner": 0
+        },
+        {
+          "actions": 54,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            0,
+            16
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520030,
+          "starter": 0,
+          "turns": 24,
+          "winner": 1
+        },
+        {
+          "actions": 45,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            20,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520031,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 45,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 2,
+          "health": [
+            19,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520032,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 34,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            0,
+            20
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520033,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 52,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 4,
+          "health": [
+            -3,
+            17
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520034,
+          "starter": 0,
+          "turns": 24,
+          "winner": 1
+        },
+        {
+          "actions": 72,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 5,
+          "health": [
+            17,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520035,
+          "starter": 1,
+          "turns": 30,
+          "winner": 0
+        },
+        {
+          "actions": 24,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            19,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520036,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 66,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            7,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520037,
+          "starter": 1,
+          "turns": 26,
+          "winner": 0
+        },
+        {
+          "actions": 55,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            16
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520038,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 32,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 4,
+          "health": [
+            0,
+            19
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610520039,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        }
+      ],
+      "mage_wins": 26,
+      "opponent": "Horda dos Ermos",
+      "opponent_class": 5.0,
+      "opponent_wins": 14,
+      "previous_mage_wins": 31.0,
+      "unfinished": 0
+    },
+    {
+      "draws": 0,
+      "games": [
+        {
+          "actions": 43,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -1,
+            18
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521000,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 41,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            16
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521001,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 56,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 5,
+          "health": [
+            -3,
+            8
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521002,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 62,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 6,
+          "health": [
+            17,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521003,
+          "starter": 1,
+          "turns": 26,
+          "winner": 0
+        },
+        {
+          "actions": 43,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            15,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521004,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 65,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 6,
+          "health": [
+            7,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521005,
+          "starter": 1,
+          "turns": 22,
+          "winner": 0
+        },
+        {
+          "actions": 40,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            20,
+            -1
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521006,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 49,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 2,
+          "health": [
+            -1,
+            18
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521007,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 56,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            7,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521008,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 35,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -3,
+            20
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521009,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 48,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -1,
+            12
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521010,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 62,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            0,
+            14
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521011,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 41,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            20,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521012,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 68,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 3,
+          "health": [
+            6,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521013,
+          "starter": 1,
+          "turns": 26,
+          "winner": 0
+        },
+        {
+          "actions": 64,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 7,
+          "health": [
+            0,
+            2
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521014,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 42,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            0,
+            17
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521015,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 70,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 7,
+          "health": [
+            8,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521016,
+          "starter": 0,
+          "turns": 31,
+          "winner": 0
+        },
+        {
+          "actions": 74,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 7,
+          "health": [
+            12,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521017,
+          "starter": 1,
+          "turns": 30,
+          "winner": 0
+        },
+        {
+          "actions": 52,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            -1,
+            9
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521018,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 48,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            17,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521019,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 49,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 3,
+          "health": [
+            18,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521020,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 60,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 3,
+          "health": [
+            12,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521021,
+          "starter": 1,
+          "turns": 26,
+          "winner": 0
+        },
+        {
+          "actions": 56,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 2,
+          "health": [
+            0,
+            10
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521022,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 53,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 2,
+          "health": [
+            -3,
+            6
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521023,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 43,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 3,
+          "health": [
+            0,
+            20
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521024,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 53,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            4,
+            -2
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521025,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 39,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            15,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521026,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 45,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            20,
+            -1
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521027,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 56,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 7,
+          "health": [
+            13,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521028,
+          "starter": 0,
+          "turns": 23,
+          "winner": 0
+        },
+        {
+          "actions": 51,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            20,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521029,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 50,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 1,
+          "health": [
+            0,
+            8
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521030,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 49,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -1,
+            12
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521031,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 63,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 4,
+          "health": [
+            9,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521032,
+          "starter": 0,
+          "turns": 23,
+          "winner": 0
+        },
+        {
+          "actions": 71,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 8,
+          "health": [
+            4,
+            -1
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521033,
+          "starter": 1,
+          "turns": 28,
+          "winner": 0
+        },
+        {
+          "actions": 51,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 2,
+          "health": [
+            0,
+            13
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521034,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 41,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            -1,
+            17
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521035,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 52,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 2,
+          "health": [
+            20,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521036,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 62,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            5,
+            0
+          ],
+          "mage_side": 0,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521037,
+          "starter": 1,
+          "turns": 24,
+          "winner": 0
+        },
+        {
+          "actions": 53,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 4,
+          "health": [
+            17,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521038,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 51,
+          "burns": 0,
+          "fatigue": [
+            0,
+            0
+          ],
+          "fire_uses": 0,
+          "health": [
+            9,
+            0
+          ],
+          "mage_side": 1,
+          "rogue_choices": {
+            "envenom": 0,
+            "loot": 0
+          },
+          "seed": 202610521039,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        }
+      ],
+      "mage_wins": 29,
+      "opponent": "União da Colheita",
+      "opponent_class": 2.0,
+      "opponent_wins": 11,
+      "previous_mage_wins": 31.0,
+      "unfinished": 0
+    }
+  ],
+  "source": {
+    "sha256": "2e95507b4dadbdd2a1fd11e104478d54e1095b8c28af2557f731e16d7221b1f7",
+    "slots": [
+      {
+        "base_class": 0.0,
+        "cards": [
+          "squire",
+          "squire",
+          "sentinel",
+          "sentinel",
+          "wall_smith",
+          "wall_smith",
+          "warrior",
+          "warrior",
+          "wall_guard",
+          "moon_herald",
+          "iron_stance",
+          "iron_stance",
+          "wall_guard",
+          "moon_herald",
+          "bloodblade",
+          "abascanto_guardian",
+          "abascanto_guardian",
+          "generous_peasant",
+          "generous_peasant",
+          "bloodblade"
+        ],
+        "cover": "bloodblade",
+        "name": "Baluarte das Cicatrizes",
+        "slot": 1.0
+      },
+      {
+        "base_class": 3.0,
+        "cards": [
+          "dusk_scout",
+          "dusk_scout",
+          "raven",
+          "raven",
+          "lightning_rogue",
+          "lightning_rogue",
+          "mist_alchemist",
+          "mist_alchemist",
+          "shadow_step",
+          "shadow_step",
+          "moon_herald",
+          "messenger_hawk",
+          "street_urchin",
+          "street_urchin",
+          "venom_rooftop",
+          "rooftop_leaper",
+          "rooftop_leaper",
+          "secrets_dealer",
+          "secrets_dealer",
+          "moon_herald"
+        ],
+        "cover": "",
+        "name": "Caçada das Brumas",
+        "slot": 2.0
+      },
+      {
+        "base_class": 1.0,
+        "cards": [
+          "mage",
+          "mage",
+          "aether_summoner",
+          "aether_summoner",
+          "runic_familiar",
+          "eclipse_channeler",
+          "eclipse_channeler",
+          "conductive_bolt",
+          "conductive_bolt",
+          "astral_flame",
+          "squire",
+          "squire",
+          "runic_familiar",
+          "astral_flame",
+          "fire_mage",
+          "fire_mage",
+          "fireball",
+          "magic_missiles",
+          "magic_missiles",
+          "wizard_apprentice"
+        ],
+        "cover": "",
+        "name": "Círculo Arcano",
+        "slot": 3.0
+      },
+      {
+        "base_class": 4.0,
+        "cards": [
+          "cleric",
+          "cleric",
+          "dawn_warden",
+          "dawn_warden",
+          "dawn_oracle",
+          "dawn_oracle",
+          "farmer",
+          "farmer",
+          "restoring_light",
+          "vigor_vow",
+          "moon_herald",
+          "restoring_light",
+          "vigor_vow",
+          "life_pilgrim",
+          "dawn_devotee",
+          "dawn_devotee",
+          "dawn_acolyte",
+          "dawn_acolyte",
+          "moon_herald",
+          "dawn_paladin"
+        ],
+        "cover": "",
+        "name": "Aurora Vital",
+        "slot": 4.0
+      },
+      {
+        "base_class": 5.0,
+        "cards": [
+          "horde_roar",
+          "horde_roar",
+          "zombie_helper",
+          "zombie_helper",
+          "moon_werewolf",
+          "moon_werewolf",
+          "marsh_troll",
+          "minotaur_brute",
+          "minotaur_brute",
+          "marsh_troll",
+          "necromancer_summoner",
+          "necromancer_summoner",
+          "goblin_raider",
+          "goblin_raider",
+          "wolf",
+          "wolf",
+          "brood_fungus",
+          "brood_fungus",
+          "scorpion_kobold",
+          "scorpion_kobold"
+        ],
+        "cover": "",
+        "name": "Horda dos Ermos",
+        "slot": 5.0
+      },
+      {
+        "base_class": 2.0,
+        "cards": [
+          "moon_herald",
+          "moon_herald",
+          "generous_peasant",
+          "generous_peasant",
+          "farmer",
+          "farmer",
+          "wise_merchant",
+          "wise_merchant",
+          "harvest_ox",
+          "harvest_ox",
+          "peasant_uprising",
+          "village_leader",
+          "village_leader",
+          "gate_watcher",
+          "gate_watcher",
+          "squire",
+          "squire",
+          "life_pilgrim",
+          "life_pilgrim",
+          "village_reconstruction"
+        ],
+        "cover": "",
+        "name": "União da Colheita",
+        "slot": 6.0
+      }
+    ],
+    "source": "C:\\Users\\flavi\\AppData\\Roaming\\Godot\\app_userdata\\Realmrift\\decks.json"
+  },
+  "total_turns": 4207,
+  "unfinished": 0
+}

@@ -1,5 +1,5 @@
 # Reconstrução da Aldeia
 
-Gerada com image_gen integrado. Destino: `assets/art/village_reconstruction.png`.
+Gerada com image_gen integrado. Destino: `assets/art/village_reconstruction.webp`.
 
 Production spell illustration for fantasy card game Crônicas da Lua, detailed painterly realistic fantasy, vertical 3:4 portrait. A hopeful medieval village reconstruction at night after a battle: humble adult townspeople and masons repairing the stone wall and small wooden gate of their village castle, a newly laid warm pale stone arch, scaffolding, timber beams, stone blocks and a lantern in foreground. Cool blue moonlight and warm amber lanterns, a gentle golden glow suggesting renewal and healing without exaggerated magical beams, rural solidarity and resilience. Strong clear composition readable on a small card, upper 12 percent and lower quarter relatively quiet for editable game UI. Artwork only, absolutely no letters, words, numbers, borders, icons, UI, watermarks or logos. Match the realistic fantasy moonlit village art of the neutral peasant leader and generous peasant.

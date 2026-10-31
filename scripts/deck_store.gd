@@ -3,7 +3,7 @@ extends RefCounted
 
 const Match = preload("res://scripts/match.gd")
 const SLOT_COUNT := 9
-const DECKSET_VERSION := 8
+const DECKSET_VERSION := 10
 var slots: Array = []
 var active := 0
 var path: String
@@ -40,12 +40,17 @@ func load_saved() -> void:
   if slot is Dictionary and slot.get("cards") is Array:
    for j in range(slot.cards.size()):
     if slot.cards[j]=="solar_storm":slot.cards[j]="fireball"
+    if slot.cards[j]=="rogue":slot.cards[j]="lightning_rogue"
    if slot.get("cover","")=="solar_storm":slot.cover="fireball"
+   if slot.get("cover","")=="rogue":slot.cover="lightning_rogue"
   # Expand old 12-card decks without removing cards, names or covers.
   if slot is Dictionary and slot.get("cards") is Array and saved_version<6 and Match.valid_deck(slot.cards,false,12):
    slot.cards=Match.expand_legacy_deck(slot.cards)
+  # Preserve saved 20-card decks and complete them once under the new limit.
+  if slot is Dictionary and slot.get("cards") is Array and saved_version<10 and Match.valid_deck(slot.cards,false,20):
+   slot.cards=expand_saved_deck(slot.cards,int(slot.get("base_class",infer_base(slot.cards))))
   # Keep legacy mixed lists editable; class/restriction validation gates play.
-  if slot is Dictionary and slot.get("name") is String and slot.get("cards") is Array and (slot.cards.is_empty() or Match.valid_deck(slot.cards,false)):
+  if slot is Dictionary and slot.get("name") is String and slot.get("cards") is Array and slot.cards.size()<=Match.DECK_SIZE and (slot.cards.is_empty() or Match.valid_deck(slot.cards,false,slot.cards.size())):
    var cover: String=String(slot.get("cover",""))
    if cover!="" and (not Match.CARD_DATA.has(cover) or cover not in slot.cards):cover=""
    var base: int=int(slot.get("base_class",infer_base(slot.cards)))
@@ -58,6 +63,19 @@ func load_saved() -> void:
  if saved_version<DECKSET_VERSION or data.slots.size()!=SLOT_COUNT:
   persist()
 
+static func expand_saved_deck(cards: Array,base: int) -> Array:
+ var result:=cards.duplicate()
+ var style: int={0:0,3:1,1:2,4:3,2:4,5:5}.get(base,4)
+ var candidates:=Match.default_deck(style)
+ candidates.append_array(Match.CARD_DATA.keys())
+ for key in candidates:
+  if result.size()>=Match.DECK_SIZE:break
+  if result.count(key)>=Match.copy_limit(key):continue
+  var next:=result.duplicate()
+  next.append(key)
+  if accepts_base(base,next) and Match.can_add_class(result,key):result.append(key)
+ return result
+
 static func infer_base(cards: Array) -> int:
  if cards.is_empty():return -1
  var faction: int=Match.deck_class(cards)
@@ -68,7 +86,7 @@ static func accepts_base(base: int,cards: Array) -> bool:
  for key in cards:
   if not Match.CARD_DATA.has(key) or not Match.CARD_DATA[key].collectible:return false
   if Match.neutral_monster_forbidden(base,key):return false
-  if base==CardData.CardClass.HORDE and Match.CARD_DATA[key].is_human() and not Match.CARD_DATA[key].horde_deck_allowed:return false
+  if base==CardData.CardClass.HORDE and Match.CARD_DATA[key].is_human() and not Match.CARD_DATA[key].has_creature_type(CardData.CreatureType.MONSTER):return false
   var faction: int=Match.CARD_DATA[key].card_class
   if faction!=CardData.CardClass.NEUTRAL and faction!=base:return false
  return true
@@ -93,7 +111,7 @@ func persist() -> bool:
  error_message = ""
  return true
 
-func save_slot(slot: int, name: String, cards: Array,base_class: int=-3) -> bool:
+func save_slot(slot: int, name: String, cards: Array,base_class: int=-3, cover_override: Variant=null) -> bool:
  if slot<0 or slot>=SLOT_COUNT:return false
  var base: int=base_class
  if base==-3:
@@ -104,11 +122,11 @@ func save_slot(slot: int, name: String, cards: Array,base_class: int=-3) -> bool
   if cards.any(func(key):return Match.neutral_monster_forbidden(base,key)):
    error_message="Monstros neutros só podem entrar na Horda ou em decks só de neutros."
    return false
-  error_message = "Humanos precisam de Pacto Sombrio para entrar na Horda." if base==CardData.CardClass.HORDE and cards.any(func(key):return Match.CARD_DATA.has(key) and Match.CARD_DATA[key].is_human() and not Match.CARD_DATA[key].horde_deck_allowed) else "Use 20 cartas, até 2 cópias (lendárias: 1), de uma única classe + neutros ou somente neutros. Respeite as cartas exclusivas de decks neutros."
+  error_message = "Humanos precisam de Pacto Sombrio para entrar na Horda." if base==CardData.CardClass.HORDE and cards.any(func(key):return Match.CARD_DATA.has(key) and Match.CARD_DATA[key].is_human() and not Match.CARD_DATA[key].human_and_monster) else "Use 22 cartas, até 2 cópias (lendárias: 1), de uma única classe + neutros ou somente neutros. Respeite as cartas exclusivas de decks neutros."
   return false
  var previous_active:=active
  var previous: Dictionary = slots[slot].duplicate(true)
- var cover: String=String(previous.get("cover",""))
+ var cover: String=String(previous.get("cover","")) if cover_override==null else String(cover_override)
  if cover not in cards:cover=""
  slots[slot] = {"name": clean_name(name, slot), "cards": cards.duplicate(),"cover":cover,"base_class":base}
  ensure_nonempty_active()
@@ -120,7 +138,7 @@ func save_slot(slot: int, name: String, cards: Array,base_class: int=-3) -> bool
 
 func activate(slot: int) -> bool:
  if slot < 0 or slot >= SLOT_COUNT or not Match.valid_deck(slots[slot].cards) or not accepts_base(base_for(slot),slots[slot].cards):
-  error_message="Complete um deck de 20 cartas antes de jogar."
+  error_message="Complete um deck de 22 cartas antes de jogar."
   return false
  var previous := active
  active = slot
@@ -135,8 +153,13 @@ func active_cards() -> Array:
 func reset_defaults() -> void:
  slots.clear()
  active=0
+ var styles: Array[int]=[0,1,2,3,5,4]
  for i in range(SLOT_COUNT):
-  slots.append({"name":Match.default_deck_name(i),"cards":Match.default_deck(i),"cover":"","base_class":infer_base(Match.default_deck(i))} if i<4 else {"name":"Novo deck %d" % (i+1),"cards":[],"cover":"","base_class":-1})
+  if i<styles.size():
+   var cards:=Match.default_deck(styles[i])
+   slots.append({"name":Match.default_deck_name(styles[i]),"cards":cards,"cover":"bloodblade" if i==0 else "","base_class":infer_base(cards)})
+  else:
+   slots.append({"name":"Novo deck %d" % (i+1),"cards":[],"cover":"","base_class":-1})
 
 func reset_saved_decks() -> bool:
  reset_defaults()

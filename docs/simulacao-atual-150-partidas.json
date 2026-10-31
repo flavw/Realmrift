@@ -1,0 +1,2003 @@
+{
+  "decks": [
+    {
+      "cards": [
+        "squire",
+        "squire",
+        "sentinel",
+        "sentinel",
+        "wall_smith",
+        "wall_smith",
+        "warrior",
+        "warrior",
+        "wall_guard",
+        "moon_herald",
+        "iron_stance",
+        "iron_stance",
+        "wall_guard",
+        "moon_herald",
+        "bloodblade",
+        "abascanto_guardian",
+        "abascanto_guardian",
+        "generous_peasant",
+        "generous_peasant",
+        "bloodblade"
+      ],
+      "name": "Baluarte das Cicatrizes"
+    },
+    {
+      "cards": [
+        "dusk_scout",
+        "dusk_scout",
+        "raven",
+        "raven",
+        "rogue",
+        "rogue",
+        "mist_alchemist",
+        "mist_alchemist",
+        "moon_herald",
+        "messenger_hawk",
+        "shadow_step",
+        "shadow_step",
+        "moon_herald",
+        "messenger_hawk",
+        "wolf",
+        "wolf",
+        "gate_watcher",
+        "gate_watcher",
+        "street_urchin",
+        "street_urchin"
+      ],
+      "name": "Caçada das Brumas"
+    },
+    {
+      "cards": [
+        "mage",
+        "mage",
+        "aether_summoner",
+        "aether_summoner",
+        "runic_familiar",
+        "eclipse_channeler",
+        "eclipse_channeler",
+        "conductive_bolt",
+        "conductive_bolt",
+        "astral_flame",
+        "squire",
+        "squire",
+        "runic_familiar",
+        "astral_flame",
+        "fire_mage",
+        "fire_mage",
+        "fireball",
+        "magic_missiles",
+        "magic_missiles",
+        "wizard_apprentice"
+      ],
+      "name": "Círculo Arcano"
+    },
+    {
+      "cards": [
+        "cleric",
+        "cleric",
+        "dawn_warden",
+        "dawn_warden",
+        "dawn_oracle",
+        "dawn_oracle",
+        "farmer",
+        "farmer",
+        "restoring_light",
+        "vigor_vow",
+        "moon_herald",
+        "restoring_light",
+        "vigor_vow",
+        "life_pilgrim",
+        "life_pilgrim",
+        "dawn_devotee",
+        "dawn_devotee",
+        "dawn_acolyte",
+        "dawn_acolyte",
+        "moon_herald"
+      ],
+      "name": "Aurora Vital"
+    },
+    {
+      "cards": [
+        "horde_roar",
+        "horde_roar",
+        "zombie_helper",
+        "zombie_helper",
+        "moon_werewolf",
+        "moon_werewolf",
+        "marsh_troll",
+        "minotaur_brute",
+        "minotaur_brute",
+        "marsh_troll",
+        "necromancer_summoner",
+        "necromancer_summoner",
+        "goblin_raider",
+        "goblin_raider",
+        "wolf",
+        "wolf",
+        "brood_fungus",
+        "brood_fungus",
+        "scorpion_kobold",
+        "scorpion_kobold"
+      ],
+      "name": "Horda dos Ermos"
+    },
+    {
+      "cards": [
+        "moon_herald",
+        "moon_herald",
+        "generous_peasant",
+        "generous_peasant",
+        "farmer",
+        "farmer",
+        "wise_merchant",
+        "wise_merchant",
+        "harvest_ox",
+        "harvest_ox",
+        "peasant_uprising",
+        "village_leader",
+        "village_leader",
+        "gate_watcher",
+        "gate_watcher",
+        "squire",
+        "squire",
+        "life_pilgrim",
+        "life_pilgrim",
+        "village_reconstruction"
+      ],
+      "name": "União da Colheita"
+    }
+  ],
+  "games_played": [
+    50,
+    50,
+    50,
+    50,
+    50,
+    50
+  ],
+  "method": "IA do jogo nos dois lados; mulligan de cartas com custo 4 ou mais; iniciativa alternada; dez partidas por confronto; baralhos salvos atuais.",
+  "results": [
+    {
+      "a": "Baluarte das Cicatrizes",
+      "a_wins": 8,
+      "average_turns": 18.7,
+      "b": "Caçada das Brumas",
+      "b_wins": 2,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 38,
+          "health": [
+            0,
+            16
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 12,
+          "winner": 1
+        },
+        {
+          "actions": 51,
+          "health": [
+            16,
+            0
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 53,
+          "health": [
+            -2,
+            10
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 43,
+          "health": [
+            20,
+            -1
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        },
+        {
+          "actions": 58,
+          "health": [
+            9,
+            -1
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 60,
+          "health": [
+            8,
+            -1
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 68,
+          "health": [
+            0,
+            7
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 61,
+          "health": [
+            0,
+            19
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 76,
+          "health": [
+            4,
+            -1
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 27,
+          "winner": 0
+        },
+        {
+          "actions": 48,
+          "health": [
+            14,
+            -2
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        }
+      ],
+      "turns": 187,
+      "unfinished": 0
+    },
+    {
+      "a": "Baluarte das Cicatrizes",
+      "a_wins": 8,
+      "average_turns": 21.5,
+      "b": "Círculo Arcano",
+      "b_wins": 2,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 43,
+          "health": [
+            19,
+            -1
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 66,
+          "health": [
+            14,
+            -1
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 24,
+          "winner": 0
+        },
+        {
+          "actions": 57,
+          "health": [
+            -1,
+            20
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 47,
+          "health": [
+            0,
+            20
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 59,
+          "health": [
+            0,
+            16
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 26,
+          "winner": 1
+        },
+        {
+          "actions": 64,
+          "health": [
+            19,
+            -1
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 26,
+          "winner": 0
+        },
+        {
+          "actions": 46,
+          "health": [
+            0,
+            17
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 54,
+          "health": [
+            0,
+            19
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 60,
+          "health": [
+            0,
+            17
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 26,
+          "winner": 1
+        },
+        {
+          "actions": 47,
+          "health": [
+            20,
+            -2
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        }
+      ],
+      "turns": 215,
+      "unfinished": 0
+    },
+    {
+      "a": "Baluarte das Cicatrizes",
+      "a_wins": 7,
+      "average_turns": 18.6,
+      "b": "Aurora Vital",
+      "b_wins": 3,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 44,
+          "health": [
+            20,
+            0
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 62,
+          "health": [
+            20,
+            0
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 52,
+          "health": [
+            0,
+            18
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 68,
+          "health": [
+            19,
+            -5
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 22,
+          "winner": 0
+        },
+        {
+          "actions": 60,
+          "health": [
+            19,
+            0
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 19,
+          "winner": 0
+        },
+        {
+          "actions": 63,
+          "health": [
+            14,
+            -2
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 73,
+          "health": [
+            -2,
+            19
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 71,
+          "health": [
+            2,
+            -4
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 22,
+          "winner": 0
+        },
+        {
+          "actions": 68,
+          "health": [
+            -1,
+            10
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 43,
+          "health": [
+            13,
+            -2
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 14,
+          "winner": 0
+        }
+      ],
+      "turns": 186,
+      "unfinished": 0
+    },
+    {
+      "a": "Baluarte das Cicatrizes",
+      "a_wins": 7,
+      "average_turns": 18.6,
+      "b": "Horda dos Ermos",
+      "b_wins": 3,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 36,
+          "health": [
+            18,
+            0
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 60,
+          "health": [
+            0,
+            16
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 76,
+          "health": [
+            8,
+            -1
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 25,
+          "winner": 0
+        },
+        {
+          "actions": 73,
+          "health": [
+            0,
+            4
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 40,
+          "health": [
+            13,
+            0
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 72,
+          "health": [
+            -1,
+            17
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 25,
+          "winner": 1
+        },
+        {
+          "actions": 39,
+          "health": [
+            -1,
+            19
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 14,
+          "winner": 1
+        },
+        {
+          "actions": 51,
+          "health": [
+            -2,
+            13
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 31,
+          "health": [
+            20,
+            -3
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 55,
+          "health": [
+            19,
+            -5
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        }
+      ],
+      "turns": 186,
+      "unfinished": 0
+    },
+    {
+      "a": "Baluarte das Cicatrizes",
+      "a_wins": 4,
+      "average_turns": 15.3,
+      "b": "União da Colheita",
+      "b_wins": 6,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 56,
+          "health": [
+            -1,
+            5
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 49,
+          "health": [
+            0,
+            14
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 43,
+          "health": [
+            17,
+            -2
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 32,
+          "health": [
+            0,
+            10
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 11,
+          "winner": 1
+        },
+        {
+          "actions": 49,
+          "health": [
+            -1,
+            2
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 31,
+          "health": [
+            -1,
+            20
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 11,
+          "winner": 1
+        },
+        {
+          "actions": 52,
+          "health": [
+            -1,
+            16
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 49,
+          "health": [
+            20,
+            -4
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 67,
+          "health": [
+            9,
+            0
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 58,
+          "health": [
+            7,
+            -1
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        }
+      ],
+      "turns": 153,
+      "unfinished": 0
+    },
+    {
+      "a": "Caçada das Brumas",
+      "a_wins": 3,
+      "average_turns": 23.8,
+      "b": "Círculo Arcano",
+      "b_wins": 7,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 74,
+          "health": [
+            0,
+            13
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 30,
+          "winner": 1
+        },
+        {
+          "actions": 72,
+          "health": [
+            -1,
+            18
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 33,
+          "winner": 1
+        },
+        {
+          "actions": 62,
+          "health": [
+            15,
+            0
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 23,
+          "winner": 0
+        },
+        {
+          "actions": 45,
+          "health": [
+            -1,
+            17
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 63,
+          "health": [
+            0,
+            5
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 24,
+          "winner": 1
+        },
+        {
+          "actions": 50,
+          "health": [
+            0,
+            17
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 53,
+          "health": [
+            12,
+            0
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 27,
+          "winner": 0
+        },
+        {
+          "actions": 36,
+          "health": [
+            0,
+            19
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 13,
+          "winner": 1
+        },
+        {
+          "actions": 36,
+          "health": [
+            19,
+            -1
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 71,
+          "health": [
+            0,
+            7
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 35,
+          "winner": 1
+        }
+      ],
+      "turns": 238,
+      "unfinished": 0
+    },
+    {
+      "a": "Caçada das Brumas",
+      "a_wins": 3,
+      "average_turns": 18.2,
+      "b": "Aurora Vital",
+      "b_wins": 7,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 78,
+          "health": [
+            -1,
+            4
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 55,
+          "health": [
+            18,
+            -2
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 57,
+          "health": [
+            18,
+            -3
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 89,
+          "health": [
+            -1,
+            17
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 37,
+          "health": [
+            -3,
+            17
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 14,
+          "winner": 1
+        },
+        {
+          "actions": 64,
+          "health": [
+            -2,
+            12
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 63,
+          "health": [
+            4,
+            -1
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 47,
+          "health": [
+            20,
+            -1
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 33,
+          "health": [
+            20,
+            0
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 11,
+          "winner": 0
+        },
+        {
+          "actions": 60,
+          "health": [
+            -6,
+            16
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        }
+      ],
+      "turns": 182,
+      "unfinished": 0
+    },
+    {
+      "a": "Caçada das Brumas",
+      "a_wins": 5,
+      "average_turns": 14.6,
+      "b": "Horda dos Ermos",
+      "b_wins": 5,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 45,
+          "health": [
+            -1,
+            7
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 14,
+          "winner": 1
+        },
+        {
+          "actions": 32,
+          "health": [
+            9,
+            0
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 12,
+          "winner": 0
+        },
+        {
+          "actions": 47,
+          "health": [
+            15,
+            -1
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 44,
+          "health": [
+            3,
+            -1
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 12,
+          "winner": 0
+        },
+        {
+          "actions": 49,
+          "health": [
+            -3,
+            7
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 59,
+          "health": [
+            -2,
+            6
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 50,
+          "health": [
+            0,
+            11
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 45,
+          "health": [
+            0,
+            17
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 15,
+          "winner": 1
+        },
+        {
+          "actions": 39,
+          "health": [
+            13,
+            0
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 36,
+          "health": [
+            10,
+            -2
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 12,
+          "winner": 0
+        }
+      ],
+      "turns": 146,
+      "unfinished": 0
+    },
+    {
+      "a": "Caçada das Brumas",
+      "a_wins": 1,
+      "average_turns": 16.4,
+      "b": "União da Colheita",
+      "b_wins": 9,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 48,
+          "health": [
+            0,
+            13
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 53,
+          "health": [
+            -1,
+            10
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 46,
+          "health": [
+            19,
+            0
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 44,
+          "health": [
+            18,
+            -2
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 56,
+          "health": [
+            -2,
+            15
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 38,
+          "health": [
+            -1,
+            18
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 13,
+          "winner": 1
+        },
+        {
+          "actions": 61,
+          "health": [
+            20,
+            -1
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 49,
+          "health": [
+            11,
+            -1
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 29,
+          "health": [
+            19,
+            0
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 11,
+          "winner": 0
+        },
+        {
+          "actions": 59,
+          "health": [
+            -2,
+            19
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        }
+      ],
+      "turns": 164,
+      "unfinished": 0
+    },
+    {
+      "a": "Círculo Arcano",
+      "a_wins": 6,
+      "average_turns": 26.4,
+      "b": "Aurora Vital",
+      "b_wins": 4,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 63,
+          "health": [
+            20,
+            -1
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 23,
+          "winner": 0
+        },
+        {
+          "actions": 119,
+          "health": [
+            10,
+            -2
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 41,
+          "winner": 0
+        },
+        {
+          "actions": 70,
+          "health": [
+            0,
+            20
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 24,
+          "winner": 1
+        },
+        {
+          "actions": 60,
+          "health": [
+            14,
+            -2
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 55,
+          "health": [
+            -2,
+            20
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 34,
+          "health": [
+            -2,
+            20
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 13,
+          "winner": 1
+        },
+        {
+          "actions": 81,
+          "health": [
+            0,
+            15
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 36,
+          "winner": 1
+        },
+        {
+          "actions": 84,
+          "health": [
+            0,
+            10
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 37,
+          "winner": 1
+        },
+        {
+          "actions": 68,
+          "health": [
+            18,
+            0
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 31,
+          "winner": 0
+        },
+        {
+          "actions": 68,
+          "health": [
+            0,
+            13
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        }
+      ],
+      "turns": 264,
+      "unfinished": 0
+    },
+    {
+      "a": "Círculo Arcano",
+      "a_wins": 5,
+      "average_turns": 23.6,
+      "b": "Horda dos Ermos",
+      "b_wins": 5,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 57,
+          "health": [
+            20,
+            0
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 23,
+          "winner": 0
+        },
+        {
+          "actions": 80,
+          "health": [
+            13,
+            0
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 38,
+          "winner": 0
+        },
+        {
+          "actions": 33,
+          "health": [
+            18,
+            0
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 73,
+          "health": [
+            0,
+            17
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 29,
+          "winner": 1
+        },
+        {
+          "actions": 59,
+          "health": [
+            19,
+            -1
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 25,
+          "winner": 0
+        },
+        {
+          "actions": 71,
+          "health": [
+            -1,
+            18
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 27,
+          "winner": 1
+        },
+        {
+          "actions": 40,
+          "health": [
+            20,
+            0
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 50,
+          "health": [
+            14,
+            -1
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 49,
+          "health": [
+            17,
+            0
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 65,
+          "health": [
+            -1,
+            14
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 25,
+          "winner": 1
+        }
+      ],
+      "turns": 236,
+      "unfinished": 0
+    },
+    {
+      "a": "Círculo Arcano",
+      "a_wins": 1,
+      "average_turns": 18.2,
+      "b": "União da Colheita",
+      "b_wins": 9,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 47,
+          "health": [
+            -2,
+            16
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 39,
+          "health": [
+            -1,
+            17
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 40,
+          "health": [
+            19,
+            -2
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 70,
+          "health": [
+            0,
+            18
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 25,
+          "winner": 1
+        },
+        {
+          "actions": 45,
+          "health": [
+            -1,
+            20
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 45,
+          "health": [
+            0,
+            20
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 40,
+          "health": [
+            20,
+            -1
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 56,
+          "health": [
+            19,
+            0
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 18,
+          "winner": 0
+        },
+        {
+          "actions": 61,
+          "health": [
+            0,
+            14
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 22,
+          "winner": 1
+        },
+        {
+          "actions": 49,
+          "health": [
+            -4,
+            20
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        }
+      ],
+      "turns": 182,
+      "unfinished": 0
+    },
+    {
+      "a": "Aurora Vital",
+      "a_wins": 3,
+      "average_turns": 19.4,
+      "b": "Horda dos Ermos",
+      "b_wins": 7,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 90,
+          "health": [
+            0,
+            14
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 28,
+          "winner": 1
+        },
+        {
+          "actions": 69,
+          "health": [
+            0,
+            20
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 23,
+          "winner": 1
+        },
+        {
+          "actions": 51,
+          "health": [
+            19,
+            0
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 52,
+          "health": [
+            -3,
+            15
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 66,
+          "health": [
+            11,
+            0
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 23,
+          "winner": 0
+        },
+        {
+          "actions": 40,
+          "health": [
+            -3,
+            20
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 13,
+          "winner": 1
+        },
+        {
+          "actions": 38,
+          "health": [
+            20,
+            -2
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 63,
+          "health": [
+            20,
+            -4
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 22,
+          "winner": 0
+        },
+        {
+          "actions": 64,
+          "health": [
+            16,
+            -5
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 21,
+          "winner": 0
+        },
+        {
+          "actions": 59,
+          "health": [
+            0,
+            15
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        }
+      ],
+      "turns": 194,
+      "unfinished": 0
+    },
+    {
+      "a": "Aurora Vital",
+      "a_wins": 0,
+      "average_turns": 15.3,
+      "b": "União da Colheita",
+      "b_wins": 10,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 61,
+          "health": [
+            0,
+            19
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 20,
+          "winner": 1
+        },
+        {
+          "actions": 65,
+          "health": [
+            -3,
+            19
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 41,
+          "health": [
+            20,
+            0
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 13,
+          "winner": 0
+        },
+        {
+          "actions": 51,
+          "health": [
+            16,
+            -2
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        },
+        {
+          "actions": 63,
+          "health": [
+            -1,
+            18
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 18,
+          "winner": 1
+        },
+        {
+          "actions": 29,
+          "health": [
+            -2,
+            20
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 11,
+          "winner": 1
+        },
+        {
+          "actions": 29,
+          "health": [
+            20,
+            0
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 11,
+          "winner": 0
+        },
+        {
+          "actions": 66,
+          "health": [
+            18,
+            -10
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 35,
+          "health": [
+            -1,
+            20
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 12,
+          "winner": 1
+        },
+        {
+          "actions": 35,
+          "health": [
+            -2,
+            20
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 13,
+          "winner": 1
+        }
+      ],
+      "turns": 153,
+      "unfinished": 0
+    },
+    {
+      "a": "Horda dos Ermos",
+      "a_wins": 6,
+      "average_turns": 16.7,
+      "b": "União da Colheita",
+      "b_wins": 4,
+      "draws": 0,
+      "games": [
+        {
+          "actions": 53,
+          "health": [
+            15,
+            -4
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 17,
+          "winner": 0
+        },
+        {
+          "actions": 65,
+          "health": [
+            4,
+            0
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 20,
+          "winner": 0
+        },
+        {
+          "actions": 24,
+          "health": [
+            20,
+            -1
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 11,
+          "winner": 0
+        },
+        {
+          "actions": 51,
+          "health": [
+            -1,
+            20
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 19,
+          "winner": 1
+        },
+        {
+          "actions": 44,
+          "health": [
+            19,
+            0
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 51,
+          "health": [
+            -1,
+            9
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 17,
+          "winner": 1
+        },
+        {
+          "actions": 40,
+          "health": [
+            19,
+            -1
+          ],
+          "reversed": true,
+          "starter": 0,
+          "turns": 15,
+          "winner": 0
+        },
+        {
+          "actions": 62,
+          "health": [
+            -2,
+            17
+          ],
+          "reversed": true,
+          "starter": 1,
+          "turns": 21,
+          "winner": 1
+        },
+        {
+          "actions": 49,
+          "health": [
+            -8,
+            18
+          ],
+          "reversed": false,
+          "starter": 0,
+          "turns": 16,
+          "winner": 1
+        },
+        {
+          "actions": 43,
+          "health": [
+            18,
+            -1
+          ],
+          "reversed": false,
+          "starter": 1,
+          "turns": 16,
+          "winner": 0
+        }
+      ],
+      "turns": 167,
+      "unfinished": 0
+    }
+  ],
+  "wins": [
+    34,
+    14,
+    21,
+    17,
+    26,
+    38
+  ]
+}

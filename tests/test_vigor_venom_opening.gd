@@ -27,15 +27,15 @@ func _init() -> void:
  quit()
 func vigor() -> void:
  assert(Match.CARD_DATA.cleric.vigor and Match.CARD_DATA.dawn_warden.vigor)
- assert(Match.CARD_DATA.dawn_warden.block==0)
+ assert(Match.CARD_DATA.dawn_warden.block==3)
  var guard_match=game()
  guard_match.players[0].board=[unit("dawn_warden")]
  guard_match.players[1].board=[unit("sentinel",1)]
  guard_match.turn=1
- assert(guard_match.can_target(1,0,-1) and guard_match.can_target(1,0,0))
- assert(guard_match.act(1,0,0) and guard_match.players[0].board[0].block==0)
+ assert(not guard_match.can_target(1,0,-1) and guard_match.can_target(1,0,0))
+ assert(guard_match.act(1,0,0) and guard_match.players[0].board[0].block==2)
  guard_match.end_turn(1)
- assert(guard_match.players[0].board[0].block==0,"Guardião da Aurora não possui Bloqueio")
+ assert(guard_match.players[0].board[0].block==3,"Guardião recupera uma carga de Bloqueio")
  var m=game()
  var a=unit("sentinel")
  a.health=10
@@ -106,16 +106,16 @@ func lightning() -> void:
  var m=game()
  var d=unit("farmer",1)
  m.players[0].board=[d];m.players[0].hand=["iron_stance"]
- assert(m.cast(0,0,0,0) and d.armor==2)
+ assert(m.cast(0,0,0,0) and d.armor==1)
  m.turn=1;m.players[1].hand=["conductive_bolt"]
  assert(m.cast(1,0,0,0) and m.players[0].board.is_empty(),"Armadura concedida também dobra o dano")
 func venom() -> void:
- assert(Match.CARD_DATA.rogue.envenom==1 and Match.CARD_DATA.raven.envenom==1)
+ assert(Match.CARD_DATA.lightning_rogue.envenom==1 and Match.CARD_DATA.raven.envenom==0)
  var m=game()
- var a=unit("rogue")
+ var a=unit("lightning_rogue")
  a.attack=1;a.health=10
  var d=unit("raven",1)
- d.armor=9;d.health=10
+ d.armor=9;d.health=10;d.envenom=1
  m.players[0].board=[a];m.players[1].board=[d]
  assert(m.act(0,0,0))
  assert(d.health==10 and d.poison==1 and a.poison==1,"Veneno aplica mesmo com dano absorvido e no contra-ataque")
@@ -134,14 +134,14 @@ func venom() -> void:
  m.players[0].board=[a];m.players[1].board=[d]
  assert(m.act(0,0,0,true) and d.poison==0 and a.poison==0)
  m=game()
- a=unit("rogue");a.health=1
+ a=unit("lightning_rogue");a.health=1
  d=unit("sentinel",1);d.health=10
  m.players[0].board=[a];m.players[1].board=[d]
  assert(m.act(0,0,0) and m.players[0].board.is_empty() and d.poison==1,"Fonte morrer não cancela veneno")
  m=game()
  a=unit("raven")
  m.players[0].board=[a]
- assert(m.act(0,0,-1) and m.players[1].hp==18 and m.players[1].poison==0)
+ assert(m.act(0,0,-1) and m.players[1].hp==19 and m.players[1].poison==0)
  a.ready=true
  assert(m.act(0,0,-1) and m.players[1].poison==0)
  m.players[1].hp=2

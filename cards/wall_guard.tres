@@ -1,10 +1,11 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 [ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/wall_guard.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/wall_guard.webp" id="2"]
 [resource]
 script=ExtResource("1")
 creature_type=0
 title="Guardião da Muralha"
+lore = "Seu posto tem a melhor vista e a pior fila de inimigos."
 cost=4
 attack=2
 health=4

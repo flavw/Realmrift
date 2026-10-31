@@ -13,7 +13,7 @@ func click(node: Control,double: bool=false) -> void:
  var event:=InputEventMouseButton.new();event.position=node.get_global_rect().get_center();event.button_index=MOUSE_BUTTON_LEFT;event.pressed=true;event.double_click=double
  root.push_input(event,true);event.pressed=false;root.push_input(event,true)
 func verify() -> void:
- assert(Match.MAX_BOARD==6 and Match.CARD_DATA.dawn_warden.block==0)
+ assert(Match.MAX_BOARD==6 and Match.CARD_DATA.dawn_warden.block==3)
  var m=fixture()
  for i in range(5):m.spawn_unit(0,"farmer")
  m.players[0].hand=["squire","wolf"]

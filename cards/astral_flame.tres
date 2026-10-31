@@ -1,14 +1,17 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/astral_flame.png" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://gr0c7shrhgis"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dvexcr1eacru3" path="res://assets/art/astral_flame.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Chama Astral"
-cost=3
-card_class=1
-card_type=1
-spell_effect=2
-spell_value=3
-attack=0
-health=0
-artwork=ExtResource("2")
+script = ExtResource("1")
+card_type = 1
+spell_effect = 2
+spell_value = 4
+title = "Chama Astral"
+lore = "Há estrelas que caem. Esta escolhe onde pousar."
+cost = 4
+attack = 0
+health = 0
+card_class = 1
+artwork = ExtResource("2")

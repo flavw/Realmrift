@@ -1,4 +1,4 @@
-# Crônicas da Lua — Duelo de Cartas
+# Realmrift — Duelo de Cartas
 
 Jogo de cartas de fantasia em Godot, com duelos contra IA e construção de decks. Há 37 criaturas colecionáveis, nove magias e um Carniçal invocado. Projeto em desenvolvimento; PvP planejado.
 
@@ -19,7 +19,7 @@ Enter, Enter do teclado numérico ou numpad 0 passa o turno. Selecione uma criat
 - Primeiro jogador sorteado; mão inicial de 3 cartas para quem começa e 4 para o segundo. Uma troca grátis das cartas escolhidas antes da compra normal do turno.
 - Vigor usa o maior valor entre ataque e vida atual tanto no ataque físico quanto no contra-ataque. Veneno acumula, causa dano no fim do turno do dono do alvo, ignora Armadura e termina completamente após esse dano.
 - Castelos com 20 de vida; mana cresce até 10; campo com até seis criaturas e mão com até oito cartas.
-- Nove espaços para decks de 20 cartas, com no máximo duas cópias por carta. Cada deck usa uma única classe + neutros.
+- Nove espaços para decks de 22 cartas, com no máximo duas cópias por carta. Cada deck usa uma única classe + neutros.
 - Armadura reduz cada dano físico, incluindo contra-ataques. Magia ignora armadura e não provoca contra-ataque.
 - Bloqueio N exige que os primeiros N ataques físicos tenham uma criatura bloqueadora como alvo. Recupera somente uma carga no início do turno do dono, até o máximo. Voo ignora essa restrição de alvo.
 - Arrancada permite atacar no turno de entrada. Fúria do Lobo custa uma mana, aumenta seu ataque permanentemente e não esgota a criatura.
@@ -46,7 +46,7 @@ Enter, Enter do teclado numérico ou numpad 0 passa o turno. Selecione uma criat
 
 A arte é compartilhada entre as duas apresentações. Artwork Zoom e Artwork Focus ajustam o enquadramento da carta completa. Ícones de Armadura e Bloqueio aparecem somente na versão reduzida, sem painel de fundo. A arte escurece e Zzzz flutua no canto superior direito quando a criatura está esgotada.
 
-Os decks são salvos em `user://decks.json`. Salvar aceita um espaço vazio ou um deck completo de 20 cartas. Jogar exige um deck completo. Rascunhos são guardados enquanto o gerenciador de decks fica aberto; salve para persistir entre sessões. Caches `.godot/`, dados locais `.local/`, credenciais e executáveis exportados ficam fora do Git.
+Os decks são salvos em `user://decks.json`. Salvar aceita um espaço vazio ou um deck completo de 22 cartas. Jogar exige um deck completo. Rascunhos são guardados enquanto o gerenciador de decks fica aberto; salve para persistir entre sessões. Caches `.godot/`, dados locais `.local/`, credenciais e executáveis exportados ficam fora do Git.
 
 ## Verificação
 
@@ -68,7 +68,7 @@ Todos os arquivos necessários para abrir e continuar o projeto estão neste rep
 
 A carta completa usa gema de mana de 40 px, nome de 20–24 px na fonte At Dawn, borda fina e degradê suave na base para as habilidades. A faixa do título e o pergaminho foram removidos para dar espaço à arte. Os atributos ficam somente em texto no canto inferior direito. Os ícones gerados de esgotar e fúria aparecem nas habilidades e ações; Bloqueio usa um rótulo textual na versão reduzida. Os prompts estão em `docs/art-prompts/minimal-icons.md`.
 
-A pasta local do projeto se chama `CronicasDaLua`. Atualizações do GitHub exigem pedido explícito do usuário; consulte `AGENTS.md`.
+A pasta local do projeto se chama `Realmrift`. Atualizações do GitHub exigem pedido explícito do usuário; consulte `AGENTS.md`.
 
 `tests/test_start_menu.gd` verifica o título, decks, regras e navegação entre início e duelo.
 
@@ -90,7 +90,7 @@ Habilidades ativáveis ganham um ponto verde quando disponíveis. Ficam apagadas
 
 Prévia e ajuda aguardam 250 ms de hover; sair ou trocar de carta cancela a abertura pendente. O custo superior usa gema azul clara de 40 px e número de 26 px com contorno; o custo de habilidade usa gema azul clara de 28 px e número de 20 px.
 
-Botão direito em uma carta da mão, campo, galeria ou editor abre a ilustração original grande, sem recorte ou UI. Clique esquerdo/direito ou Esc fecha. A visualização bloqueia seleção, ataques e atalhos de turno. A ampulheta indica esgotar; a antiga lua está preservada em assets/ui/moon-reserved.png para uma habilidade futura. Prompt em docs/art-prompts/hourglass.md.
+Botão direito em uma carta da mão, campo, galeria ou editor abre a ilustração original grande, sem recorte ou UI. Clique esquerdo/direito ou Esc fecha. A visualização bloqueia seleção, ataques e atalhos de turno. A ampulheta indica esgotar; a antiga lua está preservada em assets/ui/moon-reserved.webp para uma habilidade futura. Prompt em docs/art-prompts/hourglass.md.
 
 `tests/test_card_polish.gd` verifica cores, disponibilidade, atraso, botão direito, arte sem textos e entrada modal.
 
@@ -98,7 +98,7 @@ Botão direito em uma carta da mão, campo, galeria ou editor abre a ilustraçã
 
 Nome e linhas de habilidades ficam centralizados no eixo da carta. Os ícones de custo e esgotar acompanham a mesma linha vertical do texto. O degradê inferior inicia transparente e termina com opacidade de 78%, preservando mais da ilustração. Ataque/vida usam posições explícitas e uma linha de base compartilhada; o grupo permanece alinhado no canto inferior direito, tanto no modelo completo quanto na versão reduzida. `tests/test_card_alignment.gd` verifica os alinhamentos e o degradê.
 
-Os nomes usam a fonte At Dawn Regular fornecida pelo usuário, incorporada em `assets/fonts/At-Dawn-Regular.otf`; não é necessário instalar a fonte no sistema. O tamanho se ajusta entre 20 e 24 px para nomes longos. Os nomes usam sombra sutil, sem contorno pesado. Guerreiro, mago, neutro, ladina e clérigo são identificados pela borda fina vermelha, roxa, cinza, verde e branca/dourada. Ataque/vida continuam coloridos por bônus/dano, mas sem escudos.
+Os nomes usam a fonte At Dawn Regular fornecida pelo usuário, incorporada em `assets/fonts/At-Dawn-Regular.otf`; não é necessário instalar a fonte no sistema. O tamanho se ajusta entre 20 e 24 px para nomes longos. Os nomes usam sombra sutil, sem contorno pesado. Guerreiro, mago, neutro, ladino e clérigo são identificados pela borda fina vermelha, roxa, cinza, verde e branca/dourada. Ataque/vida continuam coloridos por bônus/dano, mas sem escudos.
 
 ## Expansão de arquétipos e magias
 
@@ -122,12 +122,12 @@ Quatro novos Chamados por classe: Ferreiro da Muralha (Armadura +1), Conjuradora
 
 O editor agora tem nove espaços em três linhas: os três decks existentes, Aurora Vital no quarto e os espaços 5/6 vazios. A migração de versão 2 para 3 preserva os decks e o ativo; espaços vazios são persistidos e não podem iniciar partida.
 
-A tela **Meus decks** agora separa a seleção da montagem de cartas. Cada deck tem capa personalizável a partir de uma carta de sua lista; **Capa e nome** permite renomear e salvar só a aparência. O formato versão 4 preserva cartas/nomes/ativo anteriores e adiciona o campo `cover` por espaço. Veja [BIBLIOTECA_DE_DECKS.md](docs/BIBLIOTECA_DE_DECKS.md).
+A tela **Meus decks** agora separa a seleção da montagem de cartas. Cada deck tem capa personalizável a partir de uma carta de sua lista; Na edição, o campo de nome e **Alterar capa** personalizam o rascunho; salvar o deck grava as alterações. O formato versão 4 preserva cartas/nomes/ativo anteriores e adiciona o campo `cover` por espaço. Veja [BIBLIOTECA_DE_DECKS.md](docs/BIBLIOTECA_DE_DECKS.md).
 
-Meus decks agora usa capas verticais 3:4 à esquerda e um painel único à direita com Editar cartas, Capa e nome e Jogar. Clicar em uma capa apenas seleciona o deck. Pequenos símbolos SVG substituem os rótulos de classe do deck, incluindo Neutro para listas somente de neutros. A composição de decks e os dados salvos foram preservados.
+Meus decks agora usa capas verticais 3:4 à esquerda e um painel único à direita com Editar cartas e Jogar. A montagem exibe a curva de mana por custo. Clicar em uma capa apenas seleciona o deck. Pequenos símbolos SVG substituem os rótulos de classe do deck, incluindo Neutro para listas somente de neutros. A composição de decks e os dados salvos foram preservados.
 
 
-Decks agora usam **20 cartas**, até duas cópias. Os cinco decks iniciais e decks salvos foram ampliados, mantendo cartas, nomes, capas, seleção ativa e espaços vazios. **Reconstrução da Aldeia** (magia neutra, 2 mana) restaura 2 do seu castelo ou de uma Muralha aliada e compra uma carta se todas as suas criaturas em campo forem neutras. Pode ser usada em qualquer classe; campo vazio também ativa a compra. [Regras e migração](docs/DECKS_20_RECONSTRUCAO.md).
+Em uma atualização anterior os decks passaram a **20 cartas**, até duas cópias. Os cinco decks iniciais e decks salvos foram ampliados, mantendo cartas, nomes, capas, seleção ativa e espaços vazios. **Reconstrução da Aldeia** (magia neutra, 2 mana) restaura 2 do seu castelo ou de uma Muralha aliada e compra uma carta se todas as suas criaturas em campo forem neutras. Pode ser usada em qualquer classe; campo vazio também ativa a compra. [Regras e migração](docs/DECKS_20_RECONSTRUCAO.md).
 
 O editor agora tem filtros por classe e tipo, busca por nome/habilidade e localização da carta na coleção com botão direito na lista. Veja docs/CLASSE_BASE_E_CLIQUES.md.
 
@@ -137,21 +137,21 @@ Reconstrução pede alvo se houver Muralhas aliadas; caso contrário, é automá
 
 Novos decks começam com a escolha da classe base ou Neutros. A coleção mostra somente cartas compatíveis. Clique para adicionar na coleção e remover na lista, sem botões +/−; adicionar usa uma animação curta. A base é preservada no formato de decks versão 7.
 
-Quem joga em segundo recebe um mulligan extra de até uma carta após a primeira troca. Fazendeiro agora é 1/3. Bola de Fogo é uma magia de Mago de 6 mana que causa 3 de dano mágico a todas as criaturas inimigas. Artes incluem dia e noite. [Regras e validação](docs/BOLA_DE_FOGO_E_MULLIGAN.md).
+Cada jogador faz um mulligan; quem joga em segundo recebe uma carta inicial extra e 1 mana temporária no primeiro turno. Fazendeiro é 1/3. Bola de Fogo é uma magia de Mago de 6 mana que causa 3 de dano mágico a todas as criaturas inimigas. Artes incluem dia e noite.
 
 Revisão atual: editor sem sugestões prontas, decks atualizados e 50 partidas contra Guerreiro. [Resultados e composições](docs/SIMULACAO_DECKS_50_PARTIDAS.md).
 
-Guardião do Abascanto: Guerreiro 3 mana, 2/3, Abascanto 1. Anula uma ocorrência de dano mágico por carga e recupera uma no início do próprio turno. Bola de Fogo substitui o nome e identificador da antiga magia de dano em área. [Regras e validação](docs/ABASCANTO_E_BOLA_DE_FOGO.md).
+Guardião Arcano: Guerreiro 3 mana, 2/3, Guarda Arcana 1. Anula uma ocorrência de dano mágico por carga e recupera uma no início do próprio turno. Bola de Fogo substitui o nome e identificador da antiga magia de dano em área. [Regras e validação](docs/ABASCANTO_E_BOLA_DE_FOGO.md).
 
 [Ícones de habilidades no campo](docs/ICONES_NO_CAMPO.md): símbolos compactos, valores/cargas atuais e estados de disponibilidade.
 
 [Controles do combate](docs/CONTROLES_COMBATE.md): clique na mão, aviso de ações restantes, castelo inimigo central e menu Esc/engrenagem.
 
-[Primeira lendária: Levante da Aldeia](docs/LEVANTE_DA_ALDEIA.md), neutra de 4 mana, */*, com herança dinâmica de habilidades neutras aliadas sem Chamados. Lendárias têm limite de uma cópia por deck. Ladina Relâmpago agora é 3/2.
+[Primeira lendária: Levante da Aldeia](docs/LEVANTE_DA_ALDEIA.md), neutra de 5 mana, */*, com herança dinâmica de habilidades neutras aliadas sem Chamados. Lendárias têm limite de uma cópia por deck. Ladina Relâmpago agora é 3/2.
 
 [Boi da Colheita e revisão das regras da aldeia](docs/COLHEITA_E_REPARO.md): Colheita por ativação de Cultivo aliado, reparo de Muralhas, castelos imunes a Veneno e suporte para outros aliados de qualquer classe.
 
-[Atacar com todos, artes de castelo e trilha original](docs/ATAQUE_EM_GRUPO_E_TRILHA.md). A música em Ogg acompanha o menu e o combate, respeitando o controle de som.
+[Atacar com todos, artes de castelo e trilha](docs/ATAQUE_EM_GRUPO_E_TRILHA.md). O menu usa a trilha ambiente e os combates usam “Chariots Of War”, de Aakash Gandhi; ambas respeitam o controle de som e o crédito aparece no menu.
 
 Layout 1920×1080 em tela cheia, com F11 para modo janela. Campo com seis criaturas por lado e [Devota do Alvorecer, novos cliques e revisão da herança neutra](docs/SEIS_CRIATURAS_E_DEVOCAO.md).
 
@@ -162,3 +162,5 @@ Necromante do Véu (4 mana, 2/4, Humana de Horda) possui Pacto Sombrio e Chamado
 A facção Horda mantém o tipo Monstro separado da classe. Clamor da Horda (3 mana) dá +2 de ataque aos Monstros aliados em campo até o fim do turno atual. Veja [regras e validação](docs/CLAMOR_DA_HORDA.md).
 
 Goblin agora é 1 mana 1/1 com Arrancada. Fungo da Ninhada (neutro Monstro, 3 mana, 0/3) fortalece a vida de Monstros com Esporos 1; Troll do Brejo (Horda Monstro, 4 mana, 3/5) tem Regeneração 1. Monstros neutros ficam restritos à Horda ou decks só de neutros. Veja [regras e validação](docs/ESPOROS_E_REGENERACAO.md).
+
+Créditos de criação, fonte e música: [CREDITS.md](CREDITS.md).

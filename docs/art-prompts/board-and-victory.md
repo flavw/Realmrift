@@ -1,7 +1,7 @@
 Generated with built-in imagegen. Arena is opaque; victory medallion transparent. Both are integrated into Godot.
 
-arena-background.png
+arena-background.webp
 Use case: stylized-concept. Background texture for a fantasy card game board, landscape 3:2. Strict overhead view of an elegant dark medieval tabletop battle arena. Central broad clear dark slate stone playing surface with faint engraved circular moon sigil, dark carved walnut edges with restrained aged gold filigree, subtle blue moonlight across the top, very subtle warm torch reflections at left and right edges. Rich realistic painterly detail matching moonlit fantasy card illustrations. Keep entire central 85% quiet, dark and visually uncluttered so cards and UI can sit on top. No letters, numbers, cards, characters, weapons, candles in center, or UI panels. Flat board surface, no perspective tilt.
 
-victory-medallion.png
+victory-medallion.webp
 Use case: stylized-concept. A single isolated victory medallion for a polished dark fantasy card game. A three-point regal gold crown above a circular blue moon crystal, surrounded by a symmetrical ornate gold laurel wreath, beautiful beveled metal gold highlights and deep cobalt gemstone, front-facing balanced compact crest. Transparent background, tiny padding, entire object visible. No lettering, no numbers, no ribbon with text, no character, no background scene. Warm golden glints and subtle cyan glow, detailed realistic fantasy game UI emblem.

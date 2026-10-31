@@ -17,13 +17,13 @@ func verify() -> void:
  for key in ["magic", "victory", "castle"]:
   assert(main.sounds[key].stream.get_length() > 0.3)
  main.duel.players[0].board = [creature("warrior", 10), creature("fire_mage", 11), creature("squire", 12), creature("wolf", 13, false)]
- main.duel.players[1].board = [creature("rogue", 20, false), creature("raven", 21), creature("sentinel", 22)]
+ main.duel.players[1].board = [creature("lightning_rogue", 20, false), creature("raven", 21), creature("sentinel", 22)]
  main.duel.players[0].hp = 14
  main.duel.players[0].mana = 4
  main.duel.players[0].max_mana = 6
  main.duel.players[1].mana = 2
  main.duel.players[1].max_mana = 5
- main.duel.players[0].hand = ["mage", "sentinel", "raven", "rogue", "fire_mage"]
+ main.duel.players[0].hand = ["mage", "sentinel", "raven", "lightning_rogue", "fire_mage"]
  main.duel.players[1].hp = 3
  main.redraw()
  await process_frame

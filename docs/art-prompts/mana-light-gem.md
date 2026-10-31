@@ -1,5 +1,5 @@
 # Gema azul clara de mana
 
-Ferramenta: image_gen integrada, com transparência. Destino final: `assets/ui/mana-cost-symbol.png`. Número desenhado por Label editável do Godot.
+Ferramenta: image_gen integrada, com transparência. Destino final: `assets/ui/mana-cost-symbol.webp`. Número desenhado por Label editável do Godot.
 
 Use case: stylized-concept. Asset type: fantasy card game mana cost UI icon, a single circular light azure-blue gemstone, genuinely transparent background. Front view, perfectly round silhouette, modest thin darker-blue beveled edge, polished translucent faceted crystal. Palette luminous sky blue and icy cyan, clearly lighter than a deep royal-blue sapphire; center medium-light blue with enough smooth quiet space for a bold dark editable number to be placed by the game. A restrained small highlight near the upper left edge; subtle facets around the outer circumference, no bright glare across center. The entire gem centered, fills 90% of a square canvas, equal margins. Clean readable small-game-icon finish, elegant and minimal, no gold rim, no ornaments, no glow outside silhouette, no lettering, numbers, symbols, UI panels or additional objects. Transparent alpha outside the round gem.

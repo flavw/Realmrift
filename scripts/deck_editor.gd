@@ -18,6 +18,7 @@ var store: DeckStore
 var slot := 0
 var draft: Array = []
 var draft_name := ""
+var draft_cover := ""
 var draft_base: int=-1
 var addition_layer: CanvasLayer
 var body: MarginContainer
@@ -26,12 +27,14 @@ var scroll_position := 0
 var collection_scroll: ScrollContainer
 var class_filter: int=-1
 var type_filter: int=-1
+var mana_filter: int=-1
 var search_query: String=""
 var focused_card: String=""
 var pending_remove_key: String=""
 var pending_open_slot: int=-1
 var collection_tiles: Dictionary={}
-const CLASS_NAMES=["Guerreiro","Mago","Neutro","Ladina","Clérigo","Horda"]
+const CLASS_NAMES=["Guerreiro","Mago","Neutro","Ladino","Clérigo","Horda"]
+var collection_dialog: AcceptDialog
 var name_edit: LineEdit
 
 func configure(value: DeckStore) -> void:
@@ -55,12 +58,14 @@ func load_slot(index: int) -> void:
  slot = index
  draft = store.slots[slot].cards.duplicate()
  draft_name = store.slots[slot].name
+ draft_cover = String(store.slots[slot].get("cover",""))
  draft_base=store.base_for(slot)
  if draft_cache.has(slot):
   draft=draft_cache[slot].cards.duplicate()
   draft_name=draft_cache[slot].name
+  draft_cover=String(draft_cache[slot].get("cover",draft_cover))
   draft_base=int(draft_cache[slot].get("base_class",draft_base))
- message = "Escolha a classe base deste deck." if draft_base<0 else "Coleção: adicionar. Lista: localizar; repetir o clique remove. Salve antes de sair."
+ message = "Escolha a classe base deste deck." if draft_base<0 else "Coleção: adicionar. Lista: localizar; − remove uma cópia. Salve antes de sair."
 
 func choose_slot(index: int) -> void:
  library_selected=index
@@ -113,6 +118,9 @@ func render() -> void:
  if screen=="library":
   render_library(page)
   return
+ if screen=="collection":
+  render_full_collection(page)
+  return
  if screen=="choose_class":
   render_class_choice(page)
   return
@@ -141,7 +149,7 @@ func render() -> void:
  collection.add_child(collection_scroll)
  var grid := GridContainer.new()
  grid.name="CollectionGrid"
- grid.columns = 5 if get_viewport_rect().size.x>=1800 else 4
+ grid.columns = 4
  grid.size_flags_horizontal=Control.SIZE_EXPAND_FILL
  grid.add_theme_constant_override("h_separation", 12)
  grid.add_theme_constant_override("v_separation", 14)
@@ -167,13 +175,12 @@ func render() -> void:
   card.mouse_default_cursor_shape=Control.CURSOR_POINTING_HAND
   card.gui_input.connect(collection_card_input.bind(key))
   var reason:=addition_reason(key)
-  card.tooltip_text="Clique para adicionar uma cópia. Botão direito: ver arte." if reason.is_empty() else reason
-  if not reason.is_empty():card.modulate=Color(0.7,0.7,0.75)
+  card.tooltip_text=""
+  if not reason.is_empty() and key!=focused_card:card.modulate=Color(0.7,0.7,0.75)
   var quantity:=text_label("%d / %d" % [draft.count(key),Match.copy_limit(key)],16)
   quantity.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
   tile.add_child(quantity)
   var kind: String = CLASS_NAMES[Match.CARD_DATA[key].card_class].to_upper()
-  if Match.CARD_DATA[key].legendary:kind+=" • LENDÁRIA"
   kind += " • "+Match.CARD_DATA[key].creature_type_name().to_upper()
   var class_label := text_label(kind, 14)
   class_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -221,6 +228,10 @@ func render() -> void:
  name_edit.custom_minimum_size.y = 42
  name_edit.text_changed.connect(func(value: String): draft_name = value)
  deck_column.add_child(name_edit)
+ var cover_button:=action_button("Alterar capa",open_personalize.bind(slot))
+ cover_button.name="ChangeDeckCover"
+ deck_column.add_child(cover_button)
+ deck_column.add_child(build_mana_curve())
  var deck_scroll := ScrollContainer.new()
  deck_scroll.name="DeckListScroll"
  deck_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -246,16 +257,16 @@ func render() -> void:
   style.border_width_left=1 if row_class==CardData.CardClass.NEUTRAL else 3
   if pending_remove_key==key:style.border_color=Color("e5c987")
   item.add_theme_stylebox_override("normal",style)
-  item.tooltip_text="Primeiro clique: localizar na coleção. Segundo clique na mesma carta: remover uma cópia."
+  item.tooltip_text="Clique para localizar na coleção. Use − para remover uma cópia."
   item.pressed.connect(select_deck_card.bind(key))
   item.gui_input.connect(deck_card_input.bind(key))
   list.add_child(item)
   var content:=HBoxContainer.new()
   content.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-  content.offset_left=7;content.offset_right=-7;content.offset_top=4;content.offset_bottom=-4
+  content.offset_left=7;content.offset_right=-58;content.offset_top=4;content.offset_bottom=-4
   content.mouse_filter=Control.MOUSE_FILTER_IGNORE
   item.add_child(content)
-  content.add_child(mana_badge(Match.CARD_DATA[key].cost))
+  content.add_child(mana_badge(Match.CARD_DATA[key].cost,Match.CARD_DATA[key].legendary))
   var caption:=text_label("%s  ×%d" % [Match.CARD_DATA[key].title,count],16)
   caption.name="DeckCardCaption"
   caption.clip_text=true;caption.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
@@ -264,6 +275,20 @@ func render() -> void:
   if row_class!=CardData.CardClass.NEUTRAL:caption.add_theme_color_override("font_color",tint)
   else:caption.add_theme_color_override("font_color",Color("f2d9a6"))
   content.add_child(caption)
+  var remove:=Button.new()
+  remove.name="RemoveDeckCard_"+String(key)
+  remove.text="−"
+  remove.tooltip_text="Remover uma cópia de %s" % Match.CARD_DATA[key].title
+  item.add_child(remove)
+  remove.set_anchors_and_offsets_preset(Control.PRESET_RIGHT_WIDE)
+  remove.offset_left=-54;remove.offset_right=-2;remove.offset_top=0;remove.offset_bottom=0
+  remove.add_theme_font_size_override("font_size",20)
+  remove.add_theme_stylebox_override("normal",UiTheme.panel(Color("16273a"),Color("847044"),0))
+  remove.add_theme_stylebox_override("hover",UiTheme.panel(Color("263e54"),Color("dfbe77"),0))
+  remove.add_theme_stylebox_override("pressed",UiTheme.panel(Color("0c1725"),Color("e7cb8c"),0))
+  remove.add_theme_stylebox_override("focus",UiTheme.panel(Color(0,0,0,0),Color("7fc5e6"),0))
+  remove.mouse_default_cursor_shape=Control.CURSOR_POINTING_HAND
+  remove.pressed.connect(animate_removal.bind(key,item))
  if draft.is_empty():
   list.add_child(text_label("Clique nas cartas da coleção para adicionar."))
  var average := float(total_mana) / maxf(1, draft.size())
@@ -271,7 +296,7 @@ func render() -> void:
  for key in draft:
   if Match.CARD_DATA[key].card_type==CardData.CardType.CREATURE:creatures+=1
  deck_column.add_child(text_label("%d criaturas · %d magias · Mana média %.1f" % [creatures,draft.size()-creatures,average],15))
- deck_column.add_child(text_label("20 cartas • 2 cópias · Lendárias: 1", 14))
+ deck_column.add_child(text_label("22 cartas • 2 cópias · Lendárias: 1", 14))
  deck_column.add_child(action_button("Limpar este rascunho", clear_draft))
  var footer := HBoxContainer.new()
  footer.add_theme_constant_override("separation", 14)
@@ -294,9 +319,9 @@ func select_base_class(value: int) -> void:
  if value not in [0,1,2,3,4,5]:return
  if not draft.is_empty() and draft_base>=0 and draft_base!=value:return
  draft_base=value
- class_filter=-1;type_filter=-1;search_query="";focused_card=""
+ class_filter=-1;type_filter=-1;mana_filter=-1;search_query="";focused_card=""
  screen="edit"
- message="Coleção: adicionar. Lista: localizar; repetir o clique remove."
+ message="Coleção: adicionar. Lista: localizar; − remove uma cópia."
  reset_collection_scroll();render()
 
 func render_class_choice(page: VBoxContainer) -> void:
@@ -343,14 +368,24 @@ func collection_card_input(event: InputEvent,key: String) -> void:
  var confirmed: bool=event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_ENTER,KEY_SPACE]
  if clicked or confirmed:
   get_viewport().set_input_as_handled()
+  focused_card=key
   add_card(key,true)
 
 func select_deck_card(key: String) -> void:
- if pending_remove_key==key:
-  remove_card(key)
- else:
-  pending_remove_key=key
-  locate_card(key)
+ pending_remove_key=key
+ locate_card(key)
+
+func animate_removal(key: String,item: Control) -> void:
+ if not is_instance_valid(item) or item.get_meta("removing",false):return
+ item.set_meta("removing",true)
+ item.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ for child in item.get_children():
+  if child is Button:child.disabled=true
+ var tween:=create_tween().set_parallel(true)
+ tween.tween_property(item,"modulate:a",0.0,0.16)
+ tween.tween_property(item,"position:x",item.position.x+24,0.16)
+ await tween.finished
+ if screen=="edit":remove_card(key)
 
 func deck_card_input(event: InputEvent,key: String) -> void:
  if event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_RIGHT:
@@ -399,10 +434,11 @@ func searchable(value: String) -> String:
 func matches_filters(key: String) -> bool:
  var data: CardData=Match.CARD_DATA[key]
  if not data.collectible:return false
- if draft_base<0 or not DeckStore.accepts_base(draft_base,[key]):return false
+ if screen!="collection" and (draft_base<0 or not DeckStore.accepts_base(draft_base,[key])):return false
  if class_filter>=0 and data.card_class!=class_filter:return false
+ if mana_filter>=0 and mini(7,data.cost)!=mana_filter:return false
  if type_filter in [0,1] and data.card_type!=type_filter:return false
- if type_filter>=2 and (data.card_type!=CardData.CardType.CREATURE or data.creature_type!=type_filter-2):return false
+ if type_filter>=2 and not data.has_creature_type(type_filter-2):return false
  if not search_query.strip_edges().is_empty():
   var content: String=data.title+" "+data.creature_type_name()
   for entry in data.ability_entries():content+=" "+entry.name+" "+String(entry.get("summary",""))
@@ -417,6 +453,17 @@ func build_collection_filters(parent: VBoxContainer) -> void:
  var picker:=OptionButton.new();picker.name="CollectionClassFilter"
  var values: Array=[-1] if draft_base==CardData.CardClass.NEUTRAL else [-1,draft_base,CardData.CardClass.NEUTRAL]
  var labels: Array=["Neutros"] if draft_base==CardData.CardClass.NEUTRAL else [CLASS_NAMES[draft_base]+" e neutros","Somente "+CLASS_NAMES[draft_base],"Somente neutros"]
+ if screen=="collection":
+  values=[-1,0,1,2,3,4,5]
+  var counts: Array[int]=[0,0,0,0,0,0]
+  var total:=0
+  for data in Match.CARD_DATA.values():
+   if not data.collectible:continue
+   counts[int(data.card_class)]+=1
+   total+=1
+  labels=["Todas as classes (%d)" % total]
+  for faction in range(CLASS_NAMES.size()):
+   labels.append("%s (%d)" % [CLASS_NAMES[faction],counts[faction]])
  for label in labels:picker.add_item(label)
  picker.select(maxi(0,values.find(class_filter)))
  picker.item_selected.connect(func(index):class_filter=values[index];reset_collection_scroll();render())
@@ -442,7 +489,7 @@ func reset_collection_scroll() -> void:
  if is_instance_valid(collection_scroll):collection_scroll.scroll_vertical=0
 
 func clear_collection_filters() -> void:
- class_filter=-1;type_filter=-1;search_query=""
+ class_filter=-1;type_filter=-1;mana_filter=-1;search_query=""
  reset_collection_scroll();render()
 
 func collection_style(key: String) -> StyleBoxFlat:
@@ -467,14 +514,16 @@ func _input(event: InputEvent) -> void:
    focused_card=""
    pending_remove_key=""
    if is_instance_valid(previous):previous.add_theme_stylebox_override("panel",collection_style(previous_key))
+   var old_card: Control=find_child("CollectionView_"+previous_key,true,false)
+   if is_instance_valid(old_card):old_card.modulate=Color(0.7,0.7,0.75) if not addition_reason(previous_key).is_empty() else Color.WHITE
    return
 
 func locate_card(key: String) -> void:
  if not Match.CARD_DATA.has(key):return
  if not DeckStore.accepts_base(draft_base,[key]):
-  message="Carta fora da classe base. Clique nela na lista para remover.";render();return
+  message="Carta fora da classe base. Use − na lista para remover.";render();return
  if not matches_filters(key):
-  class_filter=-1;type_filter=-1;search_query=""
+  class_filter=-1;type_filter=-1;mana_filter=-1;search_query=""
  focused_card=key
  message="%s localizada na coleção." % Match.CARD_DATA[key].title
  render()
@@ -512,7 +561,7 @@ func add_card(key: String,animate: bool=false) -> bool:
   var card: Control=find_child("CollectionView_"+key,true,false)
   if is_instance_valid(card):source=card.get_global_rect()
  draft.append(key)
- message = "Rascunho alterado • %d / 20 cartas." % draft.size()
+ message = "Rascunho alterado • %d / 22 cartas." % draft.size()
  render()
  if animate and source.size.x>0:animate_addition.call_deferred(key,source)
  return true
@@ -523,7 +572,7 @@ func remove_card(key: String) -> bool:
  if index < 0:
   return false
  draft.remove_at(index)
- message = "Rascunho alterado • %d / 20 cartas." % draft.size()
+ message = "Rascunho alterado • %d / 22 cartas." % draft.size()
  render()
  return true
 
@@ -533,15 +582,20 @@ func clear_draft() -> void:
  render()
 
 func save_deck() -> bool:
- var saved := store.save_slot(slot, draft_name, draft,draft_base)
- if saved:draft_cache.erase(slot)
- message = ("Espaço vazio salvo." if draft.is_empty() else "Deck salvo neste computador.") if saved else store.error_message
+ var saved := store.save_slot(slot, draft_name, draft,draft_base,draft_cover)
+ if saved:
+  draft_cache.erase(slot)
+  library_selected=slot
+  screen="library"
+  message="Deck salvo. Escolha outro deck para jogar, editar ou personalizar."
+ else:
+  message=store.error_message
  render()
  return saved
 
 func play_deck() -> void:
  if not Match.valid_deck(draft) or not DeckStore.accepts_base(draft_base,draft):
-  message="Complete um deck de 20 cartas, uma classe + neutros, antes de jogar."
+  message="Complete um deck de 22 cartas, uma classe + neutros, antes de jogar."
   render()
   return
  if save_deck() and store.activate(slot):
@@ -550,7 +604,60 @@ func play_deck() -> void:
   message = store.error_message
   render()
 
-func mana_badge(cost: int) -> Control:
+func build_mana_curve() -> Control:
+ var panel:=VBoxContainer.new()
+ panel.name="ManaCurve"
+ panel.add_theme_constant_override("separation",2)
+ var heading:=text_label("CURVA DE MANA",14)
+ heading.modulate=Color("a3c7dd")
+ panel.add_child(heading)
+ var counts: Array[int]=[0,0,0,0,0,0,0,0]
+ for key in draft:
+  if Match.CARD_DATA.has(key):counts[mini(7,maxi(0,Match.CARD_DATA[key].cost))]+=1
+ var peak: int=1
+ for count in counts:peak=maxi(peak,count)
+ var bars:=HBoxContainer.new()
+ bars.add_theme_constant_override("separation",4)
+ panel.add_child(bars)
+ for cost in range(8):
+  var button:=Button.new()
+  button.name="ManaCurveFilter%d" % cost
+  button.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+  button.custom_minimum_size.y=72
+  button.tooltip_text="Filtrar cartas de custo %s" % ("7+" if cost==7 else str(cost))
+  button.add_theme_stylebox_override("normal",UiTheme.panel(Color("263e54") if mana_filter==cost else Color("122336"),Color("79c7ed") if mana_filter==cost else Color("314558"),3))
+  button.pressed.connect(filter_mana.bind(cost))
+  bars.add_child(button)
+  var column:=VBoxContainer.new()
+  column.name="ManaCurve%d" % cost
+  column.mouse_filter=Control.MOUSE_FILTER_IGNORE
+  column.add_theme_constant_override("separation",1)
+  button.add_child(column)
+  column.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+  var count_label:=text_label(str(counts[cost]),12)
+  count_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+  column.add_child(count_label)
+  var well:=VBoxContainer.new()
+  well.mouse_filter=Control.MOUSE_FILTER_IGNORE
+  well.custom_minimum_size.y=34
+  well.alignment=BoxContainer.ALIGNMENT_END
+  column.add_child(well)
+  var bar:=ColorRect.new()
+  bar.color=Color("63b8df") if counts[cost]>0 else Color("273a4a")
+  bar.custom_minimum_size.y=maxf(2.0,32.0*counts[cost]/peak)
+  bar.mouse_filter=Control.MOUSE_FILTER_IGNORE
+  well.add_child(bar)
+  var label:=text_label("7+" if cost==7 else str(cost),12)
+  label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+  column.add_child(label)
+ return panel
+
+func filter_mana(cost: int) -> void:
+ mana_filter=-1 if mana_filter==cost else cost
+ reset_collection_scroll()
+ render()
+
+func mana_badge(cost: int, _legendary: bool=false) -> Control:
  var badge:=Control.new()
  badge.name="DeckManaCost"
  badge.custom_minimum_size=Vector2(28,28)
@@ -580,11 +687,14 @@ func mana_badge(cost: int) -> Control:
  return badge
 
 func show_library() -> void:
+ if screen=="collection":
+  class_filter=-1;type_filter=-1;mana_filter=-1;search_query=""
+  reset_collection_scroll()
  pending_open_slot=-1
  pending_remove_key=""
  if screen in ["edit","choose_class"]:
-  if draft!=store.slots[slot].cards or draft_name!=store.slots[slot].name or draft_base!=store.base_for(slot):
-   draft_cache[slot]={"cards":draft.duplicate(),"name":draft_name,"base_class":draft_base}
+  if draft!=store.slots[slot].cards or draft_name!=store.slots[slot].name or draft_base!=store.base_for(slot) or draft_cover!=String(store.slots[slot].get("cover","")):
+   draft_cache[slot]={"cards":draft.duplicate(),"name":draft_name,"base_class":draft_base,"cover":draft_cover}
   else:draft_cache.erase(slot)
  screen="library"
  message="Escolha um deck para jogar, editar cartas ou personalizar."
@@ -600,7 +710,7 @@ func library_title(page: VBoxContainer,value: String,back_text: String,callback:
 
 func deck_description(cards: Array) -> String:
  if cards.is_empty():return "Espaço vazio"
- return "%d/20 cartas%s" % [cards.size()," · Composição a corrigir" if Match.deck_class(cards)==-2 or not Match.restrictions_met(cards) else ""]
+ return "%d/22 cartas%s" % [cards.size()," · Composição a corrigir" if Match.deck_class(cards)==-2 or not Match.restrictions_met(cards) else ""]
 
 func class_badge(cards: Array,icon_size: int=22,base: int=-3) -> Control:
  if cards.is_empty() and base<0:return Control.new()
@@ -620,7 +730,7 @@ func class_badge(cards: Array,icon_size: int=22,base: int=-3) -> Control:
  icon.size=Vector2(icon_size,icon_size)
  icon.size_flags_vertical=Control.SIZE_SHRINK_CENTER
  icon.mouse_filter=Control.MOUSE_FILTER_PASS
- icon.tooltip_text=["Guerreiro","Mago","Neutro","Ladina","Clérigo","Horda"][icon_class]
+ icon.tooltip_text=["Guerreiro","Mago","Neutro","Ladino","Clérigo","Horda"][icon_class]
  icon.set_meta("card_class",icon_class)
  return icon
 
@@ -654,6 +764,9 @@ func cover_art(key: String,dimensions: Vector2) -> Control:
 
 func render_library(page: VBoxContainer) -> void:
  library_title(page,"MEUS DECKS",return_label,func():closed.emit())
+ var collection_button:=action_button("Coleção",show_full_collection)
+ collection_button.name="OpenFullCollection"
+ page.get_child(0).add_child(collection_button)
  var intro:=text_label("Selecione um deck; clique novamente para abrir ou use as ações à direita.",17)
  intro.modulate=Color("9eb3c6")
  page.add_child(intro)
@@ -711,7 +824,7 @@ func render_library(page: VBoxContainer) -> void:
   fade.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
   fade.mouse_filter=Control.MOUSE_FILTER_IGNORE
   overlay.add_child(fade)
-  var badge:=text_label("%02d%s" % [i+1," · ATIVO" if store.active==i else ""],12)
+  var badge:=text_label("%02d" % (i+1),12)
   badge.position=Vector2(10,8)
   badge.add_theme_color_override("font_outline_color",Color("07101c"))
   badge.add_theme_constant_override("outline_size",3)
@@ -762,10 +875,6 @@ func render_library_actions(parent: HBoxContainer) -> void:
  content.add_child(meta)
  if not saved.cards.is_empty() or store.base_for(library_selected)>=0:meta.add_child(class_badge(saved.cards,24,store.base_for(library_selected)))
  meta.add_child(text_label(deck_description(saved.cards),16))
- if library_selected==store.active:
-  var active:=text_label("Deck ativo",15)
-  active.modulate=Color("cdbc83")
-  content.add_child(active)
  var spacer:=Control.new()
  spacer.custom_minimum_size.y=18
  content.add_child(spacer)
@@ -773,17 +882,13 @@ func render_library_actions(parent: HBoxContainer) -> void:
  edit.name="DeckActionEdit"
  edit.custom_minimum_size.y=48
  content.add_child(edit)
- var personalize:=action_button("Capa e nome",open_personalize.bind(library_selected))
- personalize.name="DeckActionPersonalize"
- personalize.custom_minimum_size.y=48
- content.add_child(personalize)
  var play:=action_button("Jogar",play_saved.bind(library_selected),Match.valid_deck(saved.cards) and DeckStore.accepts_base(store.base_for(library_selected),saved.cards))
  play.name="DeckActionPlay"
  play.custom_minimum_size.y=48
  play.tooltip_text="Jogar com a versão salva deste deck"
  UiTheme.primary(play)
  content.add_child(play)
- var hint:=text_label("Comece adicionando cartas a este espaço." if saved.cards.is_empty() else ("Há um rascunho pendente. Jogar usa o deck salvo." if draft_cache.has(library_selected) else "A capa e o nome podem ser alterados sem mudar as cartas."),15)
+ var hint:=text_label("Comece adicionando cartas a este espaço." if saved.cards.is_empty() else ("Há um rascunho pendente. Jogar usa o deck salvo." if draft_cache.has(library_selected) else "Edite o deck para alterar a capa e o nome."),15)
  hint.custom_minimum_size.x=260
  hint.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
  hint.modulate=Color("8fa8bd")
@@ -820,19 +925,19 @@ func play_saved(index: int) -> void:
 func open_personalize(index: int) -> void:
  library_selected=index
  personal_slot=index
- personal_name=store.slots[index].name
- personal_cover=String(store.slots[index].get("cover",""))
+ personal_name=draft_name
+ personal_cover=draft_cover if draft_cover in draft else ""
  screen="personalize"
- message="Escolha a arte de uma carta do próprio deck e salve a personalização."
+ message="Escolha uma carta do rascunho para a capa."
  render()
 
 func choose_cover(key: String) -> void:
- if key!="" and key not in store.slots[personal_slot].cards:return
+ if key!="" and key not in draft:return
  personal_cover=key
  render()
 
 func render_personalize(page: VBoxContainer) -> void:
- library_title(page,"CAPA E NOME · DECK %d" % (personal_slot+1),"Meus decks",show_library)
+ library_title(page,"CAPA · DECK %d" % (personal_slot+1),"Voltar ao deck",return_to_edit)
  var columns:=HBoxContainer.new()
  columns.size_flags_vertical=Control.SIZE_EXPAND_FILL
  columns.add_theme_constant_override("separation",28)
@@ -844,34 +949,26 @@ func render_personalize(page: VBoxContainer) -> void:
  var preview_content:=VBoxContainer.new()
  preview_content.add_theme_constant_override("separation",14)
  preview.add_child(preview_content)
- var chosen: String=personal_cover if personal_cover!="" else DeckStore.automatic_cover(store.slots[personal_slot].cards)
+ var chosen: String=personal_cover if personal_cover!="" else DeckStore.automatic_cover(draft)
  preview_content.add_child(cover_art(chosen,Vector2(338,430)))
  var preview_name:=text_label(store.clean_name(personal_name,personal_slot),25)
  preview_name.name="CoverPreviewName"
  preview_name.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
  preview_name.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
  preview_content.add_child(preview_name)
- var meta:=text_label(deck_description(store.slots[personal_slot].cards),16)
+ var meta:=text_label(deck_description(draft),16)
  meta.autowrap_mode=TextServer.AUTOWRAP_OFF
  meta.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
  meta.modulate=Color("9db2c7")
  var preview_meta:=HBoxContainer.new()
  preview_meta.alignment=BoxContainer.ALIGNMENT_CENTER
- if not store.slots[personal_slot].cards.is_empty() or store.base_for(personal_slot)>=0:preview_meta.add_child(class_badge(store.slots[personal_slot].cards,22,store.base_for(personal_slot)))
+ if not draft.is_empty() or draft_base>=0:preview_meta.add_child(class_badge(draft,22,draft_base))
  preview_meta.add_child(meta)
  preview_content.add_child(preview_meta)
  var fields:=VBoxContainer.new()
  fields.size_flags_horizontal=Control.SIZE_EXPAND_FILL
  fields.add_theme_constant_override("separation",12)
  columns.add_child(fields)
- fields.add_child(text_label("NOME DO DECK",15))
- var input:=LineEdit.new()
- input.name="PersonalizeName"
- input.text=personal_name
- input.max_length=24
- input.custom_minimum_size.y=46
- input.text_changed.connect(func(value: String):personal_name=value;preview_name.text=store.clean_name(value,personal_slot))
- fields.add_child(input)
  fields.add_child(text_label("CAPA · ESCOLHA UMA CARTA DO DECK",15))
  var automatic:=action_button("✓ Capa automática" if personal_cover=="" else "Usar capa automática",choose_cover.bind(""))
  fields.add_child(automatic)
@@ -886,7 +983,7 @@ func render_personalize(page: VBoxContainer) -> void:
  grid.add_theme_constant_override("v_separation",12)
  scroll.add_child(grid)
  var seen: Dictionary={}
- for key in store.slots[personal_slot].cards:
+ for key in draft:
   if seen.has(key):continue
   seen[key]=true
   var option:=VBoxContainer.new()
@@ -913,18 +1010,82 @@ func render_personalize(page: VBoxContainer) -> void:
  note.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
  note.size_flags_horizontal=Control.SIZE_EXPAND_FILL
  footer.add_child(note)
- var save:=action_button("Salvar capa e nome",save_personalization)
+ var save:=action_button("Confirmar capa",save_personalization)
  UiTheme.primary(save)
  footer.add_child(save)
 
-func save_personalization() -> bool:
- if not store.save_metadata(personal_slot,personal_name,personal_cover):
-  message=store.error_message
-  render()
-  return false
- if draft_cache.has(personal_slot):draft_cache[personal_slot].name=store.slots[personal_slot].name
- screen="library"
- message="Capa e nome salvos."
+func return_to_edit() -> void:
+ screen="edit"
+ message="Continue editando o deck. Salve para confirmar as alterações."
  render()
+
+func save_personalization() -> bool:
+ draft_cover=personal_cover
+ return_to_edit()
  return true
+
+func show_full_collection() -> void:
+ screen="collection"
+ clear_collection_filters()
+
+func render_full_collection(page: VBoxContainer) -> void:
+ library_title(page,"COLEÇÃO DE CARTAS","Meus decks",show_library)
+ var keys:=collection_keys()
+ var count:=Match.CARD_DATA.values().filter(func(data):return data.collectible).size()
+ var note:=text_label("%d de %d cartas · Clique para ampliar; botão direito para ver a arte." % [keys.size(),count],17)
+ note.modulate=Color("9eb3c6")
+ page.add_child(note)
+ build_collection_filters(page)
+ var costs:=HBoxContainer.new()
+ costs.add_theme_constant_override("separation",8)
+ page.add_child(costs)
+ costs.add_child(text_label("Mana",16))
+ for cost in range(-1,8):
+  var button:=action_button("Todos" if cost<0 else "7+" if cost==7 else str(cost),filter_mana.bind(cost))
+  button.toggle_mode=true
+  button.button_pressed=cost==mana_filter
+  costs.add_child(button)
+ collection_scroll=ScrollContainer.new()
+ collection_scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL
+ collection_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED
+ page.add_child(collection_scroll)
+ var grid:=GridContainer.new()
+ grid.name="FullCollectionGrid"
+ grid.columns=4
+ grid.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ grid.add_theme_constant_override("h_separation",18)
+ grid.add_theme_constant_override("v_separation",18)
+ collection_scroll.add_child(grid)
+ for key in keys:
+  var frame:=PanelContainer.new()
+  frame.name="CollectionCard_"+String(key)
+  frame.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+  frame.add_theme_stylebox_override("panel",UiTheme.panel(Color("101e2c"),CardSkin.class_color(Match.CARD_DATA[key].card_class).darkened(0.3),6))
+  grid.add_child(frame)
+  var card=CardScene.instantiate()
+  card.name="CollectionView_"+String(key)
+  card.set_card(Match.CARD_DATA[key])
+  card.custom_minimum_size=Vector2(214,286)
+  card.resized.connect(func():card.custom_minimum_size.y=roundf(card.size.x*4.0/3.0))
+  card.focus_mode=Control.FOCUS_ALL
+  card.mouse_default_cursor_shape=Control.CURSOR_POINTING_HAND
+  card.gui_input.connect(func(event):
+   if (event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_LEFT) or (event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_ENTER,KEY_SPACE]):
+    get_viewport().set_input_as_handled()
+    show_collection_card(key))
+  frame.add_child(card)
+ if keys.is_empty():grid.add_child(text_label("Nenhuma carta encontrada. Altere os filtros ou a busca.",18))
+ collection_scroll.set_deferred("scroll_vertical",scroll_position)
+
+func show_collection_card(key: String) -> void:
+ if is_instance_valid(collection_dialog):collection_dialog.queue_free()
+ collection_dialog=AcceptDialog.new()
+ collection_dialog.name="CollectionCardDetails"
+ collection_dialog.title=Match.CARD_DATA[key].title
+ var card=CardScene.instantiate()
+ card.set_card(Match.CARD_DATA[key])
+ card.custom_minimum_size=Vector2(390,520)
+ collection_dialog.add_child(card)
+ add_child(collection_dialog)
+ collection_dialog.popup_centered(Vector2i(430,590))
 

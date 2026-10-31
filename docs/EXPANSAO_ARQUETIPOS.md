@@ -10,10 +10,10 @@ Foram adicionadas 12 cartas: uma criatura de cada uma das quatro classes jogáve
 | Arcano | Canalista do Eclipse | Mago/criatura | 3 | 1/3 | Disparo Arcano 2, custa 1 mana + esgotar |
 | Arcano | Familiar Rúnico | Neutro/criatura | 2 | 0/3 | Amplificar 1 |
 | Arcano | Chama Astral | Mago/magia | 3 | — | 3 de dano mágico a criatura inimiga |
-| Ímpeto | Batedora do Crepúsculo | Ladina/criatura | 2 | 2/1 | Arrancada |
+| Ímpeto | Batedora do Crepúsculo | Ladino/criatura | 2 | 2/2 | Arrancada |
 | Ímpeto | Falcão Mensageiro | Neutro/criatura | 1 | 1/1 | Voo |
-| Ímpeto | Passo das Sombras | Ladina/magia | 2 | — | Aliado ganha +1 ataque permanente e fica pronto |
-| Sustento | Guardião da Aurora | Clérigo/criatura | 4 | 2/5 | Vigor; Bloqueio 1; Cura 2, custa 1 mana + esgotar |
+| Ímpeto | Passo das Sombras | Ladino/magia | 1 | — | +1 ataque, Voo e Arrancada neste turno |
+| Sustento | Guardião da Aurora | Clérigo/criatura | 4 | 2/5 | Vigor; Bloqueio 3 |
 | Sustento | Peregrina da Vida | Neutro/criatura | 3 | 1/4 | Cultivo 1 |
 | Sustento | Luz Restauradora | Clérigo/magia | 2 | — | Cura até 4 de vida de aliado ou castelo próprio |
 
@@ -25,7 +25,7 @@ Enquanto a criatura estiver viva em campo, magias e habilidades de dano mágico 
 
 Magias são cartas de uso único. Escolha Conjurar, depois clique em um alvo permitido. A seleção pode ser cancelada sem custo. Somente um alvo válido consome mana e a carta. Magias não têm ataque/vida, não entram no campo, não esgotam criaturas por si mesmas e podem ser usadas com cinco criaturas em campo. Bloqueio não restringe seu alvo e não é consumido por dano mágico.
 
-- Postura de Ferro e Passo das Sombras só atingem criaturas aliadas vivas. Postura não muda prontidão; Passo prepara até uma criatura recém-invocada ou que já atacou. Nenhuma das duas aumenta a vida.
+- Postura de Ferro e Passo das Sombras só atingem criaturas aliadas vivas. Postura não muda prontidão; Passo pode preparar uma criatura recém-invocada que ainda não usou ação que esgota. Nenhuma das duas aumenta a vida.
 - Chama Astral atinge somente criaturas inimigas, ignora Armadura e não tem contra-ataque. Não atinge castelos.
 - Luz Restauradora só atinge aliados feridos ou seu castelo ferido. Respeita a vida máxima atual (inclusive Cultivo) e o limite 20 do castelo. Alvos cheios ou inimigos são inválidos.
 - A IA usa as quatro magias pelas mesmas regras de custo e alvo, incluindo Passo depois de um ataque e cura quando há dano suficiente.
@@ -34,7 +34,7 @@ Magias são cartas de uso único. Escolha Conjurar, depois clique em um alvo per
 
 A regra atual continua: 12 cartas, até duas cópias, três espaços salvos. Decks existentes continuam válidos e não são substituídos. Os neutros de apoio podem entrar em qualquer deck; Afinidade é uma indicação de sinergia, não uma restrição.
 
-A restrição de uma única classe jogável + neutros permanece planejada para o futuro e ainda não é imposta ao editor. As três sugestões iniciais já usam Guerreiro+neutros, Ladina+neutros e Mago+neutros. Para montar um exemplo de Clérigo, use duas cópias de cada: Clériga da Aurora, Guardião da Aurora, Peregrina da Vida, Fazendeiro, Escudeiro da Lua e Luz Restauradora.
+A restrição de uma única classe jogável + neutros permanece planejada para o futuro e ainda não é imposta ao editor. As três sugestões iniciais já usam Guerreiro+neutros, Ladino+neutros e Mago+neutros. Para montar um exemplo de Clérigo, use duas cópias de cada: Clériga da Aurora, Guardião da Aurora, Peregrina da Vida, Fazendeiro, Escudeiro da Lua e Luz Restauradora.
 
 ## Edição no Godot
 

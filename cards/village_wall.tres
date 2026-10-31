@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/village_wall.png" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bq7wt38gcorkm"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/village_wall.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-creature_type=2
-title="Muralha da Aldeia"
-cost=4
-attack=0
-health=4
-armor=1
-block=4
-wall=true
-card_class=2
-artwork=ExtResource("2")
+script = ExtResource("1")
+creature_type = 2
+wall = true
+title = "Muralha da Aldeia"
+lore = "Não corre, não reclama e nunca esquece de bloquear a passagem."
+cost = 4
+attack = 0
+health = 4
+armor = 1
+block = 5
+artwork = ExtResource("2")

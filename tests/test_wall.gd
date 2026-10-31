@@ -41,7 +41,7 @@ func _init() -> void:
  m=fixture();wall=unit("village_wall",1);m.players[1].board=[wall]
  m.players[0].hand=["mist_alchemist"]
  assert(m.play(0,0,0) and wall.poison==0 and not m.last_action.has("poison_target"))
- var rogue=unit("rogue",2);m.players[0].board=[rogue]
+ var rogue=unit("lightning_rogue",2);m.players[0].board=[rogue]
  assert(m.act(0,0,0) and wall.poison==0)
  # Both creature healing and spell healing reject wounded walls atomically.
  m=fixture();wall=unit("village_wall",1);wall.health=1

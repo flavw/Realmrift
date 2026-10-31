@@ -6,7 +6,7 @@
 - Decks antigos mistos: preservados como rascunhos para correção; não podem iniciar uma partida nem ser salvos sem corrigir.
 - **Arauto da Lua**: neutro, 2 mana, 1/2, **Chamado**. Ao entrar pela mão, concede +1/+1 permanente a outro aliado escolhido. Se entrar sozinho, não aplica bônus. Alvos esgotados são válidos; o bônus não prepara nem esgota. Sem alvo próprio, inimigo ou castelo. Cancelar/alvo inválido não consome carta ou mana. Bônus de invocações diferentes acumulam; não repete no início de turnos.
 
-Arte gerada com image_gen integrado e salva em `C:\Users\flavi\Documents\Codex\CronicasDaLua\assets\art\moon_herald.png`; prompt em `docs/art-prompts/moon-herald.md`. Coleção atual: 29 cartas, sendo 23 criaturas e 6 magias.
+Arte gerada com image_gen integrado e salva em `C:\Users\flavi\Documents\Codex\Realmrift\assets\art\moon_herald.webp`; prompt em `docs/art-prompts/moon-herald.md`. Coleção atual: 29 cartas, sendo 23 criaturas e 6 magias.
 
 Verificado com testes do motor e da interface: Chamado com e sem aliado, alvo obrigatório, consumo atômico, permanência/empilhamento, campo cheio, IA escolhendo aliado, classe única, preservação de decks antigos, reparo antes do mulligan e gemas na lista do editor.
 

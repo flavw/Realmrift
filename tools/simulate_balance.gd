@@ -24,7 +24,7 @@ func deck(faction: String, cohort: String) -> Array:
  match faction:
   "Guerreiro": core=["warrior","wall_guard","iron_stance"]
   "Mago": core=["mage","eclipse_channeler","astral_flame"]
-  "Ladina": core=["rogue","dusk_scout","shadow_step"]
+  "Ladina": core=["lightning_rogue","dusk_scout","shadow_step"]
   _: core=["cleric","dawn_warden","restoring_light"]
  for key in core:
   result.append(key)

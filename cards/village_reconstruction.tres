@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 [ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/village_reconstruction.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/village_reconstruction.webp" id="2"]
 [resource]
 script=ExtResource("1")
 title="Reconstrução da Aldeia"
+lore = "Pedra por pedra, a vila se lembra de como ficar de pé."
 cost=2
 card_class=2
 card_type=1

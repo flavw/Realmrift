@@ -7,7 +7,7 @@ func verify() -> void:
  var previous: Array=initial.slots.slice(0,6).duplicate(true)
  previous[0].name="Meu Guerreiro"
  previous[0].cover="warrior"
- previous[4]={"name":"Meu deck criado","cards":Match.default_deck(1),"cover":"raven","base_class":CardData.CardClass.ROGUE}
+ previous[4]={"name":"Meu deck criado","cards":Match.default_deck(1),"cover":"raven","base_class":CardData.CardClass.LADINO}
  var file:=FileAccess.open(initial.path,FileAccess.WRITE)
  file.store_string(JSON.stringify({"version":4,"active":4,"slots":previous}));file.close()
  var store=Store.new(initial.path)

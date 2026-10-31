@@ -18,11 +18,11 @@ Magia de Mago, **6 mana**. Causa **3 de dano mágico a todas as criaturas inimig
 
 Conjura diretamente, sem escolher um alvo individual. Exige pelo menos uma criatura inimiga. O dano é aplicado a todas antes de remover as mortas e recalcular Auras. Tem efeito dourado nos alvos e usa o som mágico em Ogg existente. A IA considera os alvos atingidos e as eliminações ao escolher a magia.
 
-Disponível na coleção de Mago, na galeria e no construtor. Os decks salvos e as sugestões não foram substituídos. Recurso: `cards/fireball.tres`; arte: `assets/art/fireball.png`, gerada com image_gen integrado. [Prompt](art-prompts/fireball.md).
+Disponível na coleção de Mago, na galeria e no construtor. Os decks salvos e as sugestões não foram substituídos. Recurso: `cards/fireball.tres`; arte: `assets/art/fireball.webp`, gerada com image_gen integrado. [Prompt](art-prompts/fireball.md).
 
 ## Direção de arte
 
-Crônicas da Lua inclui cenas diurnas e noturnas. A arte atual de Bola de Fogo mostra uma bola de fogo em uma vila noturna, com silhuetas de criaturas envoltas nas chamas. O horário da ilustração é uma escolha de ambientação e não cria uma regra de ciclo de dia/noite.
+Realmrift inclui cenas diurnas e noturnas. A arte atual de Bola de Fogo mostra uma bola de fogo em uma vila noturna, com silhuetas de criaturas envoltas nas chamas. O horário da ilustração é uma escolha de ambientação e não cria uma regra de ciclo de dia/noite.
 
 Coleção: **34 cartas, 26 criaturas e oito magias**.
 

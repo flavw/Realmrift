@@ -3,7 +3,7 @@
 - As seis capas ficam à esquerda, na proporção 3:4 (240 × 320), com mais espaço para a arte e sem botões dentro dos decks.
 - Clicar em uma capa apenas seleciona o deck. A borda destaca a seleção; o selo ATIVO continua identificando qual deck será usado no jogo.
 - Um único painel à direita mostra o selecionado e os três botões: Editar cartas/Criar deck, Capa e nome, Jogar. Espaços vazios não podem jogar.
-- Símbolos pequenos substituem os rótulos de tipo "classe + neutros". Guerreiro usa espadas vermelhas, Mago varinha roxa, Ladina adaga verde, Clérigo sol dourado e Neutro um emblema circular cinza. O nome aparece no tooltip.
+- Símbolos pequenos substituem os rótulos de tipo "classe + neutros". Guerreiro usa espadas vermelhas, Mago varinha roxa, Ladino adaga verde, Clérigo sol dourado e Neutro um emblema circular cinza. O nome aparece no tooltip.
 - Listas só com neutros recebem o símbolo Neutro; listas com uma classe e neutros mostram apenas o símbolo da classe. Espaços vazios não recebem símbolo. São apenas indicações visuais; o arquétipo neutro futuro não ganhou novas regras nesta atualização.
 - Edição e personalização continuam em telas separadas. Nome, capa, cartas, deck ativo e seis espaços foram preservados.
 

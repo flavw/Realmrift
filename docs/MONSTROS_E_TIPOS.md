@@ -13,7 +13,7 @@ A facção Horda usa borda cobre e símbolo de cabeça com chifres. Seus decks p
 
 O Lobisomem corresponde à silhueta lupina da arte de Bola de Fogo. Os três membros da nova facção são do tipo Monstro, conforme solicitado, mesmo quando têm aparência animal ou humanoide. O Zumbi é Morto-vivo, portanto não conta como Humano.
 
-Classificação dos neutros existentes: Lobo da Noite, Falcão Mensageiro, Familiar Rúnico e Boi da Colheita são Feras; Muralha da Aldeia é Artefato; os camponeses, escudeiros, vigias, arauto, peregrino e Levante da Aldeia são Humanos. O Corvo das Brumas é Fera da classe Ladina. As demais criaturas anteriores são Humanas.
+Classificação dos neutros existentes: Lobo da Noite, Falcão Mensageiro, Familiar Rúnico e Boi da Colheita são Feras; Muralha da Aldeia é Artefato; os camponeses, escudeiros, vigias, arauto, peregrino e Levante da Aldeia são Humanos. O Corvo das Brumas é Fera da classe Ladino. As demais criaturas anteriores são Humanas.
 
 Horda das Brumas é uma receita legal de 20 cartas da IA: duas cópias de Goblin Saqueador, Minotauro da Ruína, Lobisomem das Brumas, Troll do Brejo, Falcão Mensageiro, Necromante do Véu, Fungo da Ninhada, Clamor da Horda, Zumbi Serviçal e Reconstrução. Nenhum espaço salvo do jogador é substituído automaticamente.
 
@@ -21,4 +21,4 @@ Validação: `tests/test_monsters_and_types.gd` cobre tipos, composição em amb
 
 Atualização: Necromante do Véu é Humana da facção Horda com Pacto Sombrio. Cura causa dano mágico em Mortos-vivos. Veja [Necromancia](NECROMANCIA.md).
 
-Monstros neutros são permitidos apenas na Horda ou em decks só de neutros, ficando proibidos em Guerreiro, Mago, Ladina e Clérigo. Veja [Esporos e Regeneração](ESPOROS_E_REGENERACAO.md).
+Monstros neutros são permitidos apenas na Horda ou em decks só de neutros, ficando proibidos em Guerreiro, Mago, Ladino e Clérigo. Veja [Esporos e Regeneração](ESPOROS_E_REGENERACAO.md).

@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/aether_summoner.png" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bpldvnncsmyre"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cko5wph224cyd" path="res://assets/art/aether_summoner.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-creature_type=0
-title="Conjuradora do Éter"
-cost=4
-attack=1
-health=3
-card_class=1
-entry_effect=3
-entry_summon_key="runic_familiar"
-artwork=ExtResource("2")
+script = ExtResource("1")
+entry_summon_key = "runic_familiar"
+entry_effect = 3
+title = "Conjuradora do Éter"
+lore = "Seu familiar nunca responde ao chamado. Ele prefere aparecer antes."
+cost = 4
+health = 3
+card_class = 1
+resonance = 1
+artwork = ExtResource("2")

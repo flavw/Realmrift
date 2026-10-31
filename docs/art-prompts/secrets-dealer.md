@@ -1,0 +1,5 @@
+# Negociante de Segredos
+
+Ferramenta integrada image_gen. Arte final: assets/art/secrets_dealer.webp, WebP qualidade 75.
+
+Portrait 3:4 fantasy collectible card illustration, full bleed artwork only, NO text, frame or UI. A clearly adult blonde female rogue merchant in her late twenties with a sly self-assured smile, sitting at a clandestine medieval trading counter. She presents a small glowing emerald poison vial in one hand and golden coins in the other. Several elegant glass poison bottles, spilled gold coins and a discreet dagger on the wooden counter. Long loosely braided blonde hair, fitted dark green leather rogue armor with tasteful alluring neckline and shaped leather bodice, practical bracers and subtle gold jewelry. Tastefully sensual mature woman, no nudity. Warm lantern glow against cool shadows of a secluded medieval city shop, richly detailed realistic painterly fantasy illustration, cinematic light and polished materials. Face unobstructed in upper central part near 30 percent image height, clear readable face and torso for square battlefield crop. Natural hands and anatomy, gold and green visual accents.

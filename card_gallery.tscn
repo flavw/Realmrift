@@ -1,10 +1,10 @@
-[gd_scene load_steps=50 format=3]
+[gd_scene load_steps=55 format=3]
 [ext_resource type="PackedScene" path="res://card_model.tscn" id="card"]
 [ext_resource type="Resource" path="res://cards/warrior.tres" id="data0"]
 [ext_resource type="Resource" path="res://cards/mage.tres" id="data1"]
 [ext_resource type="Resource" path="res://cards/squire.tres" id="data2"]
 [ext_resource type="Resource" path="res://cards/wolf.tres" id="data3"]
-[ext_resource type="Resource" path="res://cards/rogue.tres" id="data4"]
+[ext_resource type="Resource" path="res://cards/lightning_rogue.tres" id="data4"]
 [ext_resource type="Resource" path="res://cards/raven.tres" id="data5"]
 [ext_resource type="Resource" path="res://cards/sentinel.tres" id="data6"]
 [ext_resource type="Resource" path="res://cards/fire_mage.tres" id="data7"]
@@ -48,6 +48,11 @@
 [ext_resource type="Resource" path="res://cards/brood_fungus.tres" id="brood_fungus"]
 [ext_resource type="Resource" path="res://cards/marsh_troll.tres" id="marsh_troll"]
 [ext_resource type="Resource" path="res://cards/wise_merchant.tres" id="wise_merchant"]
+[ext_resource type="Resource" path="res://cards/bloodblade.tres" id="bloodblade"]
+[ext_resource type="Resource" path="res://cards/vanguard_bastion.tres" id="vanguard_bastion"]
+[ext_resource type="Resource" path="res://cards/magic_missiles.tres" id="magic_missiles"]
+[ext_resource type="Resource" path="res://cards/wizard_apprentice.tres" id="wizard_apprentice"]
+[ext_resource type="Resource" path="res://cards/scorpion_kobold.tres" id="scorpion_kobold"]
 [node name="CardGallery" type="Control"]
 layout_mode=3
 anchors_preset=15
@@ -73,7 +78,7 @@ horizontal_scroll_mode=0
 size_flags_horizontal=3
 theme_override_constants/separation=20
 [node name="Title" type="Label" parent="Scroll/Page"]
-text="CRÔNICAS DA LUA • 48 RECURSOS • CRIATURAS E MAGIAS"
+text="REALMRIFT • CRIATURAS E MAGIAS"
 theme_override_font_sizes/font_size=25
 [node name="Grid" type="GridContainer" parent="Scroll/Page"]
 columns=5
@@ -91,7 +96,7 @@ card_data=ExtResource("data2")
 [node name="wolf" parent="Scroll/Page/Grid" instance=ExtResource("card")]
 custom_minimum_size=Vector2(250,334)
 card_data=ExtResource("data3")
-[node name="rogue" parent="Scroll/Page/Grid" instance=ExtResource("card")]
+[node name="lightning_rogue" parent="Scroll/Page/Grid" instance=ExtResource("card")]
 custom_minimum_size=Vector2(250,334)
 card_data=ExtResource("data4")
 [node name="raven" parent="Scroll/Page/Grid" instance=ExtResource("card")]
@@ -241,3 +246,23 @@ card_data=ExtResource("marsh_troll")
 [node name="wise_merchant" parent="Scroll/Page/Grid" instance=ExtResource("card")]
 custom_minimum_size=Vector2(250,334)
 card_data=ExtResource("wise_merchant")
+
+[node name="bloodblade" parent="Scroll/Page/Grid" instance=ExtResource("card")]
+custom_minimum_size=Vector2(250,334)
+card_data=ExtResource("bloodblade")
+
+[node name="vanguard_bastion" parent="Scroll/Page/Grid" instance=ExtResource("card")]
+custom_minimum_size=Vector2(250,334)
+card_data=ExtResource("vanguard_bastion")
+
+[node name="magic_missiles" parent="Scroll/Page/Grid" instance=ExtResource("card")]
+custom_minimum_size=Vector2(250,334)
+card_data=ExtResource("magic_missiles")
+
+[node name="wizard_apprentice" parent="Scroll/Page/Grid" instance=ExtResource("card")]
+custom_minimum_size=Vector2(250,334)
+card_data=ExtResource("wizard_apprentice")
+
+[node name="scorpion_kobold" parent="Scroll/Page/Grid" instance=ExtResource("card")]
+custom_minimum_size=Vector2(250,334)
+card_data=ExtResource("scorpion_kobold")

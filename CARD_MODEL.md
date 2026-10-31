@@ -28,7 +28,7 @@ Classes: Warrior vermelho, Mage roxo, Neutral cinza, Rogue verde e Cleric branco
 
 Para criar uma carta independente, duplique um recurso em `cards/` antes de editar. Salve a ilustração em `assets/art/`, selecione-a em Artwork e ajuste o enquadramento. Registre o novo recurso em CARD_DATA, em `scripts/match.gd`, para incluí-lo na coleção e no editor de decks. Habilidades novas precisam de regras na lógica da partida.
 
-Os ícones `tap-icon.png`, `block-icon.png` e `fury-icon.png` foram gerados com imagegen e ficam em `assets/ui/`. Esgotar aparece em magia/cura e Fúria no Lobo e nos botões de ações; Bloqueio permanece exclusivo da versão reduzida. Os textos continuam editáveis e as regras não mudaram.
+Os ícones `tap-icon.webp`, `block-icon.webp` e `fury-icon.webp` foram gerados com imagegen e ficam em `assets/ui/`. Esgotar aparece em magia/cura e Fúria no Lobo e nos botões de ações; Bloqueio permanece exclusivo da versão reduzida. Fúria pode ser ativada uma vez por turno por criatura. Os textos continuam editáveis.
 
 ## Resumos e explicações ao passar o mouse
 
@@ -36,11 +36,11 @@ O nó Ability agora é um VBoxContainer de linhas compactas. O exemplo da Maga �
 
 Ability Name Override e Ability Help Override são campos opcionais do Inspector para personalizar o resumo e a explicação da primeira habilidade. Valores vazios usam o texto padrão de `ability_entries()` em `scripts/card_data.gd`. Ability Text é fallback para uma habilidade não catalogada. Esses textos não mudam as regras.
 
-A caixa flutuante é criada pelo CardView numa CanvasLayer, tem tamanho independente da miniatura, evita as bordas da tela e ignora o mouse para preservar seleção e ataques. Na partida, a carta original delega essa caixa à prévia ampliada para evitar explicações duplicadas. Os símbolos novos ficam em `assets/ui/mana-cost-symbol.png` e `assets/ui/arcane-icon.png`.
+A caixa flutuante é criada pelo CardView numa CanvasLayer, tem tamanho independente da miniatura, evita as bordas da tela e ignora o mouse para preservar seleção e ataques. Na partida, a carta original delega essa caixa à prévia ampliada para evitar explicações duplicadas. Os símbolos novos ficam em `assets/ui/mana-cost-symbol.webp` e `assets/ui/arcane-icon.webp`.
 
 O nó Stats usa `scripts/stat_line.gd`: ataque e vida são Labels separados para cores independentes. `ability_context` carrega turno, mana, prontidão, alvos válidos e vida máxima para mostrar os estados reais. Sem contexto, as galerias e o editor mostram as habilidades como referência. `scripts/art_viewer.gd` abre a imagem original sem molduras, textos, escudos ou recorte.
 
-A ampulheta substitui a lua no custo de esgotar. A imagem anterior fica reservada em assets/ui/moon-reserved.png, sem habilidade atribuída.
+A ampulheta substitui a lua no custo de esgotar. A imagem anterior fica reservada em assets/ui/moon-reserved.webp, sem habilidade atribuída.
 
 ## Alinhamento e degradê
 
@@ -82,14 +82,16 @@ A biblioteca monta capas fixas de 240 × 320, com arte de 236 × 316, nome e con
 DeckStore versão 5 amplia para nove espaços e aceita arquivos anteriores de três ou seis, preservando o conteúdo existente. Os novos 7–9 são vazios. A biblioteca tem rolagem e mantém a seleção visível; o painel direito permanece fixo.
 
 
-`cards/village_reconstruction.tres`: magia neutra de 2 mana, `SpellEffect.RECONSTRUCT`, `spell_secondary=2` (cura) e sem restrição de classe do deck. Cura o próprio castelo e compra uma carta se `neutral_field(side)` confirmar apenas criaturas neutras no campo aliado, incluindo campo vazio. O custo das magias fica somente na gema superior; o campo cost da entrada ainda alimenta os estados de disponibilidade, sem gerar outra gema nas regras. A galeria tem 47 recursos, incluindo o Carniçal invocado. Decks usam 20 cartas; a versão 6 do DeckStore amplia listas antigas preservando conteúdo e metadados. Veja `docs/DECKS_20_RECONSTRUCAO.md`.
+`cards/village_reconstruction.tres`: magia neutra de 2 mana, `SpellEffect.RECONSTRUCT`, `spell_secondary=2` (cura) e sem restrição de classe do deck. Cura o próprio castelo e compra uma carta se `neutral_field(side)` confirmar apenas criaturas neutras no campo aliado, incluindo campo vazio. O custo das magias fica somente na gema superior; o campo cost da entrada ainda alimenta os estados de disponibilidade, sem gerar outra gema nas regras. A galeria tem 47 recursos, incluindo o Carniçal invocado. Decks usam 22 cartas; a versão 10 do DeckStore amplia listas anteriores preservando cartas e metadados sempre que possível. Veja `docs/DECKS_20_RECONSTRUCAO.md`.
 
 `cards/village_wall.tres` usa `wall=true` para o subtipo Muralha: imunidade a Veneno, cura recusada e nenhum ataque declarado. `block=4` usa as cargas de Bloqueio existentes. O campo affinity foi removido. Vigor não altera o ataque desenhado em card_view/field_card; Match.physical_attack continua resolvendo sua força no combate. O editor amplia os cards para a largura das quatro colunas.
 
 `cards/fireball.tres` usa SpellEffect.AREA_ARCANE, custo 6, valor 3. A conjuração resolve diretamente contra o grupo de criaturas inimigas. CardData é compatível com arte diurna e noturna. O mulligan usa mulligan_rounds por jogador: uma etapa para o primeiro, duas para o segundo; a segunda aceita até um índice.
 
-Tipos de criatura: edite creature_type no recurso CardData (Humano, Fera, Artefato, Monstro ou Morto-vivo). card_class permanece independente; Horda é a nova facção. Recursos de magia ignoram creature_type. Decks de Horda proíbem criaturas Humanas, inclusive neutras, exceto quando horde_deck_allowed (Pacto Sombrio) é verdadeiro. Veja docs/MONSTROS_E_TIPOS.md.
+Tipos de criatura: edite creature_type no recurso CardData (Humano, Fera, Artefato, Monstro ou Morto-vivo). card_class permanece independente; Horda é a nova facção. Recursos de magia ignoram creature_type. Decks de Horda proíbem criaturas Humanas, inclusive neutras, exceto quando human_and_monster (Pacto Sombrio) é verdadeiro. Veja docs/MONSTROS_E_TIPOS.md.
 
-Necromancia: horde_deck_allowed permite a exceção de Humano em Horda. EntryEffect.SUMMON_AFTER_ENEMY_HUMAN_DEATH consulta human_deaths do adversário e invoca entry_summon_key se houver espaço. collectible=false torna o Carniçal apenas invocado. creature_type=UNDEAD converte Cura em dano mágico; bônus de atributos não são Cura.
+O campo editável `lore` contém o texto de ambientação mostrado à direita da arte ampliada ao clicar com o botão direito. Ele não altera as regras da carta.
+
+Necromancia: human_and_monster permite a exceção de Humano em Horda. EntryEffect.SUMMON_AFTER_ENEMY_HUMAN_DEATH consulta human_deaths do adversário e invoca entry_summon_key se houver espaço. collectible=false torna o Carniçal apenas invocado. creature_type=UNDEAD converte Cura em dano mágico; bônus de atributos não são Cura.
 
 Campos editáveis: spores aumenta vida atual/máxima dos Monstros aliados no início do próprio turno; regeneration aplica Cura a si no fim do próprio turno após Veneno. Ambos acumulam quando herdados por Multidão a partir de fontes neutras. Monstros neutros são filtrados das quatro outras facções atuais por neutral_monster_forbidden.

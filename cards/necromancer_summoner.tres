@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/necromancer_summoner.png" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cikogyr05e7sr"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cm1khc8glf88h" path="res://assets/art/necromancer_summoner.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Necromante do Véu"
-cost=4
-attack=2
-health=4
-card_class=5
-creature_type=0
-horde_deck_allowed=true
-entry_effect=6
-entry_summon_key="summoned_ghoul"
-artwork=ExtResource("2")
+script = ExtResource("1")
+human_and_monster = true
+entry_summon_key = "summoned_ghoul"
+entry_effect = 6
+title = "Necromante do Véu"
+lore = "Ela chama reforços que raramente reclamam das condições de trabalho."
+cost = 4
+attack = 2
+health = 4
+card_class = 5
+artwork = ExtResource("2")

@@ -68,7 +68,7 @@ func verify() -> void:
  var editor=load("res://deck_editor.tscn").instantiate();editor.configure(original);root.add_child(editor)
  editor.choose_slot(0);assert(KEY in editor.collection_keys())
  var view=load("res://card_model.tscn").instantiate();view.card_data=data;view.ability_context={"abascanto":0};root.add_child(view)
- assert(view.view_entries().any(func(e):return e.name=="Abascanto 0"))
+ assert(view.view_entries().any(func(e):return e.name=="Guarda Arcana 0"))
  var field=load("res://field_card.tscn").instantiate();field.set_card(data,3,true);field.set_meta("abascanto",0);root.add_child(field)
  assert(field.get_node("Canvas/StatusIcons/Abascanto").visible and field.get_node("Canvas/StatusIcons/Abascanto/Value").text=="0")
  editor.queue_free();view.queue_free();field.queue_free();await process_frame;await create_timer(0.35).timeout

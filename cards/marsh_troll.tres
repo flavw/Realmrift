@@ -1,13 +1,17 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/marsh_troll.png" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://d4hrc3qcpl34c"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/marsh_troll.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Troll do Brejo"
-cost=4
-attack=3
-health=5
-card_class=5
-creature_type=3
-regeneration=1
-artwork=ExtResource("2")
+script = ExtResource("1")
+creature_type = 3
+regeneration = 2
+block = 1
+title = "Troll do Brejo"
+lore = "O brejo cura quase tudo. O cheiro, infelizmente, permanece."
+cost = 4
+attack = 3
+health = 5
+card_class = 5
+artwork = ExtResource("2")

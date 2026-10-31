@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 [ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/goblin_raider.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/goblin_raider.webp" id="2"]
 [resource]
 script=ExtResource("1")
 title="Goblin Saqueador"
+lore = "Seu plano era sair discretamente. O saco de panelas discordou."
 cost=1
 attack=1
 health=1

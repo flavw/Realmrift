@@ -45,13 +45,13 @@ func verify() -> void:
  # One persistent soundtrack, compressed stream, looping and following the sound setting.
  var music=main.music.player
  assert(music!=null and music.stream is AudioStreamOggVorbis and music.stream.loop)
- assert(music.stream.get_length()>80 and music.stream.get_length()<100)
+ assert(music.stream.resource_path=="res://assets/audio/chariots_of_war.ogg")
  assert(main.music.muted and (music.stream_paused or not music.playing))
  main.toggle_sound();assert(not main.music.muted and not music.stream_paused)
  main.restart();assert(main.music.player==music and main.music.get_child_count()==1)
  main.toggle_sound();assert(main.music.muted and (music.stream_paused or not music.playing))
- assert(main.find_child("PlayerCastle",true,false).get_node("CastleArtwork").texture.resource_path=="res://assets/art/castle_player.png")
- assert(main.find_child("EnemyCastle",true,false).get_node("CastleArtwork").texture.resource_path=="res://assets/art/castle_enemy.png")
+ assert(main.find_child("PlayerCastle",true,false).get_node("CastleArtwork").texture.resource_path=="res://assets/art/castle_player_wide.webp")
+ assert(main.find_child("EnemyCastle",true,false).get_node("CastleArtwork").texture.resource_path=="res://assets/art/castle_enemy_wide.webp")
  main.queue_free();await process_frame;await create_timer(0.35).timeout
  # One short real-animation check for the new sequence, rather than many animation runs.
  if OS.get_environment("VERIFY_ATTACK_ANIMATION")=="1":
@@ -61,6 +61,6 @@ func verify() -> void:
   await live.attack_all()
   assert(live.duel.players[1].hp==15 and not live.busy and live.duel.turn==0)
   live.queue_free();await process_frame;await create_timer(0.35).timeout
- print("OK: ataque em grupo com prioridade/Block/Voo, mortes e índices, vitória, sem gastos extras; castelos e música Ogg única em loop/mute.")
+ print("OK: ataque em grupo com prioridade/Block/Voo, mortes e índices, vitória, sem gastos extras; castelos e música de combate única em loop/mute.")
  quit()
 

@@ -1,10 +1,11 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 [ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/sentinel.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/sentinel.webp" id="2"]
 [resource]
 script=ExtResource("1")
 creature_type=0
 title="Sentinela de Ferro"
+lore = "Seu turno nunca termina. O relógio já desistiu de avisar."
 cost=2
 attack=1
 health=3

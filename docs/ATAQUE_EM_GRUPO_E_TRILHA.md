@@ -8,13 +8,13 @@ Só usa ataques legais: ignora criaturas esgotadas, Muralhas e criaturas sem for
 
 ## Castelos
 
-Artes originais geradas para `assets/art/castle_player.png` e `assets/art/castle_enemy.png`, em azul e vinho. Substituem os símbolos no alvo clicável sem alterar regras, vida ou posicionamento.
+Artes originais geradas para `assets/art/castle_player.webp` e `assets/art/castle_enemy.webp`, em azul e vinho. Substituem os símbolos no alvo clicável sem alterar regras, vida ou posicionamento.
 
-## Aldeia ao Amanhecer
+## Música
 
-Composição instrumental original sintetizada localmente: 32 compassos a 84 BPM, cerca de 91,43 segundos, em ré menor, com harpa, flauta, sustentação suave e percussão leve. Ogg Vorbis estéreo, 44,1 kHz, aproximadamente 644 KiB. As caudas e a ambiência atravessam a emenda do loop; o volume do jogo fica abaixo dos efeitos de combate.
+O menu usa a composição instrumental ambiente **Aldeia ao Amanhecer**, sintetizada localmente. Os combates usam **Chariots Of War**, de **Aakash Gandhi**, em `assets/audio/chariots_of_war.ogg`. O crédito também aparece no menu Créditos do jogo.
 
-O autoload `GameMusic` mantém um único reprodutor entre menu, duelo e novas partidas. A opção Som pausa/retoma a música junto ao controle dos efeitos, sem reiniciar a faixa. A preferência dura a sessão do jogo. Não é necessário Python para jogar: o áudio pronto está no projeto.
+O autoload `GameMusic` mantém um único reprodutor entre menu, duelo e novas partidas, alternando a faixa conforme a tela. A opção Som pausa/retoma a música junto ao controle dos efeitos, sem reiniciar a faixa. A preferência dura a sessão do jogo.
 
 Para recompor, execute `tools/generate_music.py` usando Python com numpy e ffmpeg no PATH. A partitura, instrumentos e síntese estão no próprio script; não usa gravações externas. A saída é codificada por pipe diretamente para Ogg, sem manter WAV.
 

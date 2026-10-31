@@ -62,7 +62,7 @@ func run_requested_game(opponent: String,number: int,seed_value: int) -> Diction
     break
    turns+=1
   for owner in range(2):
-   assert(m.players[owner].board.size()<=Match.MAX_BOARD and m.players[owner].hand.size()<=8)
+   assert(m.players[owner].board.size()<=Match.MAX_BOARD and m.players[owner].hand.size()<=Match.MAX_HAND_SIZE)
    assert(m.players[owner].mana>=0)
    for u in m.players[owner].board:assert(u.health>0 and u.get("poison",0)>=0)
  assert(m.winner!=-1,"Simulation must reach a real conclusion")

@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/abascanto_guardian.png" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://j6vj8ouo411o"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://uybv55pmy3ny" path="res://assets/art/abascanto_guardian.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-creature_type=0
-title="Guardião do Abascanto"
-cost=3
-attack=2
-health=3
-abascanto=1
-card_class=0
-artwork=ExtResource("2")
+script = ExtResource("1")
+title = "Guardião Arcano"
+lore = "Quando a magia chega à porta, ele já está esperando."
+cost = 3
+attack = 2
+health = 3
+abascanto = 1
+card_class = 0
+artwork = ExtResource("2")

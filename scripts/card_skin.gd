@@ -11,7 +11,7 @@ static func texture(asset: String) -> Texture2D:
   var vector: Texture2D = load(vector_path)
   cache[asset] = vector
   return vector
- var path := "res://assets/ui/%s.png" % asset
+ var path := "res://assets/ui/%s.webp" % asset
  if not ResourceLoader.exists(path):
   return null
  var source: Texture2D = load(path)

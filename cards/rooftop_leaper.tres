@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://b26ybd370dsy7"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://b8b7t7rvy0yqo" path="res://assets/art/rooftop_leaper.webp" id="2"]
+
+[resource]
+script = ExtResource("1")
+entry_secondary = null
+title = "Saltador dos Telhados"
+lore = "As ruas cobram pedágio. Os telhados, só equilíbrio."
+cost = 3
+attack = 2
+health = 3
+card_class = 3
+flying = true
+artwork = ExtResource("2")
+field_artwork_focus = Vector2(0.5, 0.3)

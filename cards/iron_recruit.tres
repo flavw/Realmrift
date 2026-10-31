@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/iron_recruit.webp" id="2"]
+[resource]
+script=ExtResource("1")
+creature_type=0
+title="Recruta de Ferro"
+lore="A armadura veio de segunda mão. A coragem é toda dela."
+cost=1
+attack=1
+health=2
+armor=1
+card_class=0
+artwork=ExtResource("2")
+field_artwork_focus=Vector2(0.5,0.3)

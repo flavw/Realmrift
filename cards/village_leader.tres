@@ -1,16 +1,17 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 [ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/village_leader.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/village_leader.webp" id="2"]
 [resource]
 script=ExtResource("1")
 creature_type=0
 title="Líder da Aldeia"
+lore = "Ele conhece cada família pelo nome e cada problema pelo primeiro sinal."
 cost=4
 attack=3
 health=4
 card_class=2
 aura_effect=1
 aura_value=1
-aura_targets=1
+aura_targets=0
 aura_includes_self=false
 artwork=ExtResource("2")

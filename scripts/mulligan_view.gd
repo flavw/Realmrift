@@ -32,13 +32,12 @@ func render() -> void:
  var page:=VBoxContainer.new()
  page.add_theme_constant_override("separation",20)
  center.add_child(page)
- var extra: bool=game.mulligan_rounds[0]>0
- var heading:=text_label("MULLIGAN EXTRA · 1 CARTA" if extra else "MÃO INICIAL · MULLIGAN GRÁTIS",28)
+ var heading:=text_label("MÃO INICIAL · MULLIGAN GRÁTIS",28)
  heading.name="MulliganHeading"
  heading.modulate=Color("e5d2a4")
  page.add_child(heading)
- page.add_child(text_label("Você começa com 3 cartas." if game.first_player==0 else "Você joga em segundo e recebe 4 cartas."))
- page.add_child(text_label("Troque até 1 carta ou mantenha a mão." if extra else "Escolha as cartas que deseja trocar.",17))
+ page.add_child(text_label("Você começa com 3 cartas." if game.first_player==0 else "Você joga em segundo: 4 cartas e 1 mana temporária no primeiro turno."))
+ page.add_child(text_label("Clique nas cartas que deseja trocar.",17))
  var row:=HBoxContainer.new()
  row.alignment=BoxContainer.ALIGNMENT_CENTER
  row.add_theme_constant_override("separation",18)
@@ -51,20 +50,27 @@ func render() -> void:
   view.custom_minimum_size=Vector2(220,294)
   view.gui_input.connect(card_input.bind(i))
   tile.add_child(view)
-  var toggle:=Button.new()
-  toggle.text="TROCAR" if i in selected else "Manter"
-  toggle.custom_minimum_size.y=42
-  toggle.pressed.connect(toggle_card.bind(i))
-  if i in selected:UiTheme.primary(toggle)
-  tile.add_child(toggle)
+  if i in selected:
+   var arrow:=Label.new()
+   arrow.name="MulliganSelected"
+   arrow.text="↻"
+   arrow.mouse_filter=Control.MOUSE_FILTER_IGNORE
+   arrow.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+   arrow.vertical_alignment=VERTICAL_ALIGNMENT_CENTER
+   arrow.add_theme_font_size_override("font_size",112)
+   arrow.add_theme_color_override("font_color",Color("ffe098"))
+   arrow.add_theme_color_override("font_outline_color",Color("16263c"))
+   arrow.add_theme_constant_override("outline_size",8)
+   view.add_child(arrow)
+   arrow.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
  var confirm:=Button.new()
  confirm.name="ConfirmMulligan"
- confirm.text=("Confirmar troca · %d carta(s)" % selected.size()) if not selected.is_empty() else ("Manter mão" if not extra and game.first_player==1 else "Manter mão e começar")
+ confirm.text=("Confirmar troca · %d carta(s)" % selected.size()) if not selected.is_empty() else "Manter mão e começar"
  confirm.custom_minimum_size.y=48
  confirm.pressed.connect(func():confirmed.emit(selected.duplicate()))
  UiTheme.primary(confirm)
  page.add_child(confirm)
- var tip:=text_label("Depois desta troca, você poderá trocar mais 1 carta." if not extra and game.first_player==1 else "A compra normal começa após as trocas.",14)
+ var tip:=text_label("A compra normal começa após as trocas.",14)
  tip.modulate=Color("91a7bc")
  page.add_child(tip)
  confirm.grab_focus()

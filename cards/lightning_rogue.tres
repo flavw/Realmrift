@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/lightning_rogue.webp" id="2"]
+[resource]
+script=ExtResource("1")
+creature_type=0
+title="Ladina Relâmpago"
+lore = "Se você a viu chegando, provavelmente já é tarde."
+cost=4
+attack=3
+health=2
+armor=0
+card_class=3
+swift=true
+ability_text="Arrancada\nPode atacar no turno em que entra."
+artwork=ExtResource("2")
+artwork_zoom=1.06
+artwork_focus=Vector2(0.5, 0.47)
+
+envenom=1

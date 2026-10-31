@@ -26,11 +26,12 @@ func verify() -> void:
  assert(store.slots[0].name == "Muralha Lunar")
  editor.draft=Match.default_deck(0);editor.render()
  assert(editor.remove_card("squire"))
- assert(not editor.add_card("rogue"),"Não mistura Ladina com Guerreiro")
+ assert(not editor.add_card("lightning_rogue"),"Não mistura Ladina com Guerreiro")
  assert(editor.add_card("squire"))
  assert(not editor.add_card("raven"), "Deck com 20 cartas não aceita a 21ª")
  editor.draft_name = "Ladinas da Lua"
  assert(editor.save_deck())
+ assert(editor.screen=="library", "Salvar retorna automaticamente para Meus decks")
  var saved_first: Array = store.slots[0].cards.duplicate()
  editor.choose_slot(1)
  editor.draft_name = "Meu segundo deck"

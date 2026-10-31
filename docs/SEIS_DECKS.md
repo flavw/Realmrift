@@ -3,7 +3,7 @@
 O editor agora tem duas linhas de três espaços:
 
 1. Muralha Lunar — Guerreiro (ou o deck já salvo no primeiro espaço).
-2. Caçada das Brumas — Ladina (ou o deck já salvo no segundo espaço).
+2. Caçada das Brumas — Ladino (ou o deck já salvo no segundo espaço).
 3. Círculo Arcano — Mago (ou o deck já salvo no terceiro espaço).
 4. Aurora Vital — Clérigo, 12 cartas da receita atual.
 5. Novo deck 5 — vazio, para criação do jogador.

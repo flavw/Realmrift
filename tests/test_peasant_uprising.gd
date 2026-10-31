@@ -10,9 +10,10 @@ func fixture():
  return m
 func spawn(m,key: String,side: int=0) -> Dictionary:return m.spawn_unit(side,key)
 func verify() -> void:
- assert(Match.CARD_DATA[KEY].legendary and Match.copy_limit(KEY)==1 and Match.CARD_DATA[KEY].cost==4)
- assert(Match.CARD_DATA.rogue.attack==3 and Match.CARD_DATA.rogue.swift and Match.CARD_DATA.rogue.envenom==1)
+ assert(Match.CARD_DATA[KEY].legendary and Match.copy_limit(KEY)==1 and Match.CARD_DATA[KEY].cost==5)
+ assert(Match.CARD_DATA.lightning_rogue.attack==3 and Match.CARD_DATA.lightning_rogue.swift and Match.CARD_DATA.lightning_rogue.envenom==1)
  var cards: Array=Match.default_deck(4)
+ cards[cards.find(KEY)]="village_reconstruction"
  cards[cards.find("life_pilgrim")]=KEY
  assert(Match.valid_deck(cards))
  var twice: Array=cards.duplicate();twice[twice.find("life_pilgrim")]=KEY
@@ -20,11 +21,11 @@ func verify() -> void:
  var store=Store.new("user://test_legendary_decks.json",false)
  assert(store.save_slot(4,"Lendária",cards,2) and not store.save_slot(4,"Duplicada",twice,2))
  var editor=load("res://deck_editor.tscn").instantiate();editor.configure(store);root.add_child(editor)
- editor.choose_slot(5);editor.select_base_class(2)
+ editor.choose_slot(6);editor.select_base_class(2)
  assert(editor.add_card(KEY) and not editor.add_card(KEY) and "1 cópia" in editor.addition_reason(KEY))
  assert(editor.add_card("wolf") and editor.add_card("wolf") and not editor.add_card("wolf"))
  # Alone: counts itself. Enemy abilities never transfer.
- var m=fixture();spawn(m,"rogue",1);spawn(m,"abascanto_guardian",1)
+ var m=fixture();spawn(m,"lightning_rogue",1);spawn(m,"abascanto_guardian",1)
  var mob=spawn(m,KEY)
  assert(mob.attack==1 and mob.health==1 and not mob.swift and mob.envenom==0 and mob.abascanto==0)
  # Two farmers give Cultivo 2. Repeated refreshes never grow, heal or duplicate abilities.
@@ -51,7 +52,7 @@ func verify() -> void:
  assert(mob.entry_effect==CardData.EntryEffect.NONE and mob.attack==3 and mob.health==3 and herald.attack==1 and herald.health==2)
  assert(mob.envenom==0 and mob.poison==0)
  # Class allies are excluded. Neutral allies can still grant the same unique flag.
- m=fixture();spawn(m,"rogue");spawn(m,"raven");mob=spawn(m,KEY)
+ m=fixture();spawn(m,"lightning_rogue");spawn(m,"raven");mob=spawn(m,KEY)
  assert(mob.attack==1 and mob.health==1 and not mob.swift and not mob.ready and not mob.flying and mob.envenom==0)
  m=fixture();spawn(m,"messenger_hawk");spawn(m,"messenger_hawk");mob=spawn(m,KEY)
  assert(mob.attack==3 and mob.health==3 and mob.flying)
@@ -60,7 +61,7 @@ func verify() -> void:
  assert(m.magic_bonus(0)==2)
  # Inherited wall restrictions and poison immunity disappear with their source.
  m=fixture();var wall=spawn(m,"village_wall");mob=spawn(m,KEY)
- assert(mob.wall and mob.armor==1 and m.block_capacity(mob)==4 and not Match.apply_poison(mob,2))
+ assert(mob.wall and mob.armor==1 and m.block_capacity(mob)==Match.CARD_DATA.village_wall.block and not Match.apply_poison(mob,2))
  mob.ready=true;assert(not m.can_target(0,1,-1))
  m.players[0].board.erase(wall);m.refresh_auras()
  assert(not mob.wall and mob.armor==0 and mob.block==0 and m.can_target(0,0,-1))
@@ -91,3 +92,4 @@ func verify() -> void:
  DirAccess.remove_absolute(ProjectSettings.globalize_path(store.path))
  print("OK: lendária 1/deck, Multidão aliada sem Chamados, atributos/dano, acúmulo, recargas, Aura, Muralha, morte, UI e Ladina 3/2.")
  quit()
+

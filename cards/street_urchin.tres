@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bu5e8bvtf2tkh"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/street_urchin.webp" id="2"]
+
+[resource]
+script = ExtResource("1")
+loot = 1
+title = "Trombadinha"
+lore = "No mercado, aprende-se cedo: uma boa distração vale mais que uma bolsa cheia."
+health = 1
+card_class = 3
+artwork = ExtResource("2")
+field_artwork_focus = Vector2(0.5, 0.3)

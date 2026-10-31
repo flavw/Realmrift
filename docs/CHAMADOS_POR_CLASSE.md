@@ -6,7 +6,7 @@ A coleção agora tem **29 cartas: 23 criaturas e 6 magias**. Chamado continua s
 | --- | --- | ---: | --- | --- |
 | Guerreiro | Ferreiro da Muralha | 3 | 2/3 | Outro aliado ganha +1 Armadura permanente |
 | Mago | Conjuradora do Éter | 4 | 1/3 | Invoca Familiar Rúnico 0/3, Amplificar 1, se houver espaço |
-| Ladina | Alquimista das Brumas | 3 | 2/2 | Aplica Veneno 2 a uma criatura inimiga |
+| Ladino | Alquimista das Brumas | 3 | 2/2 | Aplica Veneno 2 a uma criatura inimiga |
 | Clérigo | Oráculo da Aurora | 3 | 1/3, Vigor | Outro aliado ganha +2 de vida atual e máxima |
 
 Bônus e veneno usam o lado correto do alvo. Sem alvo disponível, a criatura entra sem aplicar o efeito. Cancelar não gasta mana ou carta. A Conjuradora não pede alvo: o Familiar entra esgotado, sua aura já funciona e não ocupa carta da mão/deck. Se a Conjuradora completar o quinto espaço, não há Familiar. Vida concedida preserva o dano anterior e não limpa Veneno. Chamado não ocorre novamente a cada turno.
@@ -43,9 +43,9 @@ As simulações e relatórios anteriores usam versões anteriores de cartas e re
 
 Artes geradas com image_gen integrado. Prompts em `docs/art-prompts/class-calls.md`. Arquivos finais:
 
-- `C:\Users\flavi\Documents\Codex\CronicasDaLua\assets\art\wall_smith.png`
-- `C:\Users\flavi\Documents\Codex\CronicasDaLua\assets\art\aether_summoner.png`
-- `C:\Users\flavi\Documents\Codex\CronicasDaLua\assets\art\mist_alchemist.png`
-- `C:\Users\flavi\Documents\Codex\CronicasDaLua\assets\art\dawn_oracle.png`
+- `C:\Users\flavi\Documents\Codex\Realmrift\assets\art\wall_smith.webp`
+- `C:\Users\flavi\Documents\Codex\Realmrift\assets\art\aether_summoner.webp`
+- `C:\Users\flavi\Documents\Codex\Realmrift\assets\art\mist_alchemist.webp`
+- `C:\Users\flavi\Documents\Codex\Realmrift\assets\art\dawn_oracle.webp`
 
 GitHub não foi atualizado.

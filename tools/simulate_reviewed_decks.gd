@@ -53,7 +53,7 @@ func one_game(cards: Array,reference: Array,number: int,seed_value: int) -> Dict
    if m.winner==-1:turns+=1
   trace.append({"turn":action_turn,"side":side,"action":m.last_action.duplicate(true),"hp":[m.players[0].hp,m.players[1].hp]})
   for p in m.players:
-   assert(p.board.size()<=Match.MAX_BOARD and p.hand.size()<=8 and p.mana>=0)
+   assert(p.board.size()<=Match.MAX_BOARD and p.hand.size()<=Match.MAX_HAND_SIZE and p.mana>=0)
    for u in p.board:assert(u.health>0)
  assert(m.winner!=-1,"A partida deve terminar pelas regras, sem vitória artificial")
  return {"game":number,"seed":seed_value,"starter":starter,"winner":m.winner,"turns":turns,"actions":actions,"hp":[m.players[0].hp,m.players[1].hp],"fatigue":[m.players[0].fatigue,m.players[1].fatigue],"initial_hands":initial,"mulligans":exchanges,"played":played,"trace":trace}

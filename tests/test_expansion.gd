@@ -10,7 +10,7 @@ func creature(key: String, id: int) -> Dictionary:
 func _init() -> void:
  var m = Match.new()
  m.players[0].mana = 10
- m.players[0].hand = ["rogue", "raven"]
+ m.players[0].hand = ["lightning_rogue", "raven"]
  m.players[1].board = [creature("squire", 50)]
  assert(m.play(0, 0))
  assert(m.players[0].board[0].ready, "Arrancada entra pronta")

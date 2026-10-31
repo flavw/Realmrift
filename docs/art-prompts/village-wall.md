@@ -1,5 +1,5 @@
 # Muralha da Aldeia
 
-Arte gerada com image_gen integrado. Destino: `assets/art/village_wall.png`.
+Arte gerada com image_gen integrado. Destino: `assets/art/village_wall.webp`.
 
 Production creature card illustration for fantasy card game Crônicas da Lua. Vertical portrait 3:4 detailed painterly realistic fantasy. An imposing defensive medieval village stone wall, thick weathered grey limestone, reinforced timber gate closed, crenellations and square watchtower, iron braces and warm amber lanterns, cool blue moonlight and a starry night sky. The wall itself is the subject and the card creature, no humanoid central character, no monstrous face, no attackers, no weapons shooting. Low-angle view of sturdy masonry and ivy, a quiet cobbled street foreground, noble feeling of protection, same warm lantern/cool moonlit rural village palette as the peasant leader and reconstruction spell. Strong readable silhouette, relatively quiet top 12 percent and bottom 20 percent for editable game interface. Art only, no text, no numbers, no icons, no borders, no UI, no watermark or logos.

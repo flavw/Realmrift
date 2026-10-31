@@ -33,7 +33,7 @@ func verify() -> void:
  m=fixture(false)
  assert(m.cast(0,0,0,-1) and m.players[0].hand==["wolf"] and m.players[0].hp==17)
  # Only the current allied battlefield controls the conditional draw.
- for key in ["wolf","warrior","mage","cleric","rogue"]:
+ for key in ["wolf","warrior","mage","cleric","lightning_rogue"]:
   m=fixture(false);m.spawn_unit(0,key)
   var draws: bool=key=="wolf"
   assert(m.cast(0,0,0,-1) and m.players[0].hp==17 and m.players[0].mana==8)
@@ -51,8 +51,8 @@ func verify() -> void:
  m=fixture();m.players[0].deck=[];m.players[0].hp=1;m.players[0].fatigue=3
  assert(m.cast(0,0,0,-1) and m.players[0].hp==-1 and m.winner==1)
  # Consuming the spell frees a hand slot before the draw; no accidental overdraw.
- m=fixture();m.players[0].hand=[KEY,"wolf","wolf","squire","squire","farmer","farmer","moon_herald"]
- assert(m.cast(0,0,0,-1) and m.players[0].hand.size()==8 and m.players[0].hand.count("wolf")==3)
+ m=fixture();m.players[0].hand=[KEY,"wolf","wolf","squire","squire","farmer","farmer"]
+ assert(m.cast(0,0,0,-1) and m.players[0].hand.size()==7 and m.players[0].hand.count("wolf")==3)
  # A full battlefield is irrelevant to a castle spell.
  m=fixture()
  for i in range(5):m.spawn_unit(0,"squire")

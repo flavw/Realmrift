@@ -1,10 +1,11 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 [ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/harvest_ox.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/harvest_ox.webp" id="2"]
 [resource]
 script=ExtResource("1")
 creature_type=1
 title="Boi da Colheita"
+lore = "Quanto maior a colheita, maior o entusiasmo. E o boi."
 cost=3
 attack=2
 health=3

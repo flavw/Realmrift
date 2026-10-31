@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://5sbrba6hq02b"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dhuay0vqbhd36" path="res://assets/art/venom_rooftop.webp" id="2"]
+
+[resource]
+script = ExtResource("1")
+legendary = true
+entry_value = 1
+entry_secondary = null
+entry_effect = 8
+title = "O Sombra"
+lore = "De todas as sombras da cidade, apenas uma escolhe onde cair."
+cost = 5
+attack = 3
+health = 3
+card_class = 3
+flying = true
+artwork = ExtResource("2")
+field_artwork_focus = Vector2(0.5, 0.3)

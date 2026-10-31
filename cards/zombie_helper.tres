@@ -1,14 +1,16 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 [ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/zombie_helper.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/zombie_helper_dread.webp" id="2"]
 [resource]
 script=ExtResource("1")
 title="Zumbi Serviçal"
+lore = "Sempre disposto a ajudar. Às vezes é preciso devolver-lhe o braço."
 cost=2
-attack=1
-health=3
+attack=2
+health=1
 card_class=2
 creature_type=4
-entry_effect=2
-entry_value=1
+entry_effect=7
+entry_attack=1
+entry_health=1
 artwork=ExtResource("2")

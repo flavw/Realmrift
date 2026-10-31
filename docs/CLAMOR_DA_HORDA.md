@@ -13,4 +13,4 @@ A facção antes chamada Monstros passa a se chamar **Horda**. Seu ID numérico 
 
 A receita Horda das Brumas da IA recebe duas cópias no lugar dos Bois da Colheita. Decks salvos do jogador são preservados. Há 46 cartas colecionáveis (37 criaturas e 9 magias), mais o Carniçal invocado, totalizando 47 recursos na galeria.
 
-Validação: `tests/test_horde_roar.gd`, tipos/composição, Necromancia e magias. Arte em `assets/art/horde_roar.png`, criada com imagegen; prompt em `art-prompts/horde-roar.md`.
+Validação: `tests/test_horde_roar.gd`, tipos/composição, Necromancia e magias. Arte em `assets/art/horde_roar.webp`, criada com imagegen; prompt em `art-prompts/horde-roar.md`.

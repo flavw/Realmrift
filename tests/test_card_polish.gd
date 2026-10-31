@@ -54,7 +54,8 @@ func verify() -> void:
  assert(Viewer.is_open(main),"Botão direito abre arte")
  var viewer=root.get_meta("card_art_viewer")
  assert(viewer.artwork.texture==Match.CARD_DATA.wolf.artwork)
- assert(viewer.find_children("*","Label",true,false).is_empty(),"Arte sem textos ou UI")
+ assert(viewer.find_child("LoreText",true,false).text==Match.CARD_DATA.wolf.lore,"Arte mostra história da carta")
+ for data in Match.CARD_DATA.values():assert(not data.lore.is_empty(),"Toda carta possui história")
  assert(main.selected==-1,"Botão direito não seleciona para atacar")
  var turn=main.duel.turn
  var enter:=InputEventKey.new()

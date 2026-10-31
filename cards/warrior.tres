@@ -1,18 +1,16 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bhfl2r8rkayi2"]
 
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/warrior.png" id="2"]
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bmkxi1iumt321" path="res://assets/art/warrior.webp" id="2"]
 
 [resource]
-script=ExtResource("1")
-creature_type=0
-title="Guerreira Audaciosa"
-cost=3
-attack=3
-health=1
-armor=2
-card_class=0
-ability_text="Armadura 2"
-artwork=ExtResource("2")
-
-
+script = ExtResource("1")
+title = "Guerreira Audaciosa"
+lore = "Ela avança primeiro. As histórias tentam alcançá-la depois."
+cost = 3
+attack = 4
+health = 1
+armor = 2
+card_class = 0
+ability_text = "Armadura 2"
+artwork = ExtResource("2")

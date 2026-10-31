@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/bloodblade.webp" id="2"]
+[resource]
+script = ExtResource("1")
+title = "Espadachim das Cicatrizes"
+lore = "Ele não conta vitórias. Conta os companheiros que voltaram para casa."
+cost = 3
+attack = 2
+health = 3
+card_class = 0
+creature_type = 0
+bleed = 1
+artwork = ExtResource("2")
+field_artwork_focus = Vector2(0.5,0.25)

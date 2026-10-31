@@ -15,6 +15,6 @@ O custo 4 compensa a proteção inicial e a imunidade com ausência de ataques e
 - Campo de afinidade removido dos recursos neutros, Inspector, coleção e ajuda.
 - Vigor continua calculado no combate, mas não converte vida em ataque no texto da carta completa, campo, galeria ou prévia. Bônus reais de ataque, inclusive Aura, permanecem visíveis.
 
-Recurso: `cards/village_wall.tres`, propriedade editável `wall=true`. Arte: `assets/art/village_wall.png`, gerada com image_gen integrado. [Prompt](art-prompts/village-wall.md).
+Recurso: `cards/village_wall.tres`, propriedade editável `wall=true`. Arte: `assets/art/village_wall.webp`, gerada com image_gen integrado. [Prompt](art-prompts/village-wall.md).
 
 Validação: testes de Muralha, Vigor funcional/visual, Aura, filtros/rolagem, Chamados, cura e magias. Capturas estáticas verificadas no Godot. Coleção: 33 cartas, 26 criaturas e sete magias.

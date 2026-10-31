@@ -1,6 +1,6 @@
 # Fungo da Ninhada e Troll do Brejo
 
-Ferramenta integrada imagegen. Arquivos finais em `assets/art/brood_fungus.png` e `assets/art/marsh_troll.png`.
+Ferramenta integrada imagegen. Arquivos finais em `assets/art/brood_fungus.webp` e `assets/art/marsh_troll.webp`.
 
 ## brood_fungus
 

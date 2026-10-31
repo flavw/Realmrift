@@ -1,6 +1,6 @@
 # Necromante e Carniçal
 
-Gerados com a ferramenta integrada imagegen. Arquivos finais em `assets/art/necromancer_summoner.png` e `assets/art/summoned_ghoul.png`.
+Gerados com a ferramenta integrada imagegen. Arquivos finais em `assets/art/necromancer_summoner.webp` e `assets/art/summoned_ghoul.webp`.
 
 ## necromancer_summoner
 

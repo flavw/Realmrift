@@ -1,13 +1,15 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 [ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/mist_alchemist.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/mist_alchemist.webp" id="2"]
 [resource]
 script=ExtResource("1")
 creature_type=0
 title="Alquimista das Brumas"
+lore = "Se o frasco borbulhar, não respire. Se não borbulhar, também não."
 cost=3
 attack=2
 health=2
+abascanto=1
 card_class=3
 entry_effect=4
 entry_value=2

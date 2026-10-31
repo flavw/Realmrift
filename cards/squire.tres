@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/squire.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/squire.webp" id="2"]
 
 [resource]
 script=ExtResource("1")
 creature_type=0
 title="Escudeiro da Lua"
+lore = "Seu escudo é maior que ele. Sua determinação também."
 cost=1
 attack=1
 health=2

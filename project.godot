@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Crônicas da Lua — Duelo de Cartas"
+config/name="Realmrift"
 run/main_scene="res://start_menu.tscn"
 config/features=PackedStringArray("4.7")
 

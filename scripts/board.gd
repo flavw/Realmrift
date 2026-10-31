@@ -1,11 +1,21 @@
 extends Control
 var background: Texture2D
+var background_index: int=-1
+const BACKGROUNDS=["res://assets/ui/arena-background.webp","res://assets/ui/arena-stone.webp","res://assets/ui/arena-forest.webp"]
+var random:=RandomNumberGenerator.new()
 
 func _ready() -> void:
  mouse_filter = Control.MOUSE_FILTER_IGNORE
  resized.connect(queue_redraw)
- if ResourceLoader.exists("res://assets/ui/arena-background.png"):
-  background = load("res://assets/ui/arena-background.png")
+ random.randomize()
+ choose_random_background()
+
+func choose_random_background() -> void:
+ var next: int=random.randi_range(0,BACKGROUNDS.size()-1)
+ if BACKGROUNDS.size()>1 and next==background_index:next=(next+random.randi_range(1,BACKGROUNDS.size()-1))%BACKGROUNDS.size()
+ background_index=next
+ background=load(BACKGROUNDS[background_index])
+ queue_redraw()
 
 func _draw() -> void:
  draw_rect(Rect2(Vector2.ZERO, size), Color("101c2b"))
@@ -15,8 +25,6 @@ func _draw() -> void:
   var rendered := texture_size * factor
   draw_texture_rect(background, Rect2((size - rendered) * 0.5, rendered), false)
   draw_rect(Rect2(Vector2.ZERO, size), Color(0.015, 0.025, 0.055, 0.42))
- var border := Rect2(Vector2(14, 14), size - Vector2(28, 28))
- draw_style_box(frame(), border)
  # Stone tiles, kept subtle so the cards remain readable.
  for y in range(0, int(size.y), 140):
   var offset := 35 if (y / 70) % 2 else 0
@@ -28,11 +36,3 @@ func _draw() -> void:
  draw_line(Vector2(size.x * 0.12, center.y), Vector2(size.x * 0.34, center.y), Color(0.7, 0.58, 0.33, 0.22), 1)
  draw_line(Vector2(size.x * 0.66, center.y), Vector2(size.x * 0.88, center.y), Color(0.7, 0.58, 0.33, 0.22), 1)
 
-func frame() -> StyleBoxFlat:
- var style := StyleBoxFlat.new()
- style.bg_color = Color("0c1623")
- style.bg_color.a = 0.15
- style.set_border_width_all(2)
- style.border_color = Color("82673c")
- style.set_corner_radius_all(20)
- return style

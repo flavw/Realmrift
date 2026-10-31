@@ -12,7 +12,7 @@ func summon_necro(m,side: int=0) -> void:
  assert(m.play(side,0))
 func verify() -> void:
  var necro: CardData=Match.CARD_DATA.necromancer_summoner
- assert(necro.is_human() and necro.horde_deck_allowed and necro.card_class==5)
+ assert(necro.is_human() and necro.human_and_monster and necro.card_class==5)
  assert(Match.CARD_DATA.zombie_helper.creature_type==CardData.CreatureType.UNDEAD)
  assert(Match.CARD_DATA.summoned_ghoul.creature_type==CardData.CreatureType.UNDEAD)
  assert(not Match.CARD_DATA.summoned_ghoul.collectible)

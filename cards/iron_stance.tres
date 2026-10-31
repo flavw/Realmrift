@@ -1,15 +1,16 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 [ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/iron_stance.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/iron_stance.webp" id="2"]
 [resource]
 script=ExtResource("1")
 title="Postura de Ferro"
+lore = "Pés firmes, escudo erguido. O resto é insistência."
 cost=2
 card_class=0
 card_type=1
 spell_effect=1
 spell_value=1
-spell_secondary=2
+spell_secondary=1
 attack=0
 health=0
 artwork=ExtResource("2")

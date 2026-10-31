@@ -24,6 +24,14 @@ func _ready() -> void:
  layout_card()
  if not Engine.is_editor_hint():
   var icon: Control = $Canvas/Exhausted
+  icon.pivot_offset=icon.size*0.5
+  if get_meta("attacked_this_turn",false):
+   var pulse:=create_tween().set_loops().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+   pulse.tween_property(icon,"rotation",0.12,0.7)
+   pulse.parallel().tween_property(icon,"modulate:a",0.6,0.7)
+   pulse.tween_property(icon,"rotation",-0.12,0.7)
+   pulse.parallel().tween_property(icon,"modulate:a",1.0,0.7)
+   return
   var base := icon.position
   var bob := create_tween().set_loops().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
   bob.tween_property(icon, "position", base - Vector2(0, 6), 0.65)
@@ -41,7 +49,16 @@ func refresh() -> void:
   return
  # Keep the upper illustration (face) when cropping the portrait to a square.
  var art = card_data.artwork
- if art is AtlasTexture:
+ if art and not art is AtlasTexture and card_data.field_artwork_focus!=Vector2(0.5,0.5):
+  var focused:=AtlasTexture.new()
+  focused.atlas=art
+  var dimensions:Vector2=art.get_size()
+  var crop_size:Vector2=Vector2(dimensions.x,minf(dimensions.y,dimensions.x))
+  var origin:Vector2=(dimensions*card_data.field_artwork_focus-crop_size*0.5).clamp(Vector2.ZERO,dimensions-crop_size)
+  focused.region=Rect2(origin,crop_size)
+  focused.filter_clip=true
+  art=focused
+ if art is AtlasTexture and card_data.field_artwork_focus==Vector2(0.5,0.5):
   var crop := AtlasTexture.new()
   crop.atlas = art.atlas
   crop.region = art.region
@@ -59,13 +76,18 @@ func refresh() -> void:
  $Canvas/Stats.set_values(attack,health,card_data.attack,card_data.health,int(get_meta("max_health",card_data.health)))
  var style := StyleBoxFlat.new()
  style.bg_color = Color("101822")
- style.set_border_width_all(2)
- style.border_color = CardSkin.class_color(card_data.card_class).lightened(0.3) if selected else CardSkin.class_color(card_data.card_class)
+ var selection_kind: String=get_meta("selection_kind","")
+ style.set_border_width_all(5 if selection_kind!="" else 2)
+ style.border_color = Color("ffd36a") if selection_kind=="selected" else Color("72ead6") if selection_kind=="target" else CardSkin.class_color(card_data.card_class)
+ if selection_kind!="":
+  style.shadow_color=Color(1.0,0.72,0.18,0.65) if selection_kind=="selected" else Color(0.3,0.95,0.8,0.48)
+  style.shadow_size=9
  style.set_corner_radius_all(10)
  $Canvas/Frame.add_theme_stylebox_override("panel", style)
  $Canvas/Artwork.modulate = Color(0.5, 0.5, 0.6) if exhausted else Color.WHITE
- $Canvas/Exhausted.texture = CardSkin.texture("exhausted-zzz")
- $Canvas/Exhausted.visible = exhausted
+ $Canvas/Exhausted.texture = CardSkin.texture("attack-spent-icon" if get_meta("attacked_this_turn",false) else "tap-icon" if get_meta("exhausting_action_taken",false) else "exhausted-zzz")
+ var waiting: bool=get_meta("summoned_this_turn",false) and not get_meta("attacked_this_turn",false) and not get_meta("exhausting_action_taken",false)
+ $Canvas/Exhausted.visible = exhausted and (waiting or selection_kind=="selected")
  refresh_ability_icons(attack,health)
 
 func refresh_ability_icons(attack: int, health: int) -> void:
@@ -76,6 +98,10 @@ func refresh_ability_icons(attack: int, health: int) -> void:
  var context: Dictionary=get_meta("ability_context",{})
  var block_value: int=int(get_meta("block",-1))
  var entries:=card_data.ability_entries(block_value,int(context.get("magic_bonus",0)),int(get_meta("armor",card_data.armor)),bool(get_meta("vigor",false)),int(get_meta("poison",0)),int(context.get("aura_attack",0)),int(get_meta("abascanto",card_data.abascanto)))
+ if context.get("turn_flying",false) and not card_data.flying:
+  entries.append({"name":"Voo temporário","badge":"Flying","icon":"flying-icon","description":"Ignora Bloqueio até o fim do turno."})
+ if int(context.get("bleeding",0))>0:
+  entries.append({"name":"Sangramento %d" % int(context.bleeding),"badge":"Bleeding","icon":"bleed-icon","value":int(context.bleeding),"description":"Após agir, perde vida igual ao Sangramento. Termina ao fim do turno do dono ou com Cura."})
  entries=entries.filter(func(e):return e.has("badge") and e.badge not in ["Entry","Swift","AuraBonus"])
  for entry in entries:
   var badge:=HBoxContainer.new()
@@ -99,6 +125,8 @@ func refresh_ability_icons(attack: int, health: int) -> void:
   number.mouse_filter=Control.MOUSE_FILTER_IGNORE
   number.add_theme_font_size_override("font_size",14)
   number.add_theme_color_override("font_color",Color("fff4da"))
+  if entry.badge=="Arcane" and int(context.get("magic_bonus",0))>0:
+   number.add_theme_color_override("font_color",Color("62efa3"))
   number.add_theme_color_override("font_outline_color",Color("060b13"))
   number.add_theme_constant_override("outline_size",3)
   badge.add_child(number)
@@ -109,7 +137,9 @@ func refresh_ability_icons(attack: int, health: int) -> void:
    var enough_mana: bool=int(context.get("mana",entry.cost))>=int(entry.cost)
    inactive=not enough_mana or (entry.get("tap",false) and exhausted)
    if entry.badge=="Heal" and context.has("heal_target"):inactive=inactive or not context.heal_target
+   if entry.badge=="QuickHeal":inactive=inactive or bool(context.get("quick_heal_used",false)) or not bool(context.get("quick_heal_target",true))
    if entry.badge=="Arcane" and context.has("magic_target"):inactive=inactive or not context.magic_target
+   if entry.badge=="Fury":inactive=inactive or bool(context.get("fury_used",false))
   badge.modulate.a=0.45 if inactive else 1.0
   badge.set_meta("ability_name",entry.name)
   badge.set_meta("description",entry.description)
@@ -120,7 +150,7 @@ func refresh_ability_icons(attack: int, health: int) -> void:
 func _gui_input(event: InputEvent) -> void:
  if event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_RIGHT and card_data:
   accept_event()
-  ArtViewer.open(self,card_data.artwork)
+  ArtViewer.open(self,card_data)
   return
  if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
   accept_event()

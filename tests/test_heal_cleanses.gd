@@ -9,17 +9,17 @@ func fixture():
 func verify() -> void:
  var data: CardData=Match.CARD_DATA.dawn_devotee
  assert(data.attack==1 and data.health==4 and data.heal_amount==1 and data.heal_cost==0 and data.cost==3)
- assert(Match.CARD_DATA.cleric.heal_cost==1 and Match.CARD_DATA.dawn_warden.heal_cost==1)
+ assert(Match.CARD_DATA.cleric.heal_cost==1 and Match.CARD_DATA.dawn_warden.heal_amount==0)
  var m=fixture();var dev=m.spawn_unit(0,"dawn_devotee");var target=m.spawn_unit(0,"farmer")
  var enemy=m.spawn_unit(1,"dawn_devotee");dev.ready=true;target.health=2;target.poison=3;m.players[0].mana=0
  assert(m.heal(0,0,1) and target.health==3 and target.poison==0 and not dev.ready and m.players[0].mana==0)
  assert(not m.can_heal(0,0,1),"Cura gratuita ainda esgota")
- assert(dev.attack==2 and dev.health==5 and enemy.attack==2 and enemy.health==5)
+ assert(dev.attack==2 and dev.health==5 and enemy.attack==1 and enemy.health==4)
  assert(m.last_action.healed[0].cleansed==3 and m.last_action.healed[0].amount==1)
  # Full health cleansing is legal, spends resources, but does not grant Devoção.
  dev.ready=true;target.poison=4
  assert(m.can_heal(0,0,1) and m.heal(0,0,1) and target.poison==0 and target.health==3 and m.players[0].mana==0)
- assert(dev.attack==2 and enemy.attack==2 and not m.last_action.has("devotion_buffs"))
+ assert(dev.attack==2 and enemy.attack==1 and not m.last_action.has("devotion_buffs"))
  assert(m.last_action.healed[0].amount==0 and m.last_action.healed[0].cleansed==4)
  # Healing magic and AI also cleanse a full-health target.
  m=fixture();target=m.spawn_unit(0,"farmer");target.poison=2;m.players[0].hand=["restoring_light"]

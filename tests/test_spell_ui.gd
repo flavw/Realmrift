@@ -32,7 +32,7 @@ func verify() -> void:
  root.add_child(art)
  assert(not art.get_node("CardCanvas/Stats").visible and art.get_node("CardCanvas/TypeLabel").visible)
  assert(load("res://scripts/card_skin.gd").texture("tap-icon").resource_path.ends_with(".svg"))
- assert(load("res://scripts/card_skin.gd").texture("mana-cost-symbol").atlas.resource_path.ends_with("mana-cost-symbol.png"))
+ assert(load("res://scripts/card_skin.gd").texture("mana-cost-symbol").atlas.resource_path.ends_with("mana-cost-symbol.webp"))
  main.duel.players[0].hand=["restoring_light"]
  main.duel.players[0].hp=17
  main.redraw()

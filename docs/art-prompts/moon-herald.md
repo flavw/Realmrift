@@ -1,5 +1,5 @@
 # Arauto da Lua
 
-Gerado com image_gen integrado. Destino: `assets/art/moon_herald.png`. Palavra-chave genérica Chamado; todos os textos permanecem editáveis no Godot.
+Gerado com image_gen integrado. Destino: `assets/art/moon_herald.webp`. Palavra-chave genérica Chamado; todos os textos permanecem editáveis no Godot.
 
 Use case: stylized-concept. Asset: portrait creature illustration for the fantasy card game Crônicas da Lua. A neutral Moon Herald, a young adult traveling herald in practical silver-grey and muted brown medieval clothing and light leather armor, lifting a small brass horn to rally a companion in a distant background, moonlit medieval town courtyard, warm amber lanterns and cool blue moonlight, elegant painterly realistic fantasy matching a collectible fantasy card illustration. A confident welcoming expression, clearly readable central face and horn, mid-body composition. Portrait 3:4. Keep the upper 12 percent relatively quiet for an editable title and leave the lower quarter uncluttered for rules overlays. No letters, numbers, symbols, borders, card UI, embedded typography, watermarks or logos. Illustration only, opaque background.

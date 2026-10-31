@@ -45,6 +45,8 @@ func verify() -> void:
  main.duel.players[1].board=[victim];main.duel.players[0].hand=["mist_alchemist"];main.duel.players[0].mana=5
  main.redraw();main.play(0);main.summon_target(1,0)
  await process_frame;await process_frame;await process_frame
+ assert(main.vfx_layer.find_child("PoisonBottle",true,false)!=null)
+ await create_timer(0.5).timeout
  assert(victim.poison==2 and main.sound_counts.get("poison_apply",0)==1)
  assert(main.vfx_layer.find_child("StatusEffect_poison_apply",true,false)!=null)
  await create_timer(0.55).timeout

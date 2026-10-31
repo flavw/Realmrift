@@ -2,50 +2,50 @@
 
 Geradas com imagegen. Ilustrações sem interface; texto e ícones são renderizados pelo Godot.
 
-## Guardião da Muralha — assets/art/wall_guard.png
+## Guardião da Muralha — assets/art/wall_guard.webp
 
 Use case: stylized-concept. Production portrait illustration for the fantasy card game Crônicas da Lua. Adult male knight in worn dark steel plate with a red cloth accent, standing firm at a moonlit fortified village gate, large practical steel shield raised defensively, imposing but grounded, face clearly visible in upper third. Detailed painterly realistic fantasy, moody blue moonlight and restrained amber torchlight, rich but coherent colors, readable silhouette. Portrait 3:4 composition, subject comfortably within frame, top 12 percent quiet background for editable name, lower quarter quiet for editable rules. Entire image is illustration only: no borders, no UI, no banners, no cost orb, no icons, no letters, no numbers, no typography. Match a moonlit medieval fantasy village card collection.
 
-## Vigia do Portão — assets/art/gate_watcher.png
+## Vigia do Portão — assets/art/gate_watcher.webp
 
 Use case: stylized-concept. Production portrait illustration for the fantasy card game Crônicas da Lua. Adult village militia watchwoman in simple chainmail and grey wool cloak, spear grounded and modest wooden buckler, alert at torchlit village gate, neutral grey accents, face clearly visible upper third, not a grand knight. Detailed painterly realistic fantasy, moody blue moonlight and restrained amber torchlight, rich but coherent colors, readable silhouette. Portrait 3:4 composition, subject comfortably within frame, top 12 percent quiet background for editable name, lower quarter quiet for editable rules. Entire image is illustration only: no borders, no UI, no banners, no cost orb, no icons, no letters, no numbers, no typography. Match a moonlit medieval fantasy village card collection.
 
-## Canalista do Eclipse — assets/art/eclipse_channeler.png
+## Canalista do Eclipse — assets/art/eclipse_channeler.webp
 
 Use case: stylized-concept. Production portrait illustration for the fantasy card game Crônicas da Lua. Adult female scholar mage in dark indigo and muted amethyst robes, holding two small violet spell stars between open hands, elegant arcane focus, moonlit medieval alley, face upper third fully visible, no oversized hat. Detailed painterly realistic fantasy, moody blue moonlight and restrained amber torchlight, rich but coherent colors, readable silhouette. Portrait 3:4 composition, subject comfortably within frame, top 12 percent quiet background for editable name, lower quarter quiet for editable rules. Entire image is illustration only: no borders, no UI, no banners, no cost orb, no icons, no letters, no numbers, no typography. Match a moonlit medieval fantasy village card collection.
 
-## Familiar Rúnico — assets/art/runic_familiar.png
+## Familiar Rúnico — assets/art/runic_familiar.webp
 
 Use case: stylized-concept. Production portrait illustration for the fantasy card game Crônicas da Lua. Small mystical silver-grey fox with luminous blue runes subtly marked in its fur, hovering small blue crystal near its nose, sitting on ancient stone in moonlit medieval alley, charming intelligent animal with clearly defined silhouette, full body centered. Detailed painterly realistic fantasy, moody blue moonlight and restrained amber torchlight, rich but coherent colors, readable silhouette. Portrait 3:4 composition, subject comfortably within frame, top 12 percent quiet background for editable name, lower quarter quiet for editable rules. Entire image is illustration only: no borders, no UI, no banners, no cost orb, no icons, no letters, no numbers, no typography. Match a moonlit medieval fantasy village card collection.
 
-## Batedora do Crepúsculo — assets/art/dusk_scout.png
+## Batedora do Crepúsculo — assets/art/dusk_scout.webp
 
 Use case: stylized-concept. Production portrait illustration for the fantasy card game Crônicas da Lua. Adult agile female rogue with short dark hair, green sash and light dark leather armor, leaping from low village rooftop towards viewer with a short blade, moonlit medieval city, dynamic readable pose, face upper third fully visible. Detailed painterly realistic fantasy, moody blue moonlight and restrained amber torchlight, rich but coherent colors, readable silhouette. Portrait 3:4 composition, subject comfortably within frame, top 12 percent quiet background for editable name, lower quarter quiet for editable rules. Entire image is illustration only: no borders, no UI, no banners, no cost orb, no icons, no letters, no numbers, no typography. Match a moonlit medieval fantasy village card collection.
 
-## Falcão Mensageiro — assets/art/messenger_hawk.png
+## Falcão Mensageiro — assets/art/messenger_hawk.webp
 
 Use case: stylized-concept. Production portrait illustration for the fantasy card game Crônicas da Lua. Majestic natural dark-grey hawk flying low above moonlit medieval rooftops with small leather messenger pouch, wings outstretched readable entire silhouette, warm torchlit windows, silver feathers and subtle green reflection, neutral animal. Detailed painterly realistic fantasy, moody blue moonlight and restrained amber torchlight, rich but coherent colors, readable silhouette. Portrait 3:4 composition, subject comfortably within frame, top 12 percent quiet background for editable name, lower quarter quiet for editable rules. Entire image is illustration only: no borders, no UI, no banners, no cost orb, no icons, no letters, no numbers, no typography. Match a moonlit medieval fantasy village card collection.
 
-## Guardião da Aurora — assets/art/dawn_warden.png
+## Guardião da Aurora — assets/art/dawn_warden.webp
 
 Use case: stylized-concept. Production portrait illustration for the fantasy card game Crônicas da Lua. Adult male cleric protector in cream and muted gold vestments over practical armor, a small warm healing light cradled in palm, standing in moonlit stone courtyard with dawn faintly on horizon, compassionate but resolute, face upper third fully visible. Detailed painterly realistic fantasy, moody blue moonlight and restrained amber torchlight, rich but coherent colors, readable silhouette. Portrait 3:4 composition, subject comfortably within frame, top 12 percent quiet background for editable name, lower quarter quiet for editable rules. Entire image is illustration only: no borders, no UI, no banners, no cost orb, no icons, no letters, no numbers, no typography. Match a moonlit medieval fantasy village card collection.
 
-## Peregrina da Vida — assets/art/life_pilgrim.png
+## Peregrina da Vida — assets/art/life_pilgrim.webp
 
 Use case: stylized-concept. Production portrait illustration for the fantasy card game Crônicas da Lua. Adult wandering herbalist woman in simple grey and earth-toned travelling clothes, carrying modest basket of medicinal leaves and carved walking staff with a tiny green sprout, moonlit village garden, warm hopeful gentle light, face upper third fully visible. Detailed painterly realistic fantasy, moody blue moonlight and restrained amber torchlight, rich but coherent colors, readable silhouette. Portrait 3:4 composition, subject comfortably within frame, top 12 percent quiet background for editable name, lower quarter quiet for editable rules. Entire image is illustration only: no borders, no UI, no banners, no cost orb, no icons, no letters, no numbers, no typography. Match a moonlit medieval fantasy village card collection.
 
-## Postura de Ferro — assets/art/iron_stance.png
+## Postura de Ferro — assets/art/iron_stance.webp
 
 Use case: stylized-concept. Production portrait illustration for the fantasy card game Crônicas da Lua. SPELL illustration, close view of a medieval defender's gauntleted arm bracing a broad steel shield as warm gold protective force ripples across the metal, red cloth accent, moonlit fortress in soft background, dramatic magical event not a portrait, steel and ember sparks. Detailed painterly realistic fantasy, moody blue moonlight and restrained amber torchlight, rich but coherent colors, readable silhouette. Portrait 3:4 composition, subject comfortably within frame, top 12 percent quiet background for editable name, lower quarter quiet for editable rules. Entire image is illustration only: no borders, no UI, no banners, no cost orb, no icons, no letters, no numbers, no typography. Match a moonlit medieval fantasy village card collection.
 
-## Chama Astral — assets/art/astral_flame.png
+## Chama Astral — assets/art/astral_flame.webp
 
 Use case: stylized-concept. Production portrait illustration for the fantasy card game Crônicas da Lua. SPELL illustration, concentrated blue-violet arcane starfire bursting against ancient stone in moonlit medieval alley, luminous spiralling small astral stars and magical shockwave, no person as main subject, clean strong central action and deep dark blues. Detailed painterly realistic fantasy, moody blue moonlight and restrained amber torchlight, rich but coherent colors, readable silhouette. Portrait 3:4 composition, subject comfortably within frame, top 12 percent quiet background for editable name, lower quarter quiet for editable rules. Entire image is illustration only: no borders, no UI, no banners, no cost orb, no icons, no letters, no numbers, no typography. Match a moonlit medieval fantasy village card collection.
 
-## Passo das Sombras — assets/art/shadow_step.png
+## Passo das Sombras — assets/art/shadow_step.webp
 
 Use case: stylized-concept. Production portrait illustration for the fantasy card game Crônicas da Lua. SPELL illustration, emerald and silver trail of a rogue vanishing between two pools of shadow in moonlit medieval street, a faint translucent adult rogue silhouette stepping forward and a single dagger glint, elegant evasive energy, not a character portrait. Detailed painterly realistic fantasy, moody blue moonlight and restrained amber torchlight, rich but coherent colors, readable silhouette. Portrait 3:4 composition, subject comfortably within frame, top 12 percent quiet background for editable name, lower quarter quiet for editable rules. Entire image is illustration only: no borders, no UI, no banners, no cost orb, no icons, no letters, no numbers, no typography. Match a moonlit medieval fantasy village card collection.
 
-## Luz Restauradora — assets/art/restoring_light.png
+## Luz Restauradora — assets/art/restoring_light.webp
 
 Use case: stylized-concept. Production portrait illustration for the fantasy card game Crônicas da Lua. SPELL illustration, warm pearl-gold healing light falling from a small luminous sacred sigil onto an injured outstretched hand, delicate motes floating through moonlit stone chapel courtyard, soothing cream and gold accents, no text or religious lettering, event-focused composition. Detailed painterly realistic fantasy, moody blue moonlight and restrained amber torchlight, rich but coherent colors, readable silhouette. Portrait 3:4 composition, subject comfortably within frame, top 12 percent quiet background for editable name, lower quarter quiet for editable rules. Entire image is illustration only: no borders, no UI, no banners, no cost orb, no icons, no letters, no numbers, no typography. Match a moonlit medieval fantasy village card collection.

@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/dawn_warden.png" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://88hs18iamvma"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bihf6jq5xnm0q" path="res://assets/art/dawn_warden.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-creature_type=0
-title="Guardião da Aurora"
-cost=4
-attack=2
-health=5
-card_class=4
-heal_amount=2
-heal_cost=1
-artwork=ExtResource("2")
-vigor=true
+script = ExtResource("1")
+vigor = true
+title = "Guardião da Aurora"
+lore = "Sua luz não afasta apenas as sombras, mas também o medo."
+cost = 4
+attack = 2
+health = 5
+card_class = 4
+block = 3
+artwork = ExtResource("2")

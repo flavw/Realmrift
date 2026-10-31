@@ -1,0 +1,5 @@
+# Recruta de Ferro
+
+Arte gerada pela ferramenta integrada image_gen. Arquivo final: assets/art/iron_recruit.webp (WebP, qualidade 75).
+
+Prompt: Create a polished vertical fantasy collectible card illustration, portrait aspect 3:4, full bleed artwork only WITHOUT text, borders, symbols or UI. A young adult female human warrior recruit, age 19, earnest determined expression, short chestnut hair, wearing practical fully covering steel breastplate over quilted red tunic, leather gloves, holding a modest training sword lowered and a scratched small metal shield. Medieval castle training yard in morning light, rich painted realistic fantasy illustration, believable anatomy, detailed metal armor, warm highlights and deep cool shadows, cinematic composition. Face fully visible near upper center at about 30 percent of image height so a square center crop preserves her face. Three quarter body composition, confident grounded stance. No helmet covering face, no sexualization, no gore. Character is a novice, not an ornate legendary champion.

@@ -2,6 +2,7 @@ extends Control
 
 signal replay_requested
 signal deck_requested
+signal menu_requested
 signal dismissed
 const UiTheme = preload("res://scripts/ui_theme.gd")
 const CardSkin = preload("res://scripts/card_skin.gd")
@@ -86,7 +87,7 @@ func _ready() -> void:
  replay.name = "ReplayButton"
  UiTheme.primary(replay)
  buttons.add_child(replay)
- buttons.add_child(action("Editar decks", func(): deck_requested.emit()))
+ buttons.add_child(action("Menu inicial", func(): menu_requested.emit()))
  var view := action("Ver tabuleiro", func(): dismissed.emit())
  view.add_theme_font_size_override("font_size", 15)
  view.custom_minimum_size.y = 34

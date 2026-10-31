@@ -23,7 +23,7 @@ func _init() -> void:
  assert(not m.play(0,0),"Magia não entra no campo como criatura")
  assert(not m.cast(0,0,1,-1) and m.players[0].mana==10 and m.players[0].hand.size()==1)
  assert(m.cast(0,0,0,0))
- assert(m.players[0].board[0].attack==4 and m.players[0].board[0].armor==4)
+ assert(m.players[0].board[0].attack==4 and m.players[0].board[0].armor==3 and m.players[0].board[0].block==1 and m.block_capacity(m.players[0].board[0])==1)
  assert(not m.players[0].board[0].ready and m.players[0].mana==8 and m.players[0].hand.is_empty())
  m=fixture()
  m.players[0].board=[unit("runic_familiar",11)]
@@ -49,7 +49,7 @@ func _init() -> void:
  assert(m.act(0,0,0,true) and tank.health==1)
  assert(Match.CARD_DATA.mage.ability_entries(-1,1)[0].name=="Disparo Arcano 2")
  m=fixture()
- m.players[0].board=[unit("rogue",16,false)]
+ m.players[0].board=[unit("lightning_rogue",16,false)]
  m.players[0].hand=["shadow_step"]
  assert(m.cast(0,0,0,0))
  assert(m.players[0].board[0].ready and m.players[0].board[0].attack==4)
@@ -86,7 +86,7 @@ func _init() -> void:
  m.turn=1
  m.players[1].mana=2
  m.players[1].hand=["shadow_step"]
- m.players[1].board=[unit("rogue",42,false)]
+ m.players[1].board=[unit("lightning_rogue",42,false)]
  assert(m.ai_step() and m.players[1].board[0].ready)
  assert(m.ai_step() and m.players[0].hp==16)
  print("OK: 47 recursos, magias, alvos, custos, aura, buffs, preparo, cura, campo cheio e IA.")

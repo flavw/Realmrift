@@ -23,7 +23,7 @@ func verify() -> void:
   if i<5:
    var symbol=tile.find_child("DeckClassSymbol",true,false)
    assert(symbol!=null and symbol.texture!=null)
-   assert(symbol.tooltip_text==["Guerreiro","Ladina","Mago","Clérigo","Neutro"][i])
+   assert(symbol.tooltip_text==["Guerreiro","Ladino","Mago","Clérigo","Neutro"][i])
   else:assert(tile.find_child("DeckClassSymbol",true,false)==null,"Vazio não é confundido com arquétipo neutro")
  for label in editor.find_children("*","Label",true,false):assert("+ neutros" not in label.text)
  var art=grid.get_child(4).find_child("DeckCoverArtwork",true,false)

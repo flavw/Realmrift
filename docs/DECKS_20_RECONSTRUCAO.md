@@ -11,7 +11,7 @@ Todos os decks agora exigem **20 cartas**, com até duas cópias de cada. Contin
 - Resolve primeiro a cura e depois a compra condicional. Uma compra sem cartas causa fadiga normalmente. Não ocupa campo e Amplificar não aumenta os efeitos.
 - Texto resumido: Restaurar 2 / Campo neutro: compre 1. A ajuda usa explicações curtas. Todas as sete magias mostram o custo apenas na gema do topo; habilidades de criaturas mantêm o custo de ativação.
 
-Recurso editável: `cards/village_reconstruction.tres`. Arte: `assets/art/village_reconstruction.png`, gerada com image_gen integrado. [Prompt](art-prompts/village-reconstruction.md).
+Recurso editável: `cards/village_reconstruction.tres`. Arte: `assets/art/village_reconstruction.webp`, gerada com image_gen integrado. [Prompt](art-prompts/village-reconstruction.md).
 
 ## União da Aldeia
 

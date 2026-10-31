@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/gate_watcher.png" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://gigdbm6yl5sw"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dwga1euoss2gf" path="res://assets/art/gate_watcher.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-creature_type=0
-title="Vigia do Portão"
-cost=2
-attack=2
-health=2
-card_class=2
-block=1
-artwork=ExtResource("2")
+script = ExtResource("1")
+title = "Vigia do Portão"
+lore = "Conhece o rosto de cada visitante e o barulho de cada dobradiça."
+cost = 2
+attack = 2
+block = 2
+artwork = ExtResource("2")

@@ -1,6 +1,6 @@
 extends RefCounted
 # Recompute inherited ranks without reapplying buffs, healing damage or refilling charges.
-const NUMERIC=["armor","fury","magic_damage","growth","heal_amount","magic_power","envenom","harvest","commerce","devotion","spores","regeneration"]
+const NUMERIC=["armor","fury","magic_damage","magic_splash","growth","resonance","rural_pride","heal_amount","quick_heal_amount","magic_power","envenom","loot","bleed","harvest","commerce","devotion","spores","regeneration"]
 const FLAGS=["swift","flying","wall"]
 
 static func refresh(m) -> void:
@@ -34,15 +34,15 @@ static func update_unit(m,unit: Dictionary,board: Array) -> void:
  unit.inherited_vigor=sources.any(func(source):return source.get("vigor",false))
  unit.vigor=unit.get("granted_vigor",false) or unit.inherited_vigor
  for field in ["block","abascanto"]:
-  var capacity:=0
+  var capacity: int=int(unit.get("granted_block",0)) if field=="block" else 0
   for source in sources:
    capacity+=m.block_capacity(source) if field=="block" else m.abascanto_capacity(source)
   var old_capacity: int=int(unit.get(field+"_capacity",0))
   unit[field]=clampi(int(unit.get(field,0))+capacity-old_capacity,0,capacity)
   unit[field+"_capacity"]=capacity
- for kind in ["magic","heal"]:
+ for kind in ["magic","heal","quick_heal"]:
   var cost:=999
-  var amount_key: String="magic_damage" if kind=="magic" else "heal_amount"
+  var amount_key: String="magic_damage" if kind=="magic" else kind+"_amount"
   for source in sources:
    if int(source.get(amount_key,0))>0:cost=mini(cost,int(source.get(kind+"_cost",1)))
   unit[kind+"_cost"]=1 if cost==999 else cost
@@ -52,14 +52,14 @@ static func update_unit(m,unit: Dictionary,board: Array) -> void:
    auras.append({"aura_effect":source.aura_effect,"aura_value":source.aura_value,"aura_targets":source.aura_targets,"aura_includes_self":source.aura_includes_self})
  unit.inherited_auras=auras
  unit.inherited_ranks=ranks
- if unit.wall:unit.poison=0
+ if unit.wall:unit.poison=0;unit.bleeding=0
 
 static func display_card(m,unit: Dictionary) -> CardData:
  var base: CardData=m.CARD_DATA[unit.key]
  if not unit.get("collective",false):return base
  var view: CardData=base.duplicate()
  view.attack=int(unit.get("collective_count",1));view.health=view.attack
- for field in NUMERIC+FLAGS+["vigor","magic_cost","heal_cost"]:view.set(field,unit.get(field,view.get(field)))
+ for field in NUMERIC+FLAGS+["vigor","magic_cost","heal_cost","quick_heal_cost"]:view.set(field,unit.get(field,view.get(field)))
  view.block=m.block_capacity(unit);view.abascanto=m.abascanto_capacity(unit)
  view.aura_value=0
  for aura in unit.get("inherited_auras",[]):

@@ -1,0 +1,27 @@
+extends SceneTree
+const Match=preload("res://scripts/match.gd")
+func _initialize() -> void:call_deferred("verify")
+func verify() -> void:
+ for starter in [0,1]:
+  var game=Match.new([],[],starter,true)
+  var second:int=1-starter
+  assert(game.players[starter].hand.size()==3 and game.players[second].hand.size()==4)
+  assert(game.mulligan(starter,[]) and game.opening)
+  assert(game.mulligan(second,[0,1]) and not game.opening)
+  assert(game.players[starter].mana==1 and game.players[second].mana==0)
+  assert(game.end_turn(starter))
+  assert(game.players[second].mana==2 and game.players[second].temporary_mana==1 and game.players[second].max_mana==1)
+  game.spend_mana(game.players[second],1)
+  assert(game.players[second].mana==1 and game.players[second].temporary_mana==0)
+  assert(game.end_turn(second) and game.end_turn(starter))
+  assert(game.players[second].mana==2 and game.players[second].temporary_mana==0)
+ var opening=Match.new([],[],1,true)
+ var view=load("res://scripts/mulligan_view.gd").new()
+ view.configure(opening);root.add_child(view)
+ view.toggle_card(0);view.toggle_card(2)
+ assert(view.selected==[0,2] and view.find_children("MulliganSelected","Label",true,false).size()==2)
+ view.toggle_card(0)
+ assert(view.selected==[2])
+ view.queue_free()
+ print("OK: mulligan único, mana temporária no primeiro turno e seleção visual.")
+ quit()

@@ -1,0 +1,5 @@
+# Saltador dos Telhados
+
+Ferramenta: image_gen integrada. Arte final: assets/art/rooftop_leaper.webp, WebP qualidade 75.
+
+Portrait 3:4 full bleed fantasy trading card illustration with NO text, UI, frame, borders or logos. A young adult male human rogue, age 22, athletic and nimble, short tousled dark hair, confident focused expression, clearly visible face at the upper center around 30 percent height. He is caught mid-leap between tiled rooftops of a dense medieval city, one knee bent and the other leg extended, arms balancing, a short moss green scarf and dark green hooded leather coat billowing behind him. Hood down, leather gloves, light practical equipment, small sheathed dagger. Dramatic believable acrobatic action, strong readable silhouette, rooftops below emphasize height. Warm late afternoon light, distant towers, cinematic depth, painterly realistic high fantasy illustration, detailed materials and anatomy, polished collectible card art. Face and upper body must read well in a compact square crop centered on his face. No literal wings: his agility represents the ability to bypass blockers.

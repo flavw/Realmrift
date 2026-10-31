@@ -1,6 +1,6 @@
 # Classe base e montagem por clique
 
-Ao criar um deck em um espaço novo, escolha Guerreiro, Mago, Ladina, Clérigo ou Neutros. A escolha limita toda a coleção: uma classe mostra apenas suas cartas e neutros; Neutros mostra somente neutros. Filtros e busca nunca revelam cartas incompatíveis.
+Ao criar um deck em um espaço novo, escolha Guerreiro, Mago, Ladino, Clérigo ou Neutros. A escolha limita toda a coleção: uma classe mostra apenas suas cartas e neutros; Neutros mostra somente neutros. Filtros e busca nunca revelam cartas incompatíveis.
 
 - Clique na carta da coleção para adicionar uma cópia. Enter ou Espaço também funciona com a carta focada.
 - Clique na linha da lista à direita para retirar uma cópia.

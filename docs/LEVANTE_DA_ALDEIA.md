@@ -1,16 +1,16 @@
 # Levante da Aldeia
 
-Neutra lendária, custo **4 mana**, ataque/vida impressos **\*/\***. Uma cópia por deck, mantendo o limite de 20 cartas. A galeria, coleção e editor incluem a nova carta; os decks salvos não são modificados automaticamente.
+Neutra lendária, custo **5 mana**, ataque/vida impressos **\*/\***. Uma cópia por deck, mantendo o limite de 20 cartas. A galeria, coleção e editor incluem a nova carta; os decks salvos não são modificados automaticamente.
 
 ## Multidão
 
 Ataque e vida base são o número de criaturas neutras aliadas vivas em campo, incluindo a própria turba. Herda as habilidades das **outros neutros aliados**, mas **não herda Chamados nem habilidades inimigas**. A contagem e a herança são contínuas; uma fonte que sai deixa de contribuir. Bônus permanentes e o dano já sofrido são preservados. Perder um neutro pode reduzir a vida a zero.
 
-Valores numéricos compatíveis somam: Cultivo, Fúria, Armadura, Envenenar, Amplificar, potência de Disparo Arcano e Cura, Colheita, capacidade de Bloqueio e Abascanto. Duas fontes de Cultivo 1 resultam em Cultivo 2. Os custos de ativação seguem o menor custo das fontes da respectiva habilidade; as cartas atuais usam 1 mana. Cura e Disparo continuam esgotando; Fúria não esgota.
+Valores numéricos compatíveis somam: Cultivo, Fúria, Armadura, Envenenar, Amplificar, potência de Disparo Arcano e Cura, Colheita, capacidade de Bloqueio e Guarda Arcana. Duas fontes de Cultivo 1 resultam em Cultivo 2. Os custos de ativação seguem o menor custo das fontes da respectiva habilidade; as cartas atuais usam 1 mana. Cura e Disparo continuam esgotando; Fúria não esgota.
 
 Vigor, Voo, Arrancada e Muralha são propriedades únicas. Muralha inclui imunidade a Veneno, proibição de cura e de atacar. Arrancada herdada na entrada prepara a turba; recebê-la depois não a prepara novamente. Vigor concedido permanentemente por magia continua após a fonte de Vigor herdado sair.
 
-Bloqueio e Abascanto mantêm cargas próprias. A capacidade soma as fontes, mas só recupera uma carga por início de turno próprio. Recalcular a herança não repõe cargas gastas. Ganhar uma nova fonte concede a capacidade adicional; perder uma fonte reduz capacidade e cargas. Não copia dano, Veneno recebido, atributos das fontes, raridade ou outras Multidões. Isso evita ciclos entre cópias da turba.
+Bloqueio e Guarda Arcana mantêm cargas próprias. A capacidade soma as fontes, mas só recupera uma carga por início de turno próprio. Recalcular a herança não repõe cargas gastas. Ganhar uma nova fonte concede a capacidade adicional; perder uma fonte reduz capacidade e cargas. Não copia dano, Veneno recebido, atributos das fontes, raridade ou outras Multidões. Isso evita ciclos entre cópias da turba.
 
 Auras herdadas passam a ser geradas pela própria turba, para o seu lado do campo, com a mesma regra de alvos. Os bônus das fontes originais e da turba acumulam. Bônus de ataque de Aura não viram ataque permanente nem são copiados novamente.
 

@@ -1,10 +1,11 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 [ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/messenger_hawk.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/messenger_hawk.webp" id="2"]
 [resource]
 script=ExtResource("1")
 creature_type=1
 title="Falcão Mensageiro"
+lore = "Entrega notícias depressa. Cobranças em sementes são antecipadas."
 cost=1
 attack=1
 health=1

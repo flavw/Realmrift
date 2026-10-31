@@ -50,7 +50,12 @@ func _init() -> void:
  assert(not m.fury(0, 0) and m.players[0].board[0].ready)
  m.players[0].board[0].ready = false
  m.players[0].mana = 2
- assert(m.fury(0, 0) and m.fury(0, 0), "Pode repetir pagando mana")
+ assert(m.fury(0, 0), "Pode ativar uma vez no turno")
+ assert(not m.fury(0, 0), "Fúria não pode repetir no mesmo turno")
+ m.end_turn(0)
+ m.end_turn(1)
+ m.players[0].mana = 2
+ assert(m.fury(0, 0), "Fúria recarrega no próximo turno")
  assert(not m.players[0].board[0].ready and m.players[0].board[0].attack == 6, "Fúria não muda esgotamento existente")
  m.players[0].board[0].ready = true
  m.players[1].board = [creature("squire"), creature("squire"), creature("wolf")]

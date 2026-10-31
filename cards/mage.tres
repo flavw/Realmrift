@@ -1,20 +1,18 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://gamni7wv1y4u"]
 
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/mage.png" id="2"]
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dtsh8weeonoej" path="res://assets/art/mage.webp" id="2"]
 
 [resource]
-script=ExtResource("1")
-creature_type=0
-title="Maga Arcana"
-cost=2
-attack=0
-health=2
-armor=0
-card_class=1
-magic_damage=1
-magic_cost=1
-ability_text="(1) + esgotar:\n1 dano mágico na criatura alvo.\nSem contra-ataque."
-artwork=ExtResource("2")
-
-
+script = ExtResource("1")
+title = "Maga Arcana"
+lore = "Seu primeiro feitiço acertou o alvo. O segundo acertou a estante."
+cost = 2
+health = 2
+card_class = 1
+magic_damage = 1
+magic_cost = 0
+ability_text = "(0) + esgotar:
+1 dano mágico em criatura ou castelo inimigo.
+Sem contra-ataque."
+artwork = ExtResource("2")

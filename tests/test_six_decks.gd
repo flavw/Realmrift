@@ -29,7 +29,7 @@ func verify() -> void:
  editor.choose_slot(4)
  assert(editor.draft.is_empty() and editor.find_child("DeckSuggestion",true,false)==null)
  assert(editor.screen=="choose_class")
- editor.select_base_class(CardData.CardClass.ROGUE)
+ editor.select_base_class(CardData.CardClass.LADINO)
  var play: Button
  for b in editor.find_children("*","Button",true,false):
   if b.text=="Jogar com este deck":play=b
@@ -38,7 +38,7 @@ func verify() -> void:
  assert(editor.save_deck())
  var reopened=Store.new(store.path)
  assert(reopened.slots[4].name=="Meu novo deck" and reopened.slots[4].cards.is_empty(),"Espaço vazio é persistido sem ganhar cartas automaticamente")
- assert(editor.add_card("rogue") and not editor.add_card("mage"))
+ assert(editor.add_card("lightning_rogue") and not editor.add_card("mage"))
  assert(not editor.save_deck(),"Rascunho incompleto não é salvo como deck jogável")
  editor.clear_draft()
  for key in Match.default_deck(1):

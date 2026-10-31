@@ -1,19 +1,22 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/raven.png" id="2"]
-[resource]
-script=ExtResource("1")
-creature_type=1
-title="Corvo das Brumas"
-cost=3
-attack=2
-health=3
-armor=0
-card_class=3
-flying=true
-ability_text="Voo\nSeus ataques ignoram Bloqueio."
-artwork=ExtResource("2")
-artwork_zoom=1.08
-artwork_focus=Vector2(0.5, 0.46)
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://g40nql2n1srr"]
 
-envenom=1
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://by53y3xqcsjb7" path="res://assets/art/raven.webp" id="2"]
+
+[resource]
+script = ExtResource("1")
+creature_type = 1
+entry_secondary = null
+abascanto = 1
+attack = 1
+health = 3
+title = "Corvo das Brumas"
+lore = "Nunca esquecido: um brilho, um segredo e a carteira do viajante."
+cost = 2
+card_class = 3
+flying = true
+ability_text = "Voo
+Guarda Arcana 1"
+artwork = ExtResource("2")
+artwork_zoom = 1.08
+artwork_focus = Vector2(0.5, 0.46)

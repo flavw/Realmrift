@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/vanguard_bastion.webp" id="2"]
+[resource]
+script = ExtResource("1")
+title = "Bastião da Vanguarda"
+lore = "Quando ele dá um passo à frente, a linha de defesa vai junto."
+cost = 5
+attack = 3
+health = 5
+card_class = 0
+creature_type = 0
+armor = 2
+block = 2
+artwork = ExtResource("2")
+field_artwork_focus = Vector2(0.5,0.3)

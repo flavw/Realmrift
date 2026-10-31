@@ -9,11 +9,11 @@ func fixture():
 func spawn(m,key: String,side: int=0) -> Dictionary:return m.spawn_unit(side,key)
 func verify() -> void:
  # Castles are immune in both directions; creature poison is unchanged.
- var m=fixture();var rogue=spawn(m,"rogue");rogue.ready=true
+ var m=fixture();var rogue=spawn(m,"lightning_rogue");rogue.ready=true
  assert(m.act(0,0,-1) and m.players[1].hp==17 and m.players[1].poison==0 and not m.last_action.has("poisoned"))
  m.players[1].poison=5;m.resolve_poison(1)
  assert(m.players[1].hp==17 and m.players[1].poison==0 and m.last_action.ticks.is_empty())
- m.turn=1;var enemy_rogue=spawn(m,"rogue",1);enemy_rogue.ready=true
+ m.turn=1;var enemy_rogue=spawn(m,"lightning_rogue",1);enemy_rogue.ready=true
  assert(m.act(1,0,-1) and m.players[0].hp==17 and m.players[0].poison==0)
  var victim=spawn(m,"farmer");assert(Match.apply_poison(victim,2));m.resolve_poison(0)
  assert(victim.health==1 and victim.poison==0 and m.players[0].hp==17)

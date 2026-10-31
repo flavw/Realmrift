@@ -109,6 +109,14 @@ func build_ability_rows() -> void:
    row.add_child(ability_icon(entry.icon))
   var label := Label.new()
   label.text = entry.name+(" — "+str(entry.summary) if entry.get("summary","")!="" else "")
+  var boosted: bool=int(ability_context.get("magic_bonus",0))>0 and (entry.get("badge","")=="Arcane" or (entry.get("spell",false) and card_data.spell_effect in [CardData.SpellEffect.AREA_ARCANE,CardData.SpellEffect.ARCANE,CardData.SpellEffect.CONDUCTIVE,CardData.SpellEffect.MAGIC_MISSILES]))
+  var boosted_value: String=""
+  if boosted:
+   for index in range(label.text.length()):
+    if label.text.substr(index,1) in ["0","1","2","3","4","5","6","7","8","9"]:
+     boosted_value=label.text.substr(index)
+     label.text=label.text.substr(0,index)
+     break
   label.mouse_filter = Control.MOUSE_FILTER_IGNORE
   label.add_theme_font_size_override("font_size", 16)
   label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -117,6 +125,17 @@ func build_ability_rows() -> void:
   label.add_theme_color_override("font_outline_color",Color(0.015,0.02,0.03,0.9))
   label.add_theme_constant_override("outline_size",2)
   row.add_child(label)
+  if not boosted_value.is_empty():
+   var value_label:=Label.new()
+   value_label.name="BoostedMagicValue"
+   value_label.text=boosted_value
+   value_label.mouse_filter=Control.MOUSE_FILTER_IGNORE
+   value_label.vertical_alignment=VERTICAL_ALIGNMENT_CENTER
+   value_label.add_theme_font_size_override("font_size",16)
+   value_label.add_theme_color_override("font_color",Color("62efa3"))
+   value_label.add_theme_color_override("font_outline_color",Color(0.015,0.02,0.03,0.9))
+   value_label.add_theme_constant_override("outline_size",2)
+   row.add_child(value_label)
   if entry.has("cost") and not entry.get("spell",false):
    var separator := Label.new()
    separator.text = "—"
@@ -268,6 +287,10 @@ func ability_state(entry: Dictionary) -> Dictionary:
   reason = "Criatura esgotada"
  elif entry.get("spell",false) and not ability_context.get("castable",false):
   reason = "Sem alvo válido"
+ elif entry.get("badge","")=="QuickHeal" and ability_context.get("quick_heal_used",false):
+  reason = "Já usada neste turno"
+ elif entry.get("badge","")=="QuickHeal" and not ability_context.get("quick_heal_target",true):
+  reason = "Sem alvo válido"
  elif card_data.magic_damage>0 and not ability_context.get("magic_target",true):
   reason = "Sem criatura inimiga como alvo"
  elif card_data.heal_amount>0 and not ability_context.get("heal_target",true):
@@ -277,11 +300,14 @@ func ability_state(entry: Dictionary) -> Dictionary:
 func _gui_input(event: InputEvent) -> void:
  if event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_RIGHT and card_data:
   accept_event()
+  if get_meta("disable_art_viewer",false):return
   set_hint_forced(false)
-  ArtViewer.open(self,card_data.artwork)
+  ArtViewer.open(self,card_data)
 
 func view_entries() -> Array[Dictionary]:
  var entries := card_data.ability_entries(current_block,int(ability_context.get("magic_bonus",0)),int(ability_context.get("armor",-1)),bool(ability_context.get("vigor",false)),int(ability_context.get("poison",0)),int(ability_context.get("aura_attack",0)),int(ability_context.get("abascanto",-1)))
+ if int(ability_context.get("bleeding",0))>0:
+  entries.append({"name":"Sangramento %d" % int(ability_context.bleeding),"icon":"bleed-icon","runtime":true,"description":"Após cada ação, perde esta quantidade de vida ignorando Armadura. Termina ao fim do turno do dono ou com Cura."})
  for entry in entries:
   if card_data.collective and ability_context.get("on_board",false) and entry.name not in ["Multidão","Lendária"]:entry["runtime"]=true
   if entry.name=="Vigor":
@@ -289,5 +315,9 @@ func view_entries() -> Array[Dictionary]:
    var health := card_data.health if current_health<0 else current_health
    entry.description += "\nForça física atual (ataque e defesa): %d." % maxi(attack,health)
  if int(ability_context.get("turn_attack",0))>0:
-  entries.append({"name":"Clamor da Horda","icon":"fury-icon","runtime":true,"description":"Recebe +%d de ataque até o fim deste turno." % int(ability_context.turn_attack)})
+  entries.append({"name":"Bônus temporário","icon":"fury-icon","runtime":true,"description":"Recebe +%d de ataque até o fim deste turno." % int(ability_context.turn_attack)})
+ if ability_context.get("turn_flying",false) and not card_data.flying:
+  entries.append({"name":"Voo temporário","icon":"flying-icon","runtime":true,"description":"Ignora Bloqueio até o fim do turno."})
+ if ability_context.get("turn_swift",false) and not card_data.swift:
+  entries.append({"name":"Arrancada temporária","icon":"swift-icon","runtime":true,"description":"Pode atacar no turno de invocação se ainda não tiver agido. Não permite agir novamente."})
  return entries

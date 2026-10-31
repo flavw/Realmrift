@@ -8,7 +8,7 @@ func verify() -> void:
  root.add_child(menu)
  current_scene = menu
  await process_frame
- assert(menu.find_child("GameTitle", true, false).text == "CRÔNICAS\nDA LUA")
+ assert(menu.find_child("GameTitle", true, false).texture.resource_path == "res://assets/ui/realmrift-logo.webp")
  menu.open_decks()
  await process_frame
  var editor = menu.deck_layer.get_child(0)
@@ -20,7 +20,11 @@ func verify() -> void:
  menu.show_rules()
  assert(menu.rules_dialog.visible)
  menu.rules_dialog.hide()
- menu.start_game()
+ menu.show_deck_selector()
+ assert(menu.deck_selector.visible)
+ var choice: Button=menu.deck_selector.find_child("SelectDeck_0",true,false)
+ assert(choice!=null)
+ choice.pressed.emit()
  await process_frame
  await process_frame
  assert(current_scene.name == "Duelo", "Jogar abre a partida")

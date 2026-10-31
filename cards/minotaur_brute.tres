@@ -1,13 +1,14 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 [ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/minotaur_brute.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/minotaur_brute.webp" id="2"]
 [resource]
 script=ExtResource("1")
 title="Minotauro da Ruína"
+lore = "Há quem procure a saída do labirinto. Ele prefere abrir outra."
 cost=5
 attack=5
 health=5
 card_class=5
 creature_type=3
-block=1
+block=3
 artwork=ExtResource("2")
