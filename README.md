@@ -1,10 +1,10 @@
 # Realmrift — Duelo de Cartas
 
-Jogo de cartas de fantasia em Godot, com duelos contra IA e construção de decks. Há 37 criaturas colecionáveis, nove magias e um Carniçal invocado. Projeto em desenvolvimento; PvP planejado.
+Jogo de cartas de fantasia em Godot, com duelos contra IA e construção de decks. Projeto em desenvolvimento; PvP planejado.
 
 As criaturas têm tipos próprios. A facção **Horda** possui Goblin Saqueador, Minotauro da Ruína e Lobisomem das Brumas, todos do tipo Monstro. Aceita neutros não humanos; Pacto Sombrio permite a exceção da Necromante humana. Zumbi Serviçal é um neutro de apoio do tipo Morto-vivo. Veja [tipos e regras de composição](docs/MONSTROS_E_TIPOS.md).
 
-Novos neutros: Líder da Aldeia (4 mana, 3/4, Aura de +1 ataque aos outros aliados) e Camponesa Generosa (2 mana, 1/3, Chamado de +1 vida atual/máxima aos outros aliados). Ambos afetam aliados de qualquer classe e excluem a própria fonte. O deck **União da Aldeia** está disponível como quinto deck inicial. Veja [regras, composição e validação](docs/UNIAO_DA_ALDEIA.md).
+A coleção reúne criaturas e magias de diferentes classes e cartas neutras. Consulte o [manual](MANUAL.txt) para as regras atuais.
 
 ## Como jogar
 
@@ -18,11 +18,11 @@ Enter, Enter do teclado numérico ou numpad 0 passa o turno. Selecione uma criat
 
 - Primeiro jogador sorteado; mão inicial de 3 cartas para quem começa e 4 para o segundo. Uma troca grátis das cartas escolhidas antes da compra normal do turno.
 - Vigor usa o maior valor entre ataque e vida atual tanto no ataque físico quanto no contra-ataque. Veneno acumula, causa dano no fim do turno do dono do alvo, ignora Armadura e termina completamente após esse dano.
-- Castelos com 20 de vida; mana cresce até 10; campo com até seis criaturas e mão com até oito cartas.
-- Nove espaços para decks de 22 cartas, com no máximo duas cópias por carta. Cada deck usa uma única classe + neutros.
+- Castelos com 20 de vida; mana cresce até 10; campo com até seis criaturas e mão com até sete cartas.
+- Nove espaços para decks de 22 cartas, com no máximo duas cópias por carta (uma para lendárias). Cada deck usa uma única classe + neutros.
 - Armadura reduz cada dano físico, incluindo contra-ataques. Magia ignora armadura e não provoca contra-ataque.
-- Bloqueio N exige que os primeiros N ataques físicos tenham uma criatura bloqueadora como alvo. Recupera somente uma carga no início do turno do dono, até o máximo. Voo ignora essa restrição de alvo.
-- Arrancada permite atacar no turno de entrada. Fúria do Lobo custa uma mana, aumenta seu ataque permanentemente e não esgota a criatura.
+- Bloqueio N exige que os primeiros N ataques físicos tenham uma criatura bloqueadora como alvo. Recupera somente uma carga no início do turno do dono, até o máximo. Voo ignora essa restrição de alvo e reduz em 1 o dano de ataques físicos recebidos ao defender.
+- Arrancada permite atacar no turno de entrada. Fúria do Lobo custa uma mana, aumenta seu ataque permanentemente, não esgota e pode ser usada uma vez por turno.
 - Fazendeiro ganha uma vida atual e máxima no início do turno do dono. Clériga cura dois de vida de um aliado ou do castelo por uma mana e esgotamento.
 - Animações de ataque, magia, morte e vitória; seis efeitos sonoros originais; botão para ligar/desligar o som.
 
