@@ -14,7 +14,7 @@ var play_button: Button
 var credits_dialog: AcceptDialog
 var deck_selector: AcceptDialog
 var enemy_deck_picker: OptionButton
-const CLASS_NAMES=["Guerreiro","Mago","Neutros","Ladino","Clérigo","Horda"]
+const CLASS_NAMES=preload("res://scripts/faction_names.gd").PT
 
 func _ready() -> void:
  theme = UiTheme.build()
@@ -283,7 +283,7 @@ func show_credits() -> void:
   var content:=RichTextLabel.new()
   content.custom_minimum_size=Vector2(620,440)
   content.bbcode_enabled=true
-  content.text="[center][font_size=24]REALMRIFT[/font_size]\n\nCriação do jogo\n[b]Flavw[/b]\nAuxiliado pelo ChatGPT\n\nFonte\n[b]At-Dawn-Regular[/b]\nCriada por Aurora\n\nMúsica de combate\n[b]Chariots Of War[/b]\nAakash Gandhi\n\nAgradecimentos aos artistas e criadores cujos créditos acompanham os recursos usados no projeto.[/center]"
+  content.text="[center][font_size=24]REALMRIFT[/font_size]\n\nCriação do jogo\n[b]Flavw[/b]\nAuxiliado pelo ChatGPT\n\nFonte\n[b]At-Dawn-Regular[/b]\nCriada por Aurora\n\nMúsica do menu\n[b]Moonlit Tavern[/b]\nflavioj · criada com Suno\n\nMúsica de combate\n[b]Chariots Of War[/b]\nAakash Gandhi\n\nAgradecimentos aos artistas e criadores cujos créditos acompanham os recursos usados no projeto.[/center]"
   credits_dialog.add_child(content)
   add_child(credits_dialog)
  credits_dialog.popup_centered(Vector2i(680,540))

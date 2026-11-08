@@ -2,8 +2,8 @@ class_name DeckStore
 extends RefCounted
 
 const Match = preload("res://scripts/match.gd")
-const SLOT_COUNT := 9
-const DECKSET_VERSION := 10
+const SLOT_COUNT := 10
+const DECKSET_VERSION := 11
 var slots: Array = []
 var active := 0
 var path: String
@@ -28,7 +28,7 @@ func load_saved() -> void:
  if parser.parse(content) != OK:
   return
  var data = parser.data
- if not data is Dictionary or not data.get("slots") is Array or data.slots.size() not in [3,6,SLOT_COUNT]:
+ if not data is Dictionary or not data.get("slots") is Array or data.slots.size() not in [3,6,9,SLOT_COUNT]:
   return
  var saved_version: int=int(data.get("version",0))
  if saved_version<2:
@@ -54,8 +54,17 @@ func load_saved() -> void:
    var cover: String=String(slot.get("cover",""))
    if cover!="" and (not Match.CARD_DATA.has(cover) or cover not in slot.cards):cover=""
    var base: int=int(slot.get("base_class",infer_base(slot.cards)))
-   if base not in [-2,-1,0,1,2,3,4,5] or (not slot.cards.is_empty() and not accepts_base(base,slot.cards)):base=infer_base(slot.cards)
+   if base not in [-2,-1,0,1,2,3,4,5,6] or (not slot.cards.is_empty() and not accepts_base(base,slot.cards)):base=infer_base(slot.cards)
    slots[i] = {"name": clean_name(slot.name, i), "cards": slot.cards.duplicate(),"cover":cover,"base_class":base}
+ # Add the new deck only in an empty slot, preserving all saved lists.
+ if saved_version<11:
+  var already_present: bool=slots.any(func(slot):return slot.cards==Match.default_deck(6))
+  if not already_present:
+   for i in range(SLOT_COUNT):
+    if slots[i].cards.is_empty():
+     var wild_cards:=Match.default_deck(6)
+     slots[i]={"name":Match.default_deck_name(6),"cards":wild_cards,"cover":"wild_elf","base_class":CardData.CardClass.WILD}
+     break
  var saved_active = data.get("active", 0)
  if (saved_active is int or saved_active is float) and saved_active >= 0 and saved_active < SLOT_COUNT:
   active = int(saved_active)
@@ -65,7 +74,7 @@ func load_saved() -> void:
 
 static func expand_saved_deck(cards: Array,base: int) -> Array:
  var result:=cards.duplicate()
- var style: int={0:0,3:1,1:2,4:3,2:4,5:5}.get(base,4)
+ var style: int={0:0,3:1,1:2,4:3,2:4,5:5,6:6}.get(base,4)
  var candidates:=Match.default_deck(style)
  candidates.append_array(Match.CARD_DATA.keys())
  for key in candidates:
@@ -118,7 +127,7 @@ func save_slot(slot: int, name: String, cards: Array,base_class: int=-3, cover_o
   base=infer_base(cards)
   var previous_base: int=base_for(slot)
   if (cards.is_empty() or Match.deck_class(cards)==-1) and previous_base>=0:base=previous_base
- if base not in [-1,0,1,2,3,4,5] or not accepts_base(base,cards) or (not cards.is_empty() and not Match.valid_deck(cards)):
+ if base not in [-1,0,1,2,3,4,5,6] or not accepts_base(base,cards) or (not cards.is_empty() and not Match.valid_deck(cards)):
   if cards.any(func(key):return Match.neutral_monster_forbidden(base,key)):
    error_message="Monstros neutros só podem entrar na Horda ou em decks só de neutros."
    return false
@@ -153,7 +162,7 @@ func active_cards() -> Array:
 func reset_defaults() -> void:
  slots.clear()
  active=0
- var styles: Array[int]=[0,1,2,3,5,4]
+ var styles: Array[int]=[0,1,2,3,5,4,6]
  for i in range(SLOT_COUNT):
   if i<styles.size():
    var cards:=Match.default_deck(styles[i])

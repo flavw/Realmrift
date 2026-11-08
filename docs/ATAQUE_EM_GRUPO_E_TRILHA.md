@@ -12,11 +12,11 @@ Artes originais geradas para `assets/art/castle_player.webp` e `assets/art/castl
 
 ## Música
 
-O menu usa a composição instrumental ambiente **Aldeia ao Amanhecer**, sintetizada localmente. Os combates usam **Chariots Of War**, de **Aakash Gandhi**, em `assets/audio/chariots_of_war.ogg`. O crédito também aparece no menu Créditos do jogo.
+O menu usa **Moonlit Tavern**, de **flavioj**, criada com o Suno, em `assets/audio/moonlit_tavern.ogg`. Os combates usam **Chariots Of War**, de **Aakash Gandhi**, em `assets/audio/chariots_of_war.ogg`. O crédito também aparece no menu Créditos do jogo.
 
 O autoload `GameMusic` mantém um único reprodutor entre menu, duelo e novas partidas, alternando a faixa conforme a tela. A opção Som pausa/retoma a música junto ao controle dos efeitos, sem reiniciar a faixa. A preferência dura a sessão do jogo.
 
-Para recompor, execute `tools/generate_music.py` usando Python com numpy e ffmpeg no PATH. A partitura, instrumentos e síntese estão no próprio script; não usa gravações externas. A saída é codificada por pipe diretamente para Ogg, sem manter WAV.
+Para recompor a antiga trilha ambiente Aldeia ao Amanhecer, execute `tools/generate_music.py` usando Python com numpy e ffmpeg no PATH. A partitura, instrumentos e síntese estão no próprio script; não usa gravações externas. A saída é codificada por pipe diretamente para Ogg, sem manter WAV.
 
 ## Verificação
 

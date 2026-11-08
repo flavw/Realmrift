@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/wild_badger.webp" id="2"]
+[resource]
+script=ExtResource("1")
+title="Texugo-do-mel Gigante"
+lore="Nem veneno nem feitiço detêm um texugo que decidiu atravessar a floresta."
+cost=4
+attack=3
+health=4
+card_class=6
+creature_type=1
+spell_immune=true
+poison_immune=true
+artwork=ExtResource("2")

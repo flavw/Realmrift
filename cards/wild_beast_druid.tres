@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/wild_beast_druid.webp" id="2"]
+[resource]
+script=ExtResource("1")
+title="Druida dos Companheiros"
+lore="Ela não comanda as feras: caminha com elas, e elas escolhem segui-la."
+cost=3
+attack=1
+health=3
+card_class=6
+aura_effect=1
+aura_value=1
+aura_targets=2
+aura_includes_self=false
+artwork=ExtResource("2")
+artwork_focus=Vector2(0.5, 0.44)
+field_artwork_focus=Vector2(0.5, 0.33)

@@ -11,7 +11,7 @@ func verify() -> void:
  main.enable_opening=false
  main.deck_store=Store.new("user://test_chamado_ui.json",false)
  root.add_child(main)
- main.duel.players[0].board=[unit("wolf",101)]
+ main.duel.players[0].board=[unit("squire",101)]
  main.duel.players[1].board=[unit("wolf",201)]
  main.duel.players[0].hand=["moon_herald"]
  main.duel.players[0].mana=5
@@ -29,7 +29,7 @@ func verify() -> void:
  assert(main.summoning==0 and main.duel.players[0].mana==5)
  main.field_nodes[0][101].activated.emit()
  assert(main.summoning==-1 and main.duel.players[0].hand.is_empty() and main.duel.players[0].mana==3)
- assert(main.duel.players[0].board[0].attack==3 and main.duel.players[0].board[0].health==3 and main.duel.players[0].board[0].max_health==3 and main.duel.players[0].board.size()==2)
+ assert(main.duel.players[0].board[0].attack==2 and main.duel.players[0].board[0].health==3 and main.duel.players[0].board[0].max_health==3 and main.duel.players[0].board.size()==2)
  assert(not main.duel.players[0].board[0].ready)
  main.open_decks()
  var editor=main.deck_editor

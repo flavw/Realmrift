@@ -1,7 +1,7 @@
 extends RefCounted
 # Recompute inherited ranks without reapplying buffs, healing damage or refilling charges.
-const NUMERIC=["armor","fury","magic_damage","magic_splash","growth","resonance","rural_pride","heal_amount","quick_heal_amount","magic_power","envenom","loot","bleed","harvest","commerce","devotion","spores","regeneration"]
-const FLAGS=["swift","flying","wall"]
+const NUMERIC=["armor","fury","magic_damage","magic_splash","growth","resonance","rural_pride","heal_amount","quick_heal_amount","magic_power","envenom","loot","bleed","harvest","commerce","devotion","spores","regeneration","pack","turn_draw"]
+const FLAGS=["swift","flying","wall","trample"]
 
 static func refresh(m) -> void:
  for p in m.players:

@@ -11,6 +11,7 @@ attack=1
 health=2
 card_class=2
 entry_effect=1
+entry_human_only=true
 entry_attack=1
 entry_health=1
 artwork=ExtResource("2")

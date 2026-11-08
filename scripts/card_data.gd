@@ -14,8 +14,8 @@ extends Resource
 func copy_limit() -> int:
  return 1 if legendary else 2
 
-enum CardClass { WARRIOR, MAGE, NEUTRAL, LADINO, CLERIC, HORDE }
-enum CreatureType { HUMAN, BEAST, ARTIFACT, MONSTER, UNDEAD }
+enum CardClass { WARRIOR, MAGE, NEUTRAL, LADINO, CLERIC, HORDE, WILD }
+enum CreatureType { HUMAN, BEAST, ARTIFACT, MONSTER, UNDEAD, ELF }
 @export var collectible: bool = true:
  set(value):
   collectible=value
@@ -32,7 +32,7 @@ enum CreatureType { HUMAN, BEAST, ARTIFACT, MONSTER, UNDEAD }
 func creature_type_name() -> String:
  if card_type==CardType.SPELL:return "Magia"
  if creature_type==CreatureType.HUMAN and human_and_monster:return "Humano / Monstro"
- return ["Humano","Fera","Artefato","Monstro","Morto-vivo"][creature_type]
+ return ["Humano","Fera","Artefato","Monstro","Morto-vivo","Elfo"][creature_type]
 
 func has_creature_type(value: int) -> bool:
  return card_type==CardType.CREATURE and (creature_type==value or (value==CreatureType.MONSTER and creature_type==CreatureType.HUMAN and human_and_monster))
@@ -40,7 +40,15 @@ func has_creature_type(value: int) -> bool:
 func is_human() -> bool:
  return card_type==CardType.CREATURE and creature_type==CreatureType.HUMAN
 enum CardType { CREATURE, SPELL }
-enum SpellEffect { NONE, FORTIFY, ARCANE, SHADOW_STEP, RESTORE, VIGOR, CONDUCTIVE, RECONSTRUCT, AREA_ARCANE, HORDE_ROAR, MAGIC_MISSILES }
+enum SpellEffect { NONE, FORTIFY, ARCANE, SHADOW_STEP, RESTORE, VIGOR, CONDUCTIVE, RECONSTRUCT, AREA_ARCANE, HORDE_ROAR, MAGIC_MISSILES, ROOTS, NATURE_REGEN, GRANT_PACK }
+@export var reach: bool=false
+@export var spell_immune: bool=false
+@export var poison_immune: bool=false
+@export var root_power: bool=false
+@export var trample: bool=false
+@export var entry_human_only: bool=false
+@export_range(0,10) var turn_draw: int=0
+@export_range(0,10) var pack: int=0
 @export_range(0,10) var spores: int=0:
  set(value):
   spores=value
@@ -51,7 +59,7 @@ enum SpellEffect { NONE, FORTIFY, ARCANE, SHADOW_STEP, RESTORE, VIGOR, CONDUCTIV
   emit_changed()
 
 enum AuraEffect { NONE, ATTACK }
-enum AuraTargets { ALLIED_NEUTRALS, ALLIES }
+enum AuraTargets { ALLIED_NEUTRALS, ALLIES, ALLIED_BEASTS }
 @export var aura_effect: AuraEffect = AuraEffect.NONE:
  set(value):
   aura_effect=value
@@ -269,7 +277,7 @@ enum EntryEffect { NONE, BUFF_ALLY, ARMOR_ALLY, SUMMON, POISON_ENEMY, BUFF_OTHER
   emit_changed()
 
 func combat_data() -> Dictionary:
- return {"name": title,"creature_type":creature_type,"human_and_monster":human_and_monster,"legendary":legendary,"collective":collective, "card_class":card_class, "neutral_deck_only":neutral_deck_only, "cost": cost, "attack": attack, "health": health, "armor": armor, "abascanto":abascanto, "block": block, "fury": fury, "swift": swift, "flying": flying, "magic_damage": magic_damage,"magic_splash":magic_splash, "magic_cost": magic_cost, "growth": growth,"resonance":resonance,"rural_pride":rural_pride,"spores":spores,"regeneration":regeneration,"harvest":harvest,"commerce":commerce,"devotion":devotion, "heal_amount": heal_amount, "heal_cost": heal_cost, "quick_heal_amount":quick_heal_amount,"quick_heal_cost":quick_heal_cost, "card_type":card_type, "spell_effect":spell_effect, "spell_value":spell_value, "spell_secondary":spell_secondary, "magic_power":magic_power,"wall":wall,"vigor":vigor,"envenom":envenom,"loot":loot,"bleed":bleed,"entry_attack":entry_attack,"entry_health":entry_health,"entry_effect":entry_effect,"entry_value":entry_value,"entry_secondary":entry_secondary,"entry_summon_key":entry_summon_key,"aura_effect":aura_effect,"aura_value":aura_value,"aura_targets":aura_targets,"aura_includes_self":aura_includes_self}
+ return {"reach":reach,"spell_immune":spell_immune,"poison_immune":poison_immune,"root_power":root_power,"trample":trample,"entry_human_only":entry_human_only,"turn_draw":turn_draw,"pack":pack,"name": title,"creature_type":creature_type,"human_and_monster":human_and_monster,"legendary":legendary,"collective":collective, "card_class":card_class, "neutral_deck_only":neutral_deck_only, "cost": cost, "attack": attack, "health": health, "armor": armor, "abascanto":abascanto, "block": block, "fury": fury, "swift": swift, "flying": flying, "magic_damage": magic_damage,"magic_splash":magic_splash, "magic_cost": magic_cost, "growth": growth,"resonance":resonance,"rural_pride":rural_pride,"spores":spores,"regeneration":regeneration,"harvest":harvest,"commerce":commerce,"devotion":devotion, "heal_amount": heal_amount, "heal_cost": heal_cost, "quick_heal_amount":quick_heal_amount,"quick_heal_cost":quick_heal_cost, "card_type":card_type, "spell_effect":spell_effect, "spell_value":spell_value, "spell_secondary":spell_secondary, "magic_power":magic_power,"wall":wall,"vigor":vigor,"envenom":envenom,"loot":loot,"bleed":bleed,"entry_attack":entry_attack,"entry_health":entry_health,"entry_effect":entry_effect,"entry_value":entry_value,"entry_secondary":entry_secondary,"entry_summon_key":entry_summon_key,"aura_effect":aura_effect,"aura_value":aura_value,"aura_targets":aura_targets,"aura_includes_self":aura_includes_self}
 func ability_entries(remaining_block: int = -1, magic_bonus: int = 0, remaining_armor: int = -1, granted_vigor: bool = false, poison_stacks: int = 0, received_aura_attack: int = 0, remaining_abascanto: int = -1) -> Array[Dictionary]:
  var entries: Array[Dictionary] = []
  if human_and_monster:
@@ -279,6 +287,12 @@ func ability_entries(remaining_block: int = -1, magic_bonus: int = 0, remaining_
  if card_type == CardType.SPELL:
   var entry := {"cost":cost,"spell":true,"name":"Magia","description":"Escolha um efeito de magia no campo Spell Effect do Inspector."}
   match spell_effect:
+   SpellEffect.GRANT_PACK:
+    entry.merge({"name":"Matilha 1 para todas as criaturas","icon":"pack-icon","description":"Todas as criaturas em campo recebem Matilha 1, inclusive inimigas; criaturas imunes a magias não são afetadas."},true)
+   SpellEffect.ROOTS:
+    entry.merge({"name":"Impede um inimigo de atacar","icon":"growth-icon","description":"Uma criatura inimiga não pode atacar durante seu próximo turno."},true)
+   SpellEffect.NATURE_REGEN:
+    entry.merge({"name":"Regeneração 2 por 5 turnos","icon":"regeneration-icon","description":"Uma criatura aliada recebe Regeneração 2 durante cinco fins de turno."},true)
    SpellEffect.MAGIC_MISSILES:
     entry.merge({"name":"%d dano mágico\n2 inimigos diferentes" % (spell_value+magic_bonus),"icon":"arcane-icon","description":"Escolha duas criaturas inimigas distintas ou uma criatura e o castelo inimigo. Cause %d de dano mágico a cada alvo. Ignora Armadura e Bloqueio; Amplificar aumenta cada míssil." % (spell_value+magic_bonus)},true)
    SpellEffect.HORDE_ROAR:
@@ -308,13 +322,13 @@ func ability_entries(remaining_block: int = -1, magic_bonus: int = 0, remaining_
    entries.append({"name":"Só deck neutro","icon":"class-neutral","description":"Seu deck original precisa conter apenas cartas neutras. A restrição vale na montagem e na conjuração, mesmo depois que as cartas forem compradas ou saírem do campo."})
   return entries
  if aura_effect!=AuraEffect.NONE:
-  var group: String="todos os seus neutros em campo" if aura_targets==AuraTargets.ALLIED_NEUTRALS else "todos os seus aliados em campo"
-  var self_note: String=" Inclui esta criatura." if aura_includes_self else " Não inclui esta criatura."
+  var group: String="todas as suas Feras em campo" if aura_targets==AuraTargets.ALLIED_BEASTS else ("todos os seus neutros em campo" if aura_targets==AuraTargets.ALLIED_NEUTRALS else "todos os seus aliados em campo")
+  var self_note: String="" if aura_targets==AuraTargets.ALLIED_BEASTS and creature_type!=CreatureType.BEAST else (" Inclui esta criatura." if aura_includes_self else " Não inclui esta criatura.")
   entries.append({"name":"Aura","icon":"aura-icon","badge":"Aura","value":aura_value,"summary":aura_summary(),"description":"Enquanto estiver em campo, %s recebem +%d de ataque.%s Acumula com outras Auras; termina quando a fonte sai do campo." % [group,aura_value,self_note]})
  if entry_effect!=EntryEffect.NONE:
   var details: String="Ao entrar pela mão, ativa o efeito uma vez."
   if entry_effect==EntryEffect.BUFF_ALLY:
-   details+="\nConcede %s permanente a outro aliado. A vida aumenta a atual e a máxima. Sem outro aliado, entra sem bônus." % entry_summary()
+   details+="\nConcede +%d/+%d permanente a %s. A vida aumenta a atual e a máxima. Sem alvo válido, entra sem bônus." % [entry_attack,entry_health,"outro Humano aliado" if entry_human_only else "outro aliado"]
   elif entry_effect==EntryEffect.GRANT_ROGUE_CHOICE:
    details+="\nEscolha: outro aliado ganha Saquear %d ou Envenenar %d permanentemente. Acumula com a habilidade existente. Sem outro aliado, entra sem efeito." % [entry_value,entry_secondary]
   elif entry_effect==EntryEffect.ARMOR_ALLY:
@@ -351,6 +365,14 @@ func ability_entries(remaining_block: int = -1, magic_bonus: int = 0, remaining_
   entries.append({"name": "Fúria %d" % fury,"badge":"Fury","value":fury, "cost": 1, "icon": "fury-icon", "description": "Uma vez por turno, pague 1 mana: ganhe +%d de ataque permanente, sem esgotar." % fury})
  if swift:
   entries.append({"name": "Arrancada","icon":"swift-icon","badge":"Swift", "description": "Entra pronta e pode atacar no mesmo turno em que é invocada."})
+ if trample:
+  entries.append({"name":"Atropelar","badge":"Trample","icon":"trample-icon","description":"Ao atacar uma criatura, o dano físico que exceder sua vida, após Armadura e Voo, atinge o castelo inimigo. Não se aplica ao contra-ataque."})
+ if turn_draw>0:entries.append({"name":"Compre %d no início do turno" % turn_draw,"badge":"TurnDraw","value":turn_draw,"icon":"draw-icon","description":"No início do seu turno, compre %d carta(s)." % turn_draw})
+ if pack>0:entries.append({"name":"Matilha %d" % pack,"badge":"Pack","value":pack,"icon":"pack-icon","description":"Quando outra Fera aliada entra em campo, ganha +%d de ataque até o fim do turno. Valores acumulam." % pack})
+ if reach:entries.append({"name":"Alcance","badge":"Reach","icon":"reach-icon","description":"Voadoras devem atacar um defensor com Alcance. Ao atacar ou contra-atacar uma voadora, recebe +1 de ataque."})
+ if spell_immune:entries.append({"name":"Imune a magia","badge":"MagicImmunity","icon":"abascanto-icon","description":"Imune a magias, inclusive aliadas, e a dano mágico."})
+ if poison_immune:entries.append({"name":"Imune a veneno","badge":"PoisonImmunity","icon":"poison-icon","description":"Não pode receber Veneno."})
+ if root_power:entries.append({"name":"Raízes Enredantes","badge":"Roots","icon":"growth-icon","cost":1,"tap":true,"description":"Pague 1 mana e esgote: uma criatura inimiga não pode atacar no próximo turno."})
  if flying:
   entries.append({"name": "Voo","icon":"flying-icon","badge":"Flying", "description": "Ao defender, recebe 1 de dano físico a menos de ataques. Contra-ataques e dano mágico não são reduzidos. Seus ataques ignoram Bloqueio; ao atacar um bloqueador, consome uma carga."})
  if magic_damage > 0 and magic_splash>0:
@@ -402,9 +424,10 @@ func entry_needs_target() -> bool:
 func entry_summary() -> String:
  match entry_effect:
   EntryEffect.BUFF_ALLY:
-   if entry_attack==0:return "Vida +%d" % entry_health
-   if entry_health==0:return "Ataque +%d" % entry_attack
-   return "+%d/+%d" % [entry_attack,entry_health]
+   var prefix: String="Humano: " if entry_human_only else ""
+   if entry_attack==0:return prefix+"Vida +%d" % entry_health
+   if entry_health==0:return prefix+"Ataque +%d" % entry_attack
+   return prefix+"+%d/+%d" % [entry_attack,entry_health]
   EntryEffect.BUFF_OTHER_ALLIES:return "Outros aliados: vida +%d" % entry_health if entry_attack==0 else "Outros aliados: +%d/+%d" % [entry_attack,entry_health]
   EntryEffect.GRANT_ROGUE_CHOICE:return "Saquear %d ou\nEnvenenar %d a outro aliado" % [entry_value,entry_secondary]
   EntryEffect.ARMOR_ALLY:return "Armadura +%d" % entry_value
@@ -416,6 +439,8 @@ func entry_summary() -> String:
  return ""
 
 func entry_prompt() -> String:
+ if entry_effect==EntryEffect.BUFF_ALLY and entry_human_only:
+  return "Chamado: escolha outro Humano aliado para receber +%d/+%d." % [entry_attack,entry_health]
  if entry_effect==EntryEffect.GRANT_ROGUE_CHOICE:
   return "Chamado: escolha outro aliado; depois escolha Saquear %d ou Envenenar %d." % [entry_value,entry_secondary]
  if entry_effect==EntryEffect.POISON_ENEMY:
@@ -424,6 +449,6 @@ func entry_prompt() -> String:
 
 func aura_summary() -> String:
  match aura_effect:
-  AuraEffect.ATTACK:return "%s: ataque +%d" % ["Neutros" if aura_targets==AuraTargets.ALLIED_NEUTRALS else ("Aliados" if aura_includes_self else "Outros aliados"),aura_value]
+  AuraEffect.ATTACK:return "%s: ataque +%d" % [("Outras Feras" if creature_type==CreatureType.BEAST and not aura_includes_self else "Feras") if aura_targets==AuraTargets.ALLIED_BEASTS else ("Neutros" if aura_targets==AuraTargets.ALLIED_NEUTRALS else ("Aliados" if aura_includes_self else "Outros aliados")),aura_value]
  return ""
 

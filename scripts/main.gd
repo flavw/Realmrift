@@ -342,6 +342,8 @@ func redraw() -> void:
  if spell_damage > 0:
   var fiery: bool=int(spell.get("magic_splash",0))>0
   actions.add_child(ability_button("flame-icon" if fiery else "arcane-icon", ("Mãos Flamejantes %d • %d mana + esgotar" if fiery else "Disparo Arcano %d • %d mana + esgotar") % [spell_damage, spell_cost], func(): magic = true; healing = false; redraw(), can_act() and spell.get("ready", false) and duel.players[0].mana >= spell_cost and duel.has_magic_target(0,selected)))
+ if spell.get("root_power",false):
+  actions.add_child(ability_button("growth-icon", "Raízes Enredantes • 1 mana + esgotar", func(): magic=true;healing=false;redraw(), can_act() and spell.get("ready",false) and duel.players[0].mana>=1 and duel.has_magic_target(0,selected)))
  if spell.get("heal_amount", 0) > 0:
   actions.add_child(ability_button("heal-icon", "Cura %d • %d mana + esgotar" % [spell.heal_amount, spell.heal_cost], select_heal, can_act() and spell.get("ready", false) and duel.players[0].mana >= spell.heal_cost and context_for(spell,0).heal_target))
  if spell.get("quick_heal_amount",0)>0:
@@ -542,8 +544,7 @@ func animate_destroyed_draw(event: Dictionary) -> void:
 
 func opponent_label() -> String:
  var faction: int=Match.deck_class(enemy_deck)
- var names: Dictionary={-1:"Neutros",0:"Guerreiro",1:"Mago",3:"Ladino",4:"Clérigo",5:"Horda"}
- return "IA — "+String(names.get(faction,"Neutros"))
+ return "IA — "+preload("res://scripts/faction_names.gd").name_for(faction)
 
 func has_allied_wall() -> bool:
  return duel.players[0].board.any(func(unit):return unit.health>0 and unit.get("wall",false))
@@ -968,7 +969,7 @@ func play(index: int) -> void:
  if Match.CARD_DATA[duel.players[0].hand[index]].card_type == CardData.CardType.SPELL:
   if not duel.has_spell_target(0,index):
    return
-  if data.spell_effect in [CardData.SpellEffect.AREA_ARCANE,CardData.SpellEffect.HORDE_ROAR] or (data.spell_effect==CardData.SpellEffect.RECONSTRUCT and not has_allied_wall()):
+  if data.spell_effect in [CardData.SpellEffect.AREA_ARCANE,CardData.SpellEffect.HORDE_ROAR,CardData.SpellEffect.GRANT_PACK] or (data.spell_effect==CardData.SpellEffect.RECONSTRUCT and not has_allied_wall()):
    casting=index
    await cast_target(1 if data.spell_effect==CardData.SpellEffect.AREA_ARCANE else 0,-1)
    return
@@ -1277,7 +1278,7 @@ func animate_action(action: Dictionary, snapshot: Array) -> void:
     if is_instance_valid(source) and is_instance_valid(victim):
      await animate_missile(source,victim)
      float_result(victim,"−%d" % int(hit.amount),Color("ff8d86"))
-  elif int(action.effect)==CardData.SpellEffect.HORDE_ROAR:
+  elif int(action.effect) in [CardData.SpellEffect.HORDE_ROAR,CardData.SpellEffect.GRANT_PACK]:
    await animate_records(action.get("buffs",[]),snapshot,"fury","fury")
   elif int(action.effect)==CardData.SpellEffect.AREA_ARCANE:
    await animate_records(action.get("area_hits",[]),snapshot,"fire","fire")
@@ -1325,6 +1326,9 @@ func animate_action(action: Dictionary, snapshot: Array) -> void:
   if int(action.get("absorbed",0))>0:float_result(destination,"Armadura %d" % int(action.absorbed),Color("e8d18a"),38)
   if not action.castle:
    float_result(attacker,"−%d" % int(action.get("received",0)),Color("ff8d86"))
+   if int(action.get("castle_damage",0))>0:
+    var enemy_castle: Control=find_child("PlayerCastle" if side==1 else "EnemyCastle",true,false)
+    if is_instance_valid(enemy_castle):float_result(enemy_castle,"−%d" % int(action.castle_damage),Color("ff8d86"))
    if int(action.get("counter_absorbed",0))>0:float_result(attacker,"Armadura %d" % int(action.counter_absorbed),Color("e8d18a"),38)
   var hit: Control = destination.get_node("Canvas") if destination.has_node("Canvas") else destination
   var initial_color := hit.modulate
@@ -1775,7 +1779,10 @@ func show_summon_feedback(action: Dictionary) -> void:
 func selection_hint() -> String:
  if duel.winner!=-1:return ""
  if duel.turn==1:return "Turno da IA"
- if summoning>=0:return "Escolha outro aliado" if Match.entry_target_side(0,Match.CARDS[duel.players[0].hand[summoning]])==0 else "Escolha um inimigo"
+ if summoning>=0:
+  var summoning_card: Dictionary=Match.CARDS[duel.players[0].hand[summoning]]
+  if summoning_card.get("entry_human_only",false):return "Escolha outro Humano aliado"
+  return "Escolha outro aliado" if Match.entry_target_side(0,summoning_card)==0 else "Escolha um inimigo"
  if casting>=0:
   if duel.spell_target_count(0,casting)>1:return "Alvos: %d/2" % spell_targets.size()
   return "Escolha um alvo"
@@ -1856,6 +1863,7 @@ func show_combat_forecast(target_index: int,owner: Control) -> bool:
  if not result.castle:info+=" · Recebe [color=#ffb28c]%d[/color]" % result.received
  if result.absorbed>0:info+="\nArmadura do alvo absorve %d" % result.absorbed
  if result.flight_reduction>0:info+="\nVoo reduz o dano em %d" % result.flight_reduction
+ if result.get("castle_damage",0)>0:info+="\nAtropelar causa %d ao castelo" % result.castle_damage
  if result.counter_absorbed>0:info+="\nSua Armadura absorve %d" % result.counter_absorbed
  for hit in result.get("splash_hits",[]):
   if hit.index==target_index:continue

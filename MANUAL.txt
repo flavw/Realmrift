@@ -1,9 +1,11 @@
 REALMRIFT — REGRAS DO DUELO
 
+Facções: Vanguarda (Vanguard), Arcano (Arcane), Luminares (Luminaries), Submundo (Underworld), Horda e Selvagem.
+
 Objetivo: reduza a vida do castelo inimigo de 20 a 0. O castelo representa o jogador. Clique no castelo da IA para atacar diretamente com uma criatura pronta. Ataques diretos não têm contra-ataque.
 
 Turnos e mana
-Quem começa é sorteado. O primeiro jogador recebe 3 cartas e o segundo recebe 4. Antes da primeira compra, ambos fazem um único mulligan gratuito, trocando qualquer quantidade da mão inicial, inclusive nenhuma. Clique nas cartas para marcá-las com uma seta. As substituições são compradas antes de devolver e embaralhar as cartas escolhidas, mas outra cópia da mesma carta pode aparecer. Não há ações nem mana durante o mulligan. Após as trocas, o primeiro jogador compra uma carta e recebe sua primeira mana normalmente. Quem joga em segundo compra no início de seu primeiro turno e recebe 1 mana temporária adicional, que é gasta primeiro e desaparece ao fim do turno. A mana máxima cresce 1 por turno, até 10, e a mana disponível é renovada no início do turno. Compre 1 carta por turno. Deck: 22 cartas, no máximo 2 cópias de cada. Há 9 espaços salvos no editor. Cada deck usa uma única classe + neutros. Mão: até 7 cartas; compras excedentes são destruídas. Campo: até 6 criaturas.
+Quem começa é sorteado. O primeiro jogador recebe 3 cartas e o segundo recebe 4. Antes da primeira compra, ambos fazem um único mulligan gratuito, trocando qualquer quantidade da mão inicial, inclusive nenhuma. Clique nas cartas para marcá-las com uma seta. As substituições são compradas antes de devolver e embaralhar as cartas escolhidas, mas outra cópia da mesma carta pode aparecer. Não há ações nem mana durante o mulligan. Após as trocas, o primeiro jogador compra uma carta e recebe sua primeira mana normalmente. Quem joga em segundo compra no início de seu primeiro turno e recebe 1 mana temporária adicional, que é gasta primeiro e desaparece ao fim do turno. A mana máxima cresce 1 por turno, até 10, e a mana disponível é renovada no início do turno. Compre 1 carta por turno. Deck: 22 cartas, no máximo 2 cópias de cada. Há 10 espaços salvos no editor. Cada deck usa uma única classe + neutros. Mão: até 7 cartas; compras excedentes são destruídas. Campo: até 6 criaturas.
 
 Invocação e combate
 Pague o custo no topo da carta para invocar. Criaturas entram esgotadas, exceto quem tem Arrancada; ficam prontas no início do seu próximo turno. Uma criatura pronta pode atacar OU usar uma habilidade que a esgote. Ataques físicos em criaturas causam dano e contra-ataque simultaneamente, mesmo que alguma morra. A defesa não esgota a criatura. Vida 0 ou menos remove a criatura. Ataque 0 não permite ataque físico.
@@ -24,19 +26,19 @@ Fúria 1 — Lobo
 Uma vez por turno, pague 1 mana para aumentar permanentemente o ataque do Lobo em 1, sem esgotá-lo. Pode usar mesmo se o Lobo já estiver esgotado; isso não o deixa pronto. O bônus dura enquanto o Lobo estiver no campo. Pode usar Fúria e depois atacar se o Lobo estiver pronto. Não causa dano, não gera contra-ataque e não consome Bloqueio inimigo.
 
 Cartas (custo; ataque/vida)
-Guerreira Audaciosa: 3; 3/1; Armadura 2; classe guerreiro, borda vermelha.
-Maga Arcana: custo 2; 1/2; Disparo Arcano 1 custa 0 mana e esgota. Atinge uma criatura ou o castelo inimigo, ignora Armadura e Bloqueio e não gera contra-ataque. Classe Mago.
+Guerreira Audaciosa: 3; 3/1; Armadura 2; facção Vanguarda, borda vermelha.
+Maga Arcana: custo 2; 1/2; Disparo Arcano 1 custa 0 mana e esgota. Atinge uma criatura ou o castelo inimigo, ignora Armadura e Bloqueio e não gera contra-ataque. Facção Arcano.
 Escudeiro da Lua: 1; 1/2; Bloqueio 1. Classe neutro, borda cinza.
 Lobo da Noite: 2 para invocar; 2/2; Fúria 1 custa 1 mana para ativar. Classe neutro, borda cinza.
 
-Ladina Relâmpago: 4; 3/2; Arrancada e Envenenar 1. Classe Ladino, borda verde.
-Corvo das Brumas: 2; 1/3; Voo e Guarda Arcana 1. Classe Ladino, borda verde.
-Sentinela de Ferro: 2; 1/3; Armadura 1. Classe guerreiro, borda vermelha.
-Feiticeira das Brasas: custo 4; 2/4; Mãos Flamejantes: pague 2 mana e esgote para causar 2 de dano mágico ao alvo inimigo e 1 a cada criatura adjacente a ele, sem contra-ataque. Não atinge castelos; Amplificar aumenta cada parcela. Pode optar por ataque físico quando pronta. Classe Mago.
-Aprendiz de Feiticeiro: custo 1; 0/2; Disparo Arcano 1 custa 1 mana e esgota. Atinge uma criatura ou o castelo inimigo, ignora Armadura e Bloqueio e não gera contra-ataque. Classe Mago.
+Ladina Relâmpago: 4; 3/2; Arrancada e Envenenar 1. Facção Submundo, borda verde.
+Corvo das Brumas: 2; 1/3; Voo e Guarda Arcana 1. Facção Submundo, borda verde.
+Sentinela de Ferro: 2; 1/3; Armadura 1. Facção Vanguarda, borda vermelha.
+Feiticeira das Brasas: custo 4; 2/4; Mãos Flamejantes: pague 2 mana e esgote para causar 2 de dano mágico ao alvo inimigo e 1 a cada criatura adjacente a ele, sem contra-ataque. Não atinge castelos; Amplificar aumenta cada parcela. Pode optar por ataque físico quando pronta. Facção Arcano.
+Aprendiz de Feiticeiro: custo 1; 0/2; Disparo Arcano 1 custa 1 mana e esgota. Atinge uma criatura ou o castelo inimigo, ignora Armadura e Bloqueio e não gera contra-ataque. Facção Arcano.
 
 Editor de decks
-Abra o menu pela engrenagem no canto superior direito ou Esc e escolha Meus decks. Há 9 espaços independentes, inicialmente Baluarte das Cicatrizes, Caçada das Brumas, Círculo Arcano, Aurora Vital, Horda dos Ermos e União da Colheita, mais três espaços vazios. Cada deck deve conter 22 cartas, até 2 iguais. Escolha Editar cartas para abrir a tela de montagem; clique na coleção para adicionar; na lista, clique para localizar e use − para remover. Durante a montagem, a curva mostra quantas cartas existem em cada custo; altere o nome e escolha Alterar capa para selecionar uma carta do rascunho. Todas as 38 cartas estão disponíveis e os decks usam uma classe + neutros. Salvar deck grava neste computador; Jogar com este deck salva, ativa o espaço e inicia uma nova partida. Nova partida usa o espaço ativo. A IA usa um deck sugerido sujeito aos mesmos limites. Rascunhos não salvos são guardados durante a navegação entre as telas desse editor. Salve antes de fechar Meus decks ou voltar ao jogo. Limpar altera somente o rascunho até salvar. A seleção e os decks são preservados ao fechar o jogo.
+Abra o menu pela engrenagem no canto superior direito ou Esc e escolha Meus decks. Há 10 espaços independentes, inicialmente Baluarte das Cicatrizes, Caçada das Brumas, Círculo Arcano, Aurora Vital, Horda dos Ermos, União da Colheita e Aliança da Floresta, mais três espaços vazios. Cada deck deve conter 22 cartas, até 2 iguais. Escolha Editar cartas para abrir a tela de montagem; clique na coleção para adicionar; na lista, clique para localizar e use − para remover. Durante a montagem, a curva mostra quantas cartas existem em cada custo; altere o nome e escolha Alterar capa para selecionar uma carta do rascunho. Todas as 38 cartas estão disponíveis e os decks usam uma classe + neutros. Salvar deck grava neste computador; Jogar com este deck salva, ativa o espaço e inicia uma nova partida. Nova partida usa o espaço ativo. A IA usa um deck sugerido sujeito aos mesmos limites. Rascunhos não salvos são guardados durante a navegação entre as telas desse editor. Salve antes de fechar Meus decks ou voltar ao jogo. Limpar altera somente o rascunho até salvar. A seleção e os decks são preservados ao fechar o jogo.
 
 Controles
 Para invocar ou conjurar, clique diretamente na carta da mão. Selecione uma criatura pronta em campo e clique em um alvo permitido. A Maga já seleciona sua magia automaticamente. Para o Lobo, selecione-o e use o botão Fúria. Para atacar diretamente, selecione um atacante e clique no castelo da IA. Alvos inválidos ficam desabilitados. Passe o mouse sobre uma carta para ver sua versão completa e os atributos atuais. Encerre o turno para a IA jogar.
@@ -57,7 +59,7 @@ Atalhos: Enter (incluindo Enter numérico) ou 0 do teclado numérico encerra o s
 
 Cultivo e cura
 Fazendeiro: neutro, custo 2, ataque/vida 1/3. No início de cada turno do dono, ganha +1 de vida atual e máxima, permanentemente enquanto estiver em campo. Não cresce imediatamente ao ser invocado nem no turno adversário. O ganho preserva o dano já sofrido.
-Clériga da Aurora: classe Clérigo (borda branca/dourada), custo 3, ataque/vida 1/4. Habilidade: pague 1 mana e esgote para curar até 2 de vida de uma criatura aliada (inclusive ela mesma) ou do seu castelo. Não pode curar inimigos nem criaturas mortas. Cura não passa da vida máxima atual da criatura, incluindo o crescimento do Fazendeiro; castelos têm máximo 20. Alvos já cheios são desabilitados e não gastam mana. Cura não causa contra-ataque nem consome Bloqueio.
+Clériga da Aurora: facção Luminares (borda branca/dourada), custo 3, ataque/vida 1/4. Habilidade: pague 1 mana e esgote para curar até 2 de vida de uma criatura aliada (inclusive ela mesma) ou do seu castelo. Não pode curar inimigos nem criaturas mortas. Cura não passa da vida máxima atual da criatura, incluindo o crescimento do Fazendeiro; castelos têm máximo 20. Alvos já cheios são desabilitados e não gastam mana. Cura não causa contra-ataque nem consome Bloqueio.
 Para curar: selecione a Clériga pronta, clique em Cura e escolha um aliado ferido ou seu castelo. A habilidade e o ataque físico são alternativas, pois ambos esgotam.
 
 Indicadores em campo
@@ -72,7 +74,7 @@ Jogar contra IA inicia um novo duelo com o deck ativo. Meus decks abre o editor,
 Escudo com valor em campo: cargas atuais de Bloqueio. Garras douradas: Fúria. Os ícones são visuais e não alteram as regras de custo, esgotamento ou recarga.
 
 Disparo Arcano e leitura das cartas
-Mísseis Mágicos: magia de Mago, custo 3. Escolha dois alvos inimigos diferentes, entre criaturas e castelo; causa 2 de dano mágico em cada. Requer ao menos uma criatura inimiga. O primeiro alvo fica marcado; clicar nele novamente desfaz a seleção. A mana e a carta só são gastas após o segundo alvo válido. Amplificar aumenta o dano de cada míssil; Guarda Arcana é resolvido separadamente. Ao selecionar alvos de magias de Mago ou Disparo Arcano, o mouse usa um cursor arcano.
+Mísseis Mágicos: magia de Arcano, custo 3. Escolha dois alvos inimigos diferentes, entre criaturas e castelo; causa 2 de dano mágico em cada. Requer ao menos uma criatura inimiga. O primeiro alvo fica marcado; clicar nele novamente desfaz a seleção. A mana e a carta só são gastas após o segundo alvo válido. Amplificar aumenta o dano de cada míssil; Guarda Arcana é resolvido separadamente. Ao selecionar alvos de magias de Arcano ou Disparo Arcano, o mouse usa um cursor arcano.
 Disparo Arcano N: pague o custo de mana indicado e esgote a criatura para causar N de dano mágico a uma criatura ou ao castelo inimigo. Nos cards atuais, Disparo Arcano 1 custa 0 mana e Disparo Arcano 2 custa 1 mana. Ignora Armadura e não provoca contra-ataque. Amplificar aumenta o dano e o valor aumentado aparece em verde. O cristal azul numerado indica o custo de mana. Fúria mostra somente custo de mana, pois não esgota.
 
 As cartas mostram habilidades resumidas. Passe o mouse para ver a explicação numa caixa lateral junto da carta ou de sua prévia ampliada. Os valores de Bloqueio exibidos em campo e na prévia acompanham as cargas atuais.
@@ -85,14 +87,14 @@ Prévia e ajuda surgem após 250 ms. Clique com o botão direito para ver a ilus
 MAGIAS E ARQUÉTIPOS
 A coleção agora tem 38 cartas: 30 criaturas e 8 magias. Magias são de uso único: clique na carta da magia e escolha o alvo permitido quando solicitado. Dano em área é automático; Reconstrução pede alvo quando houver Muralhas aliadas. Cancelar ou clicar num alvo inválido não gasta mana nem a carta. Magias não ocupam campo e funcionam mesmo com seis criaturas. Não têm ataque/vida.
 
-Postura de Ferro (Guerreiro, 2 mana): uma criatura aliada ganha +1 ataque, +1 Armadura e +1 Bloqueio permanentes, sem mudar sua prontidão.
-Chama Astral (Mago, 3 mana): causa 3 de dano mágico a uma criatura inimiga, ignorando Armadura e Bloqueio e sem contra-ataque. Não atinge castelos.
-Passo das Sombras (Ladino, 1 mana): uma criatura aliada ganha +1 de ataque, Voo e Arrancada até o fim do turno. Arrancada permite que uma criatura recém-invocada ataque se ainda não tiver atacado ou usado uma habilidade que esgota. Fúria não impede a Arrancada. Não deixa pronta uma criatura que já esgotou ao agir. Voo permite ignorar Bloqueio.
-Luz Restauradora (Clérigo, 2 mana): cura até 4 de vida de uma criatura aliada ou seu castelo, respeitando a vida máxima. Não esgota criaturas. Alvos cheios ou inimigos não são permitidos.
+Postura de Ferro (Vanguarda, 2 mana): uma criatura aliada ganha +1 ataque, +1 Armadura e +1 Bloqueio permanentes, sem mudar sua prontidão.
+Chama Astral (Arcano, 3 mana): causa 3 de dano mágico a uma criatura inimiga, ignorando Armadura e Bloqueio e sem contra-ataque. Não atinge castelos.
+Passo das Sombras (Submundo, 1 mana): uma criatura aliada ganha +1 de ataque, Voo e Arrancada até o fim do turno. Arrancada permite que uma criatura recém-invocada ataque se ainda não tiver atacado ou usado uma habilidade que esgota. Fúria não impede a Arrancada. Não deixa pronta uma criatura que já esgotou ao agir. Voo permite ignorar Bloqueio.
+Luz Restauradora (Luminares, 2 mana): cura até 4 de vida de uma criatura aliada ou seu castelo, respeitando a vida máxima. Não esgota criaturas. Alvos cheios ou inimigos não são permitidos.
 
 Amplificar N: enquanto a criatura estiver viva em campo, habilidades e magias aliadas de dano mágico causam +N de dano. Fontes diferentes somam; o bônus termina quando a fonte sai do campo. Não afeta cura nem dano físico.
 
-Novas criaturas: Guardião da Muralha (Guerreiro, 4 mana, 2/4, Armadura 1 e Bloqueio 2); Canalista do Eclipse (Mago, 3 mana, 1/3, Disparo Arcano 2 por 1 mana + esgotar); Batedora do Crepúsculo (Ladino, 2 mana, 2/2, Arrancada); Guardião da Aurora (Clérigo, 4 mana, 2/5, Vigor e Bloqueio 3).
+Novas criaturas: Guardião da Muralha (Vanguarda, 4 mana, 2/4, Armadura 1 e Bloqueio 2); Canalista do Eclipse (Arcano, 3 mana, 1/3, Disparo Arcano 2 por 1 mana + esgotar); Batedora do Crepúsculo (Submundo, 2 mana, 2/2, Arrancada); Guardião da Aurora (Luminares, 4 mana, 2/5, Vigor e Bloqueio 3).
 
 Neutros de apoio: Vigia do Portão (2 mana, 2/2, Bloqueio 1); Familiar Rúnico (2 mana, 0/3, Amplificar 1); Falcão Mensageiro (1 mana, 1/1, Voo); Peregrina da Vida (3 mana, 1/4, Cultivo 1). Afinidade indica sinergia, mas todos os neutros continuam permitidos em qualquer deck.
 
@@ -103,9 +105,9 @@ A gema numerada indica o custo de mana.
 
 Vigor — Clériga da Aurora e Guardião da Aurora
 Ao ATACAR ou DEFENDER um ataque físico, use o maior valor entre ataque base e vida ATUAL como força física. Calcule antes dos danos simultâneos. Exemplo: Clériga com ataque base 1 e vida 4 ataca e contra-ataca com 4; ferida com 2 de vida, usa 2. Não usa a vida máxima. Cura e Cultivo podem aumentar essa força. Vale também em ataques ao castelo e em qualquer criatura que recebeu Vigor de uma magia. A carta mostra o ataque efetivo em verde quando maior que o base, sem sobrescrever o atributo base. Atacar exige estar pronto e esgota. Defensores esgotados contra-atacam normalmente. Armadura reduz o dano físico. Vigor não aumenta dano mágico nem Veneno e não faz esses danos provocarem contra-ataque.
-Voto de Vigor: magia de Clérigo, custo 2. Concede Vigor permanentemente a uma criatura aliada de qualquer classe enquanto ela estiver em campo. Não cumulativa: quem já tem Vigor não é alvo válido, sem gastar mana ou carta. Não atinge castelos.
+Voto de Vigor: magia de Luminares, custo 2. Concede Vigor permanentemente a uma criatura aliada de qualquer classe enquanto ela estiver em campo. Não cumulativa: quem já tem Vigor não é alvo válido, sem gastar mana ou carta. Não atinge castelos.
 
-Descarga Condutora — magia de Mago, custo 3
+Descarga Condutora — magia de Arcano, custo 3
 Cause 2 de dano mágico a uma criatura inimiga; dobre o dano se ela tiver Armadura maior que 0 no momento da resolução. Ignora a Armadura normalmente, sem descontá-la nem removê-la, e não provoca contra-ataque. Amplificar entra antes da duplicação: com Amplificar 1, causa 3 contra quem não tem Armadura ou 6 contra quem tem. Armadura concedida por outra magia também conta. Não atinge castelos.
 
 Envenenar 1 — Ladina Relâmpago
@@ -118,7 +120,7 @@ Guardião da Aurora: custo 4, 2/5, Vigor e Bloqueio 3. Recupera uma carga de Blo
 
 Chamado — gatilho genérico de entrada
 Quando uma criatura entra em campo pela mão, ativa uma vez o efeito de Chamado descrito naquela carta. A palavra-chave indica QUANDO o efeito acontece; o efeito pode variar entre cartas, como conceder atributos, invocar criaturas ou conceder vida. Não representa um valor de ataque e não repete a cada turno. Cada novo efeito terá suas próprias regras e alvos.
-Arauto da Lua: neutro (borda cinza), custo 2, ataque/vida 1/2. Chamado — conceda +1/+1 permanente a OUTRA criatura aliada escolhida, enquanto o alvo permanecer no campo. Isso concede +1 de ataque e +1 de vida atual e máxima. Preserva o dano sofrido antes do bônus: uma criatura ferida com 1/4 de vida passa a 2/5 de vida. Cura posterior pode preencher essa vida máxima maior. Não remove Veneno nem altera prontidão. Bônus de invocações distintas acumulam.
+Arauto da Lua: neutro (borda cinza), custo 2, ataque/vida 1/2. Chamado — conceda +1/+1 permanente a OUTRO Humano aliado escolhido, enquanto o alvo permanecer no campo. Isso concede +1 de ataque e +1 de vida atual e máxima. Preserva o dano sofrido antes do bônus: uma criatura ferida com 1/4 de vida passa a 2/5 de vida. Cura posterior pode preencher essa vida máxima maior. Não remove Veneno nem altera prontidão. Bônus de invocações distintas acumulam.
 Não pode escolher a si mesmo, inimigos nem castelos. Alvos esgotados são permitidos. Se não houver outro aliado, entra normalmente sem aplicar o bônus. Se houver, escolha o aliado antes de confirmar a invocação; mana e carta só são gastas com alvo válido. Cancelar não gasta recursos. O limite de seis criaturas continua valendo. O Arauto entra esgotado normalmente.
 
 Regra de decks: uma classe + neutros
@@ -127,21 +129,21 @@ A lista do deck mostra a gema azul com o número de mana. O editor não oferece 
 
 
 Chamado por classe e novos decks
-Ferreiro da Muralha (Guerreiro): custo 3, 2/3. Chamado: concede +1 de Armadura permanente a outro aliado escolhido. Sem outro aliado, entra sem bônus. Não esgota nem prepara o alvo.
-Conjuradora do Éter (Mago): custo 4, 1/3. Chamado: invoca um Familiar Rúnico 0/3 com Amplificar 1 se houver espaço após a entrada da Conjuradora. O Familiar entra esgotado, não gasta carta nem mana extra e seu Amplificar já funciona. Se a Conjuradora ocupar o quinto espaço, o Familiar não entra. O limite continua sendo seis criaturas.
-Alquimista das Brumas (Ladino): custo 3, 2/2, Guarda Arcana 1. Chamado: aplica Veneno 2 a uma criatura inimiga escolhida, somando ao Veneno existente. Não causa dano imediato nem contra-ataque e não atinge castelos. Sem inimigos em campo, entra normalmente sem aplicar o efeito. O Veneno causa dano no fim do turno do dono do alvo e depois termina.
-Oráculo da Aurora (Clérigo): custo 3, 1/3, Vigor. Chamado: concede +2 de vida atual e máxima a outro aliado escolhido, sem alterar seu ataque base. Preserva o dano anterior e o Veneno. Esse ganho de vida aumenta a força física de um alvo com Vigor. Sem outro aliado, entra sem bônus.
+Ferreiro da Muralha (Vanguarda): custo 3, 2/3. Chamado: concede +1 de Armadura permanente a outro aliado escolhido. Sem outro aliado, entra sem bônus. Não esgota nem prepara o alvo.
+Conjuradora do Éter (Arcano): custo 4, 1/3. Chamado: invoca um Familiar Rúnico 0/3 com Amplificar 1 se houver espaço após a entrada da Conjuradora. O Familiar entra esgotado, não gasta carta nem mana extra e seu Amplificar já funciona. Se a Conjuradora ocupar o quinto espaço, o Familiar não entra. O limite continua sendo seis criaturas.
+Alquimista das Brumas (Submundo): custo 3, 2/2, Guarda Arcana 1. Chamado: aplica Veneno 2 a uma criatura inimiga escolhida, somando ao Veneno existente. Não causa dano imediato nem contra-ataque e não atinge castelos. Sem inimigos em campo, entra normalmente sem aplicar o efeito. O Veneno causa dano no fim do turno do dono do alvo e depois termina.
+Oráculo da Aurora (Luminares): custo 3, 1/3, Vigor. Chamado: concede +2 de vida atual e máxima a outro aliado escolhido, sem alterar seu ataque base. Preserva o dano anterior e o Veneno. Esse ganho de vida aumenta a força física de um alvo com Vigor. Sem outro aliado, entra sem bônus.
 Ao clicar na criatura na mão, o jogo destaca os alvos do lado correto. Cancelar ou escolher alvo inválido não gasta mana nem carta.
 
-Os decks anteriores foram substituídos nesta atualização por Muralha Lunar (Guerreiro), Caçada das Brumas (Ladino) e Círculo Arcano (Mago). Permanecem nove espaços salvos, cada um com 22 cartas, até duas cópias e uma classe + neutros. A troca de listas antigas ocorre uma vez; novas edições salvas serão preservadas.
+Os decks anteriores foram substituídos nesta atualização por Muralha Lunar (Vanguarda), Caçada das Brumas (Submundo) e Círculo Arcano (Arcano). Permanecem nove espaços salvos, cada um com 22 cartas, até duas cópias e uma classe + neutros. A troca de listas antigas ocorre uma vez; novas edições salvas serão preservadas.
 As cinco listas iniciais também podem ser usadas pela IA. No editor, novos decks começam vazios após escolher a classe base; não há botão de sugestões.
 
 
 Nove espaços de deck
-1. Muralha Lunar — Guerreiro.
-2. Caçada das Brumas — Ladino.
-3. Círculo Arcano — Mago.
-4. Aurora Vital — Clérigo.
+1. Muralha Lunar — Vanguarda.
+2. Caçada das Brumas — Submundo.
+3. Círculo Arcano — Arcano.
+4. Aurora Vital — Luminares.
 5. Espaço vazio para criar seu deck.
 6. Espaço vazio para criar seu deck.
 A ampliação preserva as cartas, nomes e deck ativo dos três primeiros espaços já salvos. Aurora Vital entra no quarto. Os espaços 5 e 6 começam sem cartas e continuam vazios ao reabrir o jogo. Selecione um deles para escolher uma classe base e começar do zero. Salvar um espaço vazio é permitido; um rascunho com 1 a 21 cartas não é um deck completo e não pode ser salvo nem usado para jogar. Para jogar, complete 22 cartas, até 2 cópias, de uma classe + neutros. Limpar e salvar um deck ativo vazio seleciona outro deck completo quando disponível.
@@ -155,7 +157,7 @@ Meus decks guarda o rascunho de cartas enquanto o editor continua aberto; voltar
 
 
 Símbolos dos decks
-O tipo do deck é indicado por um pequeno símbolo, sem o rótulo "classe + neutros": espadas vermelhas para Guerreiro, varinha roxa para Mago, adaga verde para Ladino, sol dourado para Clérigo e emblema cinza circular para Neutro. Passe o mouse no símbolo para ler o nome. Um deck com apenas cartas neutras recebe o símbolo Neutro; se incluir cartas de uma classe, passa a mostrar o símbolo dessa classe. Espaços vazios não recebem símbolo. As regras de composição continuam uma classe + neutros, ou apenas neutros.
+O tipo do deck é indicado por um pequeno símbolo, sem o rótulo "classe + neutros": espadas vermelhas para Vanguarda, varinha roxa para Arcano, adaga verde para Submundo, sol dourado para Luminares e emblema cinza circular para Neutro. Passe o mouse no símbolo para ler o nome. Um deck com apenas cartas neutras recebe o símbolo Neutro; se incluir cartas de uma classe, passa a mostrar o símbolo dessa classe. Espaços vazios não recebem símbolo. As regras de composição continuam uma classe + neutros, ou apenas neutros.
 Selecionar uma capa não muda o deck ativo nem abre a montagem automaticamente. As ações do painel direito se aplicam ao deck selecionado. Jogar ativa e usa a versão salva; Criar/Editar abre a montagem, onde ficam o nome e a escolha de capa. Não há botões de ação dentro das capas.
 
 
@@ -189,12 +191,12 @@ No editor, os cards são maiores. A carta localizada recebe borda dourada e bril
 Feedback e sons
 Tentar atacar uma criatura protegida ou o castelo enquanto há Bloqueio faz as criaturas com cargas brilharem e toca um impacto de escudo, sem gastar a ação. Voo e magia mantêm suas exceções. Cura tem brilho verde e som próprio. Veneno tem partículas e sons distintos ao ser aplicado e ao causar dano. Todos os efeitos sonoros usam Ogg Vorbis; o botão Som também silencia os novos efeitos.
 
-Bola de Fogo: magia de Mago, custo 6. Causa 3 de dano mágico a todas as criaturas inimigas, com bônus de Amplificar. Ignora Armadura e Bloqueio; não atinge aliados ou castelos. Conjura sem escolher alvo individual e exige inimigos em campo.
+Bola de Fogo: magia de Arcano, custo 6. Causa 3 de dano mágico a todas as criaturas inimigas, com bônus de Amplificar. Ignora Armadura e Bloqueio; não atinge aliados ou castelos. Conjura sem escolher alvo individual e exige inimigos em campo.
 As artes podem retratar cenas diurnas ou noturnas; o nome do jogo não limita sua ambientação.
 
 
 Guarda Arcana e Bola de Fogo
-Guardião Arcano: Guerreiro, custo 3, 2/3, Guarda Arcana 1. Cada carga anula uma magia ofensiva ou uma ocorrência de dano mágico recebido. Recupera 1 carga no início do próprio turno, até o valor da habilidade. Dano em área consome uma carga de cada criatura protegida e resolve normalmente nas demais. Não protege de dano físico nem Veneno; curas e bônus aliados não gastam cargas. A magia é consumida e a habilidade de dano mágico paga mana e esgota normalmente, mesmo quando anulada. Não há contra-ataque.
+Guardião Arcano: Vanguarda, custo 3, 2/3, Guarda Arcana 1. Cada carga anula uma magia ofensiva ou uma ocorrência de dano mágico recebido. Recupera 1 carga no início do próprio turno, até o valor da habilidade. Dano em área consome uma carga de cada criatura protegida e resolve normalmente nas demais. Não protege de dano físico nem Veneno; curas e bônus aliados não gastam cargas. A magia é consumida e a habilidade de dano mágico paga mana e esgota normalmente, mesmo quando anulada. Não há contra-ataque.
 O campo mostra o ícone de Guarda Arcana seguido das cargas atuais, incluindo zero. O card completo e sua ajuda mostram Guarda Arcana e explicam a recarga.
 Tempestade Solar foi renomeada para Bola de Fogo: custo 6, 3 de dano mágico a todas as criaturas inimigas, aumentado por Amplificar. O identificador é fireball, inclusive no recurso e na arte. Decks antigos são migrados automaticamente preservando nome, capa, seleção e composição.
 
@@ -233,7 +235,7 @@ Atacar com todos
 O botão Atacar com todos executa ataques físicos com as criaturas prontas, da esquerda para a direita. Cada uma prioriza o castelo inimigo. Se Bloqueio impedir o ataque direto, ataca o primeiro alvo permitido; Voo pode ignorar o Bloqueio. Os alvos são recalculados após cada ataque. Criaturas esgotadas, Muralhas e criaturas sem força física não atacam. Não ativa Fúria, magia ou cura, não gasta mana extra e não encerra o turno. A sequência para ao vencer. O botão fica desabilitado se não houver ataques legais.
 
 Castelos e música
-Os castelos possuem artes próprias: azul para você e vinho para a IA. Os alvos clicáveis e a vida atual continuam iguais. O menu usa a trilha ambiente Aldeia ao Amanhecer e os combates usam Chariots Of War, de Aakash Gandhi, ambas em loop e em volume de fundo. A opção Som no menu do combate controla efeitos e música; a configuração permanece ao voltar ao início durante a sessão. Os créditos do menu registram a autoria da música de combate.
+Os castelos possuem artes próprias: azul para você e vinho para a IA. Os alvos clicáveis e a vida atual continuam iguais. O menu usa Moonlit Tavern, de flavioj, criada com o Suno, e os combates usam Chariots Of War, de Aakash Gandhi, ambas em loop e em volume de fundo. A opção Som no menu do combate controla efeitos e música; a configuração permanece ao voltar ao início durante a sessão. Os créditos do menu registram a autoria da música de combate.
 
 Seleção de deck
 Ao clicar em Jogar contra IA no início, escolha um dos decks completos salvos. O deck escolhido torna-se o deck ativo e é usado no próximo duelo; espaços vazios e listas incompletas não aparecem no seletor.
@@ -278,30 +280,30 @@ Esporos e Regeneração
 Fungo da Ninhada: neutro Monstro, 3 mana, 1/3, Esporos 1. No início do seu turno, todos os outros Monstros e Feras aliados ganham +1 de vida atual e máxima. Uma criatura com ambos os tipos recebe o bônus uma vez por fonte. Acumula; não é Cura nem Cultivo.
 Troll do Brejo: Horda Monstro, 4 mana, 3/5, Bloqueio 1 e Regeneração 2. No fim do seu turno, depois do Veneno, recupera até 2 de vida sem exceder a vida máxima. Não revive mortos, não aumenta a vida máxima e funciona esgotado. Não é Cura: não ativa Devoção, não remove Veneno ou Sangramento e recupera vida normalmente em Mortos-vivos e Muralhas.
 Kobold do Ferrão: Horda Monstro, 2 mana, 2/1, Bloqueio 1 e Envenenar 1. Seus ataques e contra-ataques aplicam Veneno mesmo quando a Armadura absorve todo o dano.
-Monstros neutros só podem entrar em decks da Horda ou só de neutros. Proibidos nas outras facções atuais: Guerreiro, Mago, Ladino e Clérigo. Outros tipos neutros continuam seguindo suas regras normais.
+Monstros neutros só podem entrar em decks da Horda ou só de neutros. Proibidos nas outras facções atuais: Vanguarda, Arcano, Submundo e Luminares. Outros tipos neutros continuam seguindo suas regras normais.
 
 Comércio e mana temporária
 Comércio dispara uma vez para cada ativação de Cultivo de um aliado. A mana recebida é temporária: aparece em dourado, é gasta antes da mana normal e desaparece ao fim do turno. Ela pode exceder a reserva máxima, mas não aumenta essa reserva. Comerciante Astuta é uma Humana neutra 1/3 de custo 2 com Comércio 1; por ser Humana, não entra em decks da Horda.
 
 Sangrar
-Novo defensor Guerreiro: Bastião da Vanguarda, Humano, custo 5, 3/5, Armadura 2 e Bloqueio 2. Bloqueio recupera uma carga por turno até duas.
-Espadachim das Cicatrizes: Guerreiro Humano, custo 3, 2/3, Sangrar 1. Ao atacar ou contra-atacar, aplica Sangramento à criatura adversária, mesmo se Armadura absorver o dano. O status acumula e, após cada ação voluntária da criatura afetada (ataque, Disparo Arcano, Cura ou Fúria), ela perde vida igual ao total de Sangramento, ignorando Armadura. O efeito dura até o fim do turno do dono da criatura; se ela não agir, desaparece sem causar dano. Cura remove o Sangramento dos vivos, inclusive com vida cheia; Cura causa dano em Mortos-vivos e não os limpa. Criaturas imunes a Veneno, como Muralhas, também são imunes a Sangramento. Castelos não recebem Sangramento. Contra-ataques não contam como ação voluntária.
+Novo defensor da Vanguarda: Bastião da Vanguarda, Humano, custo 5, 3/5, Armadura 2 e Bloqueio 2. Bloqueio recupera uma carga por turno até duas.
+Espadachim das Cicatrizes: Vanguarda, Humano, custo 3, 2/3, Sangrar 1. Ao atacar ou contra-atacar, aplica Sangramento à criatura adversária, mesmo se Armadura absorver o dano. O status acumula e, após cada ação voluntária da criatura afetada (ataque, Disparo Arcano, Cura ou Fúria), ela perde vida igual ao total de Sangramento, ignorando Armadura. O efeito dura até o fim do turno do dono da criatura; se ela não agir, desaparece sem causar dano. Cura remove o Sangramento dos vivos, inclusive com vida cheia; Cura causa dano em Mortos-vivos e não os limpa. Criaturas imunes a Veneno, como Muralhas, também são imunes a Sangramento. Castelos não recebem Sangramento. Contra-ataques não contam como ação voluntária.
 
 Saquear: ao atacar o castelo inimigo, compre o número de cartas indicado. A compra segue as regras de mão cheia e fadiga.
-Trombadinha: Ladino Humano, custo 1, 1/1, Saquear 1.
+Trombadinha: Submundo, Humano, custo 1, 1/1, Saquear 1.
 
 Interface: na montagem, clique em um custo na curva de mana para filtrar a coleção; clique novamente ou use Limpar filtros para ver todos. A coluna 7+ inclui custos de 7 ou mais. No combate, o contorno dourado indica a criatura selecionada e o verde-água indica alvos válidos. Valores de dano, cura e armadura aparecem brevemente sobre os alvos.
 
-Acólita da Aurora: Clérigo Humano, custo 1, 0/2, Cura 1 por 0 mana e esgotamento.
+Acólita da Aurora: Luminares, Humano, custo 1, 0/2, Cura 1 por 0 mana e esgotamento.
 
 Brio 1: no início do seu turno, se todas as suas criaturas em campo forem neutras, esta criatura ganha +1 de ataque permanente. Camponesa Generosa possui Brio 1; Multidão pode herdar e somar Brio de outros neutros aliados.
 Opções: ajuste separadamente o volume da música e dos efeitos, alterne entre tela cheia e janela e consulte as regras. Os volumes são guardados neste computador. Um cursor de cura aparece ao escolher alvos para Cura e magias de restauração.
 
 Jogar contra IA: escolha o deck adversário no seletor acima das capas e clique no seu deck. Aleatório escolhe entre seus decks completos e válidos a cada partida. Um deck escolhido permanece como adversário ao iniciar nova partida.
 
-O Sombra: Ladino Humano lendário, custo 5, 3/3, Voo. Chamado: aplica Veneno 1 a todas as criaturas inimigas que não sejam imunes; não afeta castelos. Apenas uma cópia por deck.
+O Sombra: Submundo, Humano lendário, custo 5, 3/3, Voo. Chamado: aplica Veneno 1 a todas as criaturas inimigas que não sejam imunes; não afeta castelos. Apenas uma cópia por deck.
 
-Paladino da Alvorada: Clérigo Humano lendário, custo 5, 2/5, Bloqueio 2, Cura Célere 1 e Devoção 2. Cura Célere custa 1 mana, pode ser usada uma vez por turno sem esgotar, inclusive se a criatura estiver esgotada, e não atinge castelos. Cura uma criatura aliada, removendo Veneno e Sangramento; em Mortos-vivos de qualquer lado causa 1 de dano mágico. Devoção ativa quando sua Cura recupera vida de uma criatura aliada ou do próprio castelo, ou causa dano a um Morto-vivo.
+Paladino da Alvorada: Luminares, Humano lendário, custo 5, 2/5, Bloqueio 2, Cura Célere 1 e Devoção 2. Cura Célere custa 1 mana, pode ser usada uma vez por turno sem esgotar, inclusive se a criatura estiver esgotada, e não atinge castelos. Cura uma criatura aliada, removendo Veneno e Sangramento; em Mortos-vivos de qualquer lado causa 1 de dano mágico. Devoção ativa quando sua Cura recupera vida de uma criatura aliada ou do próprio castelo, ou causa dano a um Morto-vivo.
 
 IA: prioriza ataques que encerrem a partida; avalia dano após Armadura, risco de contra-ataque e Guarda Arcana ao escolher alvos. Usa Cura, Disparo Arcano e Fúria, inclusive Fúria em criaturas esgotadas, e escolhe alvos distintos para Mísseis Mágicos. Suas decisões usam heurísticas e não garantem a jogada ótima.
 
@@ -315,9 +317,9 @@ Cartas lendárias usam gema dourada no custo de mana e continuam limitadas a uma
 
 Recruta de Ferro: Guerreira Humana, custo 1, 1/2 e Armadura 1.
 
-Saltador dos Telhados: Ladino Humano, custo 3, 3/2 e Voo. Seus ataques ignoram Bloqueio.
+Saltador dos Telhados: Submundo, Humano, custo 3, 3/2 e Voo. Seus ataques ignoram Bloqueio.
 
-Negociante de Segredos: Ladina Humana, custo 2, 2/1. Chamado: escolha conceder Saquear 1 ou Envenenar 2 permanentemente a outro aliado. Acumula. Sem outro aliado, entra sem efeito. O Sombra não possui mais Saquear naturalmente.
+Negociante de Segredos: Submundo, Humana, custo 2, 2/1. Chamado: escolha conceder Saquear 1 ou Envenenar 2 permanentemente a outro aliado. Acumula. Sem outro aliado, entra sem efeito. O Sombra não possui mais Saquear naturalmente.
 
 O Zzz animado aparece nas criaturas recém-invocadas que ainda aguardam para agir. Para criaturas que já agiram, a espada riscada ou a ampulheta só aparece quando selecionadas; fora da seleção, ficam apenas escurecidas. A mana normal aparece em duas fileiras de cinco gemas; mana temporária aparece em dourado à parte.
 
@@ -326,3 +328,17 @@ Interface de combate: cartas da mão ampliam suavemente ao passar o mouse, com d
 Ao selecionar uma criatura pronta com Disparo Arcano, esse ataque é escolhido por padrão se houver mana para usá-lo, inclusive quando o custo for zero. O botão Ataque físico permite alternar. Sem mana suficiente, a seleção começa pelo ataque físico.
 
 Ressonância tem um efeito de ondas arcanas e som próprio. Mãos Flamejantes e Bola de Fogo usam chamas animadas e som de fogo. Esporos não beneficia a própria fonte; fontes diferentes continuam beneficiando umas às outras. Mãos Flamejantes considera os vizinhos imediatos do alvo antes de resolver as mortes, aplica dano mágico separadamente e ativa Ressonância uma vez por uso.
+
+
+Facção Selvagem
+Druidas e patrulheiros podem compor decks com cartas Selvagem e neutras. Alcance obriga criaturas com Voo a atacar um defensor com Alcance e concede +1 de força física ao atacar ou contra-atacar uma criatura com Voo. O Texugo-do-mel Gigante é imune a Veneno, dano mágico e magias, inclusive benéficas. Raízes Enredantes custa 2; o Druida das Raízes usa sua habilidade por 1 mana e esgotamento. A criatura atingida não pode declarar ataques durante seu próximo turno. Seiva Renovadora concede Regeneração 2 por cinco fins de turno do alvo. Elfo é um tipo de criatura.
+
+Deck Aliança da Floresta: reúne todas as cartas Selvagem e aliados neutros em 22 cartas. Ao atualizar um arquivo antigo, o deck ocupa um espaço vazio sem substituir os decks existentes.
+
+Druida dos Companheiros: Selvagem, Humana, custo 3, 1/3. Aura: +1 de ataque para Feras aliadas enquanto ela estiver em campo; fontes acumulam e o bônus termina quando elas saem. Javali da Investida: Selvagem, Fera, custo 3, 3/2, Arrancada; entra pronto para atacar.
+
+Cervo da Clareira: Selvagem, Fera, custo 3, 1/2. No início do seu turno, compra 1 carta adicional. União da Matilha: magia Selvagem, custo 2; concede Matilha 1 a todas as criaturas em campo, inclusive inimigas, exceto as imunes a magias. Matilha 1: quando outra Fera aliada entra em campo, ganha +1 de ataque até o fim do turno. Cada concessão acumula.
+
+Lobo do Ermo: Selvagem, Fera, custo 1, 2/1, Matilha 1. Quando outra Fera aliada entra em campo, ganha +1 de ataque até o fim do turno.
+
+Atropelar: ao atacar uma criatura, o dano físico que sobrar depois de superar Armadura, redução de Voo e a vida atual do alvo atinge o castelo inimigo. O alvo ainda contra-ataca normalmente, mesmo se o atacante ou o castelo forem destruídos. Não ativa em contra-ataques nem dano mágico. Bloqueio determina os alvos válidos normalmente.

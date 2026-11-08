@@ -11,4 +11,5 @@ health=5
 card_class=5
 creature_type=3
 block=3
+trample=true
 artwork=ExtResource("2")

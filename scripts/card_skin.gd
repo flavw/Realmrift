@@ -34,8 +34,8 @@ static func texture(asset: String) -> Texture2D:
  return atlas
 
 static func class_color(card_class: int) -> Color:
- return [Color("c87575"),Color("b08bd8"),Color("9ba5b1"),Color("6ab798"),Color("d7cba6"),Color("d69c63")][clampi(card_class,0,5)]
+ return [Color("c87575"),Color("b08bd8"),Color("9ba5b1"),Color("6ab798"),Color("d7cba6"),Color("d69c63"),Color("77a56e")][clampi(card_class,0,6)]
 
 static func class_symbol(card_class: int) -> Texture2D:
- if card_class<0 or card_class>5:return null
- return texture(["class-warrior","class-mage","class-neutral","class-rogue","class-cleric","class-horde"][card_class])
+ if card_class<0 or card_class>6:return null
+ return texture(["class-warrior","class-mage","class-neutral","class-rogue","class-cleric","class-horde","class-wild"][card_class])

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/wild_scout.webp" id="2"]
+[resource]
+script=ExtResource("1")
+title="Batedora da Floresta"
+lore="Ela conhece cada trilha pelo som que as folhas fazem sob seus pés."
+cost=2
+attack=2
+health=2
+card_class=6
+reach=true
+artwork=ExtResource("2")
+artwork_focus=Vector2(0.5, 0.44)
+field_artwork_focus=Vector2(0.5, 0.33)

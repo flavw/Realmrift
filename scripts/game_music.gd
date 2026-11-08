@@ -7,7 +7,7 @@ var effects_volume: float=1.0
 const SETTINGS_PATH="user://audio_settings.cfg"
 var player: AudioStreamPlayer
 static var current: Node
-const MENU_TRACK="res://assets/audio/aldeia_ao_amanhecer.ogg"
+const MENU_TRACK="res://assets/audio/moonlit_tavern.ogg"
 const COMBAT_TRACK="res://assets/audio/chariots_of_war.ogg"
 var track: String=MENU_TRACK
 

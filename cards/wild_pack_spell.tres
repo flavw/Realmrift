@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/wild_pack_spell.webp" id="2"]
+[resource]
+script=ExtResource("1")
+title="União da Matilha"
+lore="Mesmo rivais escutam o chamado da floresta."
+cost=2
+attack=0
+health=0
+card_class=6
+card_type=1
+spell_effect=13
+artwork=ExtResource("2")
+artwork_focus=Vector2(0.5, 0.44)

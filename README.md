@@ -14,12 +14,14 @@ A coleção reúne criaturas e magias de diferentes classes e cartas neutras. Co
 
 Enter, Enter do teclado numérico ou numpad 0 passa o turno. Selecione uma criatura e clique no alvo permitido. Passe o mouse sobre uma carta para ver sua versão completa. O botão Regras abre o [manual](MANUAL.txt).
 
+Facções: Vanguarda (**Vanguard**), Arcano (**Arcane**), Luminares (**Luminaries**), Submundo (**Underworld**), Horda e Selvagem.
+
 ## Regras e recursos
 
 - Primeiro jogador sorteado; mão inicial de 3 cartas para quem começa e 4 para o segundo. Uma troca grátis das cartas escolhidas antes da compra normal do turno.
 - Vigor usa o maior valor entre ataque e vida atual tanto no ataque físico quanto no contra-ataque. Veneno acumula, causa dano no fim do turno do dono do alvo, ignora Armadura e termina completamente após esse dano.
 - Castelos com 20 de vida; mana cresce até 10; campo com até seis criaturas e mão com até sete cartas.
-- Nove espaços para decks de 22 cartas, com no máximo duas cópias por carta (uma para lendárias). Cada deck usa uma única classe + neutros.
+- Dez espaços para decks de 22 cartas, com no máximo duas cópias por carta (uma para lendárias). Cada deck usa uma única classe + neutros.
 - Armadura reduz cada dano físico, incluindo contra-ataques. Magia ignora armadura e não provoca contra-ataque.
 - Bloqueio N exige que os primeiros N ataques físicos tenham uma criatura bloqueadora como alvo. Recupera somente uma carga no início do turno do dono, até o máximo. Voo ignora essa restrição de alvo e reduz em 1 o dano de ataques físicos recebidos ao defender.
 - Arrancada permite atacar no turno de entrada. Fúria do Lobo custa uma mana, aumenta seu ataque permanentemente, não esgota e pode ser usada uma vez por turno.
@@ -98,7 +100,7 @@ Botão direito em uma carta da mão, campo, galeria ou editor abre a ilustraçã
 
 Nome e linhas de habilidades ficam centralizados no eixo da carta. Os ícones de custo e esgotar acompanham a mesma linha vertical do texto. O degradê inferior inicia transparente e termina com opacidade de 78%, preservando mais da ilustração. Ataque/vida usam posições explícitas e uma linha de base compartilhada; o grupo permanece alinhado no canto inferior direito, tanto no modelo completo quanto na versão reduzida. `tests/test_card_alignment.gd` verifica os alinhamentos e o degradê.
 
-Os nomes usam a fonte At Dawn Regular fornecida pelo usuário, incorporada em `assets/fonts/At-Dawn-Regular.otf`; não é necessário instalar a fonte no sistema. O tamanho se ajusta entre 20 e 24 px para nomes longos. Os nomes usam sombra sutil, sem contorno pesado. Guerreiro, mago, neutro, ladino e clérigo são identificados pela borda fina vermelha, roxa, cinza, verde e branca/dourada. Ataque/vida continuam coloridos por bônus/dano, mas sem escudos.
+Os nomes usam a fonte At Dawn Regular fornecida pelo usuário, incorporada em `assets/fonts/At-Dawn-Regular.otf`; não é necessário instalar a fonte no sistema. O tamanho se ajusta entre 20 e 24 px para nomes longos. Os nomes usam sombra sutil, sem contorno pesado. Vanguarda, Arcano, Neutro, Submundo e Luminares são identificados pela borda fina vermelha, roxa, cinza, verde e branca/dourada. Ataque/vida continuam coloridos por bônus/dano, mas sem escudos.
 
 ## Expansão de arquétipos e magias
 
@@ -113,9 +115,9 @@ Simulação anterior a esta expansão: [15 partidas de Guerreiro contra as outra
 Atualização: Vigor passa a funcionar no ataque e na defesa. Disparo Arcano 2 da Feiticeira/Canalista custa 1 mana + esgotar. Veja a [segunda rodada de 15 partidas](docs/SIMULACAO_GUERREIRO_RODADA_2.md).
 
 
-Chamado: [Arauto da Lua](cards/moon_herald.tres), neutro de 2 mana e 1/2. Ao entrar pela mão, outro aliado escolhido ganha +1/+1 permanente; sozinho entra sem bônus. O alvo é confirmado antes do gasto. A gema é menor (40 px no topo, 28 px nas habilidades) e aparece também na lista do editor. Agora o editor e a validação de partida permitem somente uma classe + neutros por deck; drafts só de neutros também são válidos. Nesta atualização, os decks antigos são substituídos uma vez pelas novas receitas. Edições futuras são preservadas, respeitando uma classe + neutros.
+Chamado: [Arauto da Lua](cards/moon_herald.tres), neutro de 2 mana e 1/2. Ao entrar pela mão, outro Humano aliado escolhido ganha +1/+1 permanente; sem alvo válido entra sem bônus. O alvo é confirmado antes do gasto. A gema é menor (40 px no topo, 28 px nas habilidades) e aparece também na lista do editor. Agora o editor e a validação de partida permitem somente uma classe + neutros por deck; drafts só de neutros também são válidos. Nesta atualização, os decks antigos são substituídos uma vez pelas novas receitas. Edições futuras são preservadas, respeitando uma classe + neutros.
 
-Chamado é um gatilho genérico de entrada pela mão; o efeito é definido por carta. Arauto da Lua usa `BUFF_ALLY` e concede +1 de ataque, +1 de vida atual e +1 de vida máxima a outro aliado. O resumo é **Chamado — +1/+1**.
+Chamado é um gatilho genérico de entrada pela mão; o efeito é definido por carta. Arauto da Lua usa `BUFF_ALLY` e concede +1 de ataque, +1 de vida atual e +1 de vida máxima a outro Humano aliado. O resumo é **Chamado — Humano: +1/+1**.
 
 
 Quatro novos Chamados por classe: Ferreiro da Muralha (Armadura +1), Conjuradora do Éter (invoca Familiar Rúnico), Alquimista das Brumas (Veneno 2 em inimigo) e Oráculo da Aurora (+2 vida a aliado, com Vigor). Os decks antigos foram substituídos por novas listas; os nove espaços permanecem e cada novo deck começa pela escolha da classe base. Detalhes em [CHAMADOS_POR_CLASSE.md](docs/CHAMADOS_POR_CLASSE.md).
@@ -151,7 +153,7 @@ Guardião Arcano: Guerreiro 3 mana, 2/3, Guarda Arcana 1. Anula uma ocorrência 
 
 [Boi da Colheita e revisão das regras da aldeia](docs/COLHEITA_E_REPARO.md): Colheita por ativação de Cultivo aliado, reparo de Muralhas, castelos imunes a Veneno e suporte para outros aliados de qualquer classe.
 
-[Atacar com todos, artes de castelo e trilha](docs/ATAQUE_EM_GRUPO_E_TRILHA.md). O menu usa a trilha ambiente e os combates usam “Chariots Of War”, de Aakash Gandhi; ambas respeitam o controle de som e o crédito aparece no menu.
+[Atacar com todos, artes de castelo e trilha](docs/ATAQUE_EM_GRUPO_E_TRILHA.md). O menu usa “Moonlit Tavern”, de flavioj, criada com o Suno, e os combates usam “Chariots Of War”, de Aakash Gandhi; ambas respeitam o controle de som e o crédito aparece no menu.
 
 Layout 1920×1080 em tela cheia, com F11 para modo janela. Campo com seis criaturas por lado e [Devota do Alvorecer, novos cliques e revisão da herança neutra](docs/SEIS_CRIATURAS_E_DEVOCAO.md).
 

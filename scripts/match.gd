@@ -4,6 +4,22 @@ extends RefCounted
 const MAX_HAND_SIZE := 7
 
 const CARD_DATA = {
+ "wild_pack_spell": preload("res://cards/wild_pack_spell.tres"),
+ "wild_stag": preload("res://cards/wild_stag.tres"),
+ "wild_beast_druid": preload("res://cards/wild_beast_druid.tres"),
+ "wild_swift_boar": preload("res://cards/wild_swift_boar.tres"),
+ "wild_elf": preload("res://cards/wild_elf.tres"),
+ "wild_badger": preload("res://cards/wild_badger.tres"),
+ "wild_scout": preload("res://cards/wild_scout.tres"),
+ "wild_archer": preload("res://cards/wild_archer.tres"),
+ "wild_sprout_druid": preload("res://cards/wild_sprout_druid.tres"),
+ "wild_roots_druid": preload("res://cards/wild_roots_druid.tres"),
+ "wild_guardian": preload("res://cards/wild_guardian.tres"),
+ "wild_wolf": preload("res://cards/wild_wolf.tres"),
+ "wild_wasp": preload("res://cards/wild_wasp.tres"),
+ "wild_roots": preload("res://cards/wild_roots.tres"),
+ "wild_regeneration": preload("res://cards/wild_regeneration.tres"),
+
  "warrior": preload("res://cards/warrior.tres"),
  "mage": preload("res://cards/mage.tres"),
  "wizard_apprentice": preload("res://cards/wizard_apprentice.tres"),
@@ -91,11 +107,13 @@ var opening := false
 var mulligan_done: Array[bool] = [true,true]
 var mulligan_rounds: Array[int]=[0,0]
 
-const DECK_NAMES=["Baluarte das Cicatrizes", "Caçada das Brumas", "Círculo Arcano", "Aurora Vital", "União da Colheita", "Horda dos Ermos"]
+const DECK_NAMES=["Baluarte das Cicatrizes", "Caçada das Brumas", "Círculo Arcano", "Aurora Vital", "União da Colheita", "Horda dos Ermos", "Aliança da Floresta"]
 static func default_deck_name(style: int=0) -> String:
  return DECK_NAMES[clampi(style,0,DECK_NAMES.size()-1)]
 
 static func default_deck(style: int = 0) -> Array[String]:
+ if style==6:
+  return ["wild_badger","wild_scout","wild_archer","wild_sprout_druid","wild_roots_druid","wild_guardian","wild_wolf","wild_wasp","wild_elf","wild_roots","wild_regeneration","wolf","wolf","squire","squire","moon_herald","moon_herald","farmer","farmer","messenger_hawk","messenger_hawk","village_reconstruction"]
  var recipes := [
   ["squire", "squire", "sentinel", "sentinel", "wall_smith", "wall_smith", "warrior", "warrior", "wall_guard", "moon_herald", "iron_stance", "iron_stance", "wall_guard", "moon_herald", "bloodblade", "abascanto_guardian", "abascanto_guardian", "generous_peasant", "generous_peasant", "bloodblade"],
   ["dusk_scout", "dusk_scout", "raven", "raven", "lightning_rogue", "lightning_rogue", "mist_alchemist", "mist_alchemist", "moon_herald", "messenger_hawk", "shadow_step", "shadow_step", "moon_herald", "messenger_hawk", "wolf", "wolf", "gate_watcher", "gate_watcher", "street_urchin", "street_urchin"],
@@ -138,7 +156,7 @@ static func can_add_class(cards: Array,key: String) -> bool:
 static func neutral_monster_forbidden(base: int,key: String) -> bool:
  if not CARD_DATA.has(key):return false
  var card: CardData=CARD_DATA[key]
- return base in [CardData.CardClass.WARRIOR,CardData.CardClass.MAGE,CardData.CardClass.LADINO,CardData.CardClass.CLERIC] and card.card_class==CardData.CardClass.NEUTRAL and card.has_creature_type(CardData.CreatureType.MONSTER)
+ return base in [CardData.CardClass.WARRIOR,CardData.CardClass.MAGE,CardData.CardClass.LADINO,CardData.CardClass.CLERIC,CardData.CardClass.WILD] and card.card_class==CardData.CardClass.NEUTRAL and card.has_creature_type(CardData.CreatureType.MONSTER)
 
 static func restrictions_met(cards: Array) -> bool:
  var only_neutral: bool=deck_class(cards)==-1
@@ -287,6 +305,13 @@ func begin_turn() -> void:
     log_event("Comércio: %s recebe +%d mana temporária por Cultivo." % [listener.name,commerce])
  refresh_auras()
  draw(turn)
+ if winner!=-1:return
+ for observer in p.board.duplicate():
+  if observer.health<=0:continue
+  for i in range(int(observer.get("turn_draw",0))):
+   log_event("%s: compra adicional no início do turno." % observer.name,turn)
+   draw(turn)
+   if winner!=-1:return
 
 func spend_mana(p: Dictionary, amount: int) -> void:
  var paid: int=maxi(0,amount)
@@ -298,13 +323,21 @@ func end_turn(side: int) -> bool:
  if opening or side != turn or winner != -1:
   return false
  log_event("%s encerra o turno." % side_name(side))
+ for player in players:
+  for unit in player.board:
+   unit["turn_attack"]=int(unit.get("turn_attack",0))-int(unit.get("pack_turn_attack",0))
+   unit["pack_turn_attack"]=0
  for unit in players[side].board:
   unit["turn_attack"]=0
   unit["turn_flying"]=false
   unit["turn_swift"]=false
- for unit in players[side].board:unit["bleeding"]=0
+ for unit in players[side].board:unit["bleeding"]=0;unit["rooted"]=false
  resolve_poison(side)
  resolve_regeneration(side)
+ for unit in players[side].board:
+  if int(unit.get("nature_regen_turns",0))>0:
+   unit.nature_regen_turns-=1
+   if unit.nature_regen_turns==0:unit.regeneration=maxi(0,int(unit.regeneration)-2)
  var p: Dictionary=players[side]
  if int(p.get("temporary_mana",0))>0:
   p.mana=maxi(0,int(p.mana)-int(p.temporary_mana))
@@ -447,7 +480,7 @@ func apply_healing(owner: int,unit: Dictionary,amount: int,source_side: int=-1) 
  return restored
 
 static func apply_poison(unit: Dictionary,amount: int) -> bool:
- if unit.get("wall",false):
+ if unit.get("wall",false) or unit.get("poison_immune",false):
   unit.poison=0
   return false
  unit.poison=int(unit.get("poison",0))+amount
@@ -487,6 +520,7 @@ func attack_blockers(side: int,index: int,target: int) -> Array[int]:
  return guards if not guards.is_empty() and target not in guards else []
 
 static func damage(unit: Dictionary, amount: int, magical: bool = false) -> int:
+ if magical and unit.get("spell_immune",false):return 0
  if magical and amount>0 and int(unit.get("abascanto",0))>0:
   unit.abascanto-=1
   return 0
@@ -512,12 +546,18 @@ func can_target(side: int, index: int, target: int, magical: bool = false) -> bo
  var unit: Dictionary = p.board[index]
  if not unit.ready:
   return false
+ if magical and unit.get("root_power",false):return target>=0 and p.mana>=1 and not foe.board[target].get("spell_immune",false)
  if magical:
   return unit.get("magic_damage", 0) > 0 and p.mana >= unit.get("magic_cost", 1) and (target>=0 or int(unit.get("magic_splash",0))==0)
- if unit.get("wall",false) or physical_attack(unit) <= 0:
+ if unit.get("wall",false) or unit.get("rooted",false) or physical_attack(unit) <= 0:
   return false
+ if has_flying(unit):
+  var reachers: Array=[]
+  for j in range(foe.board.size()):
+   if foe.board[j].get("reach",false):reachers.append(j)
+  return reachers.is_empty() or target in reachers
  var guards := blockers(1 - side)
- return has_flying(unit) or guards.is_empty() or target in guards
+ return guards.is_empty() or target in guards
 
 func has_magic_target(side: int,index: int) -> bool:
  if can_target(side,index,-1,true):return true
@@ -546,18 +586,20 @@ func attack_forecast(side: int,index: int,target: int,magical: bool=false) -> Di
  if not can_target(side,index,target,magical):return {}
  var attacker: Dictionary=players[side].board[index]
  var defender: Dictionary={} if target<0 else players[1-side].board[target]
- var power: int=int(attacker.get("magic_damage",0))+magic_bonus(side) if magical else physical_attack(attacker)
+ var power: int=int(attacker.get("magic_damage",0))+magic_bonus(side) if magical else physical_attack(attacker)+(1 if target>=0 and attacker.get("reach",false) and has_flying(defender) else 0)
  var absorbed: int=0 if magical or target<0 else mini(power,maxi(0,int(defender.get("armor",0))))
  var flight_reduction: int=0 if magical or target<0 or not has_flying(defender) else mini(1,maxi(0,power-absorbed))
- var warded: bool=magical and target>=0 and int(defender.get("abascanto",0))>0
+ var warded: bool=magical and target>=0 and (int(defender.get("abascanto",0))>0 or defender.get("spell_immune",false))
  var dealt: int=0 if warded else maxi(0,power-absorbed-flight_reduction)
- var counter: int=0 if magical or target<0 else defense_attack(defender)
+ var castle_damage: int=maxi(0,dealt-int(defender.health)) if not magical and target>=0 and attacker.get("trample",false) else 0
+ if castle_damage>0:dealt-=castle_damage
+ var counter: int=0 if magical or target<0 else defense_attack(defender)+(1 if defender.get("reach",false) and has_flying(attacker) else 0)
  var counter_absorbed: int=mini(counter,maxi(0,int(attacker.get("armor",0))))
  var received: int=maxi(0,counter-counter_absorbed)
  var bleeding: int=int(attacker.get("bleeding",0))
  if not magical and target>=0 and counter>0 and not attacker.get("wall",false):bleeding+=int(defender.get("bleed",0))
  var target_health: int=int(players[1-side].hp) if target<0 else int(defender.health)
- return {"damage":dealt,"received":received,"absorbed":absorbed,"flight_reduction":flight_reduction,"counter_absorbed":counter_absorbed,"bleeding":bleeding,"warded":warded,"splash_hits":magic_hit_plan(side,index,target) if magical and int(attacker.get("magic_splash",0))>0 else [],"castle":target<0,"target_dies":dealt>=target_health,"attacker_dies":received+bleeding>=int(attacker.health)+(int(attacker.get("resonance",0)) if magical else 0)}
+ return {"damage":dealt,"castle_damage":castle_damage,"received":received,"absorbed":absorbed,"flight_reduction":flight_reduction,"counter_absorbed":counter_absorbed,"bleeding":bleeding,"warded":warded,"splash_hits":magic_hit_plan(side,index,target) if magical and int(attacker.get("magic_splash",0))>0 else [],"castle":target<0,"target_dies":dealt>=target_health,"attacker_dies":received+bleeding>=int(attacker.health)+(int(attacker.get("resonance",0)) if magical else 0)}
 
 func preferred_attack_target(side: int,index: int) -> int:
  # -1 is the castle; -2 means no legal physical attack.
@@ -568,7 +610,7 @@ func preferred_attack_target(side: int,index: int) -> int:
  return -2
 
 func apply_bleeding(unit: Dictionary,amount: int,side: int) -> void:
- if amount<=0 or unit.get("wall",false):return
+ if amount<=0 or unit.get("wall",false) or unit.get("poison_immune",false):return
  unit.bleeding=int(unit.get("bleeding",0))+amount
  if not last_action.has("bleeding_applied"):last_action["bleeding_applied"]=[]
  last_action.bleeding_applied.append({"side":side,"id":unit.id,"castle":false,"amount":amount})
@@ -660,8 +702,19 @@ func act(side: int, index: int, target: int, magical: bool = false) -> bool:
  unit.exhausting_action_taken=true
  if not magical:unit.attacked_this_turn=true
  if magical:
-  spend_mana(p,unit.magic_cost)
-  if int(unit.get("magic_splash",0))>0:
+  if unit.get("root_power",false):
+   spend_mana(p,1)
+   var victim: Dictionary=foe.board[target]
+   if int(victim.get("abascanto",0))>0:
+    victim.abascanto-=1
+    last_action["abascanto_blocked"]=true
+   else:victim.rooted=true
+   last_action["amount"]=0
+   log_event("%s usa Raízes Enredantes em %s." % [unit.name,victim.name])
+  else:
+   spend_mana(p,unit.magic_cost)
+  if unit.get("root_power",false):pass
+  elif int(unit.get("magic_splash",0))>0:
    last_action["fire_hits"]=[]
    for hit in magic_hit_plan(side,index,target):
     var victim: Dictionary=foe.board[hit.index]
@@ -679,7 +732,7 @@ func act(side: int, index: int, target: int, magical: bool = false) -> bool:
    last_action["amount"]=dealt
    last_action["abascanto_blocked"]=target>=0 and dealt==0 and total_magic>0
    log_event("%s: Guarda Arcana anula o dano mágico." % foe.board[target].name if last_action.abascanto_blocked else "%s causa %d de dano mágico em %s." % [unit.name,dealt,castle_name(1-side) if target<0 else foe.board[target].name])
-  trigger_resonance(side)
+  if not unit.get("root_power",false):trigger_resonance(side)
  elif target == -1:
   last_action["amount"]=physical_attack(unit)
   foe.hp -= physical_attack(unit)
@@ -694,14 +747,19 @@ func act(side: int, index: int, target: int, magical: bool = false) -> bool:
   if defender.get("block", 0) > 0:
    defender.block -= 1
    log_event("Bloqueio de %s consumido." % defender.name)
-  var counter: int = defense_attack(defender)
-  var physical: int=physical_attack(unit)
+  var counter: int = defense_attack(defender)+(1 if defender.get("reach",false) and has_flying(unit) else 0)
+  var physical: int=physical_attack(unit)+(1 if unit.get("reach",false) and has_flying(defender) else 0)
   var armor_absorbed: int=mini(physical,maxi(0,int(defender.get("armor",0))))
   var flight_reduction: int=mini(1,maxi(0,physical-armor_absorbed)) if has_flying(defender) else 0
   var counter_absorbed: int=mini(counter,maxi(0,int(unit.get("armor",0))))
-  var dealt := damage(defender, physical-flight_reduction)
+  var castle_damage: int=maxi(0,physical-flight_reduction-armor_absorbed-int(defender.health)) if unit.get("trample",false) else 0
+  var dealt := damage(defender, physical-flight_reduction-castle_damage)
   var received := damage(unit, counter)
+  if castle_damage>0:
+   foe.hp-=castle_damage
+   log_event("Atropelar: %s causa %d de dano ao %s." % [unit.name,castle_damage,castle_name(1-side)],side)
   last_action["amount"]=dealt
+  last_action["castle_damage"]=castle_damage
   last_action["received"]=received
   last_action["absorbed"]=armor_absorbed
   last_action["flight_reduction"]=flight_reduction
@@ -733,7 +791,7 @@ func check_winner() -> void:
 
 # Scores reflect actual damage and remaining protection, not printed attack alone.
 func ai_magic_score(victim: Dictionary,amount: int) -> int:
- if int(victim.get("abascanto",0))>0:return -3
+ if int(victim.get("abascanto",0))>0 or victim.get("spell_immune",false):return -3
  var damage_amount: int=maxi(0,amount)
  var threat: int=physical_attack(victim)+int(victim.get("magic_damage",0))*2+int(victim.get("heal_amount",0))+int(victim.get("envenom",0))
  return mini(damage_amount,int(victim.health))*3+threat+(12 if int(victim.health)<=damage_amount else 0)
@@ -761,13 +819,14 @@ func ai_magic_target(side: int,index: int) -> int:
  return best if best_score>0 else -1
 
 func ai_attack_score(attacker: Dictionary,defender: Dictionary) -> int:
- var dealt: int=maxi(0,physical_attack(attacker)-int(defender.get("armor",0))-(1 if has_flying(defender) else 0))
- var received: int=maxi(0,defense_attack(defender)-int(attacker.get("armor",0)))
+ var dealt: int=maxi(0,physical_attack(attacker)+(1 if attacker.get("reach",false) and has_flying(defender) else 0)-int(defender.get("armor",0))-(1 if has_flying(defender) else 0))
+ var received: int=maxi(0,defense_attack(defender)+(1 if defender.get("reach",false) and has_flying(attacker) else 0)-int(attacker.get("armor",0)))
  var kills: bool=dealt>=int(defender.health)
  var dies: bool=received>=int(attacker.health)
  var enemy_threat: int=physical_attack(defender)+int(defender.get("magic_damage",0))*2+int(defender.get("heal_amount",0))+int(defender.get("envenom",0))
  var own_value: int=physical_attack(attacker)+int(attacker.get("magic_damage",0))*2+int(attacker.get("heal_amount",0))
  var score: int=mini(dealt,int(defender.health))*2+enemy_threat+(12 if kills else 0)
+ if attacker.get("trample",false):score+=maxi(0,dealt-int(defender.health))*3
  score-=mini(received,int(attacker.health))*2+(12+own_value if dies else 0)
  if int(attacker.get("envenom",0))>0 and not defender.get("wall",false):score+=3
  if int(defender.get("envenom",0))>0 and not attacker.get("wall",false):score-=3
@@ -802,6 +861,10 @@ func ai_step() -> bool:
  # Immediate castle lethal takes precedence over setup and healing.
  for i in range(p.board.size()):
   if can_target(1,i,-1,false) and physical_attack(p.board[i])>=enemy.hp:return act(1,i,-1)
+  if p.board[i].get("trample",false):
+   for j in range(enemy.board.size()):
+    var forecast:=attack_forecast(1,i,j,false)
+    if not forecast.is_empty() and int(forecast.get("castle_damage",0))>=enemy.hp:return act(1,i,j,false)
  for i in range(p.board.size()):
   var caster: Dictionary=p.board[i]
   var amount: int=int(caster.get("magic_damage",0))+magic_bonus(1)
@@ -811,6 +874,9 @@ func ai_step() -> bool:
   if ai_quick_heal(i):return true
   var actor: Dictionary=p.board[i]
   if not actor.ready:continue
+  if actor.get("root_power",false):
+   for j in range(enemy.board.size()):
+    if physical_attack(enemy.board[j])>0 and not enemy.board[j].get("rooted",false) and can_target(1,i,j,true):return act(1,i,j,true)
   var heal_amount: int=int(actor.get("heal_amount",0))
   if heal_amount>0:
    var best_undead: int=-1
@@ -898,9 +964,15 @@ func can_cast(side: int, hand_index: int, target_side: int, target: int) -> bool
  var target_player: Dictionary = players[target_side]
  if target < -1 or target >= target_player.board.size():
   return false
- if target >= 0 and target_player.board[target].health <= 0:
+ if target >= 0 and (target_player.board[target].health <= 0 or target_player.board[target].get("spell_immune",false)):
   return false
  match int(card.spell_effect):
+  CardData.SpellEffect.GRANT_PACK:
+   return target_side==side and target==-1 and players.any(func(player):return player.board.any(func(creature):return creature.health>0 and not creature.get("spell_immune",false)))
+  CardData.SpellEffect.ROOTS:
+   return target_side==1-side and target>=0
+  CardData.SpellEffect.NATURE_REGEN:
+   return target_side==side and target>=0
   CardData.SpellEffect.MAGIC_MISSILES:
    return target_side==1-side and (target>=0 or target==-1) and players[1-side].board.size()>=1
   CardData.SpellEffect.HORDE_ROAR:
@@ -982,20 +1054,36 @@ func cast(side: int, hand_index: int, target_side: int, target: int) -> bool:
  var key: String = p.hand[hand_index]
  var card: Dictionary = CARDS[key]
  var unit: Dictionary = {} if target < 0 else players[target_side].board[target]
- last_action = {"kind":"spell","side":side,"attacker":-1,"target_side":target_side,"target":-1 if target<0 else unit.get("id",-1),"castle":target<0 and card.spell_effect not in [CardData.SpellEffect.AREA_ARCANE,CardData.SpellEffect.HORDE_ROAR],"effect":card.spell_effect,"card":key,"dead":[]}
+ last_action = {"kind":"spell","side":side,"attacker":-1,"target_side":target_side,"target":-1 if target<0 else unit.get("id",-1),"castle":target<0 and card.spell_effect not in [CardData.SpellEffect.AREA_ARCANE,CardData.SpellEffect.HORDE_ROAR,CardData.SpellEffect.GRANT_PACK],"effect":card.spell_effect,"card":key,"dead":[]}
  spend_mana(p,card.cost)
  p.hand.remove_at(hand_index)
  match int(card.spell_effect):
+  CardData.SpellEffect.GRANT_PACK:
+   last_action["buffs"]=[]
+   for owner in range(players.size()):
+    for creature in players[owner].board:
+     if creature.health<=0 or creature.get("spell_immune",false):continue
+     creature.pack=int(creature.get("pack",0))+1
+     last_action.buffs.append({"side":owner,"id":creature.id,"castle":false,"amount":1})
+  CardData.SpellEffect.ROOTS:
+   if int(unit.get("abascanto",0))>0:
+    unit.abascanto-=1
+    last_action["abascanto_blocked"]=true
+   else:unit.rooted=true
+  CardData.SpellEffect.NATURE_REGEN:
+   if int(unit.get("nature_regen_turns",0))<=0:unit.regeneration=int(unit.get("regeneration",0))+2
+   unit.nature_regen_turns=5
   CardData.SpellEffect.HORDE_ROAR:
    last_action["buffs"]=[]
    for ally in p.board:
-    if ally.health>0 and has_type(ally,CardData.CreatureType.MONSTER):
+    if ally.health>0 and not ally.get("spell_immune",false) and has_type(ally,CardData.CreatureType.MONSTER):
      ally["turn_attack"]=int(ally.get("turn_attack",0))+int(card.spell_value)
      last_action.buffs.append({"side":side,"id":ally.id,"castle":false,"amount":card.spell_value})
   CardData.SpellEffect.AREA_ARCANE:
    var total: int=int(card.spell_value)+magic_bonus(side)
    last_action["area_hits"]=[]
    for victim in players[1-side].board:
+    if victim.get("spell_immune",false):continue
     var dealt: int=damage(victim,total,true)
     last_action.area_hits.append({"side":1-side,"id":victim.id,"castle":false,"amount":dealt,"abascanto_blocked":dealt==0 and total>0})
     if dealt==0 and total>0:log_event("%s: Guarda Arcana anula a magia." % victim.name)
@@ -1040,7 +1128,9 @@ func cast(side: int, hand_index: int, target_side: int, target: int) -> bool:
  trigger_resonance(side)
  remove_dead()
  refresh_auras()
- if card.spell_effect==CardData.SpellEffect.HORDE_ROAR:
+ if card.spell_effect==CardData.SpellEffect.GRANT_PACK:
+  log_event("%s concede Matilha 1 às criaturas de ambos os lados." % side_name(side),side)
+ elif card.spell_effect==CardData.SpellEffect.HORDE_ROAR:
   log_event("%s conjura %s: Monstros aliados ganham +%d de ataque até o fim do turno." % [side_name(side),card.name,card.spell_value])
  elif card.spell_effect==CardData.SpellEffect.AREA_ARCANE:
   log_event("%s conjura %s: %d de dano mágico a todas as criaturas inimigas." % [side_name(side),card.name,card.spell_value+magic_bonus(side)])
@@ -1051,7 +1141,7 @@ func cast(side: int, hand_index: int, target_side: int, target: int) -> bool:
 func ai_spell_target(hand_index: int) -> Dictionary:
  var p: Dictionary = players[1]
  var card: Dictionary = CARDS[p.hand[hand_index]]
- var owner := 0 if card.spell_effect in [CardData.SpellEffect.ARCANE,CardData.SpellEffect.CONDUCTIVE,CardData.SpellEffect.AREA_ARCANE,CardData.SpellEffect.MAGIC_MISSILES] else 1
+ var owner := 0 if card.spell_effect in [CardData.SpellEffect.ARCANE,CardData.SpellEffect.CONDUCTIVE,CardData.SpellEffect.AREA_ARCANE,CardData.SpellEffect.MAGIC_MISSILES,CardData.SpellEffect.ROOTS] else 1
  if card.spell_effect==CardData.SpellEffect.RESTORE:
   for target in range(players[0].board.size()):
    if can_cast(1,hand_index,0,target) and ai_magic_score(players[0].board[target],int(card.spell_value))>0:return {"side":0,"index":target}
@@ -1063,6 +1153,14 @@ func ai_spell_target(hand_index: int) -> Dictionary:
   var score := 0
   var unit: Dictionary = {} if target < 0 else players[owner].board[target]
   match int(card.spell_effect):
+   CardData.SpellEffect.ROOTS:
+    score=physical_attack(unit)*3 if not unit.get("rooted",false) else 0
+   CardData.SpellEffect.NATURE_REGEN:
+    score=maxi(0,int(unit.get("max_health",unit.health))-int(unit.health))*2+2
+   CardData.SpellEffect.GRANT_PACK:
+    var friendly_beasts: int=p.board.filter(func(v):return has_type(v,CardData.CreatureType.BEAST)).size()
+    var enemy_beasts: int=players[0].board.filter(func(v):return has_type(v,CardData.CreatureType.BEAST)).size()
+    score=maxi(0,(friendly_beasts-enemy_beasts)*3+p.board.size()-players[0].board.size())
    CardData.SpellEffect.HORDE_ROAR:
     for ally in p.board:
      if ally.health>0 and ally.ready and not ally.get("wall",false) and has_type(ally,CardData.CreatureType.MONSTER):score+=int(card.spell_value)*3
@@ -1196,6 +1294,7 @@ func entry_valid_targets(side: int,card: Dictionary) -> Array:
  for i in range(players[owner].board.size()):
   var target: Dictionary=players[owner].board[i]
   if target.health<=0:continue
+  if int(card.get("entry_effect",0))==CardData.EntryEffect.BUFF_ALLY and card.get("entry_human_only",false) and not has_type(target,CardData.CreatureType.HUMAN):continue
   if int(card.get("entry_effect",0))==CardData.EntryEffect.BUFF_MONSTER_UNDEAD and not (has_type(target,CardData.CreatureType.MONSTER) or has_type(target,CardData.CreatureType.UNDEAD)):continue
   result.append(i)
  return result
@@ -1207,6 +1306,13 @@ func spawn_unit(side: int,key: String) -> Dictionary:
  var unit: Dictionary=card.duplicate(true)
  unit.merge({"key":key,"id":next_id,"ready":card.get("swift",false),"max_health":card.health,"poison":0,"summoned_this_turn":true,"actions_taken":0,"exhausting_action_taken":false})
  next_id+=1
+ if has_type(unit,CardData.CreatureType.BEAST):
+  for observer in players[side].board:
+   var bonus: int=int(observer.get("pack",0))
+   if observer.health<=0 or bonus<=0:continue
+   observer["turn_attack"]=int(observer.get("turn_attack",0))+bonus
+   observer["pack_turn_attack"]=int(observer.get("pack_turn_attack",0))+bonus
+   log_event("Matilha: %s recebe +%d de ataque até o fim do turno." % [observer.name,bonus],side)
  players[side].board.append(unit)
  refresh_auras()
  unit.ready=unit.get("swift",false)
@@ -1264,11 +1370,13 @@ func abascanto_capacity(unit: Dictionary) -> int:
 
 func card_for_unit(unit: Dictionary) -> CardData:
  var view: CardData=Collective.display_card(self,unit)
- if view.block!=block_capacity(unit) or view.loot!=int(unit.get("loot",0)) or view.envenom!=int(unit.get("envenom",0)):
+ if view.block!=block_capacity(unit) or view.loot!=int(unit.get("loot",0)) or view.envenom!=int(unit.get("envenom",0)) or view.regeneration!=int(unit.get("regeneration",0)) or view.pack!=int(unit.get("pack",0)):
   view=view.duplicate()
   view.block=block_capacity(unit)
   view.loot=int(unit.get("loot",0))
   view.envenom=int(unit.get("envenom",0))
+  view.regeneration=int(unit.get("regeneration",0))
+  view.pack=int(unit.get("pack",0))
  return view
 
 func refresh_auras() -> void:
@@ -1286,6 +1394,7 @@ func refresh_auras() -> void:
       if target.health<=0:continue
       if is_same(source,target) and not aura.get("aura_includes_self",true):continue
       if int(aura.get("aura_targets",0))==CardData.AuraTargets.ALLIED_NEUTRALS and unit_class(target)!=CardData.CardClass.NEUTRAL:continue
+      if int(aura.get("aura_targets",0))==CardData.AuraTargets.ALLIED_BEASTS and not has_type(target,CardData.CreatureType.BEAST):continue
       if int(aura.aura_effect)==CardData.AuraEffect.ATTACK:target.aura_attack+=int(aura.aura_value)
   var departed:=false
   for owner in range(players.size()):

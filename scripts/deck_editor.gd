@@ -23,6 +23,7 @@ var draft_base: int=-1
 var addition_layer: CanvasLayer
 var body: MarginContainer
 var message := "Escolha cartas para montar seu deck."
+var limit_notice_id := 0
 var scroll_position := 0
 var collection_scroll: ScrollContainer
 var class_filter: int=-1
@@ -33,9 +34,12 @@ var focused_card: String=""
 var pending_remove_key: String=""
 var pending_open_slot: int=-1
 var collection_tiles: Dictionary={}
-const CLASS_NAMES=["Guerreiro","Mago","Neutro","Ladino","Clérigo","Horda"]
+const CLASS_NAMES=preload("res://scripts/faction_names.gd").PT
 var collection_dialog: AcceptDialog
 var name_edit: LineEdit
+var collection_dragging := false
+var collection_drag_start_y := 0.0
+var collection_drag_start_scroll := 0
 
 func configure(value: DeckStore) -> void:
  store = value
@@ -94,6 +98,7 @@ func action_button(value: String, callback: Callable, enabled: bool = true) -> B
 func render() -> void:
  if not is_node_ready():
   return
+ collection_dragging=false
  if is_instance_valid(body):
   var previous_scroll=body.find_child("DeckLibraryScroll",true,false)
   if is_instance_valid(previous_scroll):library_scroll_position=previous_scroll.scroll_vertical
@@ -316,7 +321,7 @@ func begin_class_choice() -> void:
  render()
 
 func select_base_class(value: int) -> void:
- if value not in [0,1,2,3,4,5]:return
+ if value not in [0,1,2,3,4,5,6]:return
  if not draft.is_empty() and draft_base>=0 and draft_base!=value:return
  draft_base=value
  class_filter=-1;type_filter=-1;mana_filter=-1;search_query="";focused_card=""
@@ -336,7 +341,7 @@ func render_class_choice(page: VBoxContainer) -> void:
  grid.name="BaseClassChoices";grid.columns=3
  grid.add_theme_constant_override("h_separation",20);grid.add_theme_constant_override("v_separation",20)
  center.add_child(grid)
- for value in [0,1,3,4,5,2]:
+ for value in [0,1,3,4,5,6,2]:
   var choice:=Button.new()
   choice.name="ChooseBase_%d" % value
   choice.custom_minimum_size=Vector2(330,170)
@@ -454,8 +459,8 @@ func build_collection_filters(parent: VBoxContainer) -> void:
  var values: Array=[-1] if draft_base==CardData.CardClass.NEUTRAL else [-1,draft_base,CardData.CardClass.NEUTRAL]
  var labels: Array=["Neutros"] if draft_base==CardData.CardClass.NEUTRAL else [CLASS_NAMES[draft_base]+" e neutros","Somente "+CLASS_NAMES[draft_base],"Somente neutros"]
  if screen=="collection":
-  values=[-1,0,1,2,3,4,5]
-  var counts: Array[int]=[0,0,0,0,0,0]
+  values=[-1,0,1,2,3,4,5,6]
+  var counts: Array[int]=[0,0,0,0,0,0,0]
   var total:=0
   for data in Match.CARD_DATA.values():
    if not data.collectible:continue
@@ -469,7 +474,7 @@ func build_collection_filters(parent: VBoxContainer) -> void:
  picker.item_selected.connect(func(index):class_filter=values[index];reset_collection_scroll();render())
  row.add_child(picker)
  var types:=OptionButton.new();types.name="CollectionTypeFilter"
- for label in ["Todos os tipos","Criaturas","Magias","Humano","Fera","Artefato","Monstro","Morto-vivo"]:types.add_item(label)
+ for label in ["Todos os tipos","Criaturas","Magias","Humano","Fera","Artefato","Monstro","Morto-vivo","Elfo"]:types.add_item(label)
  types.select(type_filter+1)
  types.item_selected.connect(func(index):type_filter=index-1;reset_collection_scroll();render())
  row.add_child(types)
@@ -502,6 +507,9 @@ func collection_style(key: String) -> StyleBoxFlat:
  return style
 
 func _input(event: InputEvent) -> void:
+ if screen=="collection":
+  handle_collection_drag(event)
+  return
  if screen!="edit" or focused_card.is_empty() or not is_instance_valid(collection_scroll):return
  if not event is InputEventMouseButton or not event.pressed:return
  if event.button_index not in [MOUSE_BUTTON_LEFT,MOUSE_BUTTON_RIGHT]:return
@@ -517,6 +525,28 @@ func _input(event: InputEvent) -> void:
    var old_card: Control=find_child("CollectionView_"+previous_key,true,false)
    if is_instance_valid(old_card):old_card.modulate=Color(0.7,0.7,0.75) if not addition_reason(previous_key).is_empty() else Color.WHITE
    return
+
+func handle_collection_drag(event: InputEvent) -> void:
+ if not is_instance_valid(collection_scroll) or not collection_scroll.is_visible_in_tree():
+  collection_dragging=false
+  return
+ if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT:
+  if not event.pressed:
+   collection_dragging=false
+   return
+  var scrollbar:=collection_scroll.get_v_scroll_bar()
+  if is_instance_valid(collection_dialog) and collection_dialog.visible:return
+  if scrollbar.visible and scrollbar.get_global_rect().has_point(event.position):return
+  if collection_scroll.get_global_rect().has_point(event.position):
+   collection_dragging=true
+   collection_drag_start_y=event.position.y
+   collection_drag_start_scroll=collection_scroll.scroll_vertical
+ elif event is InputEventMouseMotion and collection_dragging:
+  if not event.button_mask & MOUSE_BUTTON_MASK_LEFT:
+   collection_dragging=false
+   return
+  collection_scroll.scroll_vertical=roundi(collection_drag_start_scroll+collection_drag_start_y-event.position.y)
+  scroll_position=collection_scroll.scroll_vertical
 
 func locate_card(key: String) -> void:
  if not Match.CARD_DATA.has(key):return
@@ -545,8 +575,8 @@ func addition_reason(key: String) -> String:
  if Match.neutral_monster_forbidden(draft_base,key):return "Monstros neutros só podem entrar na Horda ou em decks só de neutros."
  if not DeckStore.accepts_base(draft_base,[key]):return "Humanos precisam de Pacto Sombrio para entrar na Horda." if draft_base==CardData.CardClass.HORDE and Match.CARD_DATA[key].is_human() else "Esta carta não pertence à classe base do deck."
  if not Match.can_add_class(draft,key):return "Use somente uma classe por deck. Neutros são permitidos."
- if draft.count(key)>=Match.copy_limit(key):return "Lendária: máximo de 1 cópia." if Match.CARD_DATA[key].legendary else "Máximo de 2 cópias desta carta."
  if draft.size()>=Match.DECK_SIZE:return "Deck completo: remova uma carta antes de adicionar."
+ if draft.count(key)>=Match.copy_limit(key):return "Lendária: máximo de 1 cópia." if Match.CARD_DATA[key].legendary else "Máximo de 2 cópias desta carta."
  return ""
 
 func add_card(key: String,animate: bool=false) -> bool:
@@ -555,6 +585,8 @@ func add_card(key: String,animate: bool=false) -> bool:
  if not reason.is_empty():
   message=reason
   render()
+  if reason in ["Deck completo: remova uma carta antes de adicionar.", "Lendária: máximo de 1 cópia.", "Máximo de 2 cópias desta carta."]:
+   dismiss_limit_notice(reason)
   return false
  var source:=Rect2()
  if animate:
@@ -565,6 +597,14 @@ func add_card(key: String,animate: bool=false) -> bool:
  render()
  if animate and source.size.x>0:animate_addition.call_deferred(key,source)
  return true
+
+func dismiss_limit_notice(notice: String) -> void:
+ limit_notice_id+=1
+ var notice_id:=limit_notice_id
+ await get_tree().create_timer(3.0).timeout
+ if notice_id==limit_notice_id and screen=="edit" and message==notice:
+  message=""
+  render()
 
 func remove_card(key: String) -> bool:
  pending_remove_key=""
@@ -730,7 +770,7 @@ func class_badge(cards: Array,icon_size: int=22,base: int=-3) -> Control:
  icon.size=Vector2(icon_size,icon_size)
  icon.size_flags_vertical=Control.SIZE_SHRINK_CENTER
  icon.mouse_filter=Control.MOUSE_FILTER_PASS
- icon.tooltip_text=["Guerreiro","Mago","Neutro","Ladino","Clérigo","Horda"][icon_class]
+ icon.tooltip_text=CLASS_NAMES[icon_class]
  icon.set_meta("card_class",icon_class)
  return icon
 
@@ -1032,7 +1072,7 @@ func render_full_collection(page: VBoxContainer) -> void:
  library_title(page,"COLEÇÃO DE CARTAS","Meus decks",show_library)
  var keys:=collection_keys()
  var count:=Match.CARD_DATA.values().filter(func(data):return data.collectible).size()
- var note:=text_label("%d de %d cartas · Clique para ampliar; botão direito para ver a arte." % [keys.size(),count],17)
+ var note:=text_label("%d de %d cartas · Arraste para navegar; botão direito para ver a arte." % [keys.size(),count],17)
  note.modulate=Color("9eb3c6")
  page.add_child(note)
  build_collection_filters(page)
@@ -1068,9 +1108,9 @@ func render_full_collection(page: VBoxContainer) -> void:
   card.custom_minimum_size=Vector2(214,286)
   card.resized.connect(func():card.custom_minimum_size.y=roundf(card.size.x*4.0/3.0))
   card.focus_mode=Control.FOCUS_ALL
-  card.mouse_default_cursor_shape=Control.CURSOR_POINTING_HAND
+  card.mouse_default_cursor_shape=Control.CURSOR_ARROW
   card.gui_input.connect(func(event):
-   if (event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_LEFT) or (event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_ENTER,KEY_SPACE]):
+   if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_ENTER,KEY_SPACE]:
     get_viewport().set_input_as_handled()
     show_collection_card(key))
   frame.add_child(card)
