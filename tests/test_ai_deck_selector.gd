@@ -27,5 +27,5 @@ func verify() -> void:
  Setup.enemy_slot=-1
  DirAccess.remove_absolute(ProjectSettings.globalize_path("user://test_opponent_choice.json"))
  duel.queue_free()
- print("OK: seletor, adversário neutro personalizado, reinício e aleatório.")
+ print("OK: seletor, adversário aldeão personalizado, reinício e aleatório.")
  quit()

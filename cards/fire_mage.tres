@@ -1,21 +1,20 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/fire_mage.webp" id="2"]
-[resource]
-script=ExtResource("1")
-creature_type=0
-title="Feiticeira das Brasas"
-lore = "Pediu uma fogueira discreta. A vila ainda fala do resultado."
-cost=4
-attack=2
-health=4
-armor=0
-card_class=1
-magic_damage=2
-magic_splash=1
-magic_cost=2
-ability_text="Mãos Flamejantes 2"
-artwork=ExtResource("2")
-artwork_zoom=1.16
-artwork_focus=Vector2(0.5, 0.43)
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cuma8qbojlsyb"]
 
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bf4o50x2gxs8q" path="res://assets/art/fire_mage.webp" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 4
+attack = 2
+health = 4
+ability_text = "Mãos Flamejantes 2"
+artwork = ExtResource("2")
+artwork_focus = Vector2(0.5, 0.43)
+artwork_zoom = 1.16
+faction = 1
+lore = "Pediu uma fogueira discreta. A vila ainda fala do resultado."
+magic_cost = 2
+magic_damage = 2
+magic_splash = 1
+title = "Feiticeira das Brasas"

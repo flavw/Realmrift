@@ -5,11 +5,10 @@
 
 [resource]
 script = ExtResource("1")
-title = "Aprendiz de Feiticeiro"
-lore = "A primeira faísca acendeu uma vela. A segunda encontrou as cortinas."
 attack = 0
-card_class = 1
-magic_damage = 1
-resonance = 1
 artwork = ExtResource("2")
+faction = 1
 field_artwork_focus = Vector2(0.5, 0.3)
+lore = "A primeira faísca acendeu uma vela. A segunda encontrou as cortinas."
+magic_damage = 1
+title = "Aprendiz de Feiticeiro"

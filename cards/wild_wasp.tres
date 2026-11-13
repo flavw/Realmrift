@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/wild_wasp.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://ddbqkk3p0ff34"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://byml7a87d3gjs" path="res://assets/art/wild_wasp.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Vespa da Mata"
-lore="O zumbido é um aviso generoso. A ferroada não costuma ser."
-cost=3
-attack=2
-health=1
-card_class=6
-creature_type=1
-flying=true
-envenom=1
-artwork=ExtResource("2")
+script = ExtResource("1")
+cost = 3
+attack = 2
+health = 1
+artwork = ExtResource("2")
+creature_type = 1
+envenom = 1
+faction = 6
+flying = true
+lore = "O zumbido é um aviso generoso. A ferroada não costuma ser."
+title = "Vespa da Mata"

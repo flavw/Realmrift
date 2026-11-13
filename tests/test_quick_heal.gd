@@ -26,7 +26,7 @@ func verify() -> void:
   assert(m.act(side,0,0,false),"Cura Célere não impede atacar")
   m=fresh();m.turn=side
   pal=m.spawn_unit(side,"dawn_paladin");pal.ready=false
-  var enemy=m.spawn_unit(1-side,"zombie_helper");enemy.health=3;enemy.abascanto=1
+  var enemy=m.spawn_unit(1-side,"zombie_helper");enemy.health=3;enemy.antimagic=1
   assert(m.heal(side,0,0,1-side,true) and enemy.health==3 and pal.attack==2)
   m.begin_turn();assert(m.heal(side,0,0,1-side,true) and enemy.health==2 and pal.attack==4)
   m=fresh();m.turn=side;pal=m.spawn_unit(side,"dawn_paladin");pal.health-=1;m.players[side].mana=0

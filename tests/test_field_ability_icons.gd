@@ -16,7 +16,7 @@ func verify() -> void:
    assert(badge.get_node("Icon").texture!=null,"Ícone ausente: "+str(badge.name))
    assert(badge.position.x+badge.size.x<=124 and strip.position.y+badge.position.y+badge.size.y<=194,"Ícone deve caber sem invadir ataque/vida")
   field.queue_free();await process_frame
- for name in ["Armor","Block","Abascanto","Vigor","Fury","Arcane","Heal","Amplify","Aura","Wall","Growth","Harvest","Flying","Envenom","Spores","Regeneration"]:assert(seen.has(name),name)
+ for name in ["Armor","Block","Antimagic","Vigor","Fury","Arcane","Heal","Amplify","Aura","Wall","Growth","Harvest","Flying","Envenom","Spores","Regeneration"]:assert(seen.has(name),name)
  assert(not seen.has("Entry") and not seen.has("Swift") and not seen.has("AuraBonus"))
  var sample: CardData=Match.CARD_DATA.dawn_warden.duplicate();sample.block=1
  var field=Scene.instantiate();field.set_card(sample,4,true,false,2,0,true)

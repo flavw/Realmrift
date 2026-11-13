@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/fireball.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://buypf7jjlh4ie"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cv40w62f12aag" path="res://assets/art/fireball.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Bola de Fogo"
+script = ExtResource("1")
+cost = 6
+attack = 0
+health = 0
+artwork = ExtResource("2")
+card_type = 1
+faction = 1
 lore = "A solução favorita de quem não gosta de contar inimigos."
-cost=6
-card_class=1
-card_type=1
-spell_effect=8
-spell_value=3
-attack=0
-health=0
-artwork=ExtResource("2")
+spell_effect = 8
+spell_value = 3
+title = "Bola de Fogo"

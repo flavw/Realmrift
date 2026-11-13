@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cjwh4l6j6f6aj"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bqt7i7dheyxra" path="res://assets/art/hungry_ghoul.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 3
+attack = 3
+health = 3
+artwork = ExtResource("2")
+artwork_focus = Vector2(0.5, 0.4)
+carrion = 1
+creature_type = 4
+faction = 8
+field_artwork_focus = Vector2(0.5, 0.26)
+lore = "Nos Ermos, a última refeição de alguém é sempre a primeira de outro."
+title = "Carniçal Faminto"

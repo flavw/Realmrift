@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c28t0fyjsvclj"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://ddid5qg7tu2bc" path="res://assets/art/adventure-black-dragon.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 9
+attack = 3
+health = 24
+antimagic = 1
+armor = 1
+artwork = ExtResource("2")
+collectible = false
+creature_type = 3
+dragon_breaths = true
+envenom = 2
+faction = 5
+flying = true
+lore = "Seu hálito dissolve pedra; sua sombra anuncia o fim da estrada."
+title = "Dragão Negro da Fenda"

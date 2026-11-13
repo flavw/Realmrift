@@ -54,7 +54,7 @@ func verify() -> void:
  assert(editor.screen=="library" and editor.library_selected==1)
  click(editor.find_child("DeckTile2",true,false));await settle();assert(editor.screen=="edit" and editor.slot==1)
  editor.show_library();await settle();click(editor.find_child("DeckTile3",true,false),true);await settle();assert(editor.screen=="edit" and editor.slot==2)
- editor.show_library();await settle();click(editor.find_child("DeckTile9",true,false));await settle();click(editor.find_child("DeckTile9",true,false));await settle();assert(editor.screen=="choose_class" and editor.slot==8)
+ editor.show_library();await settle();click(editor.find_child("DeckTile9",true,false));await settle();click(editor.find_child("DeckTile9",true,false));await settle();assert(editor.screen=="choose_faction" and editor.slot==8)
  editor.queue_free();await process_frame
  var main=load("res://main.tscn").instantiate();main.enable_opening=false;main.muted=true;root.add_child(main)
  main.duel=fixture()

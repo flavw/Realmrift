@@ -3,7 +3,7 @@ extends RefCounted
 
 const Match = preload("res://scripts/match.gd")
 const SLOT_COUNT := 10
-const DECKSET_VERSION := 11
+const DECKSET_VERSION := 14
 var slots: Array = []
 var active := 0
 var path: String
@@ -27,7 +27,7 @@ func load_saved() -> void:
  file.close()
  if parser.parse(content) != OK:
   return
- var data = parser.data
+ var data = preload("res://scripts/save_schema.gd").normalize(parser.data)
  if not data is Dictionary or not data.get("slots") is Array or data.slots.size() not in [3,6,9,SLOT_COUNT]:
   return
  var saved_version: int=int(data.get("version",0))
@@ -38,24 +38,31 @@ func load_saved() -> void:
   var slot = data.slots[i]
   # Rename the legacy key before validation, preserving saved deck composition.
   if slot is Dictionary and slot.get("cards") is Array:
+   var previous_base: int=int(slot.get("base_faction",legacy_base(slot.cards) if saved_version<13 else infer_base(slot.cards)))
+   if saved_version<12 and previous_base==CardData.Faction.HORDE:
+    var replacements: Dictionary={"wolf":"horde_wolf","village_reconstruction":"battle_howl"}
+    for j in range(slot.cards.size()):slot.cards[j]=replacements.get(slot.cards[j],slot.cards[j])
+    slot["cover"]=replacements.get(String(slot.get("cover","")),String(slot.get("cover","")))
    for j in range(slot.cards.size()):
     if slot.cards[j]=="solar_storm":slot.cards[j]="fireball"
     if slot.cards[j]=="rogue":slot.cards[j]="lightning_rogue"
    if slot.get("cover","")=="solar_storm":slot.cover="fireball"
    if slot.get("cover","")=="rogue":slot.cover="lightning_rogue"
+   if saved_version<13 and previous_base>=0:
+    migrate_complements(slot,previous_base)
   # Expand old 12-card decks without removing cards, names or covers.
   if slot is Dictionary and slot.get("cards") is Array and saved_version<6 and Match.valid_deck(slot.cards,false,12):
    slot.cards=Match.expand_legacy_deck(slot.cards)
   # Preserve saved 20-card decks and complete them once under the new limit.
   if slot is Dictionary and slot.get("cards") is Array and saved_version<10 and Match.valid_deck(slot.cards,false,20):
-   slot.cards=expand_saved_deck(slot.cards,int(slot.get("base_class",infer_base(slot.cards))))
-  # Keep legacy mixed lists editable; class/restriction validation gates play.
+   slot.cards=expand_saved_deck(slot.cards,int(slot.get("base_faction",infer_base(slot.cards))))
+  # Keep legacy mixed lists editable; faction/restriction validation gates play.
   if slot is Dictionary and slot.get("name") is String and slot.get("cards") is Array and slot.cards.size()<=Match.DECK_SIZE and (slot.cards.is_empty() or Match.valid_deck(slot.cards,false,slot.cards.size())):
    var cover: String=String(slot.get("cover",""))
    if cover!="" and (not Match.CARD_DATA.has(cover) or cover not in slot.cards):cover=""
-   var base: int=int(slot.get("base_class",infer_base(slot.cards)))
-   if base not in [-2,-1,0,1,2,3,4,5,6] or (not slot.cards.is_empty() and not accepts_base(base,slot.cards)):base=infer_base(slot.cards)
-   slots[i] = {"name": clean_name(slot.name, i), "cards": slot.cards.duplicate(),"cover":cover,"base_class":base}
+   var base: int=int(slot.get("base_faction",infer_base(slot.cards)))
+   if base not in [-2,-1,0,1,2,3,4,5,6,7,8] or (not slot.cards.is_empty() and not accepts_base(base,slot.cards)):base=infer_base(slot.cards)
+   slots[i] = {"name": clean_name(slot.name, i), "cards": slot.cards.duplicate(),"cover":cover,"base_faction":base}
  # Add the new deck only in an empty slot, preserving all saved lists.
  if saved_version<11:
   var already_present: bool=slots.any(func(slot):return slot.cards==Match.default_deck(6))
@@ -63,7 +70,7 @@ func load_saved() -> void:
    for i in range(SLOT_COUNT):
     if slots[i].cards.is_empty():
      var wild_cards:=Match.default_deck(6)
-     slots[i]={"name":Match.default_deck_name(6),"cards":wild_cards,"cover":"wild_elf","base_class":CardData.CardClass.WILD}
+     slots[i]={"name":Match.default_deck_name(6),"cards":wild_cards,"cover":"wild_elf","base_faction":CardData.Faction.WILD}
      break
  var saved_active = data.get("active", 0)
  if (saved_active is int or saved_active is float) and saved_active >= 0 and saved_active < SLOT_COUNT:
@@ -71,6 +78,32 @@ func load_saved() -> void:
  ensure_nonempty_active()
  if saved_version<DECKSET_VERSION or data.slots.size()!=SLOT_COUNT:
   persist()
+
+static func legacy_base(cards: Array) -> int:
+ var base: int=-1
+ for key in cards:
+  if not Match.CARD_DATA.has(key):return -2
+  var origin: int={"wolf":2,"zombie_helper":5,"necromancer_summoner":5}.get(key,Match.CARD_DATA[key].faction)
+  if origin==2:continue
+  if base>=0 and base!=origin:return -2
+  base=origin
+ return 2 if base==-1 and not cards.is_empty() else base
+
+static func migrate_complements(slot: Dictionary,base: int) -> void:
+ # Only replace the moved cards when their new faction conflicts with this saved base.
+ var styles: Dictionary={0:0,3:1,1:2,4:3,2:4,5:5,6:6}
+ var candidates: Array=[]
+ if styles.has(base):candidates=Match.default_deck(styles[base])
+ candidates.append_array(Match.CARD_DATA.keys())
+ for i in range(slot.cards.size()):
+  var key: String=slot.cards[i]
+  if key not in ["wolf","zombie_helper","necromancer_summoner"] or accepts_base(base,[key]):continue
+  for replacement in candidates:
+   if slot.cards.count(replacement)>=Match.copy_limit(replacement) or not accepts_base(base,[replacement]):continue
+   if Match.CARD_DATA[replacement].neutral_deck_only and base!=CardData.Faction.VILLAGER:continue
+   slot.cards[i]=replacement
+   if slot.get("cover","")==key:slot.cover=replacement
+   break
 
 static func expand_saved_deck(cards: Array,base: int) -> Array:
  var result:=cards.duplicate()
@@ -82,26 +115,25 @@ static func expand_saved_deck(cards: Array,base: int) -> Array:
   if result.count(key)>=Match.copy_limit(key):continue
   var next:=result.duplicate()
   next.append(key)
-  if accepts_base(base,next) and Match.can_add_class(result,key):result.append(key)
+  if accepts_base(base,next) and Match.can_add_faction(result,key):result.append(key)
  return result
 
 static func infer_base(cards: Array) -> int:
  if cards.is_empty():return -1
- var faction: int=Match.deck_class(cards)
- return CardData.CardClass.NEUTRAL if faction==-1 else faction
+ var faction: int=Match.deck_faction(cards)
+ return CardData.Faction.VILLAGER if faction==-1 else faction
 
 static func accepts_base(base: int,cards: Array) -> bool:
  if base<0:return cards.is_empty()
  for key in cards:
   if not Match.CARD_DATA.has(key) or not Match.CARD_DATA[key].collectible:return false
   if Match.neutral_monster_forbidden(base,key):return false
-  if base==CardData.CardClass.HORDE and Match.CARD_DATA[key].is_human() and not Match.CARD_DATA[key].has_creature_type(CardData.CreatureType.MONSTER):return false
-  var faction: int=Match.CARD_DATA[key].card_class
-  if faction!=CardData.CardClass.NEUTRAL and faction!=base:return false
+  var faction: int=Match.CARD_DATA[key].faction
+  if not Match.faction_allowed(base,faction):return false
  return true
 
 func base_for(index: int) -> int:
- return int(slots[index].get("base_class",infer_base(slots[index].cards)))
+ return int(slots[index].get("base_faction",infer_base(slots[index].cards)))
 
 func clean_name(value: String, slot: int) -> String:
  var trimmed := value.strip_edges().left(24)
@@ -120,24 +152,27 @@ func persist() -> bool:
  error_message = ""
  return true
 
-func save_slot(slot: int, name: String, cards: Array,base_class: int=-3, cover_override: Variant=null) -> bool:
+func save_slot(slot: int, name: String, cards: Array,base_faction: int=-3, cover_override: Variant=null) -> bool:
  if slot<0 or slot>=SLOT_COUNT:return false
- var base: int=base_class
+ var base: int=base_faction
  if base==-3:
   base=infer_base(cards)
   var previous_base: int=base_for(slot)
-  if (cards.is_empty() or Match.deck_class(cards)==-1) and previous_base>=0:base=previous_base
- if base not in [-1,0,1,2,3,4,5,6] or not accepts_base(base,cards) or (not cards.is_empty() and not Match.valid_deck(cards)):
-  if cards.any(func(key):return Match.neutral_monster_forbidden(base,key)):
-   error_message="Monstros neutros só podem entrar na Horda ou em decks só de neutros."
+  if (cards.is_empty() or Match.deck_faction(cards) in [-1,CardData.Faction.WASTES]) and previous_base>=0 and accepts_base(previous_base,cards):base=previous_base
+ if base not in [-1,0,1,2,3,4,5,6,7,8] or not accepts_base(base,cards) or (not cards.is_empty() and not Match.valid_deck(cards)):
+  if not Match.villagers_allowed(base) and cards.any(func(key):return Match.CARD_DATA.has(key) and Match.CARD_DATA[key].faction==CardData.Faction.VILLAGER):
+   error_message="Esta facção não aceita Aldeia como complemento."
    return false
-  error_message = "Humanos precisam de Pacto Sombrio para entrar na Horda." if base==CardData.CardClass.HORDE and cards.any(func(key):return Match.CARD_DATA.has(key) and Match.CARD_DATA[key].is_human() and not Match.CARD_DATA[key].human_and_monster) else "Use 22 cartas, até 2 cópias (lendárias: 1), de uma única classe + neutros ou somente neutros. Respeite as cartas exclusivas de decks neutros."
+  if cards.any(func(key):return Match.neutral_monster_forbidden(base,key)):
+   error_message="Monstros da Aldeia só entram em decks da Aldeia."
+   return false
+  error_message = "Use 22 cartas de uma facção com complementos compatíveis, até 2 cópias por carta (lendárias: 1). Respeite as cartas exclusivas da Aldeia."
   return false
  var previous_active:=active
  var previous: Dictionary = slots[slot].duplicate(true)
  var cover: String=String(previous.get("cover","")) if cover_override==null else String(cover_override)
  if cover not in cards:cover=""
- slots[slot] = {"name": clean_name(name, slot), "cards": cards.duplicate(),"cover":cover,"base_class":base}
+ slots[slot] = {"name": clean_name(name, slot), "cards": cards.duplicate(),"cover":cover,"base_faction":base}
  ensure_nonempty_active()
  if not persist():
   slots[slot] = previous
@@ -166,9 +201,9 @@ func reset_defaults() -> void:
  for i in range(SLOT_COUNT):
   if i<styles.size():
    var cards:=Match.default_deck(styles[i])
-   slots.append({"name":Match.default_deck_name(styles[i]),"cards":cards,"cover":"bloodblade" if i==0 else "","base_class":infer_base(cards)})
+   slots.append({"name":Match.default_deck_name(styles[i]),"cards":cards,"cover":"bloodblade" if i==0 else "","base_faction":infer_base(cards)})
   else:
-   slots.append({"name":"Novo deck %d" % (i+1),"cards":[],"cover":"","base_class":-1})
+   slots.append({"name":"Novo deck %d" % (i+1),"cards":[],"cover":"","base_faction":-1})
 
 func reset_saved_decks() -> bool:
  reset_defaults()
@@ -184,10 +219,10 @@ func ensure_nonempty_active() -> void:
 
 static func automatic_cover(cards: Array) -> String:
  if cards.is_empty():return ""
- var preferred: String={-1:"village_leader",0:"wall_smith",1:"aether_summoner",3:"mist_alchemist",4:"dawn_oracle"}.get(Match.deck_class(cards),"")
+ var preferred: String={-1:"village_leader",0:"wall_smith",1:"aether_summoner",3:"mist_alchemist",4:"dawn_oracle"}.get(Match.deck_faction(cards),"")
  if preferred in cards:return preferred
  for key in cards:
-  if Match.CARD_DATA.has(key) and Match.CARD_DATA[key].card_class!=CardData.CardClass.NEUTRAL:return String(key)
+  if Match.CARD_DATA.has(key) and Match.CARD_DATA[key].faction!=CardData.Faction.VILLAGER:return String(key)
  return String(cards[0])
 
 func cover_for(index: int) -> String:

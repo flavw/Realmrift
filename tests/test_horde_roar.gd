@@ -7,7 +7,7 @@ func fresh():
  for p in m.players:p.board.clear();p.hand.clear();p.mana=10
  return m
 func verify() -> void:
- assert(CardData.CardClass.HORDE==5)
+ assert(CardData.Faction.HORDE==5)
  assert(Match.CARD_DATA.horde_roar.cost==3 and Match.CARD_DATA.horde_roar.spell_value==2)
  assert(Store.accepts_base(5,["necromancer_summoner","horde_roar"]))
  assert(not Store.accepts_base(5,["farmer","horde_roar"]))

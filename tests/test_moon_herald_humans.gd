@@ -7,7 +7,7 @@ func fresh():
 func _initialize():call_deferred("verify")
 func verify():
  var data=Match.CARD_DATA.moon_herald
- assert(data.entry_human_only and data.entry_summary()=="Humano: +1/+1" and "Humano" in data.entry_prompt())
+ assert(data.entry_human_only and data.entry_summary()=="+1/+1 aliado humano" and "Humano" in data.entry_prompt())
  for side in [0,1]:
   var m=fresh();m.turn=side
   var wolf=m.spawn_unit(side,"wolf")
@@ -18,7 +18,7 @@ func verify():
   assert(m.entry_valid_targets(side,Match.CARDS.moon_herald)==[1,2])
   assert(not m.play(side,0,0) and not m.play(side,0,3) and m.players[side].mana==10)
   assert(m.play(side,0,1) and human.attack==2 and human.health==3 and wolf.attack==Match.CARD_DATA.wolf.attack and elf.attack==Match.CARD_DATA.wild_elf.attack)
-  assert(m.last_action.buff_target==human.id and dual.human_and_monster)
+  assert(m.last_action.buff_target==human.id and Match.has_type(dual,CardData.CreatureType.HUMAN) and not Match.has_type(dual,CardData.CreatureType.MONSTER))
   m=fresh();m.turn=side
   m.spawn_unit(side,"wolf");m.players[side].hand=["moon_herald"]
   assert(m.play(side,0) and m.players[side].board.size()==2 and not m.last_action.has("buff_target"))
@@ -36,5 +36,5 @@ func verify():
  main.play(0)
  assert(main.summoning==0 and not main.field_nodes[0][w.id].available and main.field_nodes[0][h.id].available)
  main.queue_free();await process_frame
- print("OK: Humanos, Pacto Sombrio, alvos inválidos, sem alvo, IA e interface.")
+ print("OK: Humanos, alvos inválidos, sem alvo, IA e interface.")
  quit()

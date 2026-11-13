@@ -27,9 +27,9 @@ func verify():
  m.players[0].hand=["wild_swift_boar"]
  assert(m.play(0,0) and m.players[0].board[0].ready)
  assert(m.can_target(0,0,-1,false) and m.act(0,0,-1) and m.players[1].hp==17)
- assert(Store.accepts_base(CardData.CardClass.WILD,["wild_beast_druid","wild_swift_boar","wolf"]))
+ assert(Store.accepts_base(CardData.Faction.WILD,["wild_beast_druid","wild_swift_boar","wolf"]))
  var editor=load("res://deck_editor.tscn").instantiate();editor.configure(Store.new("user://beast_test.json",false));root.add_child(editor);await process_frame
  editor.choose_slot(6);assert(editor.collection_keys().has("wild_beast_druid") and editor.collection_keys().has("wild_swift_boar"))
  editor.queue_free();await process_frame
- print("OK: Aura apenas em Feras aliadas, acúmulo e saída; Arrancada, coleção e composição.")
+ print("OK: Aura apenas em Feras aliadas, acúmulo e saída; Disparada, coleção e composição.")
  quit()

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://daptrdienwna5"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://ewsaht0gnyhi" path="res://assets/art/alley_ambush.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 3
+attack = 0
+health = 0
+artwork = ExtResource("2")
+card_type = 1
+faction = 3
+lore = "O primeiro passo distrai. O segundo pode ser o último."
+spell_effect = 16
+spell_value = 5
+title = "Emboscada dos Becos"

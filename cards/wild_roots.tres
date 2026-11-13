@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/wild_roots.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bdn85uwhl76hq"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bwqaq70kbu2fb" path="res://assets/art/wild_roots.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Raízes Enredantes"
-lore="A floresta não persegue intrusos. Ela espera que parem de correr."
-cost=2
-attack=0
-health=0
-card_class=6
-card_type=1
-spell_effect=11
-artwork=ExtResource("2")
+script = ExtResource("1")
+cost = 2
+attack = 0
+health = 0
+artwork = ExtResource("2")
+card_type = 1
+faction = 6
+lore = "A floresta não persegue intrusos. Ela espera que parem de correr."
+spell_effect = 11
+title = "Raízes Enredantes"

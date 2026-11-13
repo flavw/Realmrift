@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/wild_sprout_druid.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://ccms6y65sffal"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bthxe7e3r1s48" path="res://assets/art/wild_sprout_druid.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Druida da Brotação"
-lore="Onde ela repousa a mão, a floresta encontra outra primavera."
-cost=3
-attack=2
-health=3
-card_class=6
-growth=1
-artwork=ExtResource("2")
-artwork_focus=Vector2(0.5, 0.44)
-field_artwork_focus=Vector2(0.5, 0.33)
+script = ExtResource("1")
+cost = 3
+attack = 2
+health = 3
+artwork = ExtResource("2")
+artwork_focus = Vector2(0.5, 0.44)
+faction = 6
+field_artwork_focus = Vector2(0.5, 0.33)
+growth = 1
+lore = "Onde ela repousa a mão, a floresta encontra outra primavera."
+title = "Druida da Brotação"

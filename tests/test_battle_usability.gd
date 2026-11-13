@@ -27,9 +27,9 @@ func verify() -> void:
   if not magical:assert(result.received==m.last_action.received and result.absorbed==m.last_action.absorbed)
  m=fixture()
  var caster=m.spawn_unit(0,"mage");caster.ready=true
- var ward=m.spawn_unit(1,"abascanto_guardian")
+ var ward=m.spawn_unit(1,"antimagic_guardian")
  var forecast=m.attack_forecast(0,0,0,true)
- assert(forecast.warded and forecast.damage==0 and ward.abascanto>0)
+ assert(forecast.warded and forecast.damage==0 and ward.antimagic>0)
  var main=load("res://main.tscn").instantiate()
  main.enable_opening=false
  root.add_child(main)

@@ -1,17 +1,18 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/cleric.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://b4oebt5brxtkr"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://36v8knmiqyml" path="res://assets/art/cleric.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-creature_type=0
-title="Clériga da Aurora"
+script = ExtResource("1")
+cost = 3
+health = 4
+ability_text = "(1) + esgotar:
+Cure 2 de vida de uma criatura
+aliada ou do seu castelo."
+artwork = ExtResource("2")
+faction = 4
+heal_amount = 2
 lore = "Ela guarda um pouco de manhã para quem já perdeu a esperança."
-cost=3
-attack=1
-health=4
-card_class=4
-heal_amount=2
-heal_cost=1
-ability_text="(1) + esgotar:\nCure 2 de vida de uma criatura\naliada ou do seu castelo."
-artwork=ExtResource("2")
-vigor=true
+title = "Clériga da Aurora"
+vigor = true

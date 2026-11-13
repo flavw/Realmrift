@@ -32,7 +32,7 @@ func verify() -> void:
  m.end_turn(0);m.end_turn(1)
  assert(m.players[0].board[0].health==4 and m.players[0].board[0].max_health==4)
  var data: CardData=Match.CARD_DATA[KEY]
- assert(data.cost==6 and data.card_class==CardData.CardClass.MAGE and data.spell_value==3 and data.card_type==CardData.CardType.SPELL)
+ assert(data.cost==6 and data.faction==CardData.Faction.MAGE and data.spell_value==3 and data.card_type==CardData.CardType.SPELL)
  m=Match.new();m.players[0].hand=[KEY];m.players[0].mana=5;m.players[1].board=[unit("village_wall",2)]
  assert(not m.cast(0,0,1,-1) and m.players[0].hand==[KEY] and m.players[0].mana==5)
  m.players[0].mana=6

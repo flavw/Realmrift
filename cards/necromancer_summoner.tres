@@ -5,13 +5,12 @@
 
 [resource]
 script = ExtResource("1")
-human_and_monster = true
-entry_summon_key = "summoned_ghoul"
-entry_effect = 6
-title = "Necromante do Véu"
-lore = "Ela chama reforços que raramente reclamam das condições de trabalho."
 cost = 4
 attack = 2
 health = 4
-card_class = 5
 artwork = ExtResource("2")
+entry_effect = 6
+entry_summon_key = "summoned_ghoul"
+faction = 7
+lore = "Ela chama reforços que raramente reclamam das condições de trabalho."
+title = "Necromante do Véu"

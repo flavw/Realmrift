@@ -5,12 +5,12 @@
 
 [resource]
 script = ExtResource("1")
+attack = 0
+health = 0
+artwork = ExtResource("2")
 card_type = 1
+faction = 3
+lore = "Agora você vê. Agora precisa olhar atrás de você."
 spell_effect = 3
 spell_value = 1
 title = "Passo das Sombras"
-lore = "Agora você vê. Agora precisa olhar atrás de você."
-attack = 0
-health = 0
-card_class = 3
-artwork = ExtResource("2")

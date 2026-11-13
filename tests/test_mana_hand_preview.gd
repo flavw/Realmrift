@@ -16,8 +16,8 @@ func verify() -> void:
  await create_timer(0.35).timeout
  assert(is_equal_approx(card.scale.x,1.72))
  var bar=main.find_child("PlayerMana",true,false)
- assert(bar.find_child("TemporaryMana",true,false).text=="+1 → +0")
- assert(bar.find_child("TemporaryManaGem",true,false).get_node("ManaSpendRing").visible)
+ assert(bar.find_child("TemporaryMana",true,false)==null)
+ assert(bar.find_child("ManaGem4",true,false).get_node("ManaSpendRing").visible)
  assert(bar.find_child("ManaGem3",true,false).get_node("ManaSpendRing").visible)
  assert(bar.find_child("ManaGem3",true,false).get_node("ManaSpendRing").size.x>0)
  assert(bar.find_child("ManaGem2",true,false).get_node("ManaSpendRing").visible)
@@ -25,9 +25,9 @@ func verify() -> void:
  assert(not bar.find_child("ManaGem0",true,false).get_node("ManaSpendRing").visible)
  main.hover_hand_card(card,false)
  await create_timer(0.2).timeout
- assert(bar.find_child("TemporaryMana",true,false).text=="+1")
+ assert(bar.find_child("TemporaryMana",true,false)==null)
  assert(not bar.find_child("ManaGem3",true,false).get_node("ManaSpendRing").visible)
- assert(not bar.find_child("TemporaryManaGem",true,false).get_node("ManaSpendRing").visible)
+ assert(not bar.find_child("ManaGem4",true,false).get_node("ManaSpendRing").visible)
  main.queue_free();await process_frame
  print("OK: prévia ampliada e custo de mana, incluindo mana temporária.")
  quit()

@@ -20,7 +20,7 @@ func _initialize() -> void:
   assert(m.act(side,0,0) and a.health==6 and d.health==5)
   m=fresh();m.turn=side
   a=m.spawn_unit(side,"raven");a.ready=true;a.attack=3;a.health=8
-  d=m.spawn_unit(1-side,"raven");d.attack=2;d.health=8;d.abascanto=0
+  d=m.spawn_unit(1-side,"raven");d.attack=2;d.health=8;d.antimagic=0
   assert(m.act(side,0,0) and a.health==6 and d.health==6)
   m=fresh();m.turn=side
   a=m.spawn_unit(side,"wolf");a.ready=true;a.attack=1;a.envenom=1;a.health=8
@@ -28,7 +28,7 @@ func _initialize() -> void:
   assert(m.act(side,0,0) and d.health==8 and d.poison==1 and m.last_action.flight_reduction==1)
   m=fresh();m.turn=side
   a=m.spawn_unit(side,"mage");a.ready=true
-  d=m.spawn_unit(1-side,"raven");d.abascanto=0
+  d=m.spawn_unit(1-side,"raven");d.antimagic=0
   assert(m.attack_forecast(side,0,0,true).damage==1)
   assert(m.act(side,0,0,true) and d.health==2)
  print("OK: Voo ao defender, contra-ataque, Armadura, Voo temporário, Veneno e magia.")

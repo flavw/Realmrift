@@ -4,9 +4,9 @@
 
 ## Resultado principal
 
-Foram executadas 480 partidas válidas com as cartas atuais, sem alterar os recursos do jogo. Todas usaram decks de 12 cartas de uma única classe jogável + neutros, com até duas cópias. Cada classe participou de 240 jogos. Não houve empates.
+Foram executadas 480 partidas válidas com as cartas atuais, sem alterar os recursos do jogo. Todas usaram decks de 12 cartas de uma única facção jogável + aldeões, com até duas cópias. Cada facção participou de 240 jogos. Não houve empates.
 
-| Classe | Vitórias | Partidas | Taxa de vitória |
+| Facção | Vitórias | Partidas | Taxa de vitória |
 | --- | ---: | ---: | ---: |
 | Guerreiro | 204 | 240 | 85.0% |
 | Ladina | 141 | 240 | 58.8% |
@@ -18,12 +18,12 @@ O Guerreiro venceu 80 de 80 partidas contra Clérigo nos cenários testados. Cl�
 ## Método e limites
 
 - Motor real `DuelMatch`, em Godot headless, sem animações ou regras reimplementadas.
-- Todos os seis confrontos entre classes foram testados.
-- Dez sementes por confronto, cada uma repetida invertendo quem começa. A ordem de cada deck é fixada por classe/semente, independentemente do lado.
-- Dois conjuntos de decks: sugestões de arquétipo e um controle com os mesmos seis neutros para todas as classes (2 Escudeiros, 2 Lobos, 2 Fazendeiros).
+- Todos os seis confrontos entre facções foram testados.
+- Dez sementes por confronto, cada uma repetida invertendo quem começa. A ordem de cada deck é fixada por facção/semente, independentemente do lado.
+- Dois conjuntos de decks: sugestões de arquétipo e um controle com os mesmos seis aldeões para todas as facções (2 Escudeiros, 2 Lobos, 2 Fazendeiros).
 - Dois pilotos: IA atual aplicada simetricamente aos dois lados e um piloto tático de avaliação imediata. O segundo enumera ações legais, aplica cada opção em cópias do estado pelo próprio motor e escolhe o maior ganho heurístico.
-- O piloto tático não faz busca de vários turnos, não é um jogador humano e sua avaliação não foi otimizada por classe. A amostra tem somente duas listas por classe e dez sementes por cenário. Resultados repetidos entre pilotos/listas são correlacionados; as taxas não representam uma previsão estatística de partidas humanas.
-- Espelhamentos de assento, limites de cópias e legalidade de classe foram verificados pelo simulador. Arquivos com erros de execução foram descartados; uma execução preliminar tática inválida e a bateria curta de verificação não entram nas contagens.
+- O piloto tático não faz busca de vários turnos, não é um jogador humano e sua avaliação não foi otimizada por facção. A amostra tem somente duas listas por facção e dez sementes por cenário. Resultados repetidos entre pilotos/listas são correlacionados; as taxas não representam uma previsão estatística de partidas humanas.
+- Espelhamentos de assento, limites de cópias e legalidade de facção foram verificados pelo simulador. Arquivos com erros de execução foram descartados; uma execução preliminar tática inválida e a bateria curta de verificação não entram nas contagens.
 
 O primeiro jogador venceu 324/480 jogos (67.5%). Houve 87 finais por fadiga (18.1%). A duração média foi 17.4 turnos individuais (um turno por jogador, não uma rodada completa).
 
@@ -32,15 +32,15 @@ O primeiro jogador venceu 324/480 jogos (67.5%). Houve 87 finais por fadiga (18.
 | Piloto/lista | Guerreiro | Ladina | Mago | Clérigo |
 | --- | ---: | ---: | ---: | ---: |
 | IA atual / arquétipo | 83.3% | 63.3% | 30.0% | 23.3% |
-| IA atual / neutros iguais | 83.3% | 68.3% | 35.0% | 13.3% |
+| IA atual / aldeões iguais | 83.3% | 68.3% | 35.0% | 13.3% |
 | Tático / arquétipo | 86.7% | 51.7% | 30.0% | 31.7% |
-| Tático / neutros iguais | 86.7% | 51.7% | 38.3% | 23.3% |
+| Tático / aldeões iguais | 86.7% | 51.7% | 38.3% | 23.3% |
 
 ## Confrontos agregados
 
 Cada confronto soma 80 partidas (2 pilotos × 2 listas × 10 sementes × 2 assentos).
 
-| Classe A | Classe B | Vitórias A | Vitórias B |
+| Facção A | Facção B | Vitórias A | Vitórias B |
 | --- | --- | ---: | ---: |
 | Guerreiro | Mago | 58 | 22 |
 | Guerreiro | Ladina | 66 | 14 |
@@ -52,10 +52,10 @@ Cada confronto soma 80 partidas (2 pilotos × 2 listas × 10 sementes × 2 assen
 ## Diagnóstico
 
 1. **Guerreiro forte demais contra dano físico.** Armadura permanente reduz cada ataque; unidades com 1–2 de ataque frequentemente causam zero dano, especialmente após Postura de Ferro. Bloqueio força trocas contra esses defensores. O poder não vem apenas de Postura: reduzir somente seu bônus de Armadura não melhorou o resultado nesta amostra.
-2. **Clérigo é a prioridade de reforço.** Cura e crescimento prolongam a partida, mas o ataque baixo e a falta de remoção dificultam converter essa sobrevivência em vitória. Contra Armadura, curar não ajuda a remover o bloqueador. A classe precisa de acesso a dano/remoção ou de uma mecânica que transforme cura em pressão ofensiva.
+2. **Clérigo é a prioridade de reforço.** Cura e crescimento prolongam a partida, mas o ataque baixo e a falta de remoção dificultam converter essa sobrevivência em vitória. Contra Armadura, curar não ajuda a remover o bloqueador. A facção precisa de acesso a dano/remoção ou de uma mecânica que transforme cura em pressão ofensiva.
 3. **Mago também precisa de reforço.** A remoção mágica responde à Armadura, mas muitas cartas exigem mana para invocar e novamente para ativar. Ao esgotar para remover, ainda deixam pouca pressão no castelo. Reduzir somente o custo de Chama Astral teve efeito pequeno e dependente da lista.
-4. **Ladina não é a primeira candidata a receber bônus.** Ficou entre 51,7% e 68,3% por cenário. Sua relação com Guerreiro/Clérigo muda bastante após ajustes das outras classes.
-5. **Iniciativa tem sinal de vantagem.** Mesmo alternando os assentos, o primeiro jogador ganhou 67,5%. Vale testar uma compensação ao segundo jogador (por exemplo, recurso temporário), separadamente dos ajustes de classe.
+4. **Ladina não é a primeira candidata a receber bônus.** Ficou entre 51,7% e 68,3% por cenário. Sua relação com Guerreiro/Clérigo muda bastante após ajustes das outras facções.
+5. **Iniciativa tem sinal de vantagem.** Mesmo alternando os assentos, o primeiro jogador ganhou 67,5%. Vale testar uma compensação ao segundo jogador (por exemplo, recurso temporário), separadamente dos ajustes de facção.
 
 ## Ensaios de ajustes — somente em memória
 
@@ -69,14 +69,14 @@ Além da linha de base, foram realizadas 1.200 partidas experimentais: cinco var
 | mage | Chama Astral: custo 3 → 2 | 85.0%/88.3% | 55.0%/50.0% | 28.3%/40.0% | 31.7%/21.7% |
 | combined | As quatro alterações acima, juntas | 75.0%/86.7% | 65.0%/50.0% | 26.7%/26.7% | 33.3%/36.7% |
 
-A redução da Armadura da Guerreira ajudou a Ladina em uma lista, mas não corrigiu Guerreiro × Clérigo. O ataque adicional no Guardião da Aurora melhorou Clérigo com neutros iguais (23,3% → 38,3%), porém quase não mudou o deck de sustento (31,7% → 33,3%) e continuou sem vencer Guerreiro. A combinação testada também não produziu equilíbrio; portanto, não recomendo aplicar esse pacote como solução pronta.
+A redução da Armadura da Guerreira ajudou a Ladina em uma lista, mas não corrigiu Guerreiro × Clérigo. O ataque adicional no Guardião da Aurora melhorou Clérigo com aldeões iguais (23,3% → 38,3%), porém quase não mudou o deck de sustento (31,7% → 33,3%) e continuou sem vencer Guerreiro. A combinação testada também não produziu equilíbrio; portanto, não recomendo aplicar esse pacote como solução pronta.
 
 ### Próximos testes recomendados
 
 - Guerreiro: testar custo/eficiência das criaturas de Armadura e a soma de Armadura + Bloqueio; preservar a identidade defensiva sem tornar unidades de baixo ataque incapazes de interagir. Não apostar apenas numa redução de Postura de Ferro.
 - Clérigo: experimentar uma remoção temática ou um gatilho ofensivo de cura (por exemplo, ganho de ataque quando uma cura efetivamente restaura vida). O aumento de ataque do Guardião pode ser parte do teste, mas não resolve sozinho.
 - Mago: testar custo de ativação da Canalista do Eclipse de 2 para 1 e/ou uma condição de vitória com alcance ao castelo. Não alterar o ataque 0 da Maga Arcana sem uma decisão de design. Essas propostas ainda não foram simuladas.
-- Repetir a bateria depois de cada mudança, incluindo listas com outros neutros e testes humanos. Os dois pilotos atuais não esgotam combinações possíveis.
+- Repetir a bateria depois de cada mudança, incluindo listas com outros aldeões e testes humanos. Os dois pilotos atuais não esgotam combinações possíveis.
 
 ## Listas usadas
 
@@ -86,7 +86,7 @@ A redução da Armadura da Guerreira ajudou a Ladina em uma lista, mas não corr
 - Ladina: rogue ×2, dusk_scout ×2, raven ×2, messenger_hawk ×2, wolf ×2, shadow_step ×2
 - Mago: mage ×2, fire_mage ×1, eclipse_channeler ×2, runic_familiar ×2, astral_flame ×2, squire ×2, farmer ×1
 
-### Controle com neutros iguais
+### Controle com aldeões iguais
 - Clérigo: squire ×2, wolf ×2, farmer ×2, cleric ×2, dawn_warden ×2, restoring_light ×2
 - Guerreiro: squire ×2, wolf ×2, farmer ×2, warrior ×2, wall_guard ×2, iron_stance ×2
 - Ladina: squire ×2, wolf ×2, farmer ×2, rogue ×2, dusk_scout ×2, shadow_step ×2

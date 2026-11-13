@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cujnkp4aaa4dp"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://nluea6y2xa2q" path="res://assets/art/ash_necromancer.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 4
+attack = 2
+health = 4
+artwork = ExtResource("2")
+artwork_focus = Vector2(0.5, 0.4)
+faction = 7
+field_artwork_focus = Vector2(0.5, 0.24)
+lore = "Para ela, cada despedida é uma promessa de poder."
+necrotic_damage = 1
+soul_harvest = 1
+title = "Necromante das Cinzas"

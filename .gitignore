@@ -1,5 +1,6 @@
 .godot/
 .local/
+work/
 # Dados locais, credenciais e arquivos exportados
 .env
 .env.*

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/wastes_bat.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 1
+attack = 1
+health = 1
+artwork = ExtResource("2")
+creature_type = 1
+faction = 8
+flying = true
+lore = "Entre as pedras, o silêncio também tem asas."
+title = "Morcego das Ruínas"

@@ -6,7 +6,7 @@ func _init():
  var elf=Match.CARD_DATA.wild_elf
  assert(elf.creature_type==CardData.CreatureType.ELF and elf.reach and elf.envenom==1)
  var a=m.spawn_unit(0,"wild_scout");a.ready=true
- var b=m.spawn_unit(1,"raven");b.health=8;b.armor=0;b.abascanto=0
+ var b=m.spawn_unit(1,"raven");b.health=8;b.armor=0;b.antimagic=0
  assert(m.attack_forecast(0,0,0).damage==2)
  var f=m.spawn_unit(1,"wild_badger")
  assert(Match.damage(f,3,true)==0 and not Match.apply_poison(f,1))

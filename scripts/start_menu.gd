@@ -6,6 +6,9 @@ const DeckScene = preload("res://deck_editor.tscn")
 const TitleFont = preload("res://assets/fonts/title_font.tres")
 const Music = preload("res://scripts/game_music.gd")
 const MatchSetup=preload("res://scripts/match_setup.gd")
+const Identity=preload("res://scripts/player_identity.gd")
+var avatar_dialog: AcceptDialog
+var menu_avatar: Control
 var store := DeckStore.new()
 var deck_layer: CanvasLayer
 var rules_dialog: AcceptDialog
@@ -14,7 +17,7 @@ var play_button: Button
 var credits_dialog: AcceptDialog
 var deck_selector: AcceptDialog
 var enemy_deck_picker: OptionButton
-const CLASS_NAMES=preload("res://scripts/faction_names.gd").PT
+const FACTION_NAMES=preload("res://scripts/faction_names.gd").PT
 
 func _ready() -> void:
  theme = UiTheme.build()
@@ -65,6 +68,8 @@ func _ready() -> void:
  play_button.add_theme_stylebox_override("normal",menu_style(Color("302b22"),Color("bf9a57")))
  play_button.add_theme_stylebox_override("hover",menu_style(Color("493b27"),Color("f4d994")))
  left.add_child(play_button)
+ var adventure:=menu_button("Modo Aventura",func(): get_tree().change_scene_to_file("res://adventure_select.tscn"))
+ left.add_child(adventure)
  var decks:=menu_button("Meus decks",open_decks,"menu-decks")
  decks.name="OpenDecks"
  left.add_child(decks)
@@ -96,6 +101,7 @@ func _ready() -> void:
  footer.offset_left=90;footer.offset_right=600
  footer.offset_top=-38;footer.offset_bottom=-18
  add_child(footer)
+ build_avatar_button()
  play_button.grab_focus()
 
 func menu_style(fill: Color,border: Color) -> StyleBoxFlat:
@@ -149,6 +155,8 @@ func menu_button(value: String, callback: Callable,icon_name: String="") -> Butt
  return button
 
 func start_game() -> void:
+ var adventure_state=preload("res://scripts/adventure_state.gd")
+ if adventure_state.current!=null:adventure_state.current.in_combat=false
  get_tree().change_scene_to_file("res://main.tscn")
 
 func show_deck_selector() -> void:
@@ -287,3 +295,40 @@ func show_credits() -> void:
   credits_dialog.add_child(content)
   add_child(credits_dialog)
  credits_dialog.popup_centered(Vector2i(680,540))
+
+
+
+
+func build_avatar_button() -> void:
+ var selector:=Button.new();selector.name="PlayerAvatarSelector";selector.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+ selector.offset_left=-290;selector.offset_right=-38;selector.offset_top=28;selector.offset_bottom=180
+ selector.add_theme_stylebox_override("normal",UiTheme.panel(Color(0.06,0.1,0.14,0.94),Color("b79a62"),8))
+ selector.pressed.connect(show_avatar_selector);add_child(selector)
+ var row:=HBoxContainer.new();row.mouse_filter=Control.MOUSE_FILTER_IGNORE;row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);row.offset_left=10;row.offset_right=-10;row.offset_top=8;row.offset_bottom=-8;selector.add_child(row)
+ var profile=preload("res://scripts/adventure_profile.gd").new()
+ menu_avatar=preload("res://scripts/player_avatar.gd").new();menu_avatar.name="MenuPlayerAvatar"
+ menu_avatar.configure(Identity.avatar(),profile.level(),float(profile.xp_in_level())/profile.xp_cost(profile.level()));row.add_child(menu_avatar)
+ var label:=Label.new();label.text="Seu avatar\nAlterar";label.add_theme_font_size_override("font_size",20);label.mouse_filter=Control.MOUSE_FILTER_IGNORE;row.add_child(label)
+
+func show_avatar_selector() -> void:
+ if is_instance_valid(avatar_dialog):avatar_dialog.queue_free()
+ avatar_dialog=AcceptDialog.new();avatar_dialog.name="AvatarSelector";avatar_dialog.title="Escolha seu avatar";avatar_dialog.min_size=Vector2i(920,510)
+ avatar_dialog.add_theme_stylebox_override("panel",UiTheme.panel(Color("101e2b"),Color("ad925f"),20));add_child(avatar_dialog)
+ var column:=VBoxContainer.new();column.custom_minimum_size=Vector2(880,410);column.add_theme_constant_override("separation",16);avatar_dialog.add_child(column)
+ var title:=Label.new();title.text="ESCOLHA SEU AVATAR";title.add_theme_font_size_override("font_size",26);title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;column.add_child(title)
+ var grid:=GridContainer.new();grid.name="AvatarChoices";grid.columns=5;grid.add_theme_constant_override("h_separation",12);grid.add_theme_constant_override("v_separation",12);column.add_child(grid)
+ for key in Identity.AVATARS:
+  var option:=Button.new();option.name="AvatarChoice_"+key;option.custom_minimum_size=Vector2(166,188);option.tooltip_text=Match.CARD_DATA[key].title+" · "+FACTION_NAMES[Match.CARD_DATA[key].faction];grid.add_child(option)
+  var box:=VBoxContainer.new();box.mouse_filter=Control.MOUSE_FILTER_IGNORE;box.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);box.offset_left=8;box.offset_right=-8;box.offset_top=5;box.offset_bottom=-5;option.add_child(box)
+  var face=preload("res://scripts/player_avatar.gd").new();face.show_level=false;face.configure(key);face.size_flags_horizontal=Control.SIZE_SHRINK_CENTER;box.add_child(face)
+  var name_label:=Label.new();name_label.custom_minimum_size.x=140;name_label.text=Match.CARD_DATA[key].title;name_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;name_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;name_label.add_theme_font_size_override("font_size",14);name_label.mouse_filter=Control.MOUSE_FILTER_IGNORE;box.add_child(name_label)
+  option.pressed.connect(select_avatar.bind(key))
+ avatar_dialog.popup_centered()
+
+func select_avatar(key: String) -> void:
+ if key not in Identity.AVATARS:return
+ Identity.choose(key)
+ menu_avatar.configure(key,menu_avatar.level,menu_avatar.xp_progress)
+ if not Identity.last_error.is_empty():
+  var error:=AcceptDialog.new();error.dialog_text=Identity.last_error;add_child(error);error.popup_centered()
+ if is_instance_valid(avatar_dialog):avatar_dialog.hide();avatar_dialog.queue_free()

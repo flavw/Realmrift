@@ -5,12 +5,12 @@
 
 [resource]
 script = ExtResource("1")
-title = "Guerreira Audaciosa"
-lore = "Ela avança primeiro. As histórias tentam alcançá-la depois."
 cost = 3
 attack = 4
 health = 1
-armor = 2
-card_class = 0
 ability_text = "Armadura 2"
+armor = 2
 artwork = ExtResource("2")
+faction = 0
+lore = "Ela avança primeiro. As histórias tentam alcançá-la depois."
+title = "Guerreira Audaciosa"

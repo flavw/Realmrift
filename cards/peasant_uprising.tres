@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/peasant_uprising.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dci3ncbrft3tj"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://d272iilgvvoxs" path="res://assets/art/peasant_uprising.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-creature_type=0
-title="Levante da Aldeia"
+script = ExtResource("1")
+cost = 5
+health = 1
+artwork = ExtResource("2")
+artwork_focus = Vector2(0.5, 0.58)
+artwork_zoom = 1.1
+collective = true
+legendary = true
 lore = "Uma pessoa com uma enxada é fazendeira. Muitas com enxadas são uma resposta."
-cost=5
-attack=1
-health=1
-card_class=2
-legendary=true
-collective=true
-artwork=ExtResource("2")
-artwork_zoom=1.1
-artwork_focus=Vector2(0.5,0.58)
+title = "Levante da Aldeia"

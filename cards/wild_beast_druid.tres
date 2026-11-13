@@ -1,18 +1,19 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/wild_beast_druid.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://buli5f6grh8sl"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://c5t8aci6wya36" path="res://assets/art/wild_beast_druid.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Druida dos Companheiros"
-lore="Ela não comanda as feras: caminha com elas, e elas escolhem segui-la."
-cost=3
-attack=1
-health=3
-card_class=6
-aura_effect=1
-aura_value=1
-aura_targets=2
-aura_includes_self=false
-artwork=ExtResource("2")
-artwork_focus=Vector2(0.5, 0.44)
-field_artwork_focus=Vector2(0.5, 0.33)
+script = ExtResource("1")
+cost = 3
+health = 3
+artwork = ExtResource("2")
+artwork_focus = Vector2(0.5, 0.44)
+aura_effect = 1
+aura_includes_self = false
+aura_targets = 2
+aura_value = 1
+faction = 6
+field_artwork_focus = Vector2(0.5, 0.33)
+lore = "Ela não comanda as feras: caminha com elas, e elas escolhem segui-la."
+title = "Druida dos Companheiros"

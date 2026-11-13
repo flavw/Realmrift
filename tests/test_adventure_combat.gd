@@ -1,0 +1,23 @@
+extends SceneTree
+const Match = preload("res://scripts/match.gd")
+func _initialize() -> void:
+ var mixed := Match.default_deck(0).slice(0, 14)
+ mixed.append("wild_elf")
+ var rules := {"enabled":true,"life_bonus":2,"powers":["starting_life","first_mana","draw_attack"]}
+ var game = Match.new(mixed, [], 0, true, rules)
+ assert(game.players[0].hp == 27)
+ assert(game.players[0].deck.size() + game.players[0].hand.size() == 15)
+ assert(game.mulligan(0,[]) and game.mulligan(1,[]))
+ assert(game.players[0].mana == 2 and game.players[0].temporary_mana == 1)
+ game.players[0].board.append({"turn_attack":0})
+ game.draw(0)
+ assert(game.players[0].board[0].turn_attack == 1)
+ var normal = Match.new(mixed, [], 0, true)
+ assert(normal.players[0].hp == 20)
+ assert(normal.players[0].deck.size() + normal.players[0].hand.size() == Match.DECK_SIZE)
+ var second = Match.new(mixed, [], 1, true, rules)
+ assert(second.mulligan(0,[]) and second.mulligan(1,[]))
+ assert(second.end_turn(1))
+ assert(second.players[0].mana == 3 and second.players[0].temporary_mana == 2)
+ print("OK: regras de aventura isoladas do duelo comum")
+ quit()

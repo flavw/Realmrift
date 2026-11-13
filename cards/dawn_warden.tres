@@ -5,12 +5,12 @@
 
 [resource]
 script = ExtResource("1")
-vigor = true
-title = "Guardião da Aurora"
-lore = "Sua luz não afasta apenas as sombras, mas também o medo."
 cost = 4
 attack = 2
 health = 5
-card_class = 4
-block = 3
 artwork = ExtResource("2")
+block = 3
+faction = 4
+lore = "Sua luz não afasta apenas as sombras, mas também o medo."
+title = "Guardião da Aurora"
+vigor = true

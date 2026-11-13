@@ -7,7 +7,7 @@ func verify() -> void:
  var previous: Array=initial.slots.slice(0,6).duplicate(true)
  previous[0].name="Meu Guerreiro"
  previous[0].cover="warrior"
- previous[4]={"name":"Meu deck criado","cards":Match.default_deck(1),"cover":"raven","base_class":CardData.CardClass.LADINO}
+ previous[4]={"name":"Meu deck criado","cards":Match.default_deck(1),"cover":"raven","base_faction":CardData.Faction.LADINO}
  var file:=FileAccess.open(initial.path,FileAccess.WRITE)
  file.store_string(JSON.stringify({"version":4,"active":4,"slots":previous}));file.close()
  var store=Store.new(initial.path)
@@ -29,7 +29,7 @@ func verify() -> void:
  assert(editor.find_child("DeckActionPlay",true,false).disabled)
  editor.find_child("DeckActionEdit",true,false).pressed.emit()
  assert(editor.slot==8 and editor.draft.is_empty())
- editor.select_base_class(CardData.CardClass.CLERIC)
+ editor.select_base_faction(CardData.Faction.CLERIC)
  editor.draft=Match.default_deck(3)
  editor.draft_name="Meu nono deck"
  assert(editor.save_deck() and store.activate(8))

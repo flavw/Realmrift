@@ -7,23 +7,24 @@ func fresh():
 func _init() -> void:
  assert(Match.CARD_DATA.mage.attack==1 and Match.CARD_DATA.mage.health==2)
  assert(Match.CARD_DATA.magic_missiles.spell_value==2)
- assert(Match.CARD_DATA.wizard_apprentice.resonance==1 and Match.CARD_DATA.aether_summoner.resonance==1)
+ assert(Match.CARD_DATA.wizard_apprentice.resonance==0 and Match.CARD_DATA.runic_familiar.resonance==1 and Match.CARD_DATA.aether_summoner.resonance==1)
  var m=fresh()
  var apprentice=m.spawn_unit(0,"wizard_apprentice")
  var conjurer=m.spawn_unit(0,"aether_summoner")
+ var familiar=m.spawn_unit(0,"runic_familiar")
  var enemy=m.spawn_unit(1,"farmer")
  var guard=m.spawn_unit(1,"squire")
  apprentice.ready=true
  assert(m.can_target(0,0,-1,true) and not m.can_target(0,0,-1,false))
- assert(m.act(0,0,-1,true) and m.players[1].hp==19 and guard.block==1)
- assert(apprentice.attack==1 and apprentice.health==3 and conjurer.attack==2 and conjurer.health==4)
+ assert(m.act(0,0,-1,true) and m.players[1].hp==18 and guard.block==1)
+ assert(apprentice.attack==0 and apprentice.health==2 and conjurer.attack==2 and conjurer.health==4 and familiar.attack==1 and familiar.health==4)
  assert(m.last_action.resonance_buffs.size()==2)
  m.players[0].hand=["magic_missiles"]
  var first={"side":1,"index":0};var castle={"side":1,"index":-1}
  assert(not m.cast_multiple(0,0,[castle,castle]))
  assert(m.cast_multiple(0,0,[first,castle]))
- assert(m.players[1].hp==17 and enemy.health==1)
- assert(apprentice.attack==2 and apprentice.health==4 and conjurer.attack==3 and conjurer.health==5)
+ assert(m.players[1].hp==15 and enemy.health==0)
+ assert(apprentice.attack==0 and apprentice.health==2 and conjurer.attack==3 and conjurer.health==5 and familiar.attack==2 and familiar.health==5)
  assert(m.last_action.missile_hits.size()==2 and m.last_action.missile_hits[1].castle)
  assert(m.last_action.resonance_buffs.size()==2)
  m=fresh()
@@ -34,12 +35,14 @@ func _init() -> void:
  m.turn=1
  var other=m.spawn_unit(1,"wizard_apprentice");other.ready=true
  var ally=m.spawn_unit(0,"wizard_apprentice")
+ familiar=m.spawn_unit(1,"runic_familiar")
  assert(m.act(1,1,-1,true))
- assert(other.attack==1 and ally.attack==0 and m.players[0].hp==19)
+ assert(other.attack==0 and ally.attack==0 and familiar.attack==1 and m.players[0].hp==18)
  m=fresh()
  apprentice=m.spawn_unit(0,"wizard_apprentice");apprentice.ready=true
- enemy=m.spawn_unit(1,"farmer");enemy.abascanto=1
- assert(m.act(0,0,0,true) and enemy.health==3 and apprentice.attack==1)
+ familiar=m.spawn_unit(0,"runic_familiar")
+ enemy=m.spawn_unit(1,"farmer");enemy.antimagic=1
+ assert(m.act(0,0,0,true) and enemy.health==3 and apprentice.attack==0 and familiar.attack==1)
  print("OK: magia e castelo, Bloqueio, dois alvos distintos e Ressonância por ação.")
  quit()
 

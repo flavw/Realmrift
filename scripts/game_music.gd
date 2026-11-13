@@ -97,3 +97,17 @@ func _exit_tree() -> void:
   player.stop()
   player.stream=null
  if current==self:current=null
+
+func play_effect(stream: AudioStream,base_db: float=-10.0) -> AudioStreamPlayer:
+ if muted or effects_volume<=0.001 or DisplayServer.get_name()=="headless":return null
+ var effect:=AudioStreamPlayer.new()
+ effect.set_script(preload("res://scripts/one_shot_audio.gd"))
+ effect.name="AdventureVictorySound"
+ effect.stream=stream
+ effect.volume_db=volume_db(effects_volume,base_db)
+ add_child(effect)
+ effect.finished.connect(effect.queue_free)
+ effect.play()
+ return effect
+
+

@@ -6,7 +6,7 @@ func verify():
  var store=Store.new("user://wild_test.json",false)
  var e=load("res://deck_editor.tscn").instantiate();e.configure(store);root.add_child(e)
  await process_frame
- e.choose_slot(6);e.select_base_class(CardData.CardClass.WILD)
+ e.choose_slot(6);e.select_base_faction(CardData.Faction.WILD)
  assert(e.draft_base==6 and "wild_elf" in e.collection_keys() and "wild_roots" in e.collection_keys())
  assert(Store.accepts_base(6,["wild_elf","squire"]) and not Store.accepts_base(6,["wild_elf","mage"]))
  var deck=[]

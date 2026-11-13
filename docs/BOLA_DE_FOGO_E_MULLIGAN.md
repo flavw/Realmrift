@@ -10,7 +10,7 @@ A interface mostra MULLIGAN EXTRA · 1 CARTA. Selecionar uma nova carta nessa et
 
 ## Fazendeiro
 
-Continua neutro de custo 2, agora **1/3**. Cultivo 1 permanece: ganha +1 vida atual e máxima no início de cada turno do dono.
+Continua aldeão de custo 2, agora **1/3**. Cultivo 1 permanece: ganha +1 vida atual e máxima no início de cada turno do dono.
 
 ## Bola de Fogo
 

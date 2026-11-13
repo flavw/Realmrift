@@ -6,7 +6,7 @@ func run() -> void:
  for d in decks:assert(Match.valid_deck(d.cards),d.name)
  var mage_index: int=-1
  for i in range(decks.size()):
-  if int(decks[i].base_class)==CardData.CardClass.MAGE:mage_index=i
+  if int(decks[i].base_faction)==CardData.Faction.MAGE:mage_index=i
  assert(mage_index>=0)
  var pairs: Array=[]
  var wins:=0
@@ -18,7 +18,7 @@ func run() -> void:
   if opponent==mage_index:continue
   var i: int=mini(opponent,mage_index)
   var j: int=maxi(opponent,mage_index)
-  var pair: Dictionary={"opponent":decks[opponent].name,"opponent_class":decks[opponent].base_class,"mage_wins":0,"opponent_wins":0,"draws":0,"unfinished":0,"games":[]}
+  var pair: Dictionary={"opponent":decks[opponent].name,"opponent_class":decks[opponent].base_faction,"mage_wins":0,"opponent_wins":0,"draws":0,"unfinished":0,"games":[]}
   for n in range(40):
    var inverted: bool=n%4>=2
    var starter: int=n%2

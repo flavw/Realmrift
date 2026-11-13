@@ -1,14 +1,14 @@
 # Revisão dos decks e 50 partidas contra Guerreiro
 
-Data: 25/10/2026. As sugestões foram removidas do editor: não há seletor nem botão para carregar uma lista pronta. Novos decks continuam começando pela escolha da classe base. As listas iniciais e da IA permanecem no jogo.
+Data: 25/10/2026. As sugestões foram removidas do editor: não há seletor nem botão para carregar uma lista pronta. Novos decks continuam começando pela escolha da facção base. As listas iniciais e da IA permanecem no jogo.
 
 ## Alterações de composição
 
 - **Muralha Lunar:** troca de um Vigia do Portão por uma Muralha da Aldeia. Mantém pressão e adiciona uma defesa resistente; apenas uma Muralha para não ocupar muitos espaços com criaturas que não atacam.
-- **Caçada das Brumas:** mantida. Arrancada, Voo e Veneno favorecem agressão; a Muralha não combina com essa proposta.
+- **Caçada das Brumas:** mantida. Disparada, Voo e Veneno favorecem agressão; a Muralha não combina com essa proposta.
 - **Círculo Arcano:** dois Vigias do Portão substituídos por duas Bolas de Fogo. Amplificar também melhora a nova limpeza de campo.
 - **Aurora Vital:** mantida. Vigor, ganhos de vida e cura continuam sendo o núcleo; a Muralha não pode ser curada nem atacar.
-- **União da Aldeia:** volta a ser exclusivamente neutra, conforme escolha do jogador. Feiticeira das Brasas e Canalista do Eclipse saem; entram uma Muralha da Aldeia e a segunda Reconstrução da Aldeia. Mantém uma Peregrina da Vida.
+- **União da Aldeia:** volta a ser exclusivamente aldeã, conforme escolha do jogador. Feiticeira das Brasas e Canalista do Eclipse saem; entram uma Muralha da Aldeia e a segunda Reconstrução da Aldeia. Mantém uma Peregrina da Vida.
 
 Todos têm 20 cartas, até duas cópias. Nomes, capas, seleção ativa e quatro espaços vazios foram preservados. Não foram alterados custos, atributos ou habilidades das cartas.
 
@@ -30,7 +30,7 @@ Aplicadas as regras atuais de Veneno que termina após causar dano, Vigor ofensi
 
 Cada vitória/derrota é da perspectiva do deck avaliado, na posição 0. No espelho, os dois lados usam exatamente a mesma lista; o 8–2 não representa diferença de força entre decks.
 
-O Mago teve o melhor resultado contra Guerreiro nesta amostra. Clérigo e neutros tiveram dificuldade. Ladino mostrou forte dependência de iniciativa: venceu as cinco em que começou e perdeu as cinco em que foi segundo. Dez jogos por confronto e uma única política de IA não bastam para concluir que uma classe precisa de mudanças de atributos. Não houve ajuste automático de balanceamento a partir desta amostra.
+O Mago teve o melhor resultado contra Guerreiro nesta amostra. Clérigo e aldeões tiveram dificuldade. Ladino mostrou forte dependência de iniciativa: venceu as cinco em que começou e perdeu as cinco em que foi segundo. Dez jogos por confronto e uma única política de IA não bastam para concluir que uma facção precisa de mudanças de atributos. Não houve ajuste automático de balanceamento a partir desta amostra.
 
 ## Uso das novas cartas
 

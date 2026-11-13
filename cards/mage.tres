@@ -5,14 +5,13 @@
 
 [resource]
 script = ExtResource("1")
-title = "Maga Arcana"
-lore = "Seu primeiro feitiço acertou o alvo. O segundo acertou a estante."
 cost = 2
-health = 2
-card_class = 1
-magic_damage = 1
-magic_cost = 0
 ability_text = "(0) + esgotar:
 1 dano mágico em criatura ou castelo inimigo.
 Sem contra-ataque."
 artwork = ExtResource("2")
+faction = 1
+lore = "Seu primeiro feitiço acertou o alvo. O segundo acertou a estante."
+magic_cost = 0
+magic_damage = 1
+title = "Maga Arcana"

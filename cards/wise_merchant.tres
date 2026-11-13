@@ -1,16 +1,13 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://sxw7han7w4iq"]
 
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/wise_merchant.webp" id="2"]
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://danpa83rkd0hb" path="res://assets/art/wise_merchant.webp" id="2"]
 
 [resource]
 script = ExtResource("1")
-creature_type = 0
-title = "Comerciante Astuta"
-lore = "Ela já sabia o preço da colheita antes de a semente cair na terra."
 cost = 2
-attack = 1
 health = 3
-card_class = 2
-commerce = 1
 artwork = ExtResource("2")
+commerce = 1
+lore = "Ela já sabia o preço da colheita antes de a semente cair na terra."
+title = "Comerciante Astuta"

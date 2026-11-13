@@ -5,16 +5,15 @@
 
 [resource]
 script = ExtResource("1")
-legendary = true
-quick_heal_amount = 1
-quick_heal_cost = 1
-title = "Paladino da Alvorada"
-lore = "Sua fé não impede as feridas; dá a ele forças para proteger mais uma vez."
 cost = 5
 attack = 2
 health = 5
-card_class = 4
+artwork = ExtResource("2")
 block = 2
 devotion = 2
-artwork = ExtResource("2")
+faction = 4
 field_artwork_focus = Vector2(0.5, 0.3)
+legendary = true
+lore = "Sua fé não impede as feridas; dá a ele forças para proteger mais uma vez."
+quick_heal_amount = 1
+title = "Paladino da Alvorada"

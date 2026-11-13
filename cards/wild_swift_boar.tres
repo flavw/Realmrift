@@ -1,16 +1,17 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/wild_swift_boar.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://5aec18matgyd"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://nl1xva3avomj" path="res://assets/art/wild_swift_boar.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Javali da Investida"
-lore="Quando os galhos se partem, já é tarde demais para sair do caminho."
-cost=3
-attack=3
-health=2
-card_class=6
-creature_type=1
-swift=true
-artwork=ExtResource("2")
-artwork_focus=Vector2(0.5, 0.44)
-field_artwork_focus=Vector2(0.5, 0.33)
+script = ExtResource("1")
+cost = 3
+attack = 3
+artwork = ExtResource("2")
+artwork_focus = Vector2(0.5, 0.44)
+creature_type = 1
+faction = 6
+field_artwork_focus = Vector2(0.5, 0.33)
+lore = "Quando os galhos se partem, já é tarde demais para sair do caminho."
+swift = true
+title = "Javali da Investida"

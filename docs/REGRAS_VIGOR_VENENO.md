@@ -6,9 +6,9 @@ Implementado localmente em 25/10/2026. Catálogo: **29 cartas — 23 criaturas e
 | --- | --- |
 | Clériga da Aurora · 3 mana · 1/4 | Vigor, mantém Cura 2 por 1 mana + esgotar |
 | Guardião da Aurora · 4 mana · 2/5 | Vigor e Bloqueio 3, sem Cura |
-| Voto de Vigor · Clérigo · 2 mana | Concede Vigor a uma criatura aliada de qualquer classe, não cumulativo |
+| Voto de Vigor · Clérigo · 2 mana | Concede Vigor a uma criatura aliada de qualquer facção, não cumulativo |
 | Descarga Condutora · Mago · 3 mana | 2 de dano mágico; dobra contra criatura com Armadura |
-| Ladina Relâmpago · 4 mana · 4/2 | Arrancada + Envenenar 1 |
+| Ladina Relâmpago · 4 mana · 4/2 | Disparada + Envenenar 1 |
 | Corvo das Brumas · 3 mana · 2/3 | Voo + Envenenar 1 |
 
 **Vigor:** ao atacar ou defender, usa `máximo(ataque base, vida atual)` antes dos danos simultâneos. Também vale em ataques ao castelo. Cura e crescimento atualizam essa força; o atributo base é preservado e a conversão de vida não altera o ataque exibido. Atacar exige estar pronto e esgota; defender funciona mesmo esgotado. Não aumenta dano mágico nem Veneno.

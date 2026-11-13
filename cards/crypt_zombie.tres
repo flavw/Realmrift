@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/crypt_zombie.png" id="2"]
+[resource]
+script=ExtResource("1")
+title="Zumbi"
+lore="Mais um turno. Mais uma volta."
+cost=2
+attack=2
+health=2
+faction=7
+creature_type=4
+collectible=false
+ability_text=""
+artwork=ExtResource("2")
+artwork_focus=Vector2(0.5,0.4)
+field_artwork_focus=Vector2(0.5,0.27)

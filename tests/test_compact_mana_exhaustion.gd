@@ -23,7 +23,7 @@ func verify() -> void:
  assert(gems.get_child(0).position.y<gems.get_child(5).position.y)
  assert(main.find_child("TemporaryMana",true,false).text=="+2")
  var icon=main.field_nodes[0][attacker.id].get_node("Canvas/Exhausted")
- assert(not icon.visible and icon.texture.resource_path.ends_with("attack-spent-icon.svg"))
+ assert(icon.visible and icon.texture.resource_path.ends_with("attack-spent-icon.svg"))
  main.select(0);await process_frame;await process_frame
  assert(main.field_nodes[0][attacker.id].get_node("Canvas/Exhausted").visible)
  assert(main.field_nodes[0][caster.id].get_node("Canvas/Exhausted").texture.resource_path.ends_with("tap-icon.svg"))

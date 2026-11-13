@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/minotaur_brute.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cimqg7k2gle5t"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cd42pe0sgq0e4" path="res://assets/art/minotaur_brute.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Minotauro da Ruína"
+script = ExtResource("1")
+cost = 5
+attack = 5
+health = 5
+artwork = ExtResource("2")
+block = 1
+creature_type = 3
+faction = 5
 lore = "Há quem procure a saída do labirinto. Ele prefere abrir outra."
-cost=5
-attack=5
-health=5
-card_class=5
-creature_type=3
-block=3
-trample=true
-artwork=ExtResource("2")
+title = "Minotauro da Ruína"
+trample = true

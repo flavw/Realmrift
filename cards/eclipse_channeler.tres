@@ -1,15 +1,14 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/eclipse_channeler.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://blbel6t5hflwg"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dteia7hv2slk4" path="res://assets/art/eclipse_channeler.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-creature_type=0
-title="Canalista do Eclipse"
+script = ExtResource("1")
+cost = 3
+health = 3
+artwork = ExtResource("2")
+faction = 1
 lore = "Entre luz e sombra há um instante. Ela aprendeu a usá-lo."
-cost=3
-attack=1
-health=3
-card_class=1
-magic_damage=2
-magic_cost=1
-artwork=ExtResource("2")
+magic_damage = 2
+title = "Canalista do Eclipse"

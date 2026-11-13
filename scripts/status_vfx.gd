@@ -65,7 +65,7 @@ func _draw() -> void:
    draw_line(at-direction*8,at+direction*8,gold,2.5,true)
    draw_circle(at,3.0,Color(1.0,0.97,0.73,fade))
   return
- var tint:=Color("9ad9ff") if kind=="spell_buff" else Color("ef5968") if kind=="bleed" else Color("ff9b47") if kind=="fury" else Color("7bf2b0") if kind in ["heal","attack_buff"] else Color("ffc370") if kind=="arcane_area" else Color("acde58")
+ var tint:=Color("ba91df") if kind=="necrotic" else Color("9ad9ff") if kind=="spell_buff" else Color("ef5968") if kind=="bleed" else Color("ff9b47") if kind=="fury" else Color("7bf2b0") if kind in ["heal","attack_buff"] else Color("ffc370") if kind=="arcane_area" else Color("acde58")
  tint.a=fade
  draw_arc(center,radius*(0.7+progress*.5),0,TAU,48,Color(tint,fade*.65),3,true)
  for i in range(7):
@@ -81,5 +81,5 @@ func _draw() -> void:
    draw_circle(at,3.0+sin(progress*PI+i)*1.4,tint)
    draw_circle(at,6.0,Color(0.4,0.15,0.6,fade*.4),false,1,true)
  if amount>0:
-  var text: String=("+" if kind=="heal" else "−" if kind in ["poison_tick","arcane_area"] else "+")+str(amount)
+  var text: String=("+" if kind=="heal" else "−" if kind in ["poison_tick","arcane_area","necrotic"] else "+")+str(amount)
   draw_string(ThemeDB.fallback_font,center+Vector2(-12,-progress*30),text,HORIZONTAL_ALIGNMENT_LEFT,-1,24,tint)

@@ -5,7 +5,7 @@ func _init() -> void:
  var acolyte: CardData=Match.CARD_DATA.dawn_acolyte
  assert(guard.cost==4 and guard.attack==2 and guard.health==5 and guard.vigor and guard.block==3 and guard.heal_amount==0)
  assert(acolyte.cost==1 and acolyte.attack==0 and acolyte.health==2 and acolyte.heal_amount==1 and acolyte.heal_cost==0)
- assert(acolyte.card_class==CardData.CardClass.CLERIC and acolyte.artwork!=null)
+ assert(acolyte.faction==CardData.Faction.CLERIC and acolyte.artwork!=null)
  var m=Match.new()
  m.players[0].board.clear();m.players[1].board.clear()
  var unit=m.spawn_unit(0,"dawn_warden")

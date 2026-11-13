@@ -40,7 +40,7 @@ func verify() -> void:
  editor.clear_draft()
  assert(editor.add_card("mage") and not editor.add_card("warrior") and editor.add_card("moon_herald"))
  editor.remove_card("mage")
- assert(editor.add_card("cleric"),"Remover a última carta da classe libera outra")
+ assert(editor.add_card("cleric"),"Remover a última carta da facção libera outra")
  main.close_decks()
  main.queue_free()
  await process_frame
@@ -52,7 +52,7 @@ func verify() -> void:
  await process_frame
  assert(repair.needs_deck_fix and is_instance_valid(repair.deck_editor) and not repair.can_act())
  assert(not is_instance_valid(repair.mulligan_layer))
- assert(Match.deck_class(repair.deck_editor.draft)==-2)
+ assert(Match.deck_faction(repair.deck_editor.draft)==-2)
  repair.deck_editor.choose_slot(0)
  repair.deck_editor.draft=Match.default_deck(0);repair.deck_editor.draft_base=0;repair.deck_editor.render()
  repair.deck_editor.play_deck()
@@ -63,5 +63,5 @@ func verify() -> void:
  await process_frame
  await create_timer(0.35).timeout
  DirAccess.remove_absolute(ProjectSettings.globalize_path(legacy.path))
- print("OK: Chamado com escolha/cancelamento/alvos/consumo, ícone de mana na lista, trava de classes e reparo de deck legado antes do mulligan.")
+ print("OK: Chamado com escolha/cancelamento/alvos/consumo, ícone de mana na lista, trava de facções e reparo de deck legado antes do mulligan.")
  quit()

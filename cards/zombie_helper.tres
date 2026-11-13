@@ -1,16 +1,18 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/zombie_helper_dread.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bll53nba3cv83"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://clpdf8fvlps2t" path="res://assets/art/zombie_helper_dread.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Zumbi Serviçal"
+script = ExtResource("1")
+cost = 2
+attack = 2
+health = 1
+artwork = ExtResource("2")
+creature_type = 4
+entry_attack = 1
+entry_effect = 7
+entry_health = 1
+faction = 8
 lore = "Sempre disposto a ajudar. Às vezes é preciso devolver-lhe o braço."
-cost=2
-attack=2
-health=1
-card_class=2
-creature_type=4
-entry_effect=7
-entry_attack=1
-entry_health=1
-artwork=ExtResource("2")
+title = "Zumbi Serviçal"

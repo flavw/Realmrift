@@ -185,8 +185,8 @@ func simulate(a: String,b: String,cohort: String,seed_value: int) -> Dictionary:
  return {"cohort":cohort,"policy":policy,"seed":seed_value,"first":a,"second":b,"winner":winner,"turns":turns,"actions":actions,"hp":[m.players[0].hp,m.players[1].hp],"finish":finish,"unused_mana":idle_mana,"supplied_mana":supplied_mana,"cards_played":cards_played}
 
 func summarize(cohort: String) -> Dictionary:
- var summary: Dictionary={"classes":{},"matchups":[],"first_wins":0,"draws":0,"games":0,"fatigue_finishes":0,"turns":0}
- for faction in FACTIONS:summary.classes[faction]={"games":0,"wins":0,"draws":0,"unused_mana":0,"supplied_mana":0}
+ var summary: Dictionary={"facções":{},"matchups":[],"first_wins":0,"draws":0,"games":0,"fatigue_finishes":0,"turns":0}
+ for faction in FACTIONS:summary.facções[faction]={"games":0,"wins":0,"draws":0,"unused_mana":0,"supplied_mana":0}
  for game in games:
   if game.cohort!=cohort:continue
   summary.games+=1
@@ -196,11 +196,11 @@ func summarize(cohort: String) -> Dictionary:
   if game.finish=="fatigue":summary.fatigue_finishes+=1
   for side in range(2):
    var faction: String=game.first if side==0 else game.second
-   summary.classes[faction].games+=1
-   if game.winner==faction:summary.classes[faction].wins+=1
-   if game.winner=="Empate":summary.classes[faction].draws+=1
-   summary.classes[faction].unused_mana+=game.unused_mana[side]
-   summary.classes[faction].supplied_mana+=game.supplied_mana[side]
+   summary.facções[faction].games+=1
+   if game.winner==faction:summary.facções[faction].wins+=1
+   if game.winner=="Empate":summary.facções[faction].draws+=1
+   summary.facções[faction].unused_mana+=game.unused_mana[side]
+   summary.facções[faction].supplied_mana+=game.supplied_mana[side]
  for i in range(FACTIONS.size()):
   for j in range(i+1,FACTIONS.size()):
    var row:={"a":FACTIONS[i],"b":FACTIONS[j],"a_wins":0,"b_wins":0,"draws":0}
@@ -237,7 +237,7 @@ func run() -> void:
    var cards:=deck(faction,cohort)
    assert(Match.valid_deck(cards))
    for key in cards:
-    assert(Match.CARD_DATA[key].card_class in [IDS[faction],CardData.CardClass.NEUTRAL],"Deck deve usar só a classe + neutros")
+    assert(Match.CARD_DATA[key].faction in [IDS[faction],CardData.Faction.NEUTRAL],"Deck deve usar só a facção + aldeões")
   for i in range(FACTIONS.size()):
    for j in range(i+1,FACTIONS.size()):
     for seed_value in range(1,rounds+1):

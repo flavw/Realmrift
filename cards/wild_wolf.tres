@@ -1,14 +1,15 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/wild_wolf.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bwq16hyu5o5vn"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bcpyudfecyeda" path="res://assets/art/wild_wolf.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Lobo do Ermo"
-lore="O ermo lhe ensinou a caçar. A alcateia lhe ensinou por quê."
-cost=1
-attack=2
-health=1
-card_class=6
-creature_type=1
-pack=1
-artwork=ExtResource("2")
+script = ExtResource("1")
+attack = 2
+health = 1
+artwork = ExtResource("2")
+creature_type = 1
+faction = 6
+lore = "O ermo lhe ensinou a caçar. A alcateia lhe ensinou por quê."
+pack = 1
+title = "Lobo do Ermo"

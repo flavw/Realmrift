@@ -68,7 +68,7 @@ func vigor() -> void:
  a=unit("farmer");a.attack=0;a.health=4
  m.players[0].board=[a];m.players[0].hand=["vigor_vow"]
  assert(m.cast(0,0,0,0) and m.can_target(0,0,-1))
- assert(m.act(0,0,-1) and m.players[1].hp==16,"Vigor concedido funciona ofensivamente em qualquer classe")
+ assert(m.act(0,0,-1) and m.players[1].hp==16,"Vigor concedido funciona ofensivamente em qualquer facção")
  for key in ["fire_mage","eclipse_channeler"]:
   m=game();a=unit(key)
   var target=unit("sentinel",1)

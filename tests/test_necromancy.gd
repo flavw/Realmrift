@@ -12,16 +12,16 @@ func summon_necro(m,side: int=0) -> void:
  assert(m.play(side,0))
 func verify() -> void:
  var necro: CardData=Match.CARD_DATA.necromancer_summoner
- assert(necro.is_human() and necro.human_and_monster and necro.card_class==5)
+ assert(necro.is_human() and not necro.has_creature_type(CardData.CreatureType.MONSTER) and necro.faction==7)
  assert(Match.CARD_DATA.zombie_helper.creature_type==CardData.CreatureType.UNDEAD)
  assert(Match.CARD_DATA.summoned_ghoul.creature_type==CardData.CreatureType.UNDEAD)
  assert(not Match.CARD_DATA.summoned_ghoul.collectible)
- assert(Store.accepts_base(5,["necromancer_summoner","zombie_helper"]))
- assert(not Store.accepts_base(5,["farmer","necromancer_summoner"]))
+ assert(Store.accepts_base(7,["necromancer_summoner","zombie_helper"]))
+ assert(not Store.accepts_base(7,["farmer","necromancer_summoner"]))
  assert(not Store.accepts_base(2,["summoned_ghoul"]))
- assert(not Match.can_add_class([],"summoned_ghoul"))
+ assert(not Match.can_add_faction([],"summoned_ghoul"))
  var deck=Match.default_deck(5)
- assert(deck.count("necromancer_summoner")==2)
+ assert(deck.count("necromancer_summoner")==0)
  assert(Match.valid_deck(deck))
  var m=fresh();summon_necro(m)
  assert(m.players[0].board.size()==1) # No enemy Human has died.
@@ -45,7 +45,7 @@ func verify() -> void:
  # A dead Beast does not unlock it; history persists after the body leaves.
  m=fresh();victim=m.spawn_unit(1,"wolf");victim.health=0;m.remove_dead();summon_necro(m)
  assert(m.human_deaths[1]==0 and m.players[0].board.size()==1)
- # Necromancer herself is Human even with Pacto Sombrio.
+ # Necromancer's own death counts as a Human death.
  m=fresh();victim=m.spawn_unit(1,"necromancer_summoner");victim.health=0;m.remove_dead()
  assert(m.human_deaths[1]==1)
  for i in range(5):m.spawn_unit(0,"wolf")
@@ -60,8 +60,8 @@ func verify() -> void:
  assert(victim.health==2 and victim.poison==2 and caster.health==4 and observer.health==4)
  assert(not caster.ready and m.players[0].mana==10)
  assert(m.last_action.kind=="magic" and m.last_action.target_side==1 and not m.last_action.has("healed"))
- caster.ready=true;victim.abascanto=1
- assert(m.heal(0,0,1,1) and victim.health==2 and victim.abascanto==0 and m.last_action.abascanto_blocked)
+ caster.ready=true;victim.antimagic=1
+ assert(m.heal(0,0,1,1) and victim.health==2 and victim.antimagic==0 and m.last_action.antimagic_blocked)
  caster.ready=true
  assert(m.heal(0,0,1,1) and victim.health==1)
  # Friendly undead can also be targeted, including at full health.
@@ -97,5 +97,5 @@ func verify() -> void:
  field_necro.set_card(necro,4,false,false,2,0,true,0)
  assert(field_necro.find_child("Pacto Sombrio",true,false)==null)
  field_necro.queue_free();main.queue_free();await process_frame;await create_timer(0.35).timeout
- print("OK: Mortos-vivos sofrem Cura como dano mágico, Abascanto/Armadura/prontidão/mana/Devoção/IA; Pacto Sombrio, registro de mortes, condição, limite de campo e Carniçal 2/2 invocado.")
+ print("OK: Mortos-vivos sofrem Cura como dano mágico, Antimagic/Armadura/prontidão/mana/Devoção/IA; registro de mortes, condição, limite de campo e Carniçal 2/2 invocado.")
  quit()

@@ -1,8 +1,8 @@
-# Chamado por classe e decks novos
+# Chamado por facção e decks novos
 
 A coleção agora tem **29 cartas: 23 criaturas e 6 magias**. Chamado continua sendo o gatilho genérico de entrada pela mão.
 
-| Classe | Carta | Mana | Ataque/vida base | Chamado |
+| Facção | Carta | Mana | Ataque/vida base | Chamado |
 | --- | --- | ---: | --- | --- |
 | Guerreiro | Ferreiro da Muralha | 3 | 2/3 | Outro aliado ganha +1 Armadura permanente |
 | Mago | Conjuradora do Éter | 4 | 1/3 | Invoca Familiar Rúnico 0/3, Amplificar 1, se houver espaço |
@@ -13,7 +13,7 @@ Bônus e veneno usam o lado correto do alvo. Sem alvo disponível, a criatura en
 
 ## Substituição dos decks
 
-Os três decks salvos passam a ser **Muralha Lunar**, **Caçada das Brumas** e **Círculo Arcano**, com 12 cartas, até duas cópias e uma classe + neutros. A versão do arquivo de decks foi atualizada para 2: listas antigas são substituídas uma única vez, e edições salvas depois disso são preservadas.
+Os três decks salvos passam a ser **Muralha Lunar**, **Caçada das Brumas** e **Círculo Arcano**, com 12 cartas, até duas cópias e uma facção + aldeões. A versão do arquivo de decks foi atualizada para 2: listas antigas são substituídas uma única vez, e edições salvas depois disso são preservadas.
 
 Há quatro sugestões no seletor do editor. **Aurora Vital**, de Clérigo, pode substituir qualquer um dos três espaços usando Carregar sugestão e depois Salvar deck. Carregar muda somente o rascunho; não salva automaticamente. A IA também pode usar as quatro receitas.
 
@@ -35,13 +35,13 @@ Há quatro sugestões no seletor do editor. **Aurora Vital**, de Clérigo, pode 
 
 ## Validação
 
-Testes do motor e da interface cobrem os quatro Chamados, escolha de lado, Armadura permanente, Veneno acumulativo, bônus de vida/Vigor, token com aura e esgotamento, limites de quatro/cinco espaços, IA, seletor de quatro receitas, regras de cópias/classe e substituição única dos decks antigos.
+Testes do motor e da interface cobrem os quatro Chamados, escolha de lado, Armadura permanente, Veneno acumulativo, bônus de vida/Vigor, token com aura e esgotamento, limites de quatro/cinco espaços, IA, seletor de quatro receitas, regras de cópias/facção e substituição única dos decks antigos.
 
 As simulações e relatórios anteriores usam versões anteriores de cartas e receitas; seus números não avaliam estes quatro Chamados nem os decks novos. Esta atualização não inclui uma nova rodada de balanceamento.
 
 ## Artes
 
-Artes geradas com image_gen integrado. Prompts em `docs/art-prompts/class-calls.md`. Arquivos finais:
+Artes geradas com image_gen integrado. Prompts em `docs/art-prompts/faction-calls.md`. Arquivos finais:
 
 - `C:\Users\flavi\Documents\Codex\Realmrift\assets\art\wall_smith.webp`
 - `C:\Users\flavi\Documents\Codex\Realmrift\assets\art\aether_summoner.webp`

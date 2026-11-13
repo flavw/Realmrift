@@ -26,7 +26,7 @@ var message := "Escolha cartas para montar seu deck."
 var limit_notice_id := 0
 var scroll_position := 0
 var collection_scroll: ScrollContainer
-var class_filter: int=-1
+var faction_filter: int=-1
 var type_filter: int=-1
 var mana_filter: int=-1
 var search_query: String=""
@@ -34,7 +34,7 @@ var focused_card: String=""
 var pending_remove_key: String=""
 var pending_open_slot: int=-1
 var collection_tiles: Dictionary={}
-const CLASS_NAMES=preload("res://scripts/faction_names.gd").PT
+const FACTION_NAMES=preload("res://scripts/faction_names.gd").PT
 var collection_dialog: AcceptDialog
 var name_edit: LineEdit
 var collection_dragging := false
@@ -68,13 +68,13 @@ func load_slot(index: int) -> void:
   draft=draft_cache[slot].cards.duplicate()
   draft_name=draft_cache[slot].name
   draft_cover=String(draft_cache[slot].get("cover",draft_cover))
-  draft_base=int(draft_cache[slot].get("base_class",draft_base))
- message = "Escolha a classe base deste deck." if draft_base<0 else "Coleção: adicionar. Lista: localizar; − remove uma cópia. Salve antes de sair."
+  draft_base=int(draft_cache[slot].get("base_faction",draft_base))
+ message = "Escolha a facção base deste deck." if draft_base<0 else "Coleção: adicionar. Lista: localizar; − remove uma cópia. Salve antes de sair."
 
 func choose_slot(index: int) -> void:
  library_selected=index
  load_slot(index)
- screen="choose_class" if draft_base<0 else "edit"
+ screen="choose_faction" if draft_base<0 else "edit"
  focused_card=""
  reset_collection_scroll()
  render()
@@ -126,8 +126,8 @@ func render() -> void:
  if screen=="collection":
   render_full_collection(page)
   return
- if screen=="choose_class":
-  render_class_choice(page)
+ if screen=="choose_faction":
+  render_faction_choice(page)
   return
  if screen=="personalize":
   render_personalize(page)
@@ -185,12 +185,12 @@ func render() -> void:
   var quantity:=text_label("%d / %d" % [draft.count(key),Match.copy_limit(key)],16)
   quantity.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
   tile.add_child(quantity)
-  var kind: String = CLASS_NAMES[Match.CARD_DATA[key].card_class].to_upper()
+  var kind: String = FACTION_NAMES[Match.CARD_DATA[key].faction].to_upper()
   kind += " • "+Match.CARD_DATA[key].creature_type_name().to_upper()
-  var class_label := text_label(kind, 14)
-  class_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-  class_label.modulate = CardSkin.class_color(Match.CARD_DATA[key].card_class).lightened(0.2)
-  tile.add_child(class_label)
+  var faction_label := text_label(kind, 14)
+  faction_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+  faction_label.modulate = CardSkin.faction_color(Match.CARD_DATA[key].faction).lightened(0.2)
+  tile.add_child(faction_label)
 
  if visible_keys.is_empty():
   var empty:=text_label("Nenhuma carta encontrada. Altere os filtros ou a busca.",17)
@@ -206,10 +206,10 @@ func render() -> void:
  var deck_title:=text_label("SEU DECK • %d / %d cartas" % [draft.size(),Match.DECK_SIZE],23)
  deck_title.size_flags_horizontal=Control.SIZE_EXPAND_FILL
  deck_heading.add_child(deck_title)
- deck_heading.add_child(class_badge(draft,24,draft_base))
+ deck_heading.add_child(faction_badge(draft,24,draft_base))
  var faction: int=draft_base
- var rule:=text_label("Somente neutros" if draft_base==CardData.CardClass.NEUTRAL else ("Horda • Humanos só com Pacto Sombrio" if draft_base==CardData.CardClass.HORDE else "Classe: %s • neutros permitidos" % CLASS_NAMES[maxi(0,draft_base)]),15)
- rule.name="DeckClassRule"
+ var rule:=text_label(composition_rule(draft_base),15)
+ rule.name="DeckFactionRule"
  rule.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
  rule.modulate=Color("a3c7dd")
  deck_column.add_child(rule)
@@ -218,12 +218,12 @@ func render() -> void:
  progress.max_value=Match.DECK_SIZE;progress.value=draft.size();progress.show_percentage=false
  progress.custom_minimum_size.y=7
  deck_column.add_child(progress)
- var change:=action_button("Trocar classe base",begin_class_choice,draft.is_empty())
+ var change:=action_button("Trocar facção base",begin_faction_choice,draft.is_empty())
  change.name="ChangeDeckBase"
- change.tooltip_text="Esvazie o rascunho para trocar a classe." if not draft.is_empty() else "Escolher outra classe base"
+ change.tooltip_text="Esvazie o rascunho para trocar a facção." if not draft.is_empty() else "Escolher outra facção base"
  deck_column.add_child(change)
  if not DeckStore.accepts_base(draft_base,draft):
-  var hint:=text_label("Remova da lista as cartas fora da classe base.",15)
+  var hint:=text_label("Remova da lista as cartas fora da facção base.",15)
   hint.modulate=Color("ff8591");hint.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
   deck_column.add_child(hint)
  name_edit = LineEdit.new()
@@ -256,10 +256,10 @@ func render() -> void:
   item.name="DeckCard_"+String(key)
   item.custom_minimum_size=Vector2(0,40)
   item.size_flags_horizontal=Control.SIZE_EXPAND_FILL
-  var row_class: int=Match.CARD_DATA[key].card_class
-  var tint: Color=CardSkin.class_color(row_class).lightened(0.18)
-  var style:=UiTheme.panel(Color("101c2a"),Color("273a4a") if row_class==CardData.CardClass.NEUTRAL else tint.darkened(0.5),6)
-  style.border_width_left=1 if row_class==CardData.CardClass.NEUTRAL else 3
+  var row_faction: int=Match.CARD_DATA[key].faction
+  var tint: Color=CardSkin.faction_color(row_faction).lightened(0.18)
+  var style:=UiTheme.panel(Color("101c2a"),Color("273a4a") if row_faction==CardData.Faction.VILLAGER else tint.darkened(0.5),6)
+  style.border_width_left=1 if row_faction==CardData.Faction.VILLAGER else 3
   if pending_remove_key==key:style.border_color=Color("e5c987")
   item.add_theme_stylebox_override("normal",style)
   item.tooltip_text="Clique para localizar na coleção. Use − para remover uma cópia."
@@ -277,7 +277,7 @@ func render() -> void:
   caption.clip_text=true;caption.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
   caption.size_flags_horizontal=Control.SIZE_EXPAND_FILL
   caption.mouse_filter=Control.MOUSE_FILTER_IGNORE
-  if row_class!=CardData.CardClass.NEUTRAL:caption.add_theme_color_override("font_color",tint)
+  if row_faction!=CardData.Faction.VILLAGER:caption.add_theme_color_override("font_color",tint)
   else:caption.add_theme_color_override("font_color",Color("f2d9a6"))
   content.add_child(caption)
   var remove:=Button.new()
@@ -314,38 +314,38 @@ func render() -> void:
  footer.add_child(action_button("Salvar deck", save_deck, valid or draft.is_empty()))
  footer.add_child(action_button("Jogar com este deck", play_deck, valid))
 
-func begin_class_choice() -> void:
+func begin_faction_choice() -> void:
  if not draft.is_empty() and draft_base>=0:
-  message="Esvazie o rascunho para trocar a classe base.";render();return
- screen="choose_class"
+  message="Esvazie o rascunho para trocar a facção base.";render();return
+ screen="choose_faction"
  render()
 
-func select_base_class(value: int) -> void:
- if value not in [0,1,2,3,4,5,6]:return
+func select_base_faction(value: int) -> void:
+ if value not in [0,1,2,3,4,5,6,7,8]:return
  if not draft.is_empty() and draft_base>=0 and draft_base!=value:return
  draft_base=value
- class_filter=-1;type_filter=-1;mana_filter=-1;search_query="";focused_card=""
+ faction_filter=-1;type_filter=-1;mana_filter=-1;search_query="";focused_card=""
  screen="edit"
  message="Coleção: adicionar. Lista: localizar; − remove uma cópia."
  reset_collection_scroll();render()
 
-func render_class_choice(page: VBoxContainer) -> void:
- library_title(page,"CLASSE BASE · DECK %d" % (slot+1),"Meus decks",show_library)
- var intro:=text_label("Escolha a classe deste deck. A coleção mostrará apenas cartas compatíveis.",20)
+func render_faction_choice(page: VBoxContainer) -> void:
+ library_title(page,"FACÇÃO BASE · DECK %d" % (slot+1),"Meus decks",show_library)
+ var intro:=text_label("Escolha a facção deste deck. A coleção mostrará apenas cartas compatíveis.",20)
  intro.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
  page.add_child(intro)
  var center:=CenterContainer.new()
  center.size_flags_vertical=Control.SIZE_EXPAND_FILL
  page.add_child(center)
  var grid:=GridContainer.new()
- grid.name="BaseClassChoices";grid.columns=3
+ grid.name="BaseFactionChoices";grid.columns=3
  grid.add_theme_constant_override("h_separation",20);grid.add_theme_constant_override("v_separation",20)
  center.add_child(grid)
- for value in [0,1,3,4,5,6,2]:
+ for value in [0,1,3,4,5,6,7,2,8]:
   var choice:=Button.new()
   choice.name="ChooseBase_%d" % value
   choice.custom_minimum_size=Vector2(330,170)
-  choice.pressed.connect(select_base_class.bind(value))
+  choice.pressed.connect(select_base_faction.bind(value))
   grid.add_child(choice)
   var content:=VBoxContainer.new()
   content.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -354,19 +354,24 @@ func render_class_choice(page: VBoxContainer) -> void:
   content.mouse_filter=Control.MOUSE_FILTER_IGNORE
   choice.add_child(content)
   var icon:=TextureRect.new()
-  icon.texture=CardSkin.class_symbol(value)
+  icon.texture=CardSkin.faction_symbol(value)
   icon.custom_minimum_size=Vector2(54,54)
   icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;icon.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
   icon.mouse_filter=Control.MOUSE_FILTER_IGNORE
   content.add_child(icon)
-  var title:=text_label("Neutros" if value==CardData.CardClass.NEUTRAL else CLASS_NAMES[value],25)
-  title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;title.modulate=CardSkin.class_color(value).lightened(0.2)
+  var title:=text_label("Aldeia" if value==CardData.Faction.VILLAGER else FACTION_NAMES[value],25)
+  title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;title.modulate=CardSkin.faction_color(value).lightened(0.2)
   title.mouse_filter=Control.MOUSE_FILTER_IGNORE;content.add_child(title)
-  var note:=text_label("Somente cartas neutras" if value==CardData.CardClass.NEUTRAL else ("Sem Humanos, exceto Pacto Sombrio" if value==CardData.CardClass.HORDE else "Classe e neutros compatíveis"),16)
+  var note:=text_label(composition_rule(value),16)
   note.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;note.mouse_filter=Control.MOUSE_FILTER_IGNORE
   content.add_child(note)
  var hint:=text_label("A escolha só é gravada ao salvar o deck. Para trocar a base, esvazie o rascunho.",16)
  hint.modulate=Color("9eb3c6");page.add_child(hint)
+
+func composition_rule(base: int) -> String:
+ var complement: int=Match.complement_for(base)
+ if complement<0 or complement==base:return "Somente %s" % FACTION_NAMES[maxi(0,base)]
+ return "%s + %s" % [FACTION_NAMES[maxi(0,base)],FACTION_NAMES[complement]]
 
 func collection_card_input(event: InputEvent,key: String) -> void:
  var clicked: bool=event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_LEFT
@@ -410,18 +415,7 @@ func animate_addition(key: String,source: Rect2) -> void:
  if not is_instance_valid(target) or screen!="edit":return
  if not is_instance_valid(addition_layer):
   addition_layer=CanvasLayer.new();addition_layer.layer=40;add_child(addition_layer)
- var ghost=CardScene.instantiate()
- ghost.name="CardAddFlight"
- ghost.card_data=Match.CARD_DATA[key]
- ghost.custom_minimum_size=Vector2.ZERO;ghost.position=source.position;ghost.size=source.size
- ghost.mouse_filter=Control.MOUSE_FILTER_IGNORE
- addition_layer.add_child(ghost)
- var destination: Vector2=target.get_global_rect().get_center()-source.size*0.11
- var tween:=create_tween().set_parallel(true).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
- tween.tween_property(ghost,"position",destination,0.28)
- tween.tween_property(ghost,"scale",Vector2.ONE*0.22,0.28)
- tween.tween_property(ghost,"modulate:a",0.25,0.28)
- tween.finished.connect(ghost.queue_free)
+ preload("res://scripts/card_add_flight.gd").play(addition_layer,Match.CARD_DATA[key],source,target.get_global_rect())
 
 func sorted_keys() -> Array:
  var keys: Array=Match.CARD_DATA.keys()
@@ -440,7 +434,7 @@ func matches_filters(key: String) -> bool:
  var data: CardData=Match.CARD_DATA[key]
  if not data.collectible:return false
  if screen!="collection" and (draft_base<0 or not DeckStore.accepts_base(draft_base,[key])):return false
- if class_filter>=0 and data.card_class!=class_filter:return false
+ if faction_filter>=0 and data.faction!=faction_filter:return false
  if mana_filter>=0 and mini(7,data.cost)!=mana_filter:return false
  if type_filter in [0,1] and data.card_type!=type_filter:return false
  if type_filter>=2 and not data.has_creature_type(type_filter-2):return false
@@ -455,26 +449,30 @@ func collection_keys() -> Array:
 
 func build_collection_filters(parent: VBoxContainer) -> void:
  var row:=HBoxContainer.new();parent.add_child(row)
- var picker:=OptionButton.new();picker.name="CollectionClassFilter"
- var values: Array=[-1] if draft_base==CardData.CardClass.NEUTRAL else [-1,draft_base,CardData.CardClass.NEUTRAL]
- var labels: Array=["Neutros"] if draft_base==CardData.CardClass.NEUTRAL else [CLASS_NAMES[draft_base]+" e neutros","Somente "+CLASS_NAMES[draft_base],"Somente neutros"]
+ var picker:=OptionButton.new();picker.name="CollectionFactionFilter"
+ var values: Array=[-1]
+ var labels: Array=[composition_rule(draft_base)]
+ var complement: int=Match.complement_for(draft_base)
+ if complement>=0 and complement!=draft_base:
+  values=[-1,draft_base,complement]
+  labels=[composition_rule(draft_base),"Somente "+FACTION_NAMES[draft_base],"Somente "+FACTION_NAMES[complement]]
  if screen=="collection":
-  values=[-1,0,1,2,3,4,5,6]
-  var counts: Array[int]=[0,0,0,0,0,0,0]
+  values=[-1,0,1,2,3,4,5,6,7,8]
+  var counts: Array[int]=[];counts.resize(FACTION_NAMES.size());counts.fill(0)
   var total:=0
   for data in Match.CARD_DATA.values():
    if not data.collectible:continue
-   counts[int(data.card_class)]+=1
+   counts[int(data.faction)]+=1
    total+=1
-  labels=["Todas as classes (%d)" % total]
-  for faction in range(CLASS_NAMES.size()):
-   labels.append("%s (%d)" % [CLASS_NAMES[faction],counts[faction]])
+  labels=["Todas as facções (%d)" % total]
+  for faction in range(FACTION_NAMES.size()):
+   labels.append("%s (%d)" % [FACTION_NAMES[faction],counts[faction]])
  for label in labels:picker.add_item(label)
- picker.select(maxi(0,values.find(class_filter)))
- picker.item_selected.connect(func(index):class_filter=values[index];reset_collection_scroll();render())
+ picker.select(maxi(0,values.find(faction_filter)))
+ picker.item_selected.connect(func(index):faction_filter=values[index];reset_collection_scroll();render())
  row.add_child(picker)
  var types:=OptionButton.new();types.name="CollectionTypeFilter"
- for label in ["Todos os tipos","Criaturas","Magias","Humano","Fera","Artefato","Monstro","Morto-vivo","Elfo"]:types.add_item(label)
+ for label in ["Todos os tipos","Criaturas","Magias","Humano","Fera","Artefato","Monstro","Morto-vivo","Elfo","Anão"]:types.add_item(label)
  types.select(type_filter+1)
  types.item_selected.connect(func(index):type_filter=index-1;reset_collection_scroll();render())
  row.add_child(types)
@@ -494,7 +492,7 @@ func reset_collection_scroll() -> void:
  if is_instance_valid(collection_scroll):collection_scroll.scroll_vertical=0
 
 func clear_collection_filters() -> void:
- class_filter=-1;type_filter=-1;mana_filter=-1;search_query=""
+ faction_filter=-1;type_filter=-1;mana_filter=-1;search_query=""
  reset_collection_scroll();render()
 
 func collection_style(key: String) -> StyleBoxFlat:
@@ -551,9 +549,9 @@ func handle_collection_drag(event: InputEvent) -> void:
 func locate_card(key: String) -> void:
  if not Match.CARD_DATA.has(key):return
  if not DeckStore.accepts_base(draft_base,[key]):
-  message="Carta fora da classe base. Use − na lista para remover.";render();return
+  message="Carta fora da facção base. Use − na lista para remover.";render();return
  if not matches_filters(key):
-  class_filter=-1;type_filter=-1;mana_filter=-1;search_query=""
+  faction_filter=-1;type_filter=-1;mana_filter=-1;search_query=""
  focused_card=key
  message="%s localizada na coleção." % Match.CARD_DATA[key].title
  render()
@@ -570,11 +568,12 @@ func reveal_card(key: String) -> void:
 
 func addition_reason(key: String) -> String:
  if not Match.CARD_DATA.has(key):return "Carta desconhecida."
- if draft_base<0:return "Escolha uma classe base primeiro."
+ if draft_base<0:return "Escolha uma facção base primeiro."
  if not Match.CARD_DATA[key].collectible:return "Criatura invocada: não pode entrar no deck."
- if Match.neutral_monster_forbidden(draft_base,key):return "Monstros neutros só podem entrar na Horda ou em decks só de neutros."
- if not DeckStore.accepts_base(draft_base,[key]):return "Humanos precisam de Pacto Sombrio para entrar na Horda." if draft_base==CardData.CardClass.HORDE and Match.CARD_DATA[key].is_human() else "Esta carta não pertence à classe base do deck."
- if not Match.can_add_class(draft,key):return "Use somente uma classe por deck. Neutros são permitidos."
+ if Match.CARD_DATA[key].faction==CardData.Faction.VILLAGER and not Match.villagers_allowed(draft_base):return "Aldeia não complementa a facção %s." % FACTION_NAMES[draft_base]
+ if Match.neutral_monster_forbidden(draft_base,key):return "Monstros da Aldeia só entram em decks da Aldeia."
+ if not DeckStore.accepts_base(draft_base,[key]):return "Esta carta não pertence à facção base nem ao seu complemento."
+ if not Match.can_add_faction(draft,key):return "Use uma facção e seu complemento compatível."
  if draft.size()>=Match.DECK_SIZE:return "Deck completo: remova uma carta antes de adicionar."
  if draft.count(key)>=Match.copy_limit(key):return "Lendária: máximo de 1 cópia." if Match.CARD_DATA[key].legendary else "Máximo de 2 cópias desta carta."
  return ""
@@ -635,7 +634,7 @@ func save_deck() -> bool:
 
 func play_deck() -> void:
  if not Match.valid_deck(draft) or not DeckStore.accepts_base(draft_base,draft):
-  message="Complete um deck de 22 cartas, uma classe + neutros, antes de jogar."
+  message="Complete um deck de 22 cartas de uma facção com complementos compatíveis antes de jogar."
   render()
   return
  if save_deck() and store.activate(slot):
@@ -704,7 +703,7 @@ func mana_badge(cost: int, _legendary: bool=false) -> Control:
  badge.size_flags_vertical=Control.SIZE_SHRINK_CENTER
  badge.mouse_filter=Control.MOUSE_FILTER_IGNORE
  var gem:=TextureRect.new()
- gem.texture=CardSkin.texture("mana-cost-symbol")
+ gem.hide()
  gem.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
  gem.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
  gem.size=Vector2(28,28)
@@ -712,7 +711,7 @@ func mana_badge(cost: int, _legendary: bool=false) -> Control:
  badge.add_child(gem)
  var number:=Label.new()
  number.text=str(cost)
- number.position=Vector2(0,-2)
+ number.position=Vector2.ZERO
  number.size=Vector2(28,28)
  number.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
  number.vertical_alignment=VERTICAL_ALIGNMENT_CENTER
@@ -721,20 +720,27 @@ func mana_badge(cost: int, _legendary: bool=false) -> Control:
  font.font_weight=800
  number.add_theme_font_override("font",font)
  number.add_theme_font_size_override("font_size",20)
- number.add_theme_color_override("font_color",Color("0b0c0e"))
+ number.add_theme_color_override("font_color",Color.WHITE)
  number.mouse_filter=Control.MOUSE_FILTER_IGNORE
  badge.add_child(number)
+ number.size=Vector2(28,28)
+ number.self_modulate.a=0
+ var centered:=preload("res://scripts/centered_mana_number.gd").new()
+ centered.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ centered.outlined=true
+ centered.legendary=_legendary
+ number.add_child(centered)
  return badge
 
 func show_library() -> void:
  if screen=="collection":
-  class_filter=-1;type_filter=-1;mana_filter=-1;search_query=""
+  faction_filter=-1;type_filter=-1;mana_filter=-1;search_query=""
   reset_collection_scroll()
  pending_open_slot=-1
  pending_remove_key=""
- if screen in ["edit","choose_class"]:
+ if screen in ["edit","choose_faction"]:
   if draft!=store.slots[slot].cards or draft_name!=store.slots[slot].name or draft_base!=store.base_for(slot) or draft_cover!=String(store.slots[slot].get("cover","")):
-   draft_cache[slot]={"cards":draft.duplicate(),"name":draft_name,"base_class":draft_base,"cover":draft_cover}
+   draft_cache[slot]={"cards":draft.duplicate(),"name":draft_name,"base_faction":draft_base,"cover":draft_cover}
   else:draft_cache.erase(slot)
  screen="library"
  message="Escolha um deck para jogar, editar cartas ou personalizar."
@@ -750,28 +756,28 @@ func library_title(page: VBoxContainer,value: String,back_text: String,callback:
 
 func deck_description(cards: Array) -> String:
  if cards.is_empty():return "Espaço vazio"
- return "%d/22 cartas%s" % [cards.size()," · Composição a corrigir" if Match.deck_class(cards)==-2 or not Match.restrictions_met(cards) else ""]
+ return "%d/22 cartas%s" % [cards.size()," · Composição a corrigir" if Match.deck_faction(cards)==-2 or not Match.restrictions_met(cards) else ""]
 
-func class_badge(cards: Array,icon_size: int=22,base: int=-3) -> Control:
+func faction_badge(cards: Array,icon_size: int=22,base: int=-3) -> Control:
  if cards.is_empty() and base<0:return Control.new()
- var faction: int=Match.deck_class(cards) if base==-3 else base
+ var faction: int=Match.deck_faction(cards) if base==-3 else base
  if faction==-2:
   var error:=text_label("!",icon_size)
-  error.tooltip_text="Classes misturadas"
+  error.tooltip_text="Facções misturadas"
   error.modulate=Color("ff8591")
   return error
- var icon_class: int=CardData.CardClass.NEUTRAL if faction==-1 else faction
+ var icon_faction: int=CardData.Faction.VILLAGER if faction==-1 else faction
  var icon:=TextureRect.new()
- icon.name="DeckClassSymbol"
- icon.texture=CardSkin.class_symbol(icon_class)
+ icon.name="DeckFactionSymbol"
+ icon.texture=CardSkin.faction_symbol(icon_faction)
  icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
  icon.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
  icon.custom_minimum_size=Vector2(icon_size,icon_size)
  icon.size=Vector2(icon_size,icon_size)
  icon.size_flags_vertical=Control.SIZE_SHRINK_CENTER
  icon.mouse_filter=Control.MOUSE_FILTER_PASS
- icon.tooltip_text=CLASS_NAMES[icon_class]
- icon.set_meta("card_class",icon_class)
+ icon.tooltip_text=FACTION_NAMES[icon_faction]
+ icon.set_meta("faction",icon_faction)
  return icon
 
 func cover_art(key: String,dimensions: Vector2) -> Control:
@@ -842,7 +848,7 @@ func render_library(page: VBoxContainer) -> void:
   tile.focus_mode=Control.FOCUS_ALL
   tile.gui_input.connect(library_cover_input.bind(i))
   var faction: int=store.base_for(i)
-  var border: Color=CardSkin.class_color(faction) if faction>=0 else CardSkin.class_color(CardData.CardClass.NEUTRAL)
+  var border: Color=CardSkin.faction_color(faction) if faction>=0 else CardSkin.faction_color(CardData.Faction.VILLAGER)
   var style:=UiTheme.panel(Color("101e2d"),Color("e4c987") if library_selected==i else border,2)
   style.set_border_width_all(2 if library_selected==i else 1)
   tile.add_theme_stylebox_override("panel",style)
@@ -871,7 +877,7 @@ func render_library(page: VBoxContainer) -> void:
   badge.mouse_filter=Control.MOUSE_FILTER_IGNORE
   overlay.add_child(badge)
   if not saved.cards.is_empty() or store.base_for(i)>=0:
-   var symbol:=class_badge(saved.cards,22,store.base_for(i))
+   var symbol:=faction_badge(saved.cards,22,store.base_for(i))
    symbol.position=Vector2(204,8)
    overlay.add_child(symbol)
   var name_label:=text_label(saved.name,18)
@@ -913,7 +919,7 @@ func render_library_actions(parent: HBoxContainer) -> void:
  var meta:=HBoxContainer.new()
  meta.add_theme_constant_override("separation",10)
  content.add_child(meta)
- if not saved.cards.is_empty() or store.base_for(library_selected)>=0:meta.add_child(class_badge(saved.cards,24,store.base_for(library_selected)))
+ if not saved.cards.is_empty() or store.base_for(library_selected)>=0:meta.add_child(faction_badge(saved.cards,24,store.base_for(library_selected)))
  meta.add_child(text_label(deck_description(saved.cards),16))
  var spacer:=Control.new()
  spacer.custom_minimum_size.y=18
@@ -1002,7 +1008,7 @@ func render_personalize(page: VBoxContainer) -> void:
  meta.modulate=Color("9db2c7")
  var preview_meta:=HBoxContainer.new()
  preview_meta.alignment=BoxContainer.ALIGNMENT_CENTER
- if not draft.is_empty() or draft_base>=0:preview_meta.add_child(class_badge(draft,22,draft_base))
+ if not draft.is_empty() or draft_base>=0:preview_meta.add_child(faction_badge(draft,22,draft_base))
  preview_meta.add_child(meta)
  preview_content.add_child(preview_meta)
  var fields:=VBoxContainer.new()
@@ -1100,7 +1106,7 @@ func render_full_collection(page: VBoxContainer) -> void:
   var frame:=PanelContainer.new()
   frame.name="CollectionCard_"+String(key)
   frame.size_flags_horizontal=Control.SIZE_EXPAND_FILL
-  frame.add_theme_stylebox_override("panel",UiTheme.panel(Color("101e2c"),CardSkin.class_color(Match.CARD_DATA[key].card_class).darkened(0.3),6))
+  frame.add_theme_stylebox_override("panel",UiTheme.panel(Color("101e2c"),CardSkin.faction_color(Match.CARD_DATA[key].faction).darkened(0.3),6))
   grid.add_child(frame)
   var card=CardScene.instantiate()
   card.name="CollectionView_"+String(key)

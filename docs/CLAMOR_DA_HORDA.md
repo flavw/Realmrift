@@ -1,6 +1,6 @@
 # Horda e Clamor da Horda
 
-A facção antes chamada Monstros passa a se chamar **Horda**. Seu ID numérico permanece 5, preservando decks salvos e suas capas. O tipo de criatura **Monstro** permanece independente da facção. Pacto Sombrio continua permitindo a Necromante Humana na Horda; outros Humanos seguem proibidos.
+A facção antes chamada Monstros passa a se chamar **Horda**. Seu ID numérico permanece 5, preservando decks salvos e suas capas. O tipo de criatura **Monstro** permanece independente da facção. A Necromante do Véu pertence à Necrópole e possui apenas o tipo Humano.
 
 **Clamor da Horda** é uma magia da Horda de **3 mana**: todos os aliados do tipo **Monstro** que já estiverem em campo ganham **+2 de ataque até o fim do turno atual**.
 

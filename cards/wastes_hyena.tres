@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://3kfwmj1pja46"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://b5l2vqlp3wdwe" path="res://assets/art/wastes_hyena.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 3
+attack = 3
+artwork = ExtResource("2")
+artwork_focus = Vector2(0.5, 0.4)
+creature_type = 1
+envenom = 1
+faction = 8
+field_artwork_focus = Vector2(0.5, 0.27)
+lore = "O riso anuncia a caça. A mordida encerra a conversa."
+title = "Hiena dos Ermos"

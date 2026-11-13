@@ -5,10 +5,10 @@ func verify() -> void:
  var legendary: CardData=Match.CARD_DATA.dawn_paladin
  var view=load("res://card_model.tscn").instantiate()
  view.set_card(legendary);root.add_child(view);await process_frame
- assert(view.get_node("CardCanvas/CostGem").texture.atlas.resource_path.ends_with("mana-cost-symbol.webp"))
+ assert(not view.get_node("CardCanvas/CostGem").visible and view.get_node("CardCanvas/Cost/CenteredNumber").outlined)
  assert(not view.view_entries().any(func(e):return e.name=="Lendária"))
  view.set_card(Match.CARD_DATA.wolf)
- assert(view.get_node("CardCanvas/CostGem").texture.atlas.resource_path.ends_with("mana-cost-symbol.webp"))
+ assert(not view.get_node("CardCanvas/CostGem").visible and view.get_node("CardCanvas/Cost/CenteredNumber").outlined)
  view.queue_free()
  var main=load("res://main.tscn").instantiate()
  main.enable_opening=false;main.muted=true

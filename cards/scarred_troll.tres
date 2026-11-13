@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/scarred_troll.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 3
+attack = 4
+health = 5
+artwork = ExtResource("2")
+creature_type = 3
+faction = 5
+lore = "Suas feridas fecham. As histórias por trás delas ficam."
+regeneration = 1
+title = "Troll Escoriado"
+wounded_entry = true

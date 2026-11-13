@@ -1,5 +1,6 @@
-[gd_scene load_steps=55 format=3]
+[gd_scene load_steps=56 format=3]
 [ext_resource type="PackedScene" path="res://card_model.tscn" id="card"]
+[ext_resource type="Resource" path="res://cards/valeria_implacavel.tres" id="valeria_implacavel"]
 [ext_resource type="Resource" path="res://cards/warrior.tres" id="data0"]
 [ext_resource type="Resource" path="res://cards/mage.tres" id="data1"]
 [ext_resource type="Resource" path="res://cards/squire.tres" id="data2"]
@@ -34,7 +35,7 @@
 [ext_resource type="Resource" path="res://cards/village_reconstruction.tres" id="data31"]
 [ext_resource type="Resource" path="res://cards/village_wall.tres" id="data32"]
 [ext_resource type="Resource" path="res://cards/fireball.tres" id="data33"]
-[ext_resource type="Resource" path="res://cards/abascanto_guardian.tres" id="abascanto"]
+[ext_resource type="Resource" path="res://cards/antimagic_guardian.tres" id="antimagic"]
 [ext_resource type="Resource" path="res://cards/peasant_uprising.tres" id="uprising"]
 [ext_resource type="Resource" path="res://cards/harvest_ox.tres" id="ox"]
 [ext_resource type="Resource" path="res://cards/dawn_devotee.tres" id="devotee"]
@@ -191,9 +192,9 @@ card_data=ExtResource("data32")
 custom_minimum_size=Vector2(250,334)
 card_data=ExtResource("data33")
 
-[node name="abascanto_guardian" parent="Scroll/Page/Grid" instance=ExtResource("card")]
+[node name="antimagic_guardian" parent="Scroll/Page/Grid" instance=ExtResource("card")]
 custom_minimum_size=Vector2(250,334)
-card_data=ExtResource("abascanto")
+card_data=ExtResource("antimagic")
 
 [node name="peasant_uprising" parent="Scroll/Page/Grid" instance=ExtResource("card")]
 custom_minimum_size=Vector2(250,334)
@@ -266,3 +267,7 @@ card_data=ExtResource("wizard_apprentice")
 [node name="scorpion_kobold" parent="Scroll/Page/Grid" instance=ExtResource("card")]
 custom_minimum_size=Vector2(250,334)
 card_data=ExtResource("scorpion_kobold")
+
+[node name="valeria_implacavel" parent="Scroll/Page/Grid" instance=ExtResource("card")]
+custom_minimum_size=Vector2(250,334)
+card_data=ExtResource("valeria_implacavel")

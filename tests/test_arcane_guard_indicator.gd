@@ -26,7 +26,7 @@ func verify() -> void:
  main.redraw();await process_frame
  field=main.field_nodes[1][raven.id]
  assert(field.find_child("ArcaneGuardTargetIndicator",true,false)!=null)
- raven.abascanto=0
+ raven.antimagic=0
  main.redraw();await process_frame
  field=main.field_nodes[1][raven.id]
  assert(field.find_child("ArcaneGuardTargetIndicator",true,false)==null)

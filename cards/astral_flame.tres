@@ -5,13 +5,13 @@
 
 [resource]
 script = ExtResource("1")
-card_type = 1
-spell_effect = 2
-spell_value = 4
-title = "Chama Astral"
-lore = "Há estrelas que caem. Esta escolhe onde pousar."
 cost = 4
 attack = 0
 health = 0
-card_class = 1
 artwork = ExtResource("2")
+card_type = 1
+faction = 1
+lore = "Há estrelas que caem. Esta escolhe onde pousar."
+spell_effect = 2
+spell_value = 4
+title = "Chama Astral"

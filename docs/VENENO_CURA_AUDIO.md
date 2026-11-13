@@ -2,7 +2,7 @@
 
 Veneno acumula no alvo e causa esse total de dano no fim do turno do dono do alvo, ignorando Armadura. Depois é removido completamente. Não reaparece no turno seguinte sem nova aplicação. A imunidade de Muralha permanece válida.
 
-Reconstrução da Aldeia resolve ao clicar em Conjurar, diretamente no seu castelo. Cura 2; compra uma carta quando o campo aliado contém somente neutros, incluindo campo vazio. Não pede seleção de alvo.
+Reconstrução da Aldeia resolve ao clicar em Conjurar, diretamente no seu castelo. Cura 2; compra uma carta quando o campo aliado contém somente aldeões, incluindo campo vazio. Não pede seleção de alvo.
 
 Tentar atacar uma criatura protegida ou o castelo com Bloqueio ativo faz as criaturas com cargas brilharem brevemente e toca um impacto de escudo. A tentativa não gasta ataque, prontidão, mana ou cargas. Voo e magia mantêm suas exceções. Tentativas repetidas têm um intervalo curto para evitar sobreposição do som.
 

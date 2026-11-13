@@ -19,7 +19,7 @@ func verify() -> void:
  m.players[0].hand=["shadow_step"];assert(m.cast(0,0,0,0) and unit.ready)
  assert(m.act(0,0,-1) and not unit.ready)
  m.players[0].hand=["shadow_step"];assert(m.cast(0,0,0,0) and not unit.ready)
- print("OK: Passo das Sombras temporário, Voo, Arrancada e ações já realizadas.")
+ print("OK: Passo das Sombras temporário, Voo, Disparada e ações já realizadas.")
  quit()
 func fresh_fury_case():
  var m=Match.new()

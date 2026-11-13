@@ -14,10 +14,10 @@ func _init() -> void:
  for style in range(3):assert(Match.valid_deck(Match.default_deck(style)))
  var mixed: Array=Match.default_deck(0)
  mixed[0]="mage"
- assert(not Match.valid_deck(mixed) and Match.valid_deck(mixed,false) and Match.deck_class(mixed)==-2)
- assert(Match.can_add_class(["mage"],"moon_herald") and not Match.can_add_class(["mage"],"sentinel"))
+ assert(not Match.valid_deck(mixed) and Match.valid_deck(mixed,false) and Match.deck_faction(mixed)==-2)
+ assert(Match.can_add_faction(["mage"],"moon_herald") and not Match.can_add_faction(["mage"],"sentinel"))
  var neutrals: Array=Match.default_deck(4)
- assert(Match.valid_deck(neutrals) and Match.deck_class(neutrals)==-1)
+ assert(Match.valid_deck(neutrals) and Match.deck_faction(neutrals)==-1)
  var m=fixture()
  assert(m.play(0,0) and m.players[0].mana==8 and m.players[0].board[0].attack==1)
  assert(not m.players[0].board[0].ready and not m.last_action.has("buff_target"))
@@ -52,7 +52,7 @@ func _init() -> void:
  wounded.ready=true;wounded.health=4
  assert(m.heal(0,0,0) and wounded.health==5 and wounded.max_health==5 and Match.physical_attack(wounded)==5,"Cura e Vigor respeitam a vida máxima concedida")
  var entry: Dictionary=Match.CARD_DATA.moon_herald.ability_entries()[0]
- assert(entry.name=="Chamado" and entry.summary=="+1/+1" and "Ao entrar pela mão" in entry.description)
+ assert(entry.name=="Chamado" and entry.summary=="+1/+1 aliado humano" and "Ao jogar esta criatura da mão" in entry.description)
  # The trigger must also resolve a health-only buff, without depending on a positive attack bonus.
  var original: Dictionary=Match.CARDS.moon_herald
  var health_only: Dictionary=original.duplicate(true)
@@ -73,7 +73,7 @@ func _init() -> void:
  var fallback=Match.new(legacy.active_cards())
  var actual: Array=fallback.players[0].hand.duplicate()
  actual.append_array(fallback.players[0].deck)
- assert(Match.valid_deck(actual),"Motor não inicia deck de classes misturadas")
+ assert(Match.valid_deck(actual),"Motor não inicia deck de facções misturadas")
  DirAccess.remove_absolute(ProjectSettings.globalize_path(store.path))
- print("OK: classe única + neutros, migração sem perda, Chamado vazio/alvo/sem custo inválido/permanência/IA e limite de campo.")
+ print("OK: facção única + aldeões, migração sem perda, Chamado vazio/alvo/sem custo inválido/permanência/IA e limite de campo.")
  quit()

@@ -15,7 +15,7 @@ func _initialize() -> void:
    assert(m.heal(side,0,target_index,target_side))
    assert(victim.health==7 and devotee.attack==2 and enemy.attack==1)
    assert(m.last_action.devotion_buffs.size()==1 and m.last_action.devotion_buffs[0].side==side)
-   devotee.ready=true;victim.abascanto=1
+   devotee.ready=true;victim.antimagic=1
    assert(m.heal(side,0,target_index,target_side))
    assert(victim.health==7 and devotee.attack==2 and not m.last_action.has("devotion_buffs"))
    m.players[side].hand=["restoring_light"]

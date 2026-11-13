@@ -1,19 +1,17 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/sentinel.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://kp2phr0jcg4t"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bdqwag1vddfhx" path="res://assets/art/sentinel.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-creature_type=0
-title="Sentinela de Ferro"
+script = ExtResource("1")
+cost = 2
+health = 3
+ability_text = "Armadura 1"
+armor = 1
+artwork = ExtResource("2")
+artwork_focus = Vector2(0.5, 0.48)
+artwork_zoom = 1.04
+faction = 0
 lore = "Seu turno nunca termina. O relógio já desistiu de avisar."
-cost=2
-attack=1
-health=3
-armor=1
-card_class=0
-
-ability_text="Armadura 1"
-artwork=ExtResource("2")
-artwork_zoom=1.04
-artwork_focus=Vector2(0.5, 0.48)
-
+title = "Sentinela de Ferro"

@@ -79,7 +79,7 @@ func run() -> void:
  for faction in FACTIONS:
   var recipe:=current_deck(faction)
   assert(Match.valid_deck(recipe))
-  for key in recipe:assert(Match.CARD_DATA[key].card_class in [IDS[faction],CardData.CardClass.NEUTRAL])
+  for key in recipe:assert(Match.CARD_DATA[key].faction in [IDS[faction],CardData.Faction.NEUTRAL])
   recipes[faction]=recipe
  var batch:=maxi(1,int(OS.get_environment("SIMULATION_BATCH")))
  var results: Array=[]

@@ -5,10 +5,10 @@
 
 [resource]
 script = ExtResource("1")
-title = "Acólita da Aurora"
-lore = "Uma pequena luz basta para encontrar o caminho de volta."
-card_class = 4
+artwork = ExtResource("2")
+faction = 4
+field_artwork_focus = Vector2(0.5, 0.3)
 heal_amount = 1
 heal_cost = 0
-artwork = ExtResource("2")
-field_artwork_focus = Vector2(0.5, 0.3)
+lore = "Uma pequena luz basta para encontrar o caminho de volta."
+title = "Acólita da Aurora"

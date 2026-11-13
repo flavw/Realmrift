@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bgq1g8572ndga"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://ceyn3nplat8od" path="res://assets/art/wolf.webp" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 2
+attack = 2
+artwork = ExtResource("2")
+creature_type = 1
+faction = 5
+fury = 1
+lore = "Longe das cercas da vila, ele corre ao lado da Horda."
+title = "Lobo dos Ermos"

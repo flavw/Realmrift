@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://j6vj8ouo411o"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://uybv55pmy3ny" path="res://assets/art/antimagic_guardian.webp" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 3
+attack = 2
+health = 3
+antimagic = 1
+artwork = ExtResource("2")
+faction = 0
+lore = "Quando a magia chega à porta, ele já está esperando."
+title = "Guardião Arcano"

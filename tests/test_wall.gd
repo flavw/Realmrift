@@ -12,7 +12,7 @@ func fixture():
 func _init() -> void:
  var data: CardData=Match.CARD_DATA.village_wall
  assert(data.cost==4 and data.attack==0 and data.health==4 and data.armor==1 and data.block==4 and data.wall)
- assert(data.card_class==CardData.CardClass.NEUTRAL)
+ assert(data.faction==CardData.Faction.VILLAGER)
  var m=fixture();var wall=unit("village_wall",1)
  m.players[0].board=[wall];m.players[0].hand=["iron_stance"]
  assert(m.cast(0,0,0,0) and wall.attack==1 and not m.can_target(0,0,-1) and not m.act(0,0,-1))

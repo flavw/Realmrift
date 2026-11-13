@@ -17,11 +17,11 @@ func _initialize() -> void:
  var slots=[]
  for i in range(6):
   var old=Match.default_deck(i).slice(0,20)
-  slots.append({"name":"Meu deck %d" % i,"cards":old,"cover":old[0],"base_class":Store.infer_base(old)})
- for i in range(3):slots.append({"name":"Vazio %d" % i,"cards":[],"cover":"","base_class":-1})
+  slots.append({"name":"Meu deck %d" % i,"cards":old,"cover":old[0],"base_faction":Store.infer_base(old)})
+ for i in range(3):slots.append({"name":"Vazio %d" % i,"cards":[],"cover":"","base_faction":-1})
  var mixed=slots[0].cards.duplicate()
  mixed[0]="mage"
- slots[6]={"name":"Misturado antigo","cards":mixed,"cover":"mage","base_class":-2}
+ slots[6]={"name":"Misturado antigo","cards":mixed,"cover":"mage","base_faction":-2}
  var old_cards=slots[2].cards.duplicate()
  var file=FileAccess.open(test_path,FileAccess.WRITE)
  file.store_string(JSON.stringify({"version":9,"active":2,"slots":slots}));file.close()

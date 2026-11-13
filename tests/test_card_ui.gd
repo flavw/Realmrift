@@ -35,7 +35,7 @@ func verify() -> void:
  assert(not main.preview.has_node("CardCanvas/Shield"))
  assert(not fields[6].has_node("Canvas/Shield"))
  var color_script=load("res://scripts/card_skin.gd")
- assert(color_script.class_color(fields[6].card_data.card_class)==color_script.class_color(fields[7].card_data.card_class),"Lobo e Escudeiro são neutros")
+ assert(color_script.faction_color(fields[6].card_data.faction)==color_script.faction_color(fields[7].card_data.faction),"Lobo e Escudeiro são aldeões")
  if DisplayServer.get_name() != "headless":
   await RenderingServer.frame_post_draw
   var output: String = OS.get_environment("CARDGAME_PREVIEW_PATH")
@@ -89,6 +89,6 @@ func verify() -> void:
    break
   await create_timer(0.02).timeout
  assert(not main.busy)
- print("OK: 8 cartas quadradas, hover e clique reais, prévia, classes, vida atual e fechamento.")
+ print("OK: 8 cartas quadradas, hover e clique reais, prévia, facções, vida atual e fechamento.")
  quit()
 

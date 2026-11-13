@@ -1,16 +1,16 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/dawn_devotee.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dk38og7agausa"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bogyupudqm4q0" path="res://assets/art/dawn_devotee.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-creature_type=0
-title="Devota do Alvorecer"
+script = ExtResource("1")
+cost = 3
+health = 4
+artwork = ExtResource("2")
+devotion = 1
+faction = 4
+heal_amount = 1
+heal_cost = 0
 lore = "Cada ferida curada lembra por que ela continua lutando."
-cost=3
-attack=1
-health=4
-card_class=4
-devotion=1
-heal_amount=1
-heal_cost=0
-artwork=ExtResource("2")
+title = "Devota do Alvorecer"

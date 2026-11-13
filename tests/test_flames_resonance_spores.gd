@@ -18,7 +18,7 @@ func verify() -> void:
  m=fixture()
  var caster=m.spawn_unit(0,"fire_mage");caster.ready=true
  var apprentice=m.spawn_unit(0,"wizard_apprentice")
- m.spawn_unit(0,"runic_familiar")
+ var familiar=m.spawn_unit(0,"runic_familiar")
  for i in range(4):
   var enemy=m.spawn_unit(1,"farmer");enemy.health=8;enemy.max_health=8;enemy.armor=10;enemy.block=2
  assert(not m.act(0,0,-1,true) and caster.ready and m.players[0].mana==10)
@@ -29,15 +29,15 @@ func verify() -> void:
  assert(m.players[0].mana==8 and not caster.ready and caster.health==4)
  assert(m.players[1].board[0].health==6 and m.players[1].board[1].health==5 and m.players[1].board[2].health==6 and m.players[1].board[3].health==8)
  assert(m.players[1].board[1].block==2)
- assert(apprentice.attack==1 and apprentice.health==3 and m.last_action.resonance_buffs.size()==1)
+ assert(apprentice.attack==0 and apprentice.health==2 and familiar.attack==1 and familiar.health==4 and m.last_action.resonance_buffs.size()==1)
  assert(not m.act(0,0,0,true))
  m=fixture();caster=m.spawn_unit(0,"fire_mage");caster.ready=true
  var left=m.spawn_unit(1,"wolf")
- var guard=m.spawn_unit(1,"abascanto_guardian")
+ var guard=m.spawn_unit(1,"antimagic_guardian")
  var right=m.spawn_unit(1,"wolf")
  var guard_hp: int=guard.health
  assert(m.act(0,0,1,true))
- assert(guard.health==guard_hp and guard.abascanto==0 and left.health==1 and right.health==1)
+ assert(guard.health==guard_hp and guard.antimagic==0 and left.health==1 and right.health==1)
  m=fixture();caster=m.spawn_unit(0,"fire_mage");caster.ready=true
  for i in range(3):
   var enemy=m.spawn_unit(1,"wolf");enemy.health=2 if i==1 else 1
@@ -49,7 +49,7 @@ func verify() -> void:
  root.add_child(main)
  main.duel=fixture()
  caster=main.duel.spawn_unit(0,"fire_mage");caster.ready=true
- main.duel.spawn_unit(0,"wizard_apprentice")
+ main.duel.spawn_unit(0,"runic_familiar")
  for i in range(3):
   var enemy=main.duel.spawn_unit(1,"farmer");enemy.health=8
  main.duel.draw_events.clear();main.redraw();await process_frame;await process_frame
@@ -66,5 +66,5 @@ func verify() -> void:
  assert(main.sound_counts.fire==2 and main.sound_counts.resonance==2)
  for key in ["fire","resonance"]:assert(main.sounds[key].stream is AudioStreamOggVorbis)
  main.queue_free();await process_frame;await process_frame
- print("OK: Esporos sem auto-bônus, dano adjacente, Amplificar, Guarda Arcana, mortes simultâneas, IA, cursor e sons/efeitos de fogo e Ressonância")
+ print("OK: Esporos sem auto-bônus, dano adjacente, Amplificar, Antimagia, mortes simultâneas, IA, cursor e sons/efeitos de fogo e Ressonância")
  quit()

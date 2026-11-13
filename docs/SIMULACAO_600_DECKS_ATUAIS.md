@@ -12,11 +12,11 @@ Foram usadas as seis listas completas do arquivo de decks salvo pelo jogador, se
 
 ## Desempenho
 
-| Deck | Classe | Vitórias / 200 | Taxa | Turnos individuais médios |
+| Deck | Facção | Vitórias / 200 | Taxa | Turnos individuais médios |
 |---|---|---:|---:|---:|
 | Círculo Arcano | Mago | 156 | 78.0% | 19.7 |
 | Baluarte das Cicatrizes | Guerreiro | 114 | 57.0% | 18.1 |
-| União da Colheita | Neutros | 89 | 44.5% | 16.8 |
+| União da Colheita | Aldeia | 89 | 44.5% | 16.8 |
 | Aurora Vital | Clérigo | 88 | 44.0% | 17.6 |
 | Horda dos Ermos | Horda | 83 | 41.5% | 17.3 |
 | Caçada das Brumas | Ladino | 70 | 35.0% | 16.2 |
@@ -54,9 +54,9 @@ O Mago é o principal sinal de desequilíbrio: venceu 156/200 partidas (78%) e t
 
 O Ladino ficou em 70/200 (35%). Além do resultado contra Mago, perdeu 30/40 contra Guerreiro. A IA escolheu Saquear 148 vezes e Envenenar 18 vezes no Chamado da Negociante, um possível viés estratégico que merece comparação antes de aumentar atributos do deck inteiro. Isso não prova que escolher Envenenar mais vezes melhoraria os resultados.
 
-Horda (41,5%), Clérigo (44%) e Neutros (44,5%) ficaram próximos entre si. Contra os quatro oponentes que não são Mago, Guerreiro venceu 67,5%, Neutros 50%, Horda 46,3%, Clérigo 45% e Ladino 41,3%. Portanto, o Guerreiro também merece atenção após a revisão do Mago.
+Horda (41,5%), Clérigo (44%) e Aldeia (44,5%) ficaram próximos entre si. Contra os quatro oponentes que não são Mago, Guerreiro venceu 67,5%, Aldeia 50%, Horda 46,3%, Clérigo 45% e Ladino 41,3%. Portanto, o Guerreiro também merece atenção após a revisão do Mago.
 
-Prioridades sugeridas: experimentar um ajuste por vez no motor de Ressonância/Disparo Arcano do Mago; comparar a escolha de veneno/compra da IA do Ladino; depois rever Ladino versus Guerreiro. Os resultados são de IA contra IA e dessas listas específicas, não uma estimativa direta de partidas entre humanos ou de todas as listas possíveis da classe. Nenhum balanceamento foi aplicado nesta etapa.
+Prioridades sugeridas: experimentar um ajuste por vez no motor de Ressonância/Disparo Arcano do Mago; comparar a escolha de veneno/compra da IA do Ladino; depois rever Ladino versus Guerreiro. Os resultados são de IA contra IA e dessas listas específicas, não uma estimativa direta de partidas entre humanos ou de todas as listas possíveis da facção. Nenhum balanceamento foi aplicado nesta etapa.
 
 ## Arquivos
 

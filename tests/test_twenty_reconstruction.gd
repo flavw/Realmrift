@@ -15,13 +15,13 @@ func verify() -> void:
   assert(cards.size()==20 and Match.valid_deck(cards))
   for key in cards:assert(cards.count(key)<=2)
  var neutral=Match.default_deck(4)
- assert(neutral.count(KEY)==2 and Match.deck_class(neutral)==-1)
+ assert(neutral.count(KEY)==2 and Match.deck_faction(neutral)==-1)
  assert(not Match.valid_deck(neutral.slice(0,12)))
- assert(Match.can_add_class([KEY],"warrior"))
- assert(Match.can_add_class(["warrior"],KEY))
- assert(Match.can_add_class([KEY],"wolf") and Match.can_add_class([],KEY))
+ assert(Match.can_add_faction([KEY],"warrior"))
+ assert(Match.can_add_faction(["warrior"],KEY))
+ assert(Match.can_add_faction([KEY],"wolf") and Match.can_add_faction([],KEY))
  var mixed: Array=neutral.duplicate();mixed[0]="warrior"
- assert(Match.valid_deck(mixed) and Match.deck_class(mixed)==0)
+ assert(Match.valid_deck(mixed) and Match.deck_faction(mixed)==0)
  var m=fixture()
  for target in [[1,-1],[0,0]]:
   assert(not m.cast(0,0,target[0],target[1]) and m.players[0].mana==10 and m.players[0].hand==[KEY])
@@ -77,7 +77,7 @@ func verify() -> void:
  assert(reopened.slots==migrated.slots and reopened.active==4)
  # Editor allows this ordinary neutral spell with any single class.
  var editor=load("res://deck_editor.tscn").instantiate();editor.configure(migrated);root.add_child(editor)
- editor.choose_slot(5);editor.select_base_class(CardData.CardClass.MAGE);editor.clear_draft()
+ editor.choose_slot(5);editor.select_base_faction(CardData.Faction.MAGE);editor.clear_draft()
  assert(editor.add_card(KEY) and editor.add_card("mage"))
  editor.clear_draft();assert(editor.add_card("mage") and editor.add_card(KEY))
  editor.draft=Match.default_deck(2);editor.render()
@@ -85,5 +85,5 @@ func verify() -> void:
  assert(editor.save_deck())
  editor.queue_free();await process_frame;await create_timer(0.35).timeout
  DirAccess.remove_absolute(ProjectSettings.globalize_path(seed.path))
- print("OK: 20 cartas, campo neutro/vazio/misto, qualquer classe no deck, cura antes da compra, fadiga, IA, migração e editor.")
+ print("OK: 20 cartas, campo aldeão/vazio/misto, qualquer facção no deck, cura antes da compra, fadiga, IA, migração e editor.")
  quit()

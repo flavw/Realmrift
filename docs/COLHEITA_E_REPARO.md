@@ -10,15 +10,15 @@ Mantém custo 2 e restaura 2 de vida do castelo ou de uma Muralha aliada, limita
 
 Se houver qualquer Muralha aliada em campo, clicar na carta abre seleção entre o castelo e as Muralhas aliadas. Cancelar ou escolher um alvo inválido não gasta recursos. Sem Muralha aliada, resolve automaticamente no castelo; Muralhas inimigas não mudam isso. A IA avalia a vida faltante do alvo.
 
-Depois do reparo, compra uma carta se o campo aliado contiver apenas neutros, ou estiver vazio. Esse requisito não impede o reparo em campos mistos. Pode conjurar em alvo com vida cheia. O efeito de cura e seu som também acompanham o reparo.
+Depois do reparo, compra uma carta se o campo aliado contiver apenas aldeões, ou estiver vazio. Esse requisito não impede o reparo em campos mistos. Pode conjurar em alvo com vida cheia. O efeito de cura e seu som também acompanham o reparo.
 
 ## Camponesa e Líder
 
-Camponesa Generosa passa a 1/3, custo 2. Seu Chamado dá +1 de vida atual/máxima permanentemente aos outros aliados, sem restrição de classe. Líder da Aldeia passa a 3/4, custo 4. Sua Aura dá +1 ataque aos outros aliados, sem restrição de classe. Nenhum deles aplica seu próprio efeito em si. Uma segunda fonte pode beneficiar a primeira normalmente.
+Camponesa Generosa passa a 1/3, custo 2. Seu Chamado dá +1 de vida atual/máxima permanentemente aos outros aliados, sem restrição de facção. Líder da Aldeia passa a 3/4, custo 4. Sua Aura dá +1 ataque aos outros aliados, sem restrição de facção. Nenhum deles aplica seu próprio efeito em si. Uma segunda fonte pode beneficiar a primeira normalmente.
 
 ## Boi da Colheita
 
-Neutro, custo 3, 2/3, Colheita 1. Cada ativação de Cultivo de um aliado dá +1/+1 permanente ao Boi. Cultivo 2 continua sendo uma ativação; dois aliados com Cultivo 1 são duas. Cultivo recebido pelo próprio Boi também conta. Não reage a Cultivo inimigo, cura, Chamado ou recálculo da interface.
+Aldeia, custo 3, 2/3, Colheita 1. Cada ativação de Cultivo de um aliado dá +1/+1 permanente ao Boi. Cultivo 2 continua sendo uma ativação; dois aliados com Cultivo 1 são duas. Cultivo recebido pelo próprio Boi também conta. Não reage a Cultivo inimigo, cura, Chamado ou recálculo da interface.
 
 As ativações de Cultivo ocorrem no início do turno do dono. A rotina registra cada ativação e aplica os bônus de Colheita sem criar novos eventos de Cultivo. Assim não existe recursão. Multidão herda e acumula Colheita, como as demais habilidades numéricas, preservando os atributos já ganhos.
 

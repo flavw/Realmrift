@@ -1,16 +1,18 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/wild_guardian.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cad0ikrm6tjax"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://crkmx0417024g" path="res://assets/art/wild_guardian.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Guardiã do Bosque"
-lore="Nenhum juramento dura mais que o silêncio de um bosque protegido."
-cost=5
-attack=3
-health=5
-card_class=6
-block=1
-harvest=1
-artwork=ExtResource("2")
-artwork_focus=Vector2(0.5, 0.44)
-field_artwork_focus=Vector2(0.5, 0.35)
+script = ExtResource("1")
+cost = 5
+attack = 3
+health = 5
+artwork = ExtResource("2")
+artwork_focus = Vector2(0.5, 0.44)
+block = 1
+faction = 6
+field_artwork_focus = Vector2(0.5, 0.35)
+harvest = 1
+lore = "Nenhum juramento dura mais que o silêncio de um bosque protegido."
+title = "Guardiã do Bosque"

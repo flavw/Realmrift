@@ -12,12 +12,12 @@ Foram executadas **exatamente 15 partidas completas**, cinco de cada confronto, 
 
 ## Método
 
-- Decks de 12 cartas, apenas uma classe + neutros, até duas cópias. Mesmas listas durante as cinco partidas de cada confronto.
+- Decks de 12 cartas, apenas uma facção + aldeões, até duas cópias. Mesmas listas durante as cinco partidas de cada confronto.
 - IA de produção do próprio jogo nos dois lados. Ao controlar Guerreiro, a visão do motor é espelhada, usando as mesmas regras e decisões da IA adversária.
 - Quem começa alterna a cada partida: Guerreiro começa três, o rival começa duas (cinco é um número ímpar). Mão inicial 3/4, mulligan grátis para ambos, devolvendo cartas de custo 4 ou mais, igual à IA do jogo.
 - Regras atuais: Vigor, Bloqueio renovando uma carga, Veneno acumulativo e decrescente, magia ignorando Armadura, Descarga Condutora e Amplificar.
 - Seeds e registros de cada ação estão no JSON; tabela por partida no CSV. Turno na tabela significa um turno individual, não uma rodada dos dois jogadores.
-- Cinco partidas por confronto permitem observar problemas, mas não estimam com segurança a taxa de vitória da classe. Os resultados também dependem dessas listas, da ordem inicial e das decisões da IA.
+- Cinco partidas por confronto permitem observar problemas, mas não estimam com segurança a taxa de vitória da facção. Os resultados também dependem dessas listas, da ordem inicial e das decisões da IA.
 
 ## O que apareceu nas partidas
 

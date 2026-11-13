@@ -21,13 +21,13 @@ func verify() -> void:
  var store=Store.new("user://test_legendary_decks.json",false)
  assert(store.save_slot(4,"Lendária",cards,2) and not store.save_slot(4,"Duplicada",twice,2))
  var editor=load("res://deck_editor.tscn").instantiate();editor.configure(store);root.add_child(editor)
- editor.choose_slot(6);editor.select_base_class(2)
+ editor.choose_slot(6);editor.select_base_faction(2)
  assert(editor.add_card(KEY) and not editor.add_card(KEY) and "1 cópia" in editor.addition_reason(KEY))
  assert(editor.add_card("wolf") and editor.add_card("wolf") and not editor.add_card("wolf"))
  # Alone: counts itself. Enemy abilities never transfer.
- var m=fixture();spawn(m,"lightning_rogue",1);spawn(m,"abascanto_guardian",1)
+ var m=fixture();spawn(m,"lightning_rogue",1);spawn(m,"antimagic_guardian",1)
  var mob=spawn(m,KEY)
- assert(mob.attack==1 and mob.health==1 and not mob.swift and mob.envenom==0 and mob.abascanto==0)
+ assert(mob.attack==1 and mob.health==1 and not mob.swift and mob.envenom==0 and mob.antimagic==0)
  # Two farmers give Cultivo 2. Repeated refreshes never grow, heal or duplicate abilities.
  m=fixture();var a=spawn(m,"farmer");var b=spawn(m,"farmer");mob=spawn(m,KEY)
  assert(mob.attack==3 and mob.health==3 and mob.growth==2)
@@ -39,12 +39,12 @@ func verify() -> void:
  m.players[0].board.erase(b);m.refresh_auras()
  assert(mob.health==2 and mob.max_health==3 and mob.attack==1 and mob.growth==0)
  # Inherited charge capacity stacks; consuming a charge is not undone by refresh.
- m=fixture();spawn(m,"squire");var neutral_ward=spawn(m,"squire");neutral_ward.abascanto=1;neutral_ward.abascanto_capacity=1
- spawn(m,"abascanto_guardian");mob=spawn(m,KEY)
- assert(m.block_capacity(mob)==2 and mob.block==2 and mob.abascanto==1)
- mob.block=0;assert(Match.damage(mob,100,true)==0 and mob.abascanto==0)
- m.refresh_auras();assert(mob.block==0 and mob.abascanto==0)
- m.begin_turn();assert(mob.block==1 and mob.abascanto==1)
+ m=fixture();spawn(m,"squire");var neutral_ward=spawn(m,"squire");neutral_ward.antimagic=1;neutral_ward.antimagic_capacity=1
+ spawn(m,"antimagic_guardian");mob=spawn(m,KEY)
+ assert(m.block_capacity(mob)==2 and mob.block==2 and mob.antimagic==1)
+ mob.block=0;assert(Match.damage(mob,100,true)==0 and mob.antimagic==0)
+ m.refresh_auras();assert(mob.block==0 and mob.antimagic==0)
+ m.begin_turn();assert(mob.block==1 and mob.antimagic==1)
  # No entry copies, including enemy and allied targeted/untargeted Chamados.
  m=fixture();var herald=spawn(m,"moon_herald");spawn(m,"generous_peasant");spawn(m,"mist_alchemist",1)
  m.players[0].hand=[KEY];assert(m.can_play(0,0) and m.play(0,0))

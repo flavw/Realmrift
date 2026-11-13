@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/wall_smith.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cprlbpti5avqi"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://coat048j7607h" path="res://assets/art/wall_smith.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-creature_type=0
-title="Ferreiro da Muralha"
+script = ExtResource("1")
+cost = 3
+attack = 2
+health = 3
+artwork = ExtResource("2")
+entry_effect = 2
+entry_value = 1
+faction = 0
 lore = "Para ele, um escudo quebrado é só um pedido de conversa."
-cost=3
-attack=2
-health=3
-card_class=0
-entry_effect=2
-entry_value=1
-artwork=ExtResource("2")
+title = "Ferreiro da Muralha"
+wide_entry_summary = true

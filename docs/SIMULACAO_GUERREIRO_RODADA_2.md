@@ -1,6 +1,6 @@
 # Segunda rodada — Vigor ofensivo e Disparo Arcano 2 por 1 mana
 
-**Mais 15 partidas completas: cinco de Guerreiro contra cada classe.** Executadas no motor real do Godot, depois das mudanças solicitadas. Sem ajustes adicionais de atributos ou decks entre partidas.
+**Mais 15 partidas completas: cinco de Guerreiro contra cada facção.** Executadas no motor real do Godot, depois das mudanças solicitadas. Sem ajustes adicionais de atributos ou decks entre partidas.
 
 Mudanças aplicadas: número da gema subiu 3 px no custo superior e 2 px nas habilidades; Vigor vale para ataques físicos e contra-ataques, usando o maior valor entre ataque base e vida atual; Feiticeira das Brasas e Canalista do Eclipse pagam 1 mana + esgotar por Disparo Arcano 2. Clériga/Guardião e criaturas que recebem Voto de Vigor usam a mesma regra, inclusive contra castelos. O Guardião mantém Bloqueio 1.
 
@@ -10,7 +10,7 @@ Mudanças aplicadas: número da gema subiu 3 px no custo superior e 2 px nas hab
 | Guerreiro × Clérigo | 4 | 1 | 0 | 5/0 |
 | Guerreiro × Mago | 3 | 2 | 0 | 4/1 |
 
-Mesmos decks de 12 cartas da rodada anterior, cada um com uma classe + neutros e até duas cópias. IA de produção nos dois lados. Início alternado: Guerreiro começa três e o rival duas; mulligan grátis para ambos, trocando cartas de custo 4 ou mais, e mão inicial 3/4. **Seeds novas** nesta rodada (2026103501–3505, 2026103601–3605 e 2026103701–3705). Como as ordens iniciais são diferentes e são apenas cinco jogos por confronto, a comparação não isola o efeito das mudanças e não determina uma taxa de vitória confiável.
+Mesmos decks de 12 cartas da rodada anterior, cada um com uma facção + aldeões e até duas cópias. IA de produção nos dois lados. Início alternado: Guerreiro começa três e o rival duas; mulligan grátis para ambos, trocando cartas de custo 4 ou mais, e mão inicial 3/4. **Seeds novas** nesta rodada (2026103501–3505, 2026103601–3605 e 2026103701–3705). Como as ordens iniciais são diferentes e são apenas cinco jogos por confronto, a comparação não isola o efeito das mudanças e não determina uma taxa de vitória confiável.
 
 ## Mecânicas exercitadas
 

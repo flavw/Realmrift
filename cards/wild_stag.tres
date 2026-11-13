@@ -1,16 +1,16 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/wild_stag.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://hgd6gd34q0cj"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://d3rrqrpi3nryc" path="res://assets/art/wild_stag.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Cervo da Clareira"
-lore="A clareira oferece seus segredos àqueles que aprendem a escutar."
-cost=3
-attack=1
-health=2
-card_class=6
-creature_type=1
-turn_draw=1
-artwork=ExtResource("2")
-artwork_focus=Vector2(0.5, 0.44)
-field_artwork_focus=Vector2(0.68, 0.32)
+script = ExtResource("1")
+cost = 3
+artwork = ExtResource("2")
+artwork_focus = Vector2(0.5, 0.44)
+creature_type = 1
+faction = 6
+field_artwork_focus = Vector2(0.68, 0.32)
+lore = "A clareira oferece seus segredos àqueles que aprendem a escutar."
+title = "Cervo da Clareira"
+turn_draw = 1

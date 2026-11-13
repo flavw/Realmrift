@@ -9,7 +9,7 @@ O editor agora tem duas linhas de três espaços:
 5. Novo deck 5 — vazio, para criação do jogador.
 6. Novo deck 6 — vazio, para criação do jogador.
 
-A migração para o formato versão 3 preserva os nomes, cartas e deck ativo dos três espaços anteriores. Espaços vazios continuam vazios depois de salvar/reabrir. Podem receber nome e ser salvos sem cartas; jogar exige um deck completo de 12 cartas, até duas cópias e uma classe + neutros. Rascunhos incompletos de 1 a 11 cartas não sobrescrevem um deck salvo. Esvaziar um deck ativo seleciona outro completo, se houver.
+A migração para o formato versão 3 preserva os nomes, cartas e deck ativo dos três espaços anteriores. Espaços vazios continuam vazios depois de salvar/reabrir. Podem receber nome e ser salvos sem cartas; jogar exige um deck completo de 12 cartas, até duas cópias e uma facção + aldeões. Rascunhos incompletos de 1 a 11 cartas não sobrescrevem um deck salvo. Esvaziar um deck ativo seleciona outro completo, se houver.
 
 Verificado: migração de três para seis sem perda, Aurora na posição 4, vazios na 5/6, persistência, criação de deck no quinto espaço, impedimento de jogar vazio, seleção em duas linhas e navegação da tela inicial.
 

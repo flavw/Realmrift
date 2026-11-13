@@ -1,20 +1,20 @@
 # Expansão: arquétipos e magias
 
-Foram adicionadas 12 cartas: uma criatura de cada uma das quatro classes jogáveis, quatro neutros de apoio e uma magia por classe. A expansão inicial levou a coleção a 22 cartas. A atualização de Vigor/Veneno acrescentou duas magias: total atual de 24 cartas (18 criaturas e 6 magias); veja [as regras novas](REGRAS_VIGOR_VENENO.md). Neutro é um conjunto compartilhado, sem classe de herói própria.
+Foram adicionadas 12 cartas: uma criatura de cada uma das quatro facções jogáveis, quatro aldeões de apoio e uma magia por facção. A expansão inicial levou a coleção a 22 cartas. A atualização de Vigor/Veneno acrescentou duas magias: total atual de 24 cartas (18 criaturas e 6 magias); veja [as regras novas](REGRAS_VIGOR_VENENO.md). Aldeia é um conjunto compartilhado, sem facção de herói própria.
 
-| Arquétipo | Carta | Classe/tipo | Mana | Ataque/vida | Habilidades/efeito |
+| Arquétipo | Carta | Facção/tipo | Mana | Ataque/vida | Habilidades/efeito |
 | --- | --- | --- | --- | --- | --- |
 | Proteção | Guardião da Muralha | Guerreiro/criatura | 4 | 2/4 | Armadura 1; Bloqueio 2 |
-| Proteção | Vigia do Portão | Neutro/criatura | 2 | 2/2 | Bloqueio 1 |
+| Proteção | Vigia do Portão | Aldeia/criatura | 2 | 2/2 | Bloqueio 1 |
 | Proteção | Postura de Ferro | Guerreiro/magia | 2 | — | Aliado ganha +1 ataque e +2 Armadura permanentes |
 | Arcano | Canalista do Eclipse | Mago/criatura | 3 | 1/3 | Disparo Arcano 2, custa 1 mana + esgotar |
-| Arcano | Familiar Rúnico | Neutro/criatura | 2 | 0/3 | Amplificar 1 |
+| Arcano | Familiar Rúnico | Arcano/Fera | 2 | 0/3 | Amplificar 1, Ressonância 1 |
 | Arcano | Chama Astral | Mago/magia | 3 | — | 3 de dano mágico a criatura inimiga |
-| Ímpeto | Batedora do Crepúsculo | Ladino/criatura | 2 | 2/2 | Arrancada |
-| Ímpeto | Falcão Mensageiro | Neutro/criatura | 1 | 1/1 | Voo |
-| Ímpeto | Passo das Sombras | Ladino/magia | 1 | — | +1 ataque, Voo e Arrancada neste turno |
+| Ímpeto | Batedora do Crepúsculo | Ladino/criatura | 2 | 2/2 | Disparada |
+| Ímpeto | Falcão Mensageiro | Aldeia/criatura | 1 | 1/1 | Voo |
+| Ímpeto | Passo das Sombras | Ladino/magia | 1 | — | +1 ataque, Voo e Disparada neste turno |
 | Sustento | Guardião da Aurora | Clérigo/criatura | 4 | 2/5 | Vigor; Bloqueio 3 |
-| Sustento | Peregrina da Vida | Neutro/criatura | 3 | 1/4 | Cultivo 1 |
+| Sustento | Peregrina da Vida | Aldeia/criatura | 3 | 1/4 | Cultivo 1 |
 | Sustento | Luz Restauradora | Clérigo/magia | 2 | — | Cura até 4 de vida de aliado ou castelo próprio |
 
 ## Nova habilidade: Amplificar N
@@ -32,13 +32,13 @@ Magias são cartas de uso único. Escolha Conjurar, depois clique em um alvo per
 
 ## Decks e futuro
 
-A regra atual continua: 12 cartas, até duas cópias, três espaços salvos. Decks existentes continuam válidos e não são substituídos. Os neutros de apoio podem entrar em qualquer deck; Afinidade é uma indicação de sinergia, não uma restrição.
+A regra atual continua: 12 cartas, até duas cópias, três espaços salvos. Decks existentes continuam válidos e não são substituídos. Os aldeões de apoio podem entrar em qualquer deck; Afinidade é uma indicação de sinergia, não uma restrição.
 
-A restrição de uma única classe jogável + neutros permanece planejada para o futuro e ainda não é imposta ao editor. As três sugestões iniciais já usam Guerreiro+neutros, Ladino+neutros e Mago+neutros. Para montar um exemplo de Clérigo, use duas cópias de cada: Clériga da Aurora, Guardião da Aurora, Peregrina da Vida, Fazendeiro, Escudeiro da Lua e Luz Restauradora.
+A restrição de uma única facção jogável + aldeões permanece planejada para o futuro e ainda não é imposta ao editor. As três sugestões iniciais já usam Guerreiro+aldeões, Ladino+aldeões e Mago+aldeões. Para montar um exemplo de Clérigo, use duas cópias de cada: Clériga da Aurora, Guardião da Aurora, Peregrina da Vida, Fazendeiro, Escudeiro da Lua e Luz Restauradora.
 
 ## Edição no Godot
 
-Em CardData, Card Type escolhe Creature ou Spell. Spell Effect, Spell Value e Spell Secondary configuram os quatro efeitos implementados. Magic Power configura Amplificar; Affinity é um texto explicativo para neutros. Atributos, nomes, descrições e arte continuam editáveis no Inspector. Efeitos inéditos exigem implementação no motor e na IA.
+Em CardData, Card Type escolhe Creature ou Spell. Spell Effect, Spell Value e Spell Secondary configuram os quatro efeitos implementados. Magic Power configura Amplificar; Affinity é um texto explicativo para aldeões. Atributos, nomes, descrições e arte continuam editáveis no Inspector. Efeitos inéditos exigem implementação no motor e na IA.
 
 Os SVGs de mana e ampulheta estão em assets/ui/. As 12 artes novas estão em assets/art/; foram geradas com imagegen, sem texto ou moldura. Prompts em docs/art-prompts/archetype-expansion.md. O número de mana é um Label preto em negrito sobre um círculo claro. O nome usa correção vertical de 6 px para alinhar visualmente a fonte At Dawn ao custo.
 

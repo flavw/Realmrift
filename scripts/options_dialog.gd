@@ -2,6 +2,7 @@ extends AcceptDialog
 
 const GameDisplaySettings=preload("res://scripts/game_display.gd")
 
+
 var music: Node
 var rules_action: Callable
 

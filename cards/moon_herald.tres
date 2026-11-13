@@ -1,17 +1,15 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/moon_herald.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bi4yt7pv5aqad"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dyiih6frps0t7" path="res://assets/art/moon_herald.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-creature_type=0
-title="Arauto da Lua"
+script = ExtResource("1")
+cost = 2
+artwork = ExtResource("2")
+entry_attack = 1
+entry_effect = 1
+entry_health = 1
+entry_human_only = true
 lore = "Sua trombeta já reuniu heróis, vizinhos e, uma vez, três cabras."
-cost=2
-attack=1
-health=2
-card_class=2
-entry_effect=1
-entry_human_only=true
-entry_attack=1
-entry_health=1
-artwork=ExtResource("2")
+title = "Arauto da Lua"

@@ -7,7 +7,7 @@ func fixture():
 func _init() -> void:
  for side in [0,1]:
   var m=fixture();m.turn=side
-  var unit=m.spawn_unit(side,"wizard_apprentice")
+  var unit=m.spawn_unit(side,"runic_familiar")
   Match.grant_stats(unit,2,3)
   var base_attack: int=unit.attack
   var base_health: int=unit.health
@@ -20,15 +20,15 @@ func _init() -> void:
   assert(unit.attack==base_attack and unit.health==1 and unit.max_health==base_health and unit.resonance_bonus==0)
   assert(m.end_turn(side) and m.end_turn(1-side))
   assert(unit.attack==base_attack and unit.health==1 and unit.max_health==base_health)
- var m=fixture();var unit=m.spawn_unit(0,"wizard_apprentice")
+ var m=fixture();var unit=m.spawn_unit(0,"runic_familiar")
  m.last_action={};m.trigger_resonance(0);m.trigger_resonance(0)
  unit.health-=1
  assert(m.end_turn(0) and m.end_turn(1))
- assert(unit.attack==0 and unit.health==1 and unit.max_health==2)
- m=fixture();unit=m.spawn_unit(0,"wizard_apprentice")
+ assert(unit.attack==0 and unit.health==2 and unit.max_health==3)
+ m=fixture();unit=m.spawn_unit(0,"runic_familiar")
  unit.growth=1
  m.last_action={};m.trigger_resonance(0);unit.health=1
  assert(m.end_turn(0) and m.end_turn(1))
- assert(unit.health==2 and unit.max_health==3 and unit.attack==0)
+ assert(unit.health==2 and unit.max_health==4 and unit.attack==0)
  print("OK: Ressonância temporária, acúmulo, expiração no turno do dono, mínimo 1, danos e bônus permanentes preservados")
  quit()

@@ -13,7 +13,7 @@ func verify() -> void:
  await process_frame
  var editor = menu.deck_layer.get_child(0)
  assert(editor.return_label == "Voltar ao início")
- assert(editor.draft.size() == 20)
+ assert(editor.draft.size() == DuelMatch.DECK_SIZE)
  editor.closed.emit()
  await process_frame
  assert(not is_instance_valid(menu.deck_layer))
@@ -44,3 +44,4 @@ func verify() -> void:
  await process_frame
  print("OK: título, editor e retorno, regras, iniciar duelo e voltar ao início.")
  quit()
+

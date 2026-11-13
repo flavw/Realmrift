@@ -5,10 +5,10 @@
 
 [resource]
 script = ExtResource("1")
-title = "Batedora do Crepúsculo"
-lore = "Ela conhece cada atalho. Principalmente os que não aparecem nos mapas."
 cost = 2
 attack = 2
-card_class = 3
-swift = true
 artwork = ExtResource("2")
+faction = 3
+lore = "Ela conhece cada atalho. Principalmente os que não aparecem nos mapas."
+swift = true
+title = "Batedora do Crepúsculo"

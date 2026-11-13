@@ -25,7 +25,7 @@ func verify() -> void:
  var badge = card.find_child("AbilityManaCost",true,false)
  assert(badge != null)
  var badge_number: Label = badge.get_child(1)
- assert(badge_number.text == "1")
+ assert(badge_number.text == str(card.card_data.magic_cost))
  assert(badge_number.position.is_equal_approx(Vector2(0,-2)),"Número de habilidade sobe 2 px para centralização óptica")
  assert(card.get_node("CardCanvas/Ability").get_child_count()==1)
  var full_description := false
@@ -54,3 +54,4 @@ func verify() -> void:
  await process_frame
  print("OK: resumos, custo centralizado, hover abre/fecha, borda esquerda e Bloqueio atual.")
  quit()
+

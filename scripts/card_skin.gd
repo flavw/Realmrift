@@ -33,9 +33,9 @@ static func texture(asset: String) -> Texture2D:
  cache[asset] = atlas
  return atlas
 
-static func class_color(card_class: int) -> Color:
- return [Color("c87575"),Color("b08bd8"),Color("9ba5b1"),Color("6ab798"),Color("d7cba6"),Color("d69c63"),Color("77a56e")][clampi(card_class,0,6)]
+static func faction_color(faction: int) -> Color:
+ return [Color("c87575"),Color("b08bd8"),Color("9ba5b1"),Color("6ab798"),Color("d7cba6"),Color("d69c63"),Color("77a56e"),Color("76aaa7"),Color("a89b78")][clampi(faction,0,8)]
 
-static func class_symbol(card_class: int) -> Texture2D:
- if card_class<0 or card_class>6:return null
- return texture(["class-warrior","class-mage","class-neutral","class-rogue","class-cleric","class-horde","class-wild"][card_class])
+static func faction_symbol(faction: int) -> Texture2D:
+ if faction<0 or faction>8:return null
+ return texture(["faction-warrior","faction-mage","faction-villagers","faction-rogue","faction-cleric","faction-horde","faction-wild","faction-necropolis","faction-wastes"][faction])

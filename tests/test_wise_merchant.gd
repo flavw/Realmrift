@@ -15,10 +15,10 @@ func _initialize() -> void:
 
 func verify() -> void:
  var card: CardData=Match.CARD_DATA.wise_merchant
- assert(card.title=="Comerciante Astuta" and card.card_class==CardDataType.CardClass.NEUTRAL)
+ assert(card.title=="Comerciante Astuta" and card.faction==CardDataType.Faction.VILLAGER)
  assert(card.creature_type==CardDataType.CreatureType.HUMAN and card.cost==2 and card.attack==1 and card.health==3 and card.commerce==1)
- assert(Match.can_add_class(["warrior"],"wise_merchant"))
- assert(not Match.can_add_class(["goblin_raider"],"wise_merchant"))
+ assert(Match.can_add_faction(["warrior"],"wise_merchant"))
+ assert(not Match.can_add_faction(["goblin_raider"],"wise_merchant"))
  var m=fresh()
  var merchant=m.spawn_unit(0,"wise_merchant")
  var farmer=m.spawn_unit(0,"farmer")

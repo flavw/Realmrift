@@ -12,7 +12,7 @@ func fixture():
 func _init() -> void:
  assert(Match.CARD_DATA.size()==38)
  var recipe=Match.default_deck(4)
- assert(Match.valid_deck(recipe) and Match.deck_class(recipe)==-1 and recipe.size()==Match.DECK_SIZE)
+ assert(Match.valid_deck(recipe) and Match.deck_faction(recipe)==-1 and recipe.size()==Match.DECK_SIZE)
  for key in recipe:assert(recipe.count(key)<=2)
  var m=fixture()
  var wolf=unit("wolf",1)
@@ -91,5 +91,5 @@ func _init() -> void:
  for key in ["village_leader","generous_peasant"]:
   m=fixture();m.turn=1;m.players[1].hand=[key]
   assert(m.ai_step() and m.players[1].board[0].key==key)
- print("OK: Aura temporária, acúmulo/alvos, combate/magia/veneno, Fúria/Vigor, Chamado coletivo permanente e IA; deck neutro válido.")
+ print("OK: Aura temporária, acúmulo/alvos, combate/magia/veneno, Fúria/Vigor, Chamado coletivo permanente e IA; deck aldeão válido.")
  quit()

@@ -9,22 +9,22 @@ func fresh():
 func verify() -> void:
  var goblin: CardData=Match.CARD_DATA.goblin_raider
  assert(goblin.cost==1 and goblin.attack==1 and goblin.health==1 and goblin.swift)
- assert(Match.CARD_DATA.brood_fungus.card_class==2 and Match.CARD_DATA.brood_fungus.creature_type==3)
+ assert(Match.CARD_DATA.brood_fungus.faction==2 and Match.CARD_DATA.brood_fungus.creature_type==3)
  for base in [0,1,3,4]:
   assert(not Store.accepts_base(base,["brood_fungus"]))
  for key in ["warrior","mage","lightning_rogue","cleric"]:
-  assert(not Match.can_add_class([key],"brood_fungus"))
-  assert(not Match.can_add_class(["brood_fungus"],key))
+  assert(not Match.can_add_faction([key],"brood_fungus"))
+  assert(not Match.can_add_faction(["brood_fungus"],key))
  assert(Store.accepts_base(5,["brood_fungus"]) and Store.accepts_base(2,["brood_fungus"]))
- assert(Match.can_add_class(["goblin_raider"],"brood_fungus"))
- assert(Match.can_add_class(["farmer"],"brood_fungus")) # Pure neutral remains allowed.
+ assert(Match.can_add_faction(["goblin_raider"],"brood_fungus"))
+ assert(Match.can_add_faction(["farmer"],"brood_fungus")) # Pure neutral remains allowed.
  for style in range(Match.DECK_NAMES.size()):assert(Match.valid_deck(Match.default_deck(style)))
  var invalid=Match.default_deck(0);invalid[0]="brood_fungus"
  assert(not Match.valid_deck(invalid))
  var store=Store.new("user://test_fungus_troll.json",false)
  assert(not store.save_slot(0,"Inválido",invalid,0))
  var neutral=Match.default_deck(4);neutral[0]="brood_fungus"
- assert(Match.valid_deck(neutral) and store.save_slot(5,"Neutros",neutral,2))
+ assert(Match.valid_deck(neutral) and store.save_slot(5,"Aldeia",neutral,2))
  # Start-of-owner-turn growth affects all allied Monsters, excluding the source.
  var m=fresh()
  var fungus=m.spawn_unit(0,"brood_fungus")
@@ -74,9 +74,9 @@ func verify() -> void:
  var editor=load("res://deck_editor.tscn").instantiate();editor.configure(store);root.add_child(editor)
  editor.choose_slot(0)
  assert(not editor.collection_keys().has("brood_fungus"))
- editor.choose_slot(6);editor.select_base_class(5)
+ editor.choose_slot(6);editor.select_base_faction(5)
  assert(editor.collection_keys().has("brood_fungus") and editor.collection_keys().has("marsh_troll"))
  editor.choose_slot(5);assert(editor.collection_keys().has("brood_fungus"))
  editor.queue_free();await process_frame;await create_timer(0.35).timeout
- print("OK: Goblin 1 mana 1/1 Arrancada, restrição de Monstros neutros, Esporos/acúmulo/Multidão, Regeneração/Devoção/Veneno/Mortos-vivos/Muralha, filtros e salvamento.")
+ print("OK: Goblin 1 mana 1/1 Disparada, restrição de Monstros aldeões, Esporos/acúmulo/Multidão, Regeneração/Devoção/Veneno/Mortos-vivos/Muralha, filtros e salvamento.")
  quit()

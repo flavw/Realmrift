@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/summoned_ghoul.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dv3vkar37a822"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://o8fqd2rmaupe" path="res://assets/art/summoned_ghoul.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Carniçal"
+script = ExtResource("1")
+cost = 2
+attack = 2
+ability_text = ""
+artwork = ExtResource("2")
+collectible = false
+creature_type = 4
+faction = 7
 lore = "A necromante pediu discrição. Ele trouxe o cheiro de cemitério."
-cost=2
-attack=2
-health=2
-card_class=2
-creature_type=4
-collectible=false
-ability_text=""
-artwork=ExtResource("2")
+title = "Carniçal"

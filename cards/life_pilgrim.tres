@@ -1,14 +1,13 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/life_pilgrim.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bykejsvw2rvh4"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://badxd62e2072g" path="res://assets/art/life_pilgrim.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-creature_type=0
-title="Peregrina da Vida"
+script = ExtResource("1")
+cost = 3
+health = 4
+artwork = ExtResource("2")
+growth = 1
 lore = "Ela segue as estradas onde ainda há alguém precisando de ajuda."
-cost=3
-attack=1
-health=4
-card_class=2
-growth=1
-artwork=ExtResource("2")
+title = "Peregrina da Vida"

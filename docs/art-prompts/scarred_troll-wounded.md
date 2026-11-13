@@ -1,0 +1,5 @@
+# Troll Escoriado — Ferido
+
+Modo: edição com image_gen integrado. Referência: assets/art/scarred_troll.png (versão original). A edição substitui a arte deste card por solicitação do usuário.
+
+Edit the provided fantasy card illustration of Troll Escoriado. Preserve the exact troll's identity, face, painterly realistic style, rocky wilderness background, portrait 2:3 composition and quiet top 7 percent for card title. Make him visibly severely battle-wounded but alive and resilient: the arm that currently crosses his chest to touch the shoulder is MISSING, ending in a visibly injured upper-arm stump near the shoulder. Do not retain a hand touching the shoulder. Show vivid GREEN troll blood staining the stump, torn leather, several substantial cuts and bruises across his torso, and drips of green blood on his clothing. Keep the other arm holding the club intact. A faint green regeneration glow surrounds the stump, but the arm has not regrown. Readable missing-arm silhouette. Fantasy monster injuries with green blood, no exposed organs or exposed bone, no extra arms. Keep image beautiful polished game art, no text, UI or border.

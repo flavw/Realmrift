@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/wall_guard.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://b3f48wvc4i7to"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://d2yregn6khsgn" path="res://assets/art/wall_guard.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-creature_type=0
-title="Guardião da Muralha"
+script = ExtResource("1")
+cost = 4
+attack = 2
+health = 4
+armor = 1
+artwork = ExtResource("2")
+block = 2
+faction = 0
 lore = "Seu posto tem a melhor vista e a pior fila de inimigos."
-cost=4
-attack=2
-health=4
-card_class=0
-armor=1
-block=2
-artwork=ExtResource("2")
+title = "Guardião da Muralha"

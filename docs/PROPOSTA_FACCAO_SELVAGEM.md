@@ -1,6 +1,6 @@
 # Proposta — Facção Selvagem
 
-Facção para druidas e patrulheiros, com criaturas humanas e feras. As cartas usam a classe Selvagem e podem ser combinadas com neutras compatíveis.
+Facção para druidas e patrulheiros, com criaturas humanas e feras. As cartas usam a facção Selvagem e podem ser combinadas com aldeãs compatíveis.
 
 ## Criaturas propostas
 

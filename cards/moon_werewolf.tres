@@ -1,16 +1,16 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cnwdmtn4556t5"]
 
 [ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/moon_werewolf.webp" id="2"]
+[ext_resource type="Texture2D" uid="uid://b5gdrwdbregem" path="res://assets/art/moon_werewolf.webp" id="2"]
 
 [resource]
 script = ExtResource("1")
-creature_type = 3
-title = "Lobisomem das Brumas"
-lore = "Nas noites de névoa, os passos chegam antes da silhueta."
 cost = 4
 attack = 3
 health = 4
-card_class = 5
-fury = 1
 artwork = ExtResource("2")
+creature_type = 3
+faction = 5
+fury = 1
+lore = "Nas noites de névoa, os passos chegam antes da silhueta."
+title = "Lobisomem das Brumas"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dn247hll3p5fs"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://doinfij75ymp" path="res://assets/art/adventure-mimic.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 6
+health = 14
+artwork = ExtResource("2")
+collectible = false
+creature_type = 3
+fury = 1
+lore = "O tesouro aguardava sua próxima refeição."
+title = "Mímico Devorador"

@@ -13,13 +13,13 @@ func _init() -> void:
  m.players[0].hand = ["lightning_rogue", "raven"]
  m.players[1].board = [creature("squire", 50)]
  assert(m.play(0, 0))
- assert(m.players[0].board[0].ready, "Arrancada entra pronta")
- assert(not m.can_target(0, 0, -1), "Arrancada respeita Bloqueio")
+ assert(m.players[0].board[0].ready, "Disparada entra pronta")
+ assert(not m.can_target(0, 0, -1), "Disparada respeita Bloqueio")
  assert(m.act(0, 0, 0))
  assert(not m.players[0].board[0].ready)
  assert(not m.act(0, 0, -1), "Só pode atacar uma vez")
  assert(m.play(0, 0))
- assert(not m.players[0].board[1].ready, "Voo não concede Arrancada")
+ assert(not m.players[0].board[1].ready, "Voo não concede Disparada")
  m.players[0].board[1].ready = true
  m.players[1].board = [creature("squire", 51), creature("sentinel", 52)]
  assert(m.can_target(0, 1, -1) and m.can_target(0, 1, 1), "Voo ignora Bloqueio")
@@ -59,5 +59,5 @@ func _init() -> void:
  expected.sort()
  assert(actual == expected, "Partida usa exatamente o deck escolhido")
  DirAccess.remove_absolute(ProjectSettings.globalize_path(decks.path))
- print("OK: Arrancada, Voo, novo mago, 9 decks, limite de 2 cópias, persistência e deck aplicado à partida.")
+ print("OK: Disparada, Voo, novo mago, 9 decks, limite de 2 cópias, persistência e deck aplicado à partida.")
  quit()

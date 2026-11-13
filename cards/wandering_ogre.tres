@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://boorex6edjmcp"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://jvemi31lwv6x" path="res://assets/art/wandering_ogre.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 4
+attack = 4
+health = 4
+artwork = ExtResource("2")
+artwork_focus = Vector2(0.5, 0.4)
+creature_type = 3
+faction = 8
+field_artwork_focus = Vector2(0.5, 0.26)
+lore = "Ele não conhece fronteiras. As fronteiras é que aprenderam a sair do caminho."
+title = "Ogro Errante"
+trample = true

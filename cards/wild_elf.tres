@@ -1,17 +1,19 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
-[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/art/wild_elf.webp" id="2"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://ca8u1t1djvj1f"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://b0scrfa8ask63" path="res://assets/art/wild_elf.webp" id="2"]
+
 [resource]
-script=ExtResource("1")
-title="Elfa da Aliança Verde"
-lore="Elfos raramente caminham com humanos; ela encontrou na natureza uma razão para fazê-lo."
-cost=4
-attack=2
-health=3
-card_class=6
-creature_type=5
-reach=true
-envenom=1
-artwork=ExtResource("2")
-artwork_focus=Vector2(0.5, 0.4)
-field_artwork_focus=Vector2(0.5, 0.32)
+script = ExtResource("1")
+cost = 4
+attack = 2
+health = 3
+artwork = ExtResource("2")
+artwork_focus = Vector2(0.5, 0.4)
+creature_type = 5
+envenom = 1
+faction = 6
+field_artwork_focus = Vector2(0.5, 0.32)
+lore = "Elfos raramente caminham com humanos; ela encontrou na natureza uma razão para fazê-lo."
+reach = true
+title = "Elfa da Aliança Verde"

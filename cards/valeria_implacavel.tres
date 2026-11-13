@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://27d3bdtecfb2"]
+
+[ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bxt475jutnqqm" path="res://assets/art/valeria_implacavel.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 6
+attack = 5
+health = 4
+armor = 2
+artwork = ExtResource("2")
+artwork_focus = Vector2(0.5, 0.45)
+bleed = 3
+faction = 0
+field_artwork_focus = Vector2(0.5, 0.28)
+legendary = true
+lore = "Quando a linha da Vanguarda cede, ela avança. Ninguém confunde sua chegada com um pedido de paz."
+title = "Valéria, a Implacável"

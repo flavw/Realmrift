@@ -43,7 +43,7 @@ func verify() -> void:
  editor.choose_slot(3)
  await process_frame
  editor.draft=Match.default_deck(3);editor.render()
- assert(editor.draft_name=="Aurora Vital" and editor.draft.count("dawn_oracle")==2 and Match.deck_class(editor.draft)==CardData.CardClass.CLERIC)
+ assert(editor.draft_name=="Aurora Vital" and editor.draft.count("dawn_oracle")==2 and Match.deck_faction(editor.draft)==CardData.Faction.CLERIC)
  assert(editor.save_deck() and main.deck_store.slots.size()==Store.SLOT_COUNT)
  var saved=Store.new(main.deck_store.path)
  assert(saved.slots[3].cards==editor.draft and saved.slots[3].name=="Aurora Vital")

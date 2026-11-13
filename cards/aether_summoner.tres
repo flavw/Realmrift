@@ -5,12 +5,13 @@
 
 [resource]
 script = ExtResource("1")
-entry_summon_key = "runic_familiar"
-entry_effect = 3
-title = "Conjuradora do Éter"
-lore = "Seu familiar nunca responde ao chamado. Ele prefere aparecer antes."
 cost = 4
 health = 3
-card_class = 1
-resonance = 1
 artwork = ExtResource("2")
+entry_effect = 3
+entry_summon_key = "runic_familiar"
+faction = 1
+lore = "Seu familiar nunca responde ao chamado. Ele prefere aparecer antes."
+resonance = 1
+title = "Conjuradora do Éter"
+wide_entry_summary = true

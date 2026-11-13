@@ -5,12 +5,12 @@
 
 [resource]
 script = ExtResource("1")
-entry_effect = 1
-entry_health = 2
-title = "Oráculo da Aurora"
-lore = "Ela viu o futuro. Pediu que todos dormissem mais cedo."
 cost = 2
 health = 3
-card_class = 4
-devotion = 1
 artwork = ExtResource("2")
+devotion = 1
+entry_effect = 1
+entry_health = 2
+faction = 4
+lore = "Ela viu o futuro. Pediu que todos dormissem mais cedo."
+title = "Oráculo da Aurora"

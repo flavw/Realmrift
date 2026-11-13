@@ -5,13 +5,12 @@
 
 [resource]
 script = ExtResource("1")
-entry_secondary = null
-title = "Saltador dos Telhados"
-lore = "As ruas cobram pedágio. Os telhados, só equilíbrio."
 cost = 3
 attack = 2
 health = 3
-card_class = 3
-flying = true
 artwork = ExtResource("2")
+faction = 3
 field_artwork_focus = Vector2(0.5, 0.3)
+flying = true
+lore = "As ruas cobram pedágio. Os telhados, só equilíbrio."
+title = "Saltador dos Telhados"

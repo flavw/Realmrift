@@ -28,8 +28,8 @@ func verify() -> void:
  assert(tabs.get_global_rect().end.x<=root.get_visible_rect().size.x)
  editor.choose_slot(4)
  assert(editor.draft.is_empty() and editor.find_child("DeckSuggestion",true,false)==null)
- assert(editor.screen=="choose_class")
- editor.select_base_class(CardData.CardClass.LADINO)
+ assert(editor.screen=="choose_faction")
+ editor.select_base_faction(CardData.Faction.LADINO)
  var play: Button
  for b in editor.find_children("*","Button",true,false):
   if b.text=="Jogar com este deck":play=b

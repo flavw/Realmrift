@@ -39,6 +39,6 @@ func verify():
  m.spawn_unit(1,"wolf")
  assert(Match.attack_value(rival)==Match.CARD_DATA.farmer.attack+2)
  assert(m.end_turn(1) and Match.attack_value(rival)==Match.CARD_DATA.farmer.attack)
- assert(Store.accepts_base(CardData.CardClass.WILD,["wild_stag","wild_pack_spell","wolf"]))
+ assert(Store.accepts_base(CardData.Faction.WILD,["wild_stag","wild_pack_spell","wolf"]))
  print("OK: compra, Matilha nos dois lados, imunidade, acúmulo e duração.")
  quit()

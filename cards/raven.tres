@@ -5,18 +5,16 @@
 
 [resource]
 script = ExtResource("1")
-creature_type = 1
-entry_secondary = null
-abascanto = 1
-attack = 1
-health = 3
-title = "Corvo das Brumas"
-lore = "Nunca esquecido: um brilho, um segredo e a carteira do viajante."
 cost = 2
-card_class = 3
-flying = true
+health = 3
 ability_text = "Voo
-Guarda Arcana 1"
+Resistência à Magia 1"
+antimagic = 1
 artwork = ExtResource("2")
-artwork_zoom = 1.08
 artwork_focus = Vector2(0.5, 0.46)
+artwork_zoom = 1.08
+creature_type = 1
+faction = 3
+flying = true
+lore = "Nunca esquecido: um brilho, um segredo e a carteira do viajante."
+title = "Corvo das Brumas"

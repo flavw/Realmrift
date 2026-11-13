@@ -24,9 +24,9 @@ func _initialize() -> void:
   assert(regen.health>1 and regen.poison==2 and regen.bleeding==1)
   assert(ally.attack==3 and enemy.attack==1 and not m.last_action.has("healed") and not m.last_action.has("devotion_buffs"))
   assert(m.last_action.regenerated.size()==1)
-  regen.creature_type=CardData.CreatureType.UNDEAD;regen.health=1;regen.abascanto=1
+  regen.creature_type=CardData.CreatureType.UNDEAD;regen.health=1;regen.antimagic=1
   m.last_action={};m.resolve_regeneration(side)
-  assert(regen.health>1 and regen.abascanto==1 and regen.poison==2)
+  assert(regen.health>1 and regen.antimagic==1 and regen.poison==2)
   regen.wall=true;regen.health=1
   m.last_action={};m.resolve_regeneration(side)
   assert(regen.health>1)
