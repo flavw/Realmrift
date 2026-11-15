@@ -19,7 +19,7 @@ func render() -> void:
  var title:=Label.new();title.text="ESCOLHA SUA AVENTURA";title.add_theme_font_size_override("font_size",30);column.add_child(title)
  var tile:=PanelContainer.new();tile.add_theme_stylebox_override("panel",preload("res://scripts/ui_theme.gd").panel(Color("132733"),Color("b69962"),16));column.add_child(tile)
  var content:=VBoxContainer.new();content.add_theme_constant_override("separation",14);tile.add_child(content)
- var art:=TextureRect.new();art.name="AdventureSelectionArtwork";art.texture=preload("res://assets/ui/adventure-opening.png");art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;art.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_COVERED;art.custom_minimum_size=Vector2(960,340);content.add_child(art)
+ var art:=TextureRect.new();art.name="AdventureSelectionArtwork";art.texture=preload("res://assets/ui/adventure-opening.webp");art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;art.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_COVERED;art.custom_minimum_size=Vector2(960,340);content.add_child(art)
  var heading:=Label.new();heading.text="Da Vila à Fenda";heading.add_theme_font_size_override("font_size",30);content.add_child(heading)
  var description:=Label.new();description.text="De uma pequena vila às ruínas do Dragão Negro. Recrute aliados de todos os reinos e feche a fenda.";description.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;description.custom_minimum_size.x=920;content.add_child(description)
  var current=State.current

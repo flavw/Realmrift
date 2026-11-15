@@ -45,7 +45,7 @@ func _process(_delta: float) -> void:
 	var shot_available: bool=can_act() and magic and selected>=0 and selected<duel.players[0].board.size() and duel.has_magic_target(0,selected)
 	var spell_available: bool=can_act() and casting>=0 and casting<duel.players[0].hand.size() and duel.has_spell_target(0,casting) and (Match.CARD_DATA[duel.players[0].hand[casting]].faction==CardData.Faction.MAGE or aimed_magic_damage()>=0)
 	var aiming:bool=can_act() and not ArtViewer.is_open(self) and not heal_aiming and (shot_available or spell_available)
-	var physical:bool=can_act() and not ArtViewer.is_open(self) and not magic and not healing and casting<0 and summoning<0 and selected>=0 and selected<duel.players[0].board.size() and duel.players[0].board[selected].ready and Match.physical_attack(duel.players[0].board[selected])>0 and not duel.players[0].board[selected].get("wall",false) and is_enemy_target_hovered()
+	var physical:bool=can_act() and not ArtViewer.is_open(self) and not magic and not healing and casting<0 and summoning<0 and selected>=0 and selected<duel.players[0].board.size() and duel.players[0].board[selected].ready and Match.physical_attack(duel.players[0].board[selected])>0 and not duel.players[0].board[selected].get("wall",false) and not duel.players[0].board[selected].get("end_random_attack",false) and is_enemy_target_hovered()
 	update_cursor_damage(aiming or necrotic_heal_aim)
 	if aiming==arcane_cursor_active and physical==physical_cursor_active and heal_aiming==heal_cursor_active:return
 	arcane_cursor_active=aiming
@@ -471,7 +471,7 @@ func redraw() -> void:
 	all_attack.name="AttackAll"
 	all_attack.tooltip_text="Ataques físicos na ordem do campo. Prioriza o castelo; respeita Bloqueio e Voo. Não usa habilidades nem mana."
 	var has_selection: bool = selected >= 0 and selected < duel.players[0].board.size()
-	if has_selection and not duel.players[0].board[selected].get("wall",false) and Match.physical_attack(duel.players[0].board[selected]) > 0:
+	if has_selection and not duel.players[0].board[selected].get("wall",false) and not duel.players[0].board[selected].get("end_random_attack",false) and Match.physical_attack(duel.players[0].board[selected]) > 0:
 		var physical_button:=button("Ataque físico", func(): magic = false; healing = false; redraw(), can_act() and duel.players[0].board[selected].ready)
 		physical_button.name="PhysicalAttackMode"
 		mark_action_mode(physical_button,not magic and not healing)
@@ -951,7 +951,7 @@ func context_for(unit: Dictionary, side: int, on_board: bool = true) -> Dictiona
 		for target_side in [side,1-side]:
 			for i in range(duel.players[target_side].board.size()):
 				if duel.can_heal(side,actor_index,i,target_side,true):quick_target=true
-	return {"mimic_sleeping":unit.get("mimic_sleeping",false),"farm_blessing_persistent":unit.get("farm_blessing_persistent",false),"farm_blessing":unit.get("farm_blessing",false),"side":side,"on_board":on_board,"turn":duel.turn,"ready":unit.get("ready",false),"mana":duel.players[side].mana,"busy":busy,"winner":duel.winner,"max_health":unit.get("max_health",unit.get("health",1)),"magic_target":duel.has_magic_target(side,duel.players[side].board.find(unit)) if on_board else true,"heal_target":heal_target,"quick_heal_target":quick_target,"quick_heal_used":unit.get("quick_heal_used",false),"magic_bonus":duel.magic_bonus(side),"armor":unit.get("armor",0),"vigor":unit.get("vigor",false),"poison":unit.get("poison",0),"bleeding":unit.get("bleeding",0),"aura_attack":unit.get("aura_attack",0),"turn_attack":unit.get("turn_attack",0),"turn_flying":unit.get("turn_flying",false),"turn_swift":unit.get("turn_swift",false),"antimagic":unit.get("antimagic",0),"fury_used":unit.get("fury_used",false)}
+	return {"mimic_sleeping":unit.get("mimic_sleeping",false),"farm_blessing_persistent":unit.get("farm_blessing_persistent",false),"farm_blessing":unit.get("farm_blessing",false),"side":side,"on_board":on_board,"turn":duel.turn,"ready":unit.get("ready",false),"mana":duel.players[side].mana,"busy":busy,"winner":duel.winner,"max_health":unit.get("max_health",unit.get("health",1)),"magic_target":duel.has_magic_target(side,duel.players[side].board.find(unit)) if on_board else true,"heal_target":heal_target,"quick_heal_target":quick_target,"quick_heal_used":unit.get("quick_heal_used",false),"magic_bonus":duel.magic_bonus(side),"armor":unit.get("armor",0),"vigor":unit.get("vigor",false),"poison":unit.get("poison",0),"bleeding":unit.get("bleeding",0),"aura_attack":unit.get("aura_attack",0),"turn_attack":unit.get("turn_attack",0),"turn_flying":unit.get("turn_flying",false),"turn_swift":unit.get("turn_swift",false),"turn_impulsive":unit.get("turn_impulsive",false),"granted_impulsive":unit.get("granted_impulsive",false),"antimagic":unit.get("antimagic",0),"fury_used":unit.get("fury_used",false)}
 
 func show_preview(data: CardData, health: int, owner: Control) -> void:
 	if busy or is_instance_valid(deck_editor) or not is_instance_valid(preview):
@@ -1059,7 +1059,7 @@ func add_hero(side: int, parent: Node = null) -> void:
 		castle.add_child(mark)
 	if side==1 and duel.creature_boss_id>=0:
 		life.text="—"
-		art.texture=preload("res://assets/art/adventure-mimic.png")
+		art.texture=preload("res://assets/art/adventure-mimic.webp")
 		castle.tooltip_text="O castelo não conta neste encontro. Derrote o Mímico Devorador."
 	if side==1 and can_act() and not magic and not healing and casting<0 and summoning<0 and not duel.attack_blockers(0,selected,-1).is_empty():
 		var blocked:=Control.new()
@@ -1160,7 +1160,7 @@ func play(index: int) -> void:
 	if Match.CARD_DATA[duel.players[0].hand[index]].card_type == CardData.CardType.SPELL:
 		if not duel.has_spell_target(0,index):
 			return
-		if data.spell_effect in [CardData.SpellEffect.AREA_ARCANE,CardData.SpellEffect.HORDE_ROAR,CardData.SpellEffect.GRANT_PACK,CardData.SpellEffect.SEPULCHRAL_TIDE] or (data.spell_effect==CardData.SpellEffect.RECONSTRUCT and not has_allied_wall()):
+		if data.spell_effect in [CardData.SpellEffect.AREA_ARCANE,CardData.SpellEffect.RUIN_ROAR,CardData.SpellEffect.GRANT_PACK,CardData.SpellEffect.SEPULCHRAL_TIDE,CardData.SpellEffect.SANDSTORM] or (data.spell_effect==CardData.SpellEffect.RECONSTRUCT and not has_allied_wall()):
 			casting=index
 			await cast_target(1 if data.spell_effect==CardData.SpellEffect.AREA_ARCANE else 0,-1)
 			return
@@ -1291,12 +1291,14 @@ func end_turn() -> void:
 	magic = false
 	set_busy(true)
 	await animate_impulsive_attacks(0)
+	if duel.winner==-1:await animate_automatic_hunts(0)
 	if duel.winner!=-1:
 		set_busy(false);redraw();return
 	var snapshot := field_nodes.duplicate()
 	duel.end_turn(0)
 	await animate_action(duel.last_action,snapshot)
 	redraw()
+	await animate_records(duel.last_action.get("turn_castle_hits",[]),field_nodes,"arcane_area","castle")
 	animate_turn_summons(duel.last_action)
 	if duel.turn==1 and duel.winner==-1:
 		await run_ai_turn()
@@ -1320,10 +1322,13 @@ func run_ai_turn() -> void:
 		await get_tree().create_timer(0.25).timeout
 	if duel.turn==1 and duel.winner==-1:
 		await animate_impulsive_attacks(1)
+		if duel.winner==-1:await animate_automatic_hunts(1)
 		var snapshot := field_nodes.duplicate()
 		if duel.winner==-1:
 			duel.end_turn(1)
 			await animate_action(duel.last_action,snapshot)
+	redraw()
+	await animate_records(duel.last_action.get("turn_castle_hits",[]),field_nodes,"arcane_area","castle")
 	set_busy(false)
 	redraw()
 	animate_turn_summons(duel.last_action)
@@ -1336,6 +1341,15 @@ func animate_impulsive_attacks(side: int) -> void:
 		redraw()
 		if duel.winner!=-1:return
 		await get_tree().process_frame
+		await get_tree().process_frame
+
+func animate_automatic_hunts(side: int) -> void:
+	for i in range(Match.MAX_BOARD):
+		var snapshot: Array=field_nodes.duplicate()
+		if not duel.perform_automatic_hunt(side):return
+		await animate_action(duel.last_action,snapshot)
+		redraw()
+		if duel.winner!=-1:return
 		await get_tree().process_frame
 
 func animate_turn_summons(action: Dictionary) -> void:
@@ -1476,6 +1490,10 @@ func animate_action(action: Dictionary, snapshot: Array) -> void:
 			if is_instance_valid(recipient):await status_effect("spell_buff",recipient).finished
 		await animate_poison_bottles(action,snapshot)
 		await animate_records(action.get("poisoned",[]),snapshot,"poison_apply","poison_apply")
+		await animate_records(action.get("healed",[]),snapshot,"heal","heal")
+		await animate_records(action.get("entry_damage",[]),snapshot,"arcane_area","magic")
+		await animate_devotion(action,snapshot)
+		await animate_deaths(action,snapshot)
 		return
 	if kind in ["poison","turn_end"]:
 		await animate_records(action.get("ticks",[]),snapshot,"poison_tick","poison_tick")
@@ -1512,7 +1530,7 @@ func animate_action(action: Dictionary, snapshot: Array) -> void:
 				if is_instance_valid(source) and is_instance_valid(victim):
 					await animate_missile(source,victim)
 					float_result(victim,"−%d" % int(hit.amount),Color("ff8d86"))
-		elif int(action.effect) in [CardData.SpellEffect.HORDE_ROAR,CardData.SpellEffect.GRANT_PACK]:
+		elif int(action.effect) in [CardData.SpellEffect.RUIN_ROAR,CardData.SpellEffect.GRANT_PACK]:
 			await animate_records(action.get("buffs",[]),snapshot,"fury","fury")
 		elif int(action.effect) in [CardData.SpellEffect.DRAGON_POISON,CardData.SpellEffect.DRAGON_ACID]:
 			await animate_cone(spell_source(side),action.get("cone_targets",action.get("area_hits",[])),snapshot,"poison" if int(action.effect)==CardData.SpellEffect.DRAGON_POISON else "acid")
@@ -1522,10 +1540,12 @@ func animate_action(action: Dictionary, snapshot: Array) -> void:
 					if is_instance_valid(victim):float_result(victim,"−%d" % int(hit.amount),Color("d9f58a"))
 		elif int(action.effect)==CardData.SpellEffect.AREA_ARCANE:
 			await animate_records(action.get("area_hits",[]),snapshot,"fire","fire")
+		elif int(action.effect)==CardData.SpellEffect.SANDSTORM:
+			await animate_records(action.get("area_hits",[]),snapshot,"arcane_area","magic")
 		elif int(action.effect)==CardData.SpellEffect.SEPULCHRAL_TIDE:
 			await animate_records(action.get("area_hits",[]),snapshot,"necrotic","magic")
 			await animate_records(action.get("healed",[]),snapshot,"heal","heal")
-		elif int(action.effect) in [CardData.SpellEffect.SHADOW_STEP,CardData.SpellEffect.FORTIFY,CardData.SpellEffect.VIGOR] and is_instance_valid(destination):
+		elif int(action.effect) in [CardData.SpellEffect.SHADOW_STEP,CardData.SpellEffect.FORTIFY,CardData.SpellEffect.VIGOR,CardData.SpellEffect.WAR_PAINT] and is_instance_valid(destination):
 			play_sound("buff")
 			var effect:Tween=status_effect("spell_buff",destination)
 			if int(action.get("armor_gain",0))>0:float_result(destination,"+%d armadura" % int(action.armor_gain),Color("e8d18a"))
@@ -1988,7 +2008,7 @@ func show_rogue_choice(side: int,index: int) -> void:
 	var choices:=HBoxContainer.new()
 	choices.add_theme_constant_override("separation",20)
 	content.add_child(choices)
-	choices.add_child(rogue_choice_option("loot","Saquear %d" % data.entry_value,"Ao atacar o castelo inimigo,\ncompre %d carta(s)." % data.entry_value,"draw-icon",Color("d8b65e")))
+	choices.add_child(rogue_choice_option("loot","Punga %d" % data.entry_value,"Ao atacar o castelo inimigo,\ncompre %d carta(s)." % data.entry_value,"draw-icon",Color("d8b65e")))
 	choices.add_child(rogue_choice_option("envenom","Envenenar %d" % data.entry_secondary,"Ataques e contra-ataques aplicam\nVeneno %d a criaturas." % data.entry_secondary,"envenom-icon",Color("8cd276")))
 	var note:=label_text("Bônus permanente · Acumula com habilidades existentes",15)
 	note.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
@@ -2037,6 +2057,9 @@ func rogue_choice_option(choice: String,title: String,description: String,icon_n
 func show_summon_feedback(action: Dictionary) -> void:
 	await get_tree().process_frame
 	show_armor_from_summon(action,field_nodes)
+	await animate_records(action.get("healed",[]),field_nodes,"heal","heal")
+	await animate_records(action.get("entry_damage",[]),field_nodes,"arcane_area","magic")
+	await animate_devotion(action,field_nodes)
 	if action.has("granted_ability"):
 		play_sound("buff")
 		status_effect("spell_buff",field_nodes[int(action.side)].get(action.get("buff_target",-1)))

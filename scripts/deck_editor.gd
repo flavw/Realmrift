@@ -37,6 +37,7 @@ var collection_tiles: Dictionary={}
 const FACTION_NAMES=preload("res://scripts/faction_names.gd").PT
 var collection_dialog: AcceptDialog
 var name_edit: LineEdit
+var collection_return_to_menu := false
 var collection_dragging := false
 var collection_drag_start_y := 0.0
 var collection_drag_start_scroll := 0
@@ -354,7 +355,7 @@ func render_faction_choice(page: VBoxContainer) -> void:
   content.mouse_filter=Control.MOUSE_FILTER_IGNORE
   choice.add_child(content)
   var icon:=TextureRect.new()
-  icon.texture=CardSkin.faction_symbol(value)
+  icon.texture=CardSkin.faction_symbol(value,true)
   icon.custom_minimum_size=Vector2(54,54)
   icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;icon.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
   icon.mouse_filter=Control.MOUSE_FILTER_IGNORE
@@ -934,11 +935,38 @@ func render_library_actions(parent: HBoxContainer) -> void:
  play.tooltip_text="Jogar com a versão salva deste deck"
  UiTheme.primary(play)
  content.add_child(play)
+ var delete:=action_button("Excluir deck",confirm_delete_deck.bind(library_selected),not saved.cards.is_empty() or draft_cache.has(library_selected))
+ delete.name="DeckActionDelete"
+ delete.custom_minimum_size.y=48
+ content.add_child(delete)
  var hint:=text_label("Comece adicionando cartas a este espaço." if saved.cards.is_empty() else ("Há um rascunho pendente. Jogar usa o deck salvo." if draft_cache.has(library_selected) else "Edite o deck para alterar a capa e o nome."),15)
  hint.custom_minimum_size.x=260
  hint.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
  hint.modulate=Color("8fa8bd")
  content.add_child(hint)
+
+func confirm_delete_deck(index: int) -> void:
+ if index<0 or index>=DeckStore.SLOT_COUNT:return
+ var dialog:=ConfirmationDialog.new()
+ dialog.name="DeleteDeckConfirmation"
+ dialog.title="Excluir deck"
+ dialog.dialog_text="Excluir ‘%s’ e seu rascunho? Esta ação não pode ser desfeita." % store.slots[index].name
+ dialog.ok_button_text="Excluir"
+ dialog.cancel_button_text="Cancelar"
+ add_child(dialog)
+ dialog.confirmed.connect(func():
+  if store.delete_slot(index):
+   draft_cache.erase(index)
+   if slot==index:load_slot(index)
+   pending_open_slot=-1
+   message="Deck excluído. O espaço está disponível."
+  else:message=store.error_message
+  render()
+ )
+ dialog.close_requested.connect(dialog.queue_free)
+ dialog.canceled.connect(dialog.queue_free)
+ dialog.confirmed.connect(dialog.queue_free)
+ dialog.popup_centered()
 
 func select_library_deck(index: int) -> void:
  if index<0 or index>=DeckStore.SLOT_COUNT:return
@@ -1075,7 +1103,10 @@ func show_full_collection() -> void:
  clear_collection_filters()
 
 func render_full_collection(page: VBoxContainer) -> void:
- library_title(page,"COLEÇÃO DE CARTAS","Meus decks",show_library)
+ if collection_return_to_menu:
+  library_title(page,"COLEÇÃO DE CARTAS","Voltar ao início",func():closed.emit())
+ else:
+  library_title(page,"COLEÇÃO DE CARTAS","Meus decks",show_library)
  var keys:=collection_keys()
  var count:=Match.CARD_DATA.values().filter(func(data):return data.collectible).size()
  var note:=text_label("%d de %d cartas · Arraste para navegar; botão direito para ver a arte." % [keys.size(),count],17)

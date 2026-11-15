@@ -2,9 +2,9 @@ extends SceneTree
 const Match=preload("res://scripts/match.gd")
 func _initialize() -> void:call_deferred("verify")
 func verify() -> void:
- assert(Match.CARD_DATA.marsh_troll.block==1 and Match.CARD_DATA.minotaur_brute.block==1)
+ assert(Match.CARD_DATA.marsh_troll.block==0 and Match.CARD_DATA.minotaur_brute.block==1)
  var kobold:CardData=Match.CARD_DATA.scorpion_kobold
- assert(kobold.cost==2 and kobold.attack==2 and kobold.health==1 and kobold.block==1 and kobold.envenom==1 and kobold.faction==CardData.Faction.HORDE)
+ assert(kobold.cost==2 and kobold.attack==2 and kobold.health==1 and kobold.block==1 and kobold.envenom==1 and kobold.faction==CardData.Faction.RUIN)
  var game=Match.new()
  for p in game.players:p.board.clear();p.hand.clear();p.mana=10
  var fungus=game.spawn_unit(0,"brood_fungus")

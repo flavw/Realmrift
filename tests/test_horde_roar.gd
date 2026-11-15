@@ -7,7 +7,7 @@ func fresh():
  for p in m.players:p.board.clear();p.hand.clear();p.mana=10
  return m
 func verify() -> void:
- assert(CardData.Faction.HORDE==5)
+ assert(CardData.Faction.RUIN==5)
  assert(Match.CARD_DATA.horde_roar.cost==3 and Match.CARD_DATA.horde_roar.spell_value==2)
  assert(Store.accepts_base(5,["necromancer_summoner","horde_roar"]))
  assert(not Store.accepts_base(5,["farmer","horde_roar"]))
@@ -51,15 +51,15 @@ func verify() -> void:
  # Exhaustion is not removed by casting.
  assert(m.cast(1,0,1,-1) and not ready_monster.ready)
  var store=Store.new("user://test_horde_roar.json",false)
- assert(store.save_slot(5,"Horda",Match.default_deck(5),5))
+ assert(store.save_slot(5,"Ruína",Match.default_deck(5),5))
  assert(Store.new(store.path).base_for(5)==5)
  var main=load("res://main.tscn").instantiate();main.enable_opening=false;main.muted=true;root.add_child(main)
  main.enemy_deck_style=5
- assert(main.opponent_label()=="IA — Horda")
+ assert(main.opponent_label()=="IA — Ruína")
  assert(Match.default_deck(5).count("horde_roar")==2)
  var view=load("res://card_model.tscn").instantiate();view.card_data=Match.CARD_DATA.goblin_raider
  view.ability_context={"turn_attack":2};root.add_child(view)
- assert(view.view_entries().any(func(e):return e.name=="Clamor da Horda" and e.runtime))
+ assert(view.view_entries().any(func(e):return e.name=="Clamor da Ruína" and e.runtime))
  view.queue_free();main.queue_free();await process_frame;await create_timer(0.35).timeout
  print("OK: Horda preserva ID/salvamento; Clamor por 3 mana, apenas Monstros aliados, +2 temporário acumulável, expiração, bônus permanentes, novos invocados, UI e IA.")
  quit()

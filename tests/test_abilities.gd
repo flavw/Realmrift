@@ -75,7 +75,7 @@ func _init() -> void:
  m.players[1].board = [creature("wolf")]
  assert(m.act(0, 0, 0))
  assert(m.players[0].board[0].block == 1, "Contra-ataque não consome Bloqueio")
- # Bloqueio 2 starts with two charges but only recovers one per owner turn.
+ # Bloqueio 2 starts with two charges and fully recovers at every turn.
  var squire_data = Match.CARD_DATA.squire
  var original_block: int = squire_data.block
  squire_data.block = 2
@@ -93,9 +93,9 @@ func _init() -> void:
  assert(recovery.players[0].board[0].block == 0)
  assert(recovery.act(1, 2, -1), "Terceiro ataque pode ser direto")
  recovery.end_turn(1)
- assert(recovery.players[0].board[0].block == 1, "Bloqueio 2 recupera só 1 carga")
+ assert(recovery.players[0].board[0].block == 2, "Bloqueio 2 recupera todas as cargas")
  recovery.end_turn(0)
- assert(recovery.players[0].board[0].block == 1, "Só recupera no turno do dono")
+ assert(recovery.players[0].board[0].block == 2, "Também recupera no turno adversário")
  recovery.end_turn(1)
  assert(recovery.players[0].board[0].block == 2)
  recovery.end_turn(0)

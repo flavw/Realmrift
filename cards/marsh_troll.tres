@@ -9,7 +9,6 @@ cost = 4
 attack = 3
 health = 5
 artwork = ExtResource("2")
-block = 1
 creature_type = 3
 faction = 5
 lore = "O brejo cura quase tudo. O cheiro, infelizmente, permanece."

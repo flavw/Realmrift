@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/luminary_healer.webp" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 3
+attack = 2
+health = 2
+artwork = ExtResource("2")
+devotion = 1
+entry_effect = 10
+entry_value = 1
+faction = 4
+lore = "Cada pequena chama é uma promessa de amanhecer."
+title = "Guardiã da Chama Serena"

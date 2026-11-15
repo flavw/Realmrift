@@ -1,11 +1,11 @@
 REALMRIFT — REGRAS DO DUELO
 
-Facções: Vanguarda (Vanguard), Arcano (Arcane), Aldeia (Village), Luminares (Luminaries), Submundo (Underworld), Horda, Selvagem e Necrópole (Necropolis).
+Facções: Vanguarda (Vanguard), Arcano (Arcane), Aldeia (Village), Luminares (Luminaries), Submundo (Underworld), Ruína, Selvagem e Necrópole (Necropolis).
 
 Objetivo: reduza a vida do castelo inimigo de 20 a 0. O castelo representa o jogador. Clique no castelo da IA para atacar diretamente com uma criatura pronta. Ataques diretos não têm contra-ataque.
 
 Turnos e mana
-Quem começa é sorteado. O primeiro jogador recebe 3 cartas e o segundo recebe 4. Antes da primeira compra, ambos fazem um único mulligan gratuito, trocando qualquer quantidade da mão inicial, inclusive nenhuma. Clique nas cartas para marcá-las com uma seta. As substituições são compradas antes de devolver e embaralhar as cartas escolhidas, mas outra cópia da mesma carta pode aparecer. Não há ações nem mana durante o mulligan. Após as trocas, o primeiro jogador compra uma carta e recebe sua primeira mana normalmente. Quem joga em segundo compra no início de seu primeiro turno e recebe 1 mana temporária adicional, que é gasta primeiro e desaparece ao fim do turno. A mana máxima cresce 1 por turno, até 10, e a mana disponível é renovada no início do turno. Compre 1 carta por turno. Deck: 22 cartas, no máximo 2 cópias de cada. Há 10 espaços salvos no editor. Cada deck usa uma facção com complementos compatíveis. Mão: até 7 cartas; compras excedentes são destruídas. Campo: até 6 criaturas.
+Quem começa é sorteado. O primeiro jogador recebe 3 cartas e o segundo recebe 4. Antes da primeira compra, ambos fazem um único mulligan gratuito, trocando qualquer quantidade da mão inicial, inclusive nenhuma. Clique nas cartas para marcá-las com uma seta. As substituições são compradas antes de devolver e embaralhar as cartas escolhidas, mas outra cópia da mesma carta pode aparecer. Não há ações nem mana durante o mulligan. Após as trocas, o primeiro jogador compra uma carta e recebe sua primeira mana normalmente. Quem joga em segundo compra no início de seu primeiro turno e recebe 1 mana temporária adicional, que é gasta primeiro e desaparece ao fim do turno. A mana máxima cresce 1 por turno, até 10, e a mana disponível é renovada no início do turno. Compre 1 carta por turno. Deck: 22 cartas, no máximo 2 cópias de cada. Há 15 espaços salvos no editor. Cada deck usa uma facção com complementos compatíveis. Mão: até 7 cartas; compras excedentes são destruídas. Campo: até 6 criaturas.
 
 Invocação e combate
 Pague o custo no topo da carta para invocar. Criaturas entram esgotadas, exceto quem tem Disparada; ficam prontas no início do seu próximo turno. Uma criatura pronta pode atacar OU usar uma habilidade que a esgote. Ataques físicos em criaturas causam dano e contra-ataque simultaneamente, mesmo que alguma morra. A defesa não esgota a criatura. Vida 0 ou menos remove a criatura. Ataque 0 não permite ataque físico.
@@ -14,13 +14,13 @@ Armadura
 Reduz cada dano físico recebido, com mínimo de 0. Não é consumida. Também reduz dano de contra-ataque. Dano mágico ignora armadura e não gera contra-ataque.
 
 Bloqueio 1 — Escudeiro
-Enquanto o Escudeiro tiver sua carga de Bloqueio, ataques físicos do adversário devem atingir uma criatura com Bloqueio ativo. Não é possível atacar outras criaturas nem o castelo. Ao receber o primeiro ataque físico válido, perde 1 carga, mesmo se a armadura absorver todo o dano. Bloqueio N entra com N cargas e exige ser alvo dos primeiros N ataques físicos recebidos, consumindo uma carga por ataque. No início de cada turno do dono, recupera apenas 1 carga, até o máximo N. Exemplo: Bloqueio 2 que gastou as duas cargas recupera 1 no próximo turno; se preservar essa carga, pode voltar a 2 no turno seguinte. Se houver vários Escudeiros, escolha qualquer um com carga; os demais continuam protegendo. Magia ignora Bloqueio e não consome a carga. Contra-ataques não consomem Bloqueio. A carga também desaparece quando a criatura sai do campo.
+Enquanto o Escudeiro tiver sua carga de Bloqueio, ataques físicos do adversário devem atingir uma criatura com Bloqueio ativo. Não é possível atacar outras criaturas nem o castelo. Ao receber o primeiro ataque físico válido, perde 1 carga, mesmo se a armadura absorver todo o dano. Bloqueio N entra com N cargas e exige ser alvo dos primeiros N ataques físicos recebidos, consumindo uma carga por ataque. No início de cada turno, de qualquer jogador, recupera todas as cargas, até o máximo N. Exemplo: Bloqueio 2 que gastou as duas cargas volta a 2 no início do próximo turno. Se houver vários Escudeiros, escolha qualquer um com carga; os demais continuam protegendo. Magia ignora Bloqueio e não consome a carga. Contra-ataques não consomem Bloqueio. A carga também desaparece quando a criatura sai do campo.
 
 Disparada — Ladina Relâmpago
 Entra pronta e pode atacar no mesmo turno da invocação. O ataque ainda esgota e deve respeitar Bloqueio. Não concede ataques extras.
 
 Voo — Corvo das Brumas
-Ataques físicos de criaturas com Voo ignoram Bloqueio: podem atingir outra criatura ou diretamente o castelo, mesmo com Escudeiro ativo. Ao defender um ataque físico, recebe 1 de dano a menos, além da redução por Armadura (mínimo 0). Se a criatura com Voo iniciar o ataque, recebe o contra-ataque normalmente. Dano mágico não é reduzido. Voo não permite atacar no turno da invocação. Se escolher atacar uma criatura com Bloqueio, consome normalmente uma carga.
+Ataques físicos de criaturas com Voo ignoram Bloqueio: podem atingir outra criatura ou diretamente o castelo, mesmo com Escudeiro ativo. Ao defender um ataque físico, recebe 1 de dano a menos, além da redução por Armadura (mínimo 0); atacantes com Alcance ignoram essa redução. Se a criatura com Voo iniciar o ataque, recebe o contra-ataque normalmente. Dano mágico não é reduzido. Voo não permite atacar no turno da invocação. Se escolher atacar uma criatura com Bloqueio, consome normalmente uma carga.
 
 Fúria 1 — Lobo
 Uma vez por turno, pague 1 mana para aumentar permanentemente o ataque do Lobo em 1, sem esgotá-lo. Pode usar mesmo se o Lobo já estiver esgotado; isso não o deixa pronto. O bônus dura enquanto o Lobo estiver no campo. Pode usar Fúria e depois atacar se o Lobo estiver pronto. Não causa dano, não gera contra-ataque e não consome Bloqueio inimigo.
@@ -38,7 +38,7 @@ Feiticeira das Brasas: custo 4; 2/4; Mãos Flamejantes: pague 2 mana e esgote pa
 Aprendiz de Feiticeiro: custo 1; 0/2; Disparo Arcano 1 custa 1 mana e esgota. Atinge uma criatura ou o castelo inimigo, ignora Armadura e Bloqueio e não gera contra-ataque. Facção Arcano.
 
 Editor de decks
-Abra o menu pela engrenagem no canto superior direito ou Esc e escolha Meus decks. Há 10 espaços independentes, inicialmente Baluarte das Cicatrizes, Caçada das Brumas, Círculo Arcano, Aurora Vital, Horda dos Ermos, União da Colheita e Aliança da Floresta, mais três espaços vazios. Cada deck deve conter 22 cartas, até 2 iguais. Escolha Editar cartas para abrir a tela de montagem; clique na coleção para adicionar; na lista, clique para localizar e use − para remover. Durante a montagem, a curva mostra quantas cartas existem em cada custo; altere o nome e escolha Alterar capa para selecionar uma carta do rascunho. Todas as cartas colecionáveis estão disponíveis e os decks usam uma facção com complementos compatíveis. Salvar deck grava neste computador; Jogar com este deck salva, ativa o espaço e inicia uma nova partida. Nova partida usa o espaço ativo. A IA usa um deck sugerido sujeito aos mesmos limites. Rascunhos não salvos são guardados durante a navegação entre as telas desse editor. Salve antes de fechar Meus decks ou voltar ao jogo. Limpar altera somente o rascunho até salvar. A seleção e os decks são preservados ao fechar o jogo.
+Abra o menu pela engrenagem no canto superior direito ou Esc e escolha Meus decks. Há 15 espaços independentes para decks. Novos jogos incluem Baluarte das Cicatrizes, Caçada das Brumas, Círculo Arcano, Aurora Vital, União da Colheita, Aliança da Floresta e Ecos das Dunas; os demais espaços começam vazios. Cada deck deve conter 22 cartas, até 2 iguais. Escolha Editar cartas para abrir a tela de montagem; clique na coleção para adicionar; na lista, clique para localizar e use − para remover. Durante a montagem, a curva mostra quantas cartas existem em cada custo; altere o nome e escolha Alterar capa para selecionar uma carta do rascunho. Todas as cartas colecionáveis estão disponíveis e os decks usam uma facção com complementos compatíveis. Salvar deck grava neste computador; Jogar com este deck salva, ativa o espaço e inicia uma nova partida. Nova partida usa o espaço ativo. A IA usa um deck sugerido sujeito aos mesmos limites. Rascunhos não salvos são guardados durante a navegação entre as telas desse editor. Salve antes de fechar Meus decks ou voltar ao jogo. Limpar altera somente o rascunho até salvar. A seleção e os decks são preservados ao fechar o jogo.
 
 Controles
 Para invocar ou conjurar, clique diretamente na carta da mão. Selecione uma criatura pronta em campo e clique em um alvo permitido. A Maga já seleciona sua magia automaticamente. Para o Lobo, selecione-o e use o botão Fúria. Para atacar diretamente, selecione um atacante e clique no castelo da IA. Alvos inválidos ficam desabilitados. Passe o mouse sobre uma carta para ver sua versão completa e os atributos atuais. Encerre o turno para a IA jogar.
@@ -51,7 +51,7 @@ Sem cartas no baralho, cada compra causa dano crescente ao próprio castelo: 1, 
 
 
 Resultado e som
-Ao terminar o duelo, aparece o painel de vitória, derrota ou empate. Vitória toca uma fanfarra e mostra partículas. Jogar novamente reinicia com o deck ativo; Editar decks abre os nove espaços salvos; Ver tabuleiro fecha o painel de resultado. O botão Som no topo liga/desliga os efeitos. Magia, ataque ao castelo e vitória têm sons próprios, além de invocação, ataque em criatura e morte.
+Ao terminar o duelo, aparece o painel de vitória, derrota ou empate. Vitória toca uma fanfarra e mostra partículas. Jogar novamente reinicia com o deck ativo; Editar decks abre os espaços salvos; Ver tabuleiro fecha o painel de resultado. O botão Som no topo liga/desliga os efeitos. Magia, ataque ao castelo e vitória têm sons próprios, além de invocação, ataque em criatura e morte.
 
 
 Atalhos: Enter (incluindo Enter numérico) ou 0 do teclado numérico encerra o seu turno. Segurar a tecla não repete a ação. O atalho fica bloqueado durante animações, turno da IA, editor de decks e manual aberto.
@@ -115,7 +115,7 @@ Ataques e contra-ataques físicos aplicam o valor de Envenenar à criatura adver
 Veneno acumula no alvo. No fim do turno do dono do alvo, causa dano igual ao total acumulado, ignorando Armadura, e termina completamente. Exemplo: Veneno 2 causa 2 uma vez; não causa dano no turno seguinte sem uma nova aplicação. Cura remove todo o Veneno do alvo. Pode curar uma criatura envenenada com vida cheia para limpar o efeito. Não esgota, não consome Bloqueio nem provoca contra-ataque. Mortes e fim da partida são resolvidos antes do próximo turno.
 Indicadores: a carta reduzida mostra Vig. seguido da força física atual e Ven. seguido das cargas recebidas. Passe o mouse na criatura para ler os detalhes ao lado da carta completa.
 
-Guardião da Aurora: custo 4, 2/5, Vigor e Bloqueio 3. Recupera uma carga de Bloqueio no início de cada turno do dono, até o máximo de 3.
+Guardião da Aurora: custo 4, 2/5, Vigor e Bloqueio 3. Recupera todas as cargas de Bloqueio no início de cada turno, até o máximo de 3.
 
 
 Chamado — gatilho genérico de entrada
@@ -131,7 +131,7 @@ A lista do deck mostra a gema azul com o número de mana. O editor não oferece 
 Chamado por facção e novos decks
 Ferreiro da Muralha (Vanguarda): custo 3, 2/3. Chamado: concede +1 de Armadura permanente a outro aliado escolhido. Sem outro aliado, entra sem bônus. Não esgota nem prepara o alvo.
 Conjuradora do Éter (Arcano): custo 4, 1/3. Chamado: invoca um Familiar Rúnico 0/3 com Amplificar 1 se houver espaço após a entrada da Conjuradora. O Familiar entra esgotado, não gasta carta nem mana extra e seu Amplificar já funciona. Se a Conjuradora ocupar o quinto espaço, o Familiar não entra. O limite continua sendo seis criaturas.
-Alquimista das Brumas (Submundo): custo 3, 2/2, Resistência à Magia 1. Chamado: aplica Veneno 2 a uma criatura inimiga escolhida, somando ao Veneno existente. Não causa dano imediato nem contra-ataque e não atinge castelos. Sem inimigos em campo, entra normalmente sem aplicar o efeito. O Veneno causa dano no fim do turno do dono do alvo e depois termina.
+Alquimista das Brumas (Submundo): custo 3, 2/2, Furtivo. Chamado: aplica Veneno 2 a uma criatura inimiga escolhida, somando ao Veneno existente. Não causa dano imediato nem contra-ataque e não atinge castelos. Sem alvos válidos, entra normalmente sem aplicar o efeito. O Veneno causa dano no fim do turno do dono do alvo e depois termina.
 Oráculo da Aurora (Luminares): custo 3, 1/3, Vigor. Chamado: concede +2 de vida atual e máxima a outro aliado escolhido, sem alterar seu ataque base. Preserva o dano anterior e o Veneno. Esse ganho de vida aumenta a força física de um alvo com Vigor. Sem outro aliado, entra sem bônus.
 Ao clicar na criatura na mão, o jogo destaca os alvos do lado correto. Cancelar ou escolher alvo inválido não gasta mana nem carta.
 
@@ -183,7 +183,7 @@ No editor, filtre entre a facção escolhida e aldeões, criaturas ou magias. A 
 
 
 Muralha da Aldeia
-Criatura aldeã de custo 4, 0/4, Armadura 1 e Bloqueio 4 (Defensor 4). Deve ser alvo dos quatro primeiros ataques físicos; recupera apenas uma carga por turno até quatro. Muralha: imune a Veneno, não recebe cura e não declara ataques, mesmo com bônus de ataque ou Vigor. Cura por habilidade ou magia não pode escolhê-la. Aumento de atributos, como +1 de vida atual e máxima de Chamado, continua permitido. Contra-ataques usam a força normal de defesa caso ela receba bônus. Armadura não reduz dano mágico.
+Criatura aldeã de custo 5, 0/5, Armadura 1 e Bloqueio 4 (Defensor 4). Deve ser alvo dos quatro primeiros ataques físicos; recupera todas as cargas no início de cada turno, até quatro. Muralha: imune a Veneno, não recebe cura e não declara ataques, mesmo com bônus de ataque ou Vigor. Cura por habilidade ou magia não pode escolhê-la. Aumento de atributos, como +1 de vida atual e máxima de Chamado, continua permitido. Contra-ataques usam a força normal de defesa caso ela receba bônus. Armadura não reduz dano mágico.
 Vigor continua funcionando nos ataques e na defesa, mas não aumenta o número de ataque exibido. As cartas mostram seu ataque com bônus reais; a conversão da vida é calculada só ao resolver o combate.
 No editor, os cards são maiores. A carta localizada recebe borda dourada e brilho. Afinidade foi removida dos aldeões.
 
@@ -218,7 +218,7 @@ O castelo inimigo fica centralizado acima da fileira adversária; sua identifica
 Lendárias e Levante da Aldeia
 Cartas lendárias permitem somente 1 cópia de cada por deck; as demais continuam com até 2. O deck tem 22 cartas. A coleção e o editor indicam a raridade e o limite individual.
 Levante da Aldeia: aldeã lendária, custo 5, ataque/vida base iguais ao número de criaturas aldeãs aliadas vivas em campo, contando a própria turba. Multidão: herda habilidades dos OUTROS ALIADOS DA ALDEIA enquanto elas estiverem em campo. Não copia Chamados nem criaturas inimigas. Os atributos e habilidades se atualizam com a entrada e saída das fontes. Duas fontes de Cultivo 1 dão Cultivo 2; valores compatíveis somam, Voo/Vigor/Muralha/Disparada não duplicam. As restrições de Muralha também valem. Outras Multidões e raridade não são copiadas.
-Atributos incluem os bônus normais de Aura e ganhos permanentes; dano sofrido é preservado. Cultivo já ganho não é perdido ao sair a fonte. Perder um aliado reduz a vida base e pode matar a turba ferida. Bloqueio e Resistência à Magia somam capacidade e recuperam somente 1 no início de cada turno próprio, sem restaurar cargas a cada atualização do campo. Disparada copiada ao entrar deixa a turba pronta; adquiri-la depois não prepara uma criatura esgotada. No card fora do campo, os atributos aparecem como */*. No campo, aparecem os números e habilidades atuais.
+Atributos incluem os bônus normais de Aura e ganhos permanentes; dano sofrido é preservado. Cultivo já ganho não é perdido ao sair a fonte. Perder um aliado reduz a vida base e pode matar a turba ferida. Bloqueio e Resistência à Magia somam capacidade. Bloqueio recupera todas as cargas no início de cada turno; Resistência à Magia recupera uma carga no início do turno do dono. Atualizar o campo não restaura cargas. Disparada copiada ao entrar deixa a turba pronta; adquiri-la depois não prepara uma criatura esgotada. No card fora do campo, os atributos aparecem como */*. No campo, aparecem os números e habilidades atuais.
 Ladina Relâmpago passou a 3/2, mantendo custo 4, Disparada e Envenenar 1.
 No combate, a identificação do oponente fica no canto superior esquerdo, no formato IA — facção; decks só de aldeões mostram IA — Aldeia.
 
@@ -260,11 +260,11 @@ Devota do Alvorecer permanece custo 3 e Devoção 1, agora com atributos 1/4 e C
 Custos das habilidades de Cura
 Nos cards atuais, Cura 1 custa 0 mana e esgota; Cura 2 custa 1 mana e esgota. Devota do Alvorecer usa Cura 1 gratuita; Clériga da Aurora mantém Cura 2 por 1 mana; Guardião da Aurora não tem Cura. O custo é definido por carta em Heal Cost, permitindo exceções futuras. O custo de invocação da Devota continua 3.
 
-Tipos de criaturas e facção Horda
+Tipos de criaturas e facção Ruína
 Tipo é independente da facção: Humano, Fera, Artefato, Monstro e Morto-vivo. Aparece na carta completa e nos filtros da coleção. Magias não têm tipo de criatura.
-Horda pode usar cartas da própria facção e dos Ermos. Aldeia não complementa a Horda, independentemente de tipo ou habilidade. A Aldeia complementa Vanguarda, Arcano, Submundo, Luminares e Selvagem. Necrópole também não aceita Aldeia. A aventura permite recrutar cartas de qualquer facção após o draft inicial.
+Ruína pode usar cartas da própria facção e dos Ermos. Aldeia não complementa a Ruína, independentemente de tipo ou habilidade. A Aldeia complementa Vanguarda, Arcano, Submundo, Luminares e Selvagem. Necrópole também não aceita Aldeia. A aventura permite recrutar cartas de qualquer facção após o draft inicial.
 Goblin Saqueador: Monstro, 1 mana, 1/1, Disparada.
-Minotauro da Ruína: Monstro da Horda, 5 mana, 5/5, Bloqueio 1 e Atropelar.
+Minotauro da Ruína: Monstro da Ruína, 5 mana, 5/5, Bloqueio 1 e Atropelar.
 Lobisomem das Brumas: Monstro, 4 mana, 3/4, Fúria 1 por 1 mana, sem esgotar.
 Zumbi Serviçal: Ermos, Morto-vivo, 2 mana, 2/1. Chamado: conceda +1/+1 permanente a outro Monstro ou Morto-vivo aliado escolhido. Sem alvo válido, entra sem efeito.
 
@@ -273,24 +273,24 @@ Necromancia e Mortos-vivos
 Zumbi Serviçal e Carniçal são Mortos-vivos. Cura causa neles dano mágico igual ao valor da Cura: ignora Armadura, sem contra-ataque, respeitando Resistência à Magia. Não remove Veneno; se causar dano, ativa a Devoção do lado que usou a Cura. Amplificar não altera o valor convertido. Bônus de atributos e Cultivo não são Cura. Pode selecionar Mortos-vivos dos dois lados, mesmo com vida cheia. Alvos vivos e castelos continuam aliados.
 Necromante do Véu: 4 mana, 2/4, Humana da Necrópole. Não conta como Monstro. Chamado: se um Humano inimigo já morreu nesta partida, invoque um Carniçal 2/2 Morto-vivo, se houver espaço. A condição persiste; mortes aliadas e de outros tipos não contam. O Carniçal entra esgotado e é apenas invocado, não pode entrar no deck.
 
-Horda (novo nome da facção antes chamada Monstros)
-Clamor da Horda: magia da Horda, 3 mana. Monstros aliados em campo ganham +2 de ataque até o fim do turno atual. Não afeta outros tipos, não deixa criaturas prontas e não beneficia criaturas invocadas depois. Duas conjurações acumulam +4 e expiram juntas. Bônus permanentes permanecem. Clique na carta para conjurar sem escolher alvo; requer ao menos um Monstro aliado.
+Ruína (novo nome da facção antes chamada Monstros)
+Clamor da Ruína: magia da Ruína, 3 mana. Monstros aliados em campo ganham +2 de ataque até o fim do turno atual. Não afeta outros tipos, não deixa criaturas prontas e não beneficia criaturas invocadas depois. Duas conjurações acumulam +4 e expiram juntas. Bônus permanentes permanecem. Clique na carta para conjurar sem escolher alvo; requer ao menos um Monstro aliado.
 
 Esporos e Regeneração
 Fungo da Ninhada: aldeão Monstro, 3 mana, 1/3, Esporos 1. No início do seu turno, todos os outros Monstros e Feras aliados ganham +1 de vida atual e máxima. Uma criatura com ambos os tipos recebe o bônus uma vez por fonte. Acumula; não é Cura nem Cultivo.
-Troll do Brejo: Horda Monstro, 4 mana, 3/5, Bloqueio 1 e Regeneração 2. No fim do seu turno, depois do Veneno, recupera até 2 de vida sem exceder a vida máxima. Não revive mortos, não aumenta a vida máxima e funciona esgotado. Não é Cura: não ativa Devoção, não remove Veneno ou Sangramento e recupera vida normalmente em Mortos-vivos e Muralhas.
-Kobold do Ferrão: Horda Monstro, 2 mana, 2/1, Bloqueio 1 e Envenenar 1. Seus ataques e contra-ataques aplicam Veneno mesmo quando a Armadura absorve todo o dano.
-Monstros da Aldeia, caso existam, são exclusivos de decks só da Aldeia. O Fungo da Ninhada agora pertence à Horda. Nenhuma carta da Aldeia entra em decks da Horda.
+Troll do Brejo: Ruína Monstro, 4 mana, 3/5 e Regeneração 2. No fim do seu turno, depois do Veneno, recupera até 2 de vida sem exceder a vida máxima. Não revive mortos, não aumenta a vida máxima e funciona esgotado. Não é Cura: não ativa Devoção, não remove Veneno ou Sangramento e recupera vida normalmente em Mortos-vivos e Muralhas.
+Kobold do Ferrão: Ruína Monstro, 2 mana, 2/1, Bloqueio 1 e Envenenar 1. Seus ataques e contra-ataques aplicam Veneno mesmo quando a Armadura absorve todo o dano.
+Monstros da Aldeia, caso existam, são exclusivos de decks só da Aldeia. O Fungo da Ninhada agora pertence à Ruína. Nenhuma carta da Aldeia entra em decks da Ruína.
 
 Comércio e mana temporária
-Comércio dispara uma vez para cada ativação de Cultivo de um aliado. A mana recebida é temporária: aparece em dourado, é gasta antes da mana normal e desaparece ao fim do turno. Ela pode exceder a reserva máxima, mas não aumenta essa reserva. Comerciante Astuta é uma Humana aldeã 1/3 de custo 2 com Comércio 1; por pertencer à Aldeia, não entra em decks da Horda.
+Comércio dispara uma vez para cada ativação de Cultivo de um aliado. A mana recebida é temporária: aparece em dourado, é gasta antes da mana normal e desaparece ao fim do turno. Ela pode exceder a reserva máxima, mas não aumenta essa reserva. Comerciante Astuta é uma Humana aldeã 1/3 de custo 2 com Comércio 1; por pertencer à Aldeia, não entra em decks da Ruína.
 
 Sangrar
-Novo defensor da Vanguarda: Bastião da Vanguarda, Humano, custo 5, 3/5, Armadura 2 e Bloqueio 2. Bloqueio recupera uma carga por turno até duas.
+Novo defensor da Vanguarda: Bastião da Vanguarda, Humano, custo 5, 3/5, Armadura 2 e Bloqueio 2. Bloqueio recupera todas as cargas no início de cada turno, até duas.
 Espadachim das Cicatrizes: Vanguarda, Humano, custo 3, 2/3, Sangrar 1. Ao atacar ou contra-atacar, aplica Sangramento à criatura adversária, mesmo se Armadura absorver o dano. O status acumula e, após cada ação voluntária da criatura afetada (ataque, Disparo Arcano, Cura ou Fúria), ela perde vida igual ao total de Sangramento, ignorando Armadura. O efeito dura até o fim do turno do dono da criatura; se ela não agir, desaparece sem causar dano. Cura remove o Sangramento dos vivos, inclusive com vida cheia; Cura causa dano em Mortos-vivos e não os limpa. Criaturas imunes a Veneno, como Muralhas, também são imunes a Sangramento. Castelos não recebem Sangramento. Contra-ataques não contam como ação voluntária.
 
-Saquear: ao atacar o castelo inimigo, compre o número de cartas indicado. A compra segue as regras de mão cheia e fadiga.
-Trombadinha: Submundo, Humano, custo 1, 1/1, Saquear 1.
+Punga: ao atacar o castelo inimigo, compre o número de cartas indicado. A compra segue as regras de mão cheia e fadiga.
+Trombadinha: Submundo, Humano, custo 1, 1/1, Punga 1.
 
 Interface: na montagem, clique em um custo na curva de mana para filtrar a coleção; clique novamente ou use Limpar filtros para ver todos. A coluna 7+ inclui custos de 7 ou mais. No combate, o contorno dourado indica a criatura selecionada e o verde-água indica alvos válidos. Valores de dano, cura e armadura aparecem brevemente sobre os alvos.
 
@@ -319,7 +319,7 @@ Recruta de Ferro: Guerreira Humana, custo 1, 1/2 e Armadura 1.
 
 Saltador dos Telhados: Submundo, Humano, custo 3, 3/2 e Voo. Seus ataques ignoram Bloqueio.
 
-Negociante de Segredos: Submundo, Humana, custo 2, 2/1. Chamado: escolha conceder Saquear 1 ou Envenenar 2 permanentemente a outro aliado. Acumula. Sem outro aliado, entra sem efeito. O Sombra não possui mais Saquear naturalmente.
+Negociante de Segredos: Submundo, Humana, custo 2, 2/1. Chamado: escolha conceder Punga 1 ou Envenenar 2 permanentemente a outro aliado. Acumula. Sem outro aliado, entra sem efeito. O Sombra não possui mais Punga naturalmente.
 
 O Zzz animado aparece nas criaturas recém-invocadas que ainda aguardam para agir. Para criaturas que já agiram, a espada riscada ou a ampulheta só aparece quando selecionadas; fora da seleção, ficam apenas escurecidas. A mana normal aparece em duas fileiras de cinco gemas; mana temporária aparece em dourado à parte.
 
@@ -331,7 +331,7 @@ Ressonância tem um efeito de ondas arcanas e som próprio. Mãos Flamejantes e 
 
 
 Facção Selvagem
-Druidas e patrulheiros podem compor decks com cartas Selvagem e aldeãs. Alcance obriga criaturas com Voo a atacar um defensor com Alcance e concede +1 de força física ao atacar ou contra-atacar uma criatura com Voo. O Texugo-do-mel Gigante é imune a Veneno, dano mágico e magias, inclusive benéficas. Raízes Enredantes custa 2; o Druida das Raízes usa sua habilidade por 1 mana e esgotamento. A criatura atingida não pode declarar ataques durante seu próximo turno. Seiva Renovadora concede Regeneração 2 por cinco fins de turno do alvo. Elfo é um tipo de criatura.
+Druidas e patrulheiros podem compor decks com cartas Selvagem e aldeãs. Alcance obriga criaturas com Voo a atacar um defensor com Alcance e concede +1 de força física ao atacar ou contra-atacar uma criatura com Voo e ignora a redução de Voo ao atacar. O Texugo-do-mel Gigante é imune a Veneno, dano mágico e magias, inclusive benéficas. Raízes Enredantes custa 2; o Druida das Raízes usa sua habilidade por 1 mana e esgotamento. A criatura atingida não pode declarar ataques durante seu próximo turno. Seiva Renovadora concede Regeneração 2 por cinco fins de turno do alvo. Elfo é um tipo de criatura.
 
 Deck Aliança da Floresta: reúne todas as cartas Selvagem e aliados aldeões em 22 cartas. Ao atualizar um arquivo antigo, o deck ocupa um espaço vazio sem substituir os decks existentes.
 
@@ -345,24 +345,24 @@ Atropelar: ao atacar uma criatura, o dano físico que sobrar depois de superar A
 
 
 Aldeia e Necrópole
-Os antigos Neutros agora são Aldeia. Complementam Vanguarda, Arcano, Submundo, Luminares e Selvagem; não complementam Horda nem Necrópole. Decks só da Aldeia continuam permitidos.
+Os antigos Neutros agora são Aldeia. Complementam Vanguarda, Arcano, Submundo, Luminares e Selvagem; não complementam Ruína nem Necrópole. Decks só da Aldeia continuam permitidos.
 Necrópole estreia com Necromante das Cinzas (4 mana, Humano 2/4, Colher Almas 1 e Disparo Necrótico 1) e Sentinela da Cripta (2 mana, Morto-vivo 1/3, Bloqueio 1). As duas cartas estão na coleção e nas ofertas da aventura, mas ainda não formam um deck legal de 22 cartas.
 Colher Almas N: a morte de outro aliado concede +N/+N permanentemente naquele combate. Cada morte conta uma vez. Não ativa para mortes inimigas nem quando a própria fonte morre simultaneamente.
-A Horda mantém seu deck padrão de 22 cartas com Fungo da Ninhada, Lobo dos Ermos e Uivo de Guerra, sem depender da Aldeia. Decks antigos da Horda recebem as substituições compatíveis ao carregar.
+A Ruína mantém seu deck padrão de 22 cartas com Fungo da Ninhada, Capataz das Minas e Pintura de Guerra, sem depender da Aldeia. Decks antigos da Ruína recebem as substituições compatíveis ao carregar.
 
 
-Ermos — complemento de Horda e Necrópole
-Ermos reúne Lobo da Noite (antes Aldeia) e Zumbi Serviçal (antes Horda). A Necromante do Véu agora pertence à Necrópole. Os atributos, artes e habilidades desses cards foram mantidos.
-Horda e Necrópole podem usar Ermos, mas não Aldeia. As cinco facções anteriores continuam usando Aldeia e não podem usar Ermos. Humanos dos Ermos também podem complementar a Horda.
+Ermos — complemento de Ruína e Necrópole
+Ermos reúne Lobo da Noite (antes Aldeia) e Zumbi Serviçal (antes Ruína). A Necromante do Véu agora pertence à Necrópole. Os atributos, artes e habilidades desses cards foram mantidos.
+Ruína e Necrópole podem usar Ermos, mas não Aldeia. As cinco facções anteriores continuam usando Aldeia e não podem usar Ermos. Humanos dos Ermos também podem complementar a Ruína.
 O construtor oferece nove facções. Decks salvos recebem substituições compatíveis para os cards transferidos quando necessário; nomes, espaços, tamanhos e seleção ativa são preservados. Na aventura, o recrutamento continua livre após o draft inicial.
 
 
 Novos aliados dos Ermos
 Carniçal Faminto: Morto-vivo dos Ermos, custo 3, 3/3, Carniceiro 1. Quando outra criatura morre, aliada ou inimiga, recupera 1 de vida até a vida máxima. Não é Cura, não remove Veneno/Sangramento, não ativa Devoção e não revive uma fonte que morreu junto com a vítima.
-Ogro Errante: Monstro dos Ermos, custo 4, 4/4, Atropelar. Pode receber os bônus de Clamor da Horda e Uivo de Guerra por ser Monstro.
-Ambos complementam Horda e Necrópole e podem ser recrutados na aventura.
+Ogro Errante: Monstro dos Ermos, custo 4, 4/4, Atropelar. Pode receber os bônus de Clamor da Ruína e ser alvo de Pintura de Guerra.
+Ambos complementam Ruína e Necrópole e podem ser recrutados na aventura.
 
-Hiena dos Ermos: Fera dos Ermos, custo 3, 3/2, Envenenar 1. Ataques e contra-ataques físicos aplicam 1 de Veneno a criaturas. Pode complementar Horda e Necrópole e ser recrutada na aventura.
+Hiena dos Ermos: Fera dos Ermos, custo 3, 3/2, Envenenar 1. Ataques e contra-ataques físicos aplicam 1 de Veneno a criaturas. Pode complementar Ruína e Necrópole e ser recrutada na aventura.
 
 Diretriz de balanceamento: Aldeia e Ermos são complementares. Seus cards devem ser, em geral, um pouco menos eficientes que os das facções principais de custo semelhante, considerando atributos, habilidades e sinergias em conjunto.
 
@@ -383,3 +383,31 @@ Necromante das Cinzas: Disparo Necrótico 1 substitui Disparo Arcano. Custa 1 ma
 
 Impulsivo — Esqueleto Inquieto
 Ao encerrar seu turno, se estiver pronto, apto e ainda não tiver atacado, realiza um ataque físico automático como Atacar com todos. Respeita Bloqueio, chefes, armadilhas e impedimentos de ataque. Não concede ataques extras nem deixa a criatura pronta. Resolve antes dos efeitos de fim de turno. O Esqueleto Inquieto mantém custo 1, 1/1 e Disparada.
+
+
+Efêmero e Tempestade de Areia
+Efêmero: após realizar ou defender um ataque físico, a criatura é destruída, depois de resolver o combate. Magias e habilidades não contam como ataque ou defesa.
+Tempestade de Areia: causa 2 de dano mágico aos dois castelos e a todas as criaturas que não sejam da facção Ermos, nos dois lados. Ignora Armadura; Antimagia e imunidade a magia protegem as criaturas, e Amplificar aumenta o dano.
+
+Escavação: no início do turno do controlador, cada criatura com Escavação causa o valor indicado de dano físico a cada castelo. Armadura reduz cada ocorrência separadamente. A partida termina imediatamente se o dano for letal.
+
+Pintura de Guerra: magia da Ruína de custo 2. Uma criatura aliada alvo ganha +2 de ataque e Impulsivo permanentemente. Não a deixa pronta nem concede ataque extra.
+
+Arauta das Dunas: Ermos, Monstro, custo 3, 2/3. Sua Aura concede +1 de ataque aos outros aliados dos Ermos enquanto ela estiver em campo; várias Auras se acumulam.
+Khar, Devorador das Dunas: Fera lendária dos Ermos, custo 7, 8/8, Atropelar. Não pode ser comandado a atacar. Ao fim do turno de seu controlador, mesmo recém-convocado ou esgotado, ataca uma criatura aleatória, aliada ou inimiga, que não seja dos Ermos. Ignora Bloqueio, mas respeita impedimentos como Raízes; sem alvo válido, não ataca. O dano excedente de Atropelar pode atingir o castelo inimigo.
+
+Guia das Caravanas: Humano dos Ermos, custo 4, 3/2. Chamado: invoca um Camelo 1/3 com Bloqueio 1, se houver espaço. O camelo é uma Fera dos Ermos e não pode ser incluído diretamente no deck.
+
+Furtivo: a criatura não pode ser atacada nem escolhida como alvo de magias ou habilidades, inclusive aliadas. Efeitos sem alvo, como dano em área, ainda a afetam. Ao atacar, perde Furtivo pelo resto da partida. Enquanto estiver furtiva, não obriga ataques com Bloqueio ou Alcance.
+
+Caçador Anubita: Monstro dos Ermos, custo 5, 5/3 e Furtivo. Como os demais, perde Furtivo ao atacar e continua vulnerável a efeitos sem alvo.
+
+Meus decks: selecione um deck e escolha Excluir deck para removê-lo após confirmação; o espaço fica livre e o rascunho correspondente também é removido. Se o deck ativo for excluído, outro deck completo é selecionado.
+
+Aventura: cada expedição começa com 2 dados; os níveis 4 e 8 concedem cada um +1 dado inicial em novas expedições, no lugar da melhoria de escolha. No recrutamento inicial, gaste 1 dado para trocar as três ofertas por cartas de qualquer custo da facção escolhida e seu complemento. Dados e ofertas são salvos com a expedição. Os ícones no canto superior permitem salvar e sair ou abandonar a expedição.
+
+Worg da Ruína: Fera da Ruína, custo 3, 2/3. Montaria 1 concede +1 de ataque enquanto houver pelo menos um aliado vivo imediatamente ao lado; aliados dos dois lados não duplicam o bônus. Ao perder o último vizinho, o bônus termina.
+
+Aventura: gaste 1 dado para trocar os poderes oferecidos, as cartas recebidas após vitória ou o item encontrado. O item é trocado antes de escolher a carta que o receberá. Dados e ofertas atuais são salvos com a expedição.
+
+Fazendeiro Galante: Humano da Aldeia, custo 4, 3/4 e Brio 1. No início do próprio turno, se todas as suas criaturas forem da Aldeia, ganha +1 de ataque permanentemente.

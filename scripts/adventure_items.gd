@@ -60,6 +60,3 @@ static func decorate(host: Control,data: CardData) -> void:
   var icon:=TextureRect.new();icon.texture=load(DEFINITIONS[item].icon)
   icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;icon.custom_minimum_size=Vector2(28,28) if compact else Vector2(34,34)
   icon.mouse_filter=Control.MOUSE_FILTER_IGNORE;holder.add_child(icon)
-
-
-

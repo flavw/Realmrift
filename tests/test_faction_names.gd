@@ -4,8 +4,8 @@ const Match=preload("res://scripts/match.gd")
 const Store=preload("res://scripts/deck_store.gd")
 func _initialize():call_deferred("verify")
 func verify():
- assert(Factions.PT==["Vanguarda","Arcano","Aldeia","Submundo","Luminares","Horda","Selvagem","Necrópole","Ermos"])
- assert(Factions.EN==["Vanguard","Arcane","Village","Underworld","Luminaries","Horde","Wilds","Necropolis","Wastes"])
+ assert(Factions.PT==["Vanguarda","Arcano","Aldeia","Submundo","Luminares","Ruína","Selvagem","Necrópole","Ermos"])
+ assert(Factions.EN==["Vanguard","Arcane","Village","Underworld","Luminaries","Ruin","Wilds","Necropolis","Wastes"])
  for i in range(9):
   assert(Factions.name_for(i,"pt_BR")==Factions.PT[i])
   assert(Factions.name_for(i,"en_US")==Factions.EN[i])

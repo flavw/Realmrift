@@ -1,5 +1,5 @@
 # Troll Escoriado
 
-Geração original com image_gen integrado. Destino: assets/art/scarred_troll.png.
+Geração original com image_gen integrado. Destino: assets/art/scarred_troll.webp.
 
 Original premium realistic painted fantasy trading card illustration, full bleed portrait 2:3. A solitary rugged scarred troll wandering barren hills, broad monstrous proportions, gray green skin, small tusks, heavy brow, scraggly hair, patched primitive leather clothing and bone charms. Three-quarter body view, gripping a weathered wooden club lowered beside him, his other hand touching a faintly green glowing healing scar on his shoulder, a subtle sign of regeneration. Clearly a troll monster, not an orc soldier or undead. Desolate windswept scrubland with scattered ruined stones, cloudy daylight, earthy muted colors with small emerald magical accent. Face readable upper center below top 12 percent, reserve top 7 percent quiet sky for title overlay. Rich painterly realism, expressive creature design, high quality fantasy trading card art, no text, numbers, borders, UI, watermark, no gore.

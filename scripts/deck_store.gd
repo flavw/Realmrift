@@ -2,8 +2,8 @@ class_name DeckStore
 extends RefCounted
 
 const Match = preload("res://scripts/match.gd")
-const SLOT_COUNT := 10
-const DECKSET_VERSION := 14
+const SLOT_COUNT := 15
+const DECKSET_VERSION := 15
 var slots: Array = []
 var active := 0
 var path: String
@@ -28,7 +28,7 @@ func load_saved() -> void:
  if parser.parse(content) != OK:
   return
  var data = preload("res://scripts/save_schema.gd").normalize(parser.data)
- if not data is Dictionary or not data.get("slots") is Array or data.slots.size() not in [3,6,9,SLOT_COUNT]:
+ if not data is Dictionary or not data.get("slots") is Array or data.slots.size() not in [3,6,9,10,SLOT_COUNT]:
   return
  var saved_version: int=int(data.get("version",0))
  if saved_version<2:
@@ -39,7 +39,7 @@ func load_saved() -> void:
   # Rename the legacy key before validation, preserving saved deck composition.
   if slot is Dictionary and slot.get("cards") is Array:
    var previous_base: int=int(slot.get("base_faction",legacy_base(slot.cards) if saved_version<13 else infer_base(slot.cards)))
-   if saved_version<12 and previous_base==CardData.Faction.HORDE:
+   if saved_version<12 and previous_base==CardData.Faction.RUIN:
     var replacements: Dictionary={"wolf":"horde_wolf","village_reconstruction":"battle_howl"}
     for j in range(slot.cards.size()):slot.cards[j]=replacements.get(slot.cards[j],slot.cards[j])
     slot["cover"]=replacements.get(String(slot.get("cover","")),String(slot.get("cover","")))
@@ -48,6 +48,9 @@ func load_saved() -> void:
     if slot.cards[j]=="rogue":slot.cards[j]="lightning_rogue"
    if slot.get("cover","")=="solar_storm":slot.cover="fireball"
    if slot.get("cover","")=="rogue":slot.cover="lightning_rogue"
+   if "horde_wolf" in slot.cards:
+    replace_removed_wolves(slot,previous_base)
+   if slot.get("name","")=="Horda dos Ermos":slot.name="Ruína dos Ermos"
    if saved_version<13 and previous_base>=0:
     migrate_complements(slot,previous_base)
   # Expand old 12-card decks without removing cards, names or covers.
@@ -78,6 +81,25 @@ func load_saved() -> void:
  ensure_nonempty_active()
  if saved_version<DECKSET_VERSION or data.slots.size()!=SLOT_COUNT:
   persist()
+
+static func replace_removed_wolves(slot: Dictionary,base: int) -> void:
+ # Preserve every other card and never exceed a card's copy limit.
+ var candidates: Array=["orc_mine_overseer","wastes_hyena","wastes_bat","hungry_ghoul","scarred_troll","battle_howl","goblin_raider","brood_fungus","scorpion_kobold","marsh_troll","minotaur_brute","moon_werewolf"]
+ var original_cover: String=String(slot.get("cover",""))
+ var cover_replacement: String=""
+ for index in range(slot.cards.size()-1,-1,-1):
+  if slot.cards[index]!="horde_wolf":continue
+  var replacement: String=""
+  for key in candidates:
+   if slot.cards.count(key)>=Match.copy_limit(key):continue
+   if not accepts_base(base if base>=0 else CardData.Faction.RUIN,[key]):continue
+   replacement=key
+   break
+  if replacement.is_empty():slot.cards.remove_at(index)
+  else:
+   slot.cards[index]=replacement
+   cover_replacement=replacement
+ if original_cover=="horde_wolf":slot.cover=cover_replacement
 
 static func legacy_base(cards: Array) -> int:
  var base: int=-1
@@ -180,6 +202,18 @@ func save_slot(slot: int, name: String, cards: Array,base_faction: int=-3, cover
   return false
  return true
 
+func delete_slot(slot: int) -> bool:
+ if slot<0 or slot>=SLOT_COUNT:return false
+ var previous: Dictionary=slots[slot].duplicate(true)
+ var previous_active: int=active
+ slots[slot]={"name":"Novo deck %d" % (slot+1),"cards":[],"cover":"","base_faction":-1}
+ ensure_nonempty_active()
+ if not persist():
+  slots[slot]=previous
+  active=previous_active
+  return false
+ return true
+
 func activate(slot: int) -> bool:
  if slot < 0 or slot >= SLOT_COUNT or not Match.valid_deck(slots[slot].cards) or not accepts_base(base_for(slot),slots[slot].cards):
   error_message="Complete um deck de 22 cartas antes de jogar."
@@ -197,11 +231,11 @@ func active_cards() -> Array:
 func reset_defaults() -> void:
  slots.clear()
  active=0
- var styles: Array[int]=[0,1,2,3,5,4,6]
+ var styles: Array[int]=[0,1,2,3,-1,4,6,7]
  for i in range(SLOT_COUNT):
-  if i<styles.size():
+  if i<styles.size() and styles[i]>=0:
    var cards:=Match.default_deck(styles[i])
-   slots.append({"name":Match.default_deck_name(styles[i]),"cards":cards,"cover":"bloodblade" if i==0 else "","base_faction":infer_base(cards)})
+   slots.append({"name":Match.default_deck_name(styles[i]),"cards":cards,"cover":"bloodblade" if i==0 else "wastes_ancient_worm" if styles[i]==7 else "","base_faction":infer_base(cards)})
   else:
    slots.append({"name":"Novo deck %d" % (i+1),"cards":[],"cover":"","base_faction":-1})
 

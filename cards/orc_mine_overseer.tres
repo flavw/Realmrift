@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/orc_mine_overseer.webp" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 3
+attack = 3
+health = 3
+artwork = ExtResource("2")
+creature_type = 3
+entry_attack = 2
+entry_effect = 11
+entry_value = 1
+faction = 5
+lore = "Nas minas da Ruína, o ferro cede antes dos capatazes."
+title = "Capataz das Minas"

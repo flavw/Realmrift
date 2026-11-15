@@ -51,7 +51,7 @@ func verify() -> void:
  assert(m.act(0,0,0) and m.players[1].hp==17)
  m=fixture();o=m.spawn_unit(0,"wandering_ogre");g=m.spawn_unit(0,"hungry_ghoul")
  m.players[0].hand=["battle_howl"]
- assert(m.cast(0,0,0,-1) and Match.attack_value(o)==5 and Match.attack_value(g)==3)
+ assert(m.cast(0,0,0,0) and Match.attack_value(o)==6 and Match.attack_value(g)==3 and o.impulsive)
  # Adventure equipment duplicates the new exported ability together with the card.
  var enhanced=Items.enhance("hungry_ghoul","heart")
  assert(Match.CARDS[enhanced].carrion==1 and Match.CARDS[enhanced].health==5)

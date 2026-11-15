@@ -1,4 +1,4 @@
 # Dragão Negro da Fenda
 Gerado com image_gen integrado (não CLI).
-Asset: assets/art/adventure-black-dragon.png
+Asset: assets/art/adventure-black-dragon.webp
 Prompt: One portrait fantasy trading card game final boss illustration for Realmrift. A colossal black dragon with obsidian scales, enormous ragged wings spread, horned head facing three-quarter toward viewer, toxic green vapor curling from jaws and droplets of acid near fangs. Perched on shattered stone ruins above a magical rift in a rugged mountain pass, storm clouds parted by muted daylight, rich realistic painterly fantasy trading card art, intimidating regal presence, sharp readable face and silhouette, detailed scales and claws. Keep the top 7 percent visually quiet for title and mana overlay, face below that band. No text, numbers, border, UI, watermark or other characters.

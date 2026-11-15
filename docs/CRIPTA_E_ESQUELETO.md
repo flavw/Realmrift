@@ -16,6 +16,6 @@ Cripta e Esqueleto são colecionáveis e entram na coleção e nas ofertas/recom
 
 `CardData.turn_summon_key` indica o recurso a invocar no início do turno e permanece em ordem alfabética depois de `turn_draw`. A habilidade tem ícone próprio e explicação ao inspecionar o card. Não foram adicionadas migrações de saves antigos.
 
-Artes: `assets/art/defiled_crypt.png`, `assets/art/restless_skeleton.png`, `assets/art/crypt_zombie.png`. Prompts em [Cripta e Esqueleto](art-prompts/crypt-skeleton.md) e [Zumbi](art-prompts/crypt-zombie.md).
+Artes: `assets/art/defiled_crypt.webp`, `assets/art/restless_skeleton.webp`, `assets/art/crypt_zombie.webp`. Prompts em [Cripta e Esqueleto](art-prompts/crypt-skeleton.md) e [Zumbi](art-prompts/crypt-zombie.md).
 
 Validação: `tests/test_necropolis_crypt_skeleton.gd` e `tests/test_single_creature_type.gd`.

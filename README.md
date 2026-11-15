@@ -2,7 +2,7 @@
 
 Jogo de cartas de fantasia em Godot, com duelos contra IA e construção de decks. Projeto em desenvolvimento; PvP planejado.
 
-Os antigos Neutros agora são a facção **Aldeia**, complemento de Vanguarda, Arcano, Submundo, Luminares e Selvagem. **Ermos** é o complemento da Horda e da Necrópole, com Lobo da Noite e Zumbi Serviçal. **Necrópole** reúne Necromante das Cinzas, Necromante do Véu e Sentinela da Cripta. Horda e Necrópole não aceitam Aldeia. Veja [Ermos e transferências](docs/ERMOS.md) e [Aldeia e Necrópole](docs/ALDEOES_E_NECROPOLE.md).
+Os antigos Neutros agora são a facção **Aldeia**, complemento de Vanguarda, Arcano, Submundo, Luminares e Selvagem. **Ermos** é o complemento da Ruína e da Necrópole, com Lobo da Noite e Zumbi Serviçal. **Necrópole** reúne Necromante das Cinzas, Necromante do Véu e Sentinela da Cripta. Ruína e Necrópole não aceitam Aldeia. Veja [Ermos e transferências](docs/ERMOS.md) e [Aldeia e Necrópole](docs/ALDEOES_E_NECROPOLE.md).
 
 A coleção reúne criaturas e magias de diferentes facções e cartas aldeãs. Consulte o [manual](MANUAL.txt) para as regras atuais.
 
@@ -14,7 +14,7 @@ A coleção reúne criaturas e magias de diferentes facções e cartas aldeãs. 
 
 Enter, Enter do teclado numérico ou numpad 0 passa o turno. Selecione uma criatura e clique no alvo permitido. Passe o mouse sobre uma carta para ver sua versão completa. O botão Regras abre o [manual](MANUAL.txt).
 
-Facções: Vanguarda (**Vanguard**), Arcano (**Arcane**), Aldeia (**Village**), Luminares (**Luminaries**), Submundo (**Underworld**), Horda, Selvagem, Necrópole (**Necropolis**) e Ermos (**Wastes**).
+Facções: Vanguarda (**Vanguard**), Arcano (**Arcane**), Aldeia (**Village**), Luminares (**Luminaries**), Submundo (**Underworld**), Ruína, Selvagem, Necrópole (**Necropolis**) e Ermos (**Wastes**).
 
 ## Regras e recursos
 
@@ -161,9 +161,9 @@ Curas agora removem Veneno, inclusive em criaturas com vida cheia. Devota do Alv
 
 Necromante do Véu (4 mana, 2/4, Humana da Necrópole) possui Chamado condicional de Carniçal 2/2. Cura agora causa dano mágico em Mortos-vivos. Veja [regras de Necromancia](docs/NECROMANCIA.md).
 
-A facção Horda mantém o tipo Monstro separado da facção. Clamor da Horda (3 mana) dá +2 de ataque aos Monstros aliados em campo até o fim do turno atual. Veja [regras e validação](docs/CLAMOR_DA_HORDA.md).
+A facção Ruína mantém o tipo Monstro separado da facção. Clamor da Ruína (3 mana) dá +2 de ataque aos Monstros aliados em campo até o fim do turno atual. Veja [regras e validação](docs/CLAMOR_DA_HORDA.md).
 
-Goblin agora é 1 mana 1/1 com Disparada. Fungo da Ninhada (aldeão Monstro, 3 mana, 0/3) fortalece a vida de Monstros com Esporos 1; Troll do Brejo (Horda Monstro, 4 mana, 3/5) tem Regeneração 1. Monstros aldeões ficam restritos à Horda ou decks só de aldeões. Veja [regras e validação](docs/ESPOROS_E_REGENERACAO.md).
+Goblin agora é 1 mana 1/1 com Disparada. Fungo da Ninhada (aldeão Monstro, 3 mana, 0/3) fortalece a vida de Monstros com Esporos 1; Troll do Brejo (Ruína Monstro, 4 mana, 3/5) tem Regeneração 1. Monstros aldeões ficam restritos à Ruína ou decks só de aldeões. Veja [regras e validação](docs/ESPOROS_E_REGENERACAO.md).
 
 Créditos de criação, fonte e música: [CREDITS.md](CREDITS.md).
 
@@ -191,9 +191,9 @@ Nodos de itens oferecem três cartas do deck atual para aplicar um item sorteado
 
 A ponte oferece pagar todo o ouro e curar 10% do máximo (arredondado para cima), enfrentar um deck mediano de bandidos por +2 ouro e um item extras além da recompensa normal, ou fugir. Fugir tem 50% de chance de causar 10% de dano não letal e, independentemente, 50% de conceder +1 ouro ou +1 vida máxima.
 
-Baús têm 50% de chance de revelar um Mímico Devorador; nos demais casos, dividem igualmente a chance entre item e 1d6 ouro. O resultado é resolvido uma única vez. O mímico tem 1 de ataque, 14 de vida, Fúria 1 e Armadura 1, sem Regeneração ou Bloqueio. Ele aparece maior no centro do campo, sem castelo inimigo, com a condição de vitória escrita na tela. Ataques automáticos do jogador apontam para ele. Sua mana começa em zero no primeiro turno dele e cresce até três, com três espaços na barra. Sua mão fixa contém três Raízes Enredantes e dois Clamores da Horda. O adversário não compra cartas e não sofre fadiga nesse encontro. A criatura deve ser derrotada: destruir o castelo inimigo não vence a luta; o jogador ainda perde se sua própria vida chegar a zero. Vencer o mímico concede a recompensa normal e +3 ouro e um item extras: 4 ouro no total, uma carta e um aprimoramento garantido (mais o bônus de Tesouro de Guerra, se houver).
+Baús têm 50% de chance de revelar um Mímico Devorador; nos demais casos, dividem igualmente a chance entre item e 1d6 ouro. O resultado é resolvido uma única vez. O mímico tem 1 de ataque, 14 de vida, Fúria 1 e Armadura 1, sem Regeneração ou Bloqueio. Ele aparece maior no centro do campo, sem castelo inimigo, com a condição de vitória escrita na tela. Ataques automáticos do jogador apontam para ele. Sua mana começa em zero no primeiro turno dele e cresce até três, com três espaços na barra. Sua mão fixa contém três Raízes Enredantes e dois Clamores da Ruína. O adversário não compra cartas e não sofre fadiga nesse encontro. A criatura deve ser derrotada: destruir o castelo inimigo não vence a luta; o jogador ainda perde se sua própria vida chegar a zero. Vencer o mímico concede a recompensa normal e +3 ouro e um item extras: 4 ouro no total, uma carta e um aprimoramento garantido (mais o bônus de Tesouro de Guerra, se houver).
 
-O mapa abre até quatro rotas em algumas etapas e volta a duas entre as seções finais. Somente nodos ligados ao caminho anterior podem ser escolhidos. As artes novas e seus prompts ficam em `assets/ui/adventure-chest.png`, `assets/art/adventure-mimic.png` e `docs/art-prompts/adventure-chest-mimic.md`.
+O mapa abre até quatro rotas em algumas etapas e volta a duas entre as seções finais. Somente nodos ligados ao caminho anterior podem ser escolhidos. As artes novas e seus prompts ficam em `assets/ui/adventure-chest.webp`, `assets/art/adventure-mimic.webp` e `docs/art-prompts/adventure-chest-mimic.md`.
 
 
 
@@ -245,15 +245,15 @@ Cada visita ao mercador mantém seis ofertas comuns de 3 ouro e uma oferta espec
 
 O mapa tem um fundo panorâmico próprio, da Vila do Vale, fazendas e ponte, passando pelos bosques e ruínas, até as montanhas da fenda. Trilhas percorridas/disponíveis usam dourado, encontros benéficos têm bordas verdes e o chefe tem destaque vermelho quando ainda está adiante. A tela ganhou títulos de fantasia, barra de XP e uma disposição própria para a oferta aprimorada do mercador.
 
-Asset e prompt: `assets/ui/adventure-world-map.png` e `docs/art-prompts/adventure-world-map.md`. Ícone vetorial: `assets/ui/item-boots.svg`. Verificação específica: `tests/test_adventure_merchant_items.gd`.
+Asset e prompt: `assets/ui/adventure-world-map.webp` e `docs/art-prompts/adventure-world-map.md`. Ícone vetorial: `assets/ui/item-boots.svg`. Verificação específica: `tests/test_adventure_merchant_items.gd`.
 
 
 ### Iluminação da viagem, presentes da fazenda e Valéria
 
 O fundo do mapa começa com a vila iluminada e as regiões futuras escurecidas. A faixa iluminada avança a cada etapa, mantendo as áreas anteriores claras; ao chegar à fenda, todo o mapa está revelado. Os nodos e a navegação continuam visíveis e funcionais sobre a iluminação.
 
-Na fazenda há três opções: conversar com os moradores, dar um presente de 2 ouro ou um grande presente de 4 ouro. Os efeitos e a arte do banquete só aparecem depois que o presente é pago. O de 2 ouro concede +1 vida atual e máxima às criaturas aliadas no próximo combate; o de 4 ouro concede o mesmo bônus em todos os combates restantes da expedição. Não é um bônus permanente do perfil. Os dois presentes são alternativas e não acumulam mais de +1 vida. A arte do banquete mantém a identidade da Camponesa Generosa. Artes e prompts: `assets/ui/adventure-opening.png`, `assets/ui/adventure-farm-banquet.png`, `docs/art-prompts/adventure-opening-and-banquet.md`.
+Na fazenda há três opções: conversar com os moradores, dar um presente de 2 ouro ou um grande presente de 4 ouro. Os efeitos e a arte do banquete só aparecem depois que o presente é pago. O de 2 ouro concede +1 vida atual e máxima às criaturas aliadas no próximo combate; o de 4 ouro concede o mesmo bônus em todos os combates restantes da expedição. Não é um bônus permanente do perfil. Os dois presentes são alternativas e não acumulam mais de +1 vida. A arte do banquete mantém a identidade da Camponesa Generosa. Artes e prompts: `assets/ui/adventure-opening.webp`, `assets/ui/adventure-farm-banquet.webp`, `docs/art-prompts/adventure-opening-and-banquet.md`.
 
-Valéria, a Implacável: nova criatura Humana lendária da Vanguarda, custo 6, ataque/vida 5/4, Armadura 2 e Sangrar 3. Está na coleção, editor e galeria, e participa das ofertas elegíveis da aventura; não altera automaticamente os decks salvos. Usa as regras existentes de Sangramento e de lendárias (uma cópia por deck). O modelo visual identifica a raridade e a ajuda explica o limite. Arte em `assets/art/valeria_implacavel.png`; prompt em `docs/art-prompts/valeria-implacavel.md`.
+Valéria, a Implacável: nova criatura Humana lendária da Vanguarda, custo 6, ataque/vida 5/4, Armadura 2 e Sangrar 3. Está na coleção, editor e galeria, e participa das ofertas elegíveis da aventura; não altera automaticamente os decks salvos. Usa as regras existentes de Sangramento e de lendárias (uma cópia por deck). O modelo visual identifica a raridade e a ajuda explica o limite. Arte em `assets/art/valeria_implacavel.webp`; prompt em `docs/art-prompts/valeria-implacavel.md`.
 
 Verificações: `tests/test_adventure_reveal_banquet.gd` e `tests/test_valeria.gd`.

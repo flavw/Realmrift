@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/orc_mine_caller.webp" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 4
+attack = 3
+health = 3
+artwork = ExtResource("2")
+creature_type = 3
+entry_effect = 3
+entry_summon_key = "orc_miner"
+faction = 5
+lore = "Quando ele acende a lanterna, a mina inteira volta ao trabalho."
+title = "Mestre das Escavações"
+wide_entry_summary = true

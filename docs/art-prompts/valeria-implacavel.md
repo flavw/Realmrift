@@ -1,7 +1,7 @@
 # Valéria, a Implacável
 
 Gerada com image_gen integrado, sem CLI.
-Asset: assets/art/valeria_implacavel.png
+Asset: assets/art/valeria_implacavel.webp
 Recurso: cards/valeria_implacavel.tres
 Valores finais: Vanguarda, criatura Humana lendária, custo 6, ataque 5, vida 4, Armadura 2, Sangrar 3; máximo de uma cópia por deck.
 

@@ -31,7 +31,9 @@ func _ready() -> void:
   add_text(column,"%s ×%d — %s" % [Profile.BONUSES[key].name,int(totals[key]),Profile.BONUSES[key].description],"Permanent_"+key,18)
  if not any_bonus:add_text(column,"Nenhuma melhoria permanente escolhida ainda.","NoPermanentBonuses",18)
  add_text(column,("Desbloqueado" if level>=3 else "Nível 3")+" · Uma tentativa extra por expedição.","Milestone3",18)
+ add_text(column,("Desbloqueado" if level>=4 else "Nível 4")+" · +1 dado no início de cada expedição.","Milestone4",18)
  add_text(column,("Desbloqueado" if level>=5 else "Nível 5")+" · Um item inicial aleatório após montar o deck.","Milestone5",18)
+ add_text(column,("Desbloqueado" if level>=8 else "Nível 8")+" · +1 dado no início de cada expedição.","Milestone8",18)
  var pending: Dictionary=run.profile.pending_choice() if run.profile!=null else {}
  if not pending.is_empty():
   add_text(column,"Nível %d alcançado — escolha uma melhoria" % int(pending.level),"PendingLevel",21)
@@ -42,7 +44,9 @@ func _ready() -> void:
  add_text(column,"PODERES DESTA EXPEDIÇÃO","RunPowersHeading",22)
  if run.powers.is_empty():add_text(column,"Você ainda não recebeu um poder nesta expedição.","NoRunPowers",18)
  for key in run.powers:
-  add_text(column,State.POWERS[key].name+"\n"+State.POWERS[key].description,"PowerDetail_"+key,19)
+  var row:=HBoxContainer.new();row.add_theme_constant_override("separation",12);column.add_child(row)
+  var icon:=TextureRect.new();icon.name="PowerIcon_"+key;icon.texture=preload("res://scripts/card_skin.gd").texture(State.POWER_ICONS[key]);icon.custom_minimum_size=Vector2(36,36);icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;icon.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;row.add_child(icon)
+  add_text(row,State.POWERS[key].name+"\n"+State.POWERS[key].description,"PowerDetail_"+key,19)
  if run.farm_blessing_all_run or run.farm_blessing_pending:
   add_text(column,"Bênção do banquete\n+1 de vida às suas criaturas "+("até o fim da expedição." if run.farm_blessing_all_run else "no próximo combate."),"FarmPower",19)
 

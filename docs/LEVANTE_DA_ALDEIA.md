@@ -10,7 +10,7 @@ Valores numéricos compatíveis somam: Cultivo, Fúria, Armadura, Envenenar, Amp
 
 Vigor, Voo, Disparada e Muralha são propriedades únicas. Muralha inclui imunidade a Veneno, proibição de cura e de atacar. Disparada herdada na entrada prepara a turba; recebê-la depois não a prepara novamente. Vigor concedido permanentemente por magia continua após a fonte de Vigor herdado sair.
 
-Bloqueio e Antimagia mantêm cargas próprias. A capacidade soma as fontes, mas só recupera uma carga por início de turno próprio. Recalcular a herança não repõe cargas gastas. Ganhar uma nova fonte concede a capacidade adicional; perder uma fonte reduz capacidade e cargas. Não copia dano, Veneno recebido, atributos das fontes, raridade ou outras Multidões. Isso evita ciclos entre cópias da turba.
+Bloqueio e Antimagia mantêm cargas próprias. A capacidade soma as fontes. Bloqueio recupera todas as cargas no início de cada turno; Antimagia recupera uma carga no início do turno próprio. Recalcular a herança não repõe cargas gastas. Ganhar uma nova fonte concede a capacidade adicional; perder uma fonte reduz capacidade e cargas. Não copia dano, Veneno recebido, atributos das fontes, raridade ou outras Multidões. Isso evita ciclos entre cópias da turba.
 
 Auras herdadas passam a ser geradas pela própria turba, para o seu lado do campo, com a mesma regra de alvos. Os bônus das fontes originais e da turba acumulam. Bônus de ataque de Aura não viram ataque permanente nem são copiados novamente.
 

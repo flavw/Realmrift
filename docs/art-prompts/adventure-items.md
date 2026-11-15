@@ -1,4 +1,4 @@
 # Arte do encontro de itens
 Gerada com image_gen integrado, não CLI.
-Asset: assets/ui/adventure-items.png
+Asset: assets/ui/adventure-items.webp
 Prompt: One landscape fantasy trading card game illustration for Realmrift's equipment encounter. On a weathered artisan's wooden table inside a stone roadside forge: a small heart-shaped ruby amulet on a gold chain, a finely sharpened steel short sword, an iron buckler with brass rim, and a cyan crystal talisman. Arrange as one coherent still life with the four treasures clearly readable near the center, warm forge embers and daylight, mossy stone doorway softly blurred behind. Detailed realistic painterly fantasy card art, tactile metal leather gems, inviting discovery atmosphere. Works as a wide encounter banner and cropped round map node. No people, no text, no UI, no border, no watermark.

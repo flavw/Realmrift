@@ -2,7 +2,7 @@
 
 Arte gerada pela ferramenta integrada imagegen, sem imagens de referência.
 
-Arquivo final: `assets/art/wastes_hyena.png`.
+Arquivo final: `assets/art/wastes_hyena.webp`.
 
 Card: `cards/wastes_hyena.tres` — Ermos, Fera 3/2, custo 3, Envenenar 1.
 

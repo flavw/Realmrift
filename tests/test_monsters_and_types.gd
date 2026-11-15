@@ -17,7 +17,7 @@ func verify() -> void:
  assert(not Match.CARD_DATA.village_reconstruction.is_human())
  assert(Match.CARD_DATA.zombie_helper.creature_type==CardData.CreatureType.UNDEAD)
  for key in ["goblin_raider","minotaur_brute","moon_werewolf"]:
-  assert(Match.CARD_DATA[key].faction==CardData.Faction.HORDE)
+  assert(Match.CARD_DATA[key].faction==CardData.Faction.RUIN)
   assert(Match.CARD_DATA[key].creature_type==CardData.CreatureType.MONSTER)
  var deck=Match.default_deck(5)
  assert(deck.size()==20 and Match.valid_deck(deck) and Match.deck_faction(deck)==5)
@@ -35,7 +35,7 @@ func verify() -> void:
  assert(not Store.accepts_base(5,["mage"]))
  assert(CardSkin.faction_symbol(5)!=null and CardSkin.faction_color(5)!=CardSkin.faction_color(2))
  var store=Store.new("user://test_monsters_decks.json",false)
- assert(store.save_slot(5,"Horda",deck,5))
+ assert(store.save_slot(5,"Ruína",deck,5))
  var invalid_deck=deck.duplicate();invalid_deck[0]="farmer"
  assert(not store.save_slot(5,"Inválido",invalid_deck,5))
  assert(store.slots[5].cards==deck)

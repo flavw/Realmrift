@@ -94,7 +94,7 @@ func verify() -> void:
   slot.cover="wolf"
   for i in range(slot.cards.size()):
    if slot.cards[i]=="wolf":slot.cards[i]="necromancer_summoner"
-   elif slot.cards[i]=="horde_wolf":slot.cards[i]="wolf"
+   elif slot.cards[i]=="orc_mine_overseer":slot.cards[i]="wolf"
    elif slot.cards[i]=="battle_howl":slot.cards[i]="village_reconstruction"
  var file=FileAccess.open(store.path,FileAccess.WRITE)
  file.store_string(JSON.stringify({"version":11,"active":4,"slots":legacy}));file.close()
@@ -102,7 +102,7 @@ func verify() -> void:
  for i in range(Store.SLOT_COUNT):
   assert(restored.slots[i].name==legacy[i].name and restored.slots[i].cards.size()==legacy[i].cards.size())
   if restored.base_for(i)==5:
-   assert(Match.valid_deck(restored.slots[i].cards) and restored.slots[i].cover=="horde_wolf")
+   assert(Match.valid_deck(restored.slots[i].cards) and restored.slots[i].cover=="orc_mine_overseer")
  restored.slots[9]={"name":"Sementes da Necrópole","cards":["ash_necromancer","crypt_sentinel"],"cover":"ash_necromancer","base_faction":7}
  assert(restored.persist())
  assert(Store.new(store.path).base_for(9)==7)

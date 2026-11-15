@@ -75,7 +75,7 @@ func _init() -> void:
  m.players[0].board=[unit("wall_guard",40)]
  m.players[0].board[0].block=0
  m.begin_turn()
- assert(m.players[0].board[0].block==1,"Bloqueio 2 recupera só 1")
+ assert(m.players[0].board[0].block==2,"Bloqueio 2 recupera todas as cargas")
  m=fixture()
  m.turn=1
  m.players[1].mana=3

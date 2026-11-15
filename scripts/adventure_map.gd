@@ -1,7 +1,7 @@
 extends Control
 signal route_selected(index: int)
 const Match=preload("res://scripts/match.gd")
-const MapTexture=preload("res://assets/ui/adventure-world-map.png")
+const MapTexture=preload("res://assets/ui/adventure-world-map.webp")
 const Names=preload("res://scripts/faction_names.gd")
 var run
 func configure(state) -> void:
@@ -36,7 +36,7 @@ func configure(state) -> void:
    add_child(b)
    var art:=TextureRect.new();art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
    art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;art.mouse_filter=Control.MOUSE_FILTER_IGNORE
-   var special: String={"treasure":"res://assets/ui/adventure-gold-icon.svg","healer":"res://assets/ui/adventure-healer-icon.svg","shop":"res://assets/ui/adventure-merchant-icon.svg","power_event":"res://assets/ui/adventure-power-sanctuary.png","chest":"res://assets/ui/adventure-chest.png","item":"res://assets/ui/adventure-items.png"}.get(data.kind,"")
+   var special: String={"treasure":"res://assets/ui/adventure-gold-icon.svg","healer":"res://assets/ui/adventure-healer-icon.svg","shop":"res://assets/ui/adventure-merchant-icon.svg","power_event":"res://assets/ui/adventure-power-sanctuary.webp","chest":"res://assets/ui/adventure-chest.webp","item":"res://assets/ui/adventure-items.webp"}.get(data.kind,"")
    art.texture=load(special) if not special.is_empty() else Match.CARD_DATA[data.portrait].artwork
    var material:=ShaderMaterial.new();material.shader=preload("res://scripts/adventure_node.gdshader")
    if not special.is_empty():material.set_shader_parameter("crop",Vector2.ONE);material.set_shader_parameter("focus",Vector2(0.5,0.5))

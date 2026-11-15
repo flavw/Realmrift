@@ -1,6 +1,6 @@
 # Muralha e apresentação das cartas
 
-Muralha da Aldeia é uma criatura aldeã de **4 mana, 0/4, Armadura 1 e Bloqueio 4**. O pedido Defensor 4 usa o sistema existente de Bloqueio: deve receber os quatro primeiros ataques físicos, e recupera só uma carga no início do seu turno, até quatro. Voo e magia mantêm suas regras de ignorar a obrigação.
+Muralha da Aldeia é uma criatura aldeã de **5 mana, 0/5, Armadura 1 e Bloqueio 4**. O pedido Defensor 4 usa o sistema existente de Bloqueio: deve receber os quatro primeiros ataques físicos, e recupera todas as cargas no início de cada turno, até quatro. Voo e magia mantêm suas regras de ignorar a obrigação.
 
 **Muralha:** imune a Veneno, não recebe cura e não declara ataques. A imunidade vale para ataques/contra-ataques e Chamado de Veneno. Cargas indevidas também são removidas antes do dano periódico. Cura de criatura e magia de cura recusam a Muralha, sem consumir carta, mana ou prontidão. Armadura continua reduzindo cada dano físico; dano mágico ignora Armadura.
 

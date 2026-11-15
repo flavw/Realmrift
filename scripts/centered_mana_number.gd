@@ -44,8 +44,8 @@ func _draw() -> void:
   var display_scale: float=maxf(0.05,get_global_transform_with_canvas().get_scale().abs().x)
   # Raster font outlines do not reliably match their requested pixel width.
   # Stamp the glyph silhouette instead, keeping the border constant on screen.
-  draw_mana_border(font,origin,label.text,font_size,3.5/display_scale,Color("a47830") if legendary else Color("318cc5"))
-  draw_mana_border(font,origin,label.text,font_size,1.25/display_scale,Color("291907") if legendary else Color("071525"))
+  draw_mana_border(font,origin,label.text,font_size,3.5/display_scale,Color.BLACK)
+  draw_mana_border(font,origin,label.text,font_size,1.25/display_scale,Color.BLACK)
  if text_outline_size>0:
   draw_string_outline(font,origin,label.text,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size,text_outline_size,text_outline_color)
  draw_string(font,origin,label.text,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size,fill_color)

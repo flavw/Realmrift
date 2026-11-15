@@ -7,10 +7,10 @@
 script = ExtResource("1")
 cost = 3
 attack = 2
-antimagic = 1
 artwork = ExtResource("2")
 entry_effect = 4
 entry_value = 2
 faction = 3
 lore = "Se o frasco borbulhar, não respire. Se não borbulhar, também não."
+stealth = true
 title = "Alquimista das Brumas"

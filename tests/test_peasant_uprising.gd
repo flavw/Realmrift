@@ -44,7 +44,7 @@ func verify() -> void:
  assert(m.block_capacity(mob)==2 and mob.block==2 and mob.antimagic==1)
  mob.block=0;assert(Match.damage(mob,100,true)==0 and mob.antimagic==0)
  m.refresh_auras();assert(mob.block==0 and mob.antimagic==0)
- m.begin_turn();assert(mob.block==1 and mob.antimagic==1)
+ m.begin_turn();assert(mob.block==2 and mob.antimagic==1)
  # No entry copies, including enemy and allied targeted/untargeted Chamados.
  m=fixture();var herald=spawn(m,"moon_herald");spawn(m,"generous_peasant");spawn(m,"mist_alchemist",1)
  m.players[0].hand=[KEY];assert(m.can_play(0,0) and m.play(0,0))

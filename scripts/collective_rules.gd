@@ -1,6 +1,6 @@
 extends RefCounted
 # Recompute inherited ranks without reapplying buffs, healing damage or refilling charges.
-const NUMERIC=["end_turn_attack","necrotic_damage","carrion","soul_harvest","armor","fury","magic_damage","magic_splash","growth","resonance","rural_pride","heal_amount","quick_heal_amount","magic_power","envenom","loot","bleed","harvest","commerce","devotion","spores","regeneration","pack","turn_draw"]
+const NUMERIC=["end_turn_attack","necrotic_damage","carrion","soul_harvest","armor","fury","magic_damage","magic_splash","growth","resonance","rural_pride","heal_amount","quick_heal_amount","magic_power","envenom","loot","bleed","harvest","commerce","devotion","spores","regeneration","pack","turn_draw","turn_castle_damage"]
 const FLAGS=["impulsive","swift","flying","wall","trample"]
 
 static func refresh(m) -> void:
@@ -29,7 +29,7 @@ static func update_unit(m,unit: Dictionary,board: Array) -> void:
   ranks[field]=total
   unit[field]=maxi(0,int(unit.get(field,0))+total-int(old.get(field,0)))
  for field in FLAGS:
-  unit[field]=sources.any(func(source):return source.get(field,false)) or unit.get("adventure_flag_"+field,false)
+  unit[field]=sources.any(func(source):return source.get(field,false)) or unit.get("adventure_flag_"+field,false) or (field=="impulsive" and unit.get("granted_impulsive",false))
  if unit.get("vigor",false) and not unit.get("inherited_vigor",false):unit.granted_vigor=true
  unit.inherited_vigor=sources.any(func(source):return source.get("vigor",false))
  unit.vigor=unit.get("granted_vigor",false) or unit.inherited_vigor

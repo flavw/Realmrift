@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/gallant_farmer.webp" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 4
+attack = 3
+health = 4
+artwork = ExtResource("2")
+field_artwork_focus = Vector2(0.5, 0.3)
+lore = "Ele diz que o segredo da colheita é trabalho duro. A aldeia tem outras teorias."
+rural_pride = 1
+title = "Fazendeiro Galante"

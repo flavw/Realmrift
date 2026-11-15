@@ -2,7 +2,7 @@
 
 Arte gerada pela ferramenta integrada imagegen, sem imagens de referência.
 
-Arquivo final: `assets/art/crypt_zombie.png`. Usado por `cards/crypt_zombie.tres`, Zumbi 2/2 não colecionável invocado pela Cripta Profanada.
+Arquivo final: `assets/art/crypt_zombie.webp`. Usado por `cards/crypt_zombie.tres`, Zumbi 2/2 não colecionável invocado pela Cripta Profanada.
 
 Prompt exato:
 

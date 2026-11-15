@@ -1,16 +1,17 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cwoxlpoeue0g1"]
 
 [ext_resource type="Script" uid="uid://cu2c2gl42tcri" path="res://scripts/card_data.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://cxcx637ffccxd" path="res://assets/art/horde_roar.webp" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/war_paint.webp" id="2"]
 
 [resource]
 script = ExtResource("1")
+cost = 2
 attack = 0
 health = 0
 artwork = ExtResource("2")
 card_type = 1
 faction = 5
-lore = "Um uivo basta para reunir as garras dispersas."
-spell_effect = 9
-spell_value = 1
-title = "Uivo de Guerra"
+lore = "Cada traço desperta a fúria que a batalha exige."
+spell_effect = 19
+spell_value = 2
+title = "Pintura de Guerra"

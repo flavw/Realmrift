@@ -58,7 +58,7 @@ func verify() -> void:
  assert(editor.collection_keys().all(func(key):return Match.CARD_DATA[key].faction==8) and editor.composition_rule(8)=="Somente Ermos")
  editor.begin_faction_choice();editor.select_base_faction(5);await process_frame
  assert(editor.collection_keys().has("wolf") and editor.collection_keys().has("zombie_helper"))
- assert(not editor.collection_keys().has("necromancer_summoner") and editor.composition_rule(5)=="Horda + Ermos")
+ assert(not editor.collection_keys().has("necromancer_summoner") and editor.composition_rule(5)=="Ruína + Ermos")
  editor.begin_faction_choice();editor.select_base_faction(7);await process_frame
  assert(editor.collection_keys().has("necromancer_summoner") and editor.collection_keys().has("wolf"))
  editor.queue_free();await process_frame

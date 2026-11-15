@@ -70,9 +70,17 @@ func _ready() -> void:
  left.add_child(play_button)
  var adventure:=menu_button("Modo Aventura",func(): get_tree().change_scene_to_file("res://adventure_select.tscn"))
  left.add_child(adventure)
+ var deck_actions:=HBoxContainer.new()
+ deck_actions.add_theme_constant_override("separation",12)
+ left.add_child(deck_actions)
  var decks:=menu_button("Meus decks",open_decks,"menu-decks")
  decks.name="OpenDecks"
- left.add_child(decks)
+ decks.add_theme_font_size_override("font_size",20)
+ deck_actions.add_child(decks)
+ var collection:=menu_button("Coleção",open_collection,"menu-collection")
+ collection.name="OpenCollection"
+ collection.add_theme_font_size_override("font_size",20)
+ deck_actions.add_child(collection)
  var divider:=HSeparator.new()
  var line:=StyleBoxLine.new()
  line.color=Color(0.7,0.56,0.32,0.3)
@@ -259,6 +267,13 @@ func open_decks() -> void:
  editor.closed.connect(close_decks)
  editor.play_requested.connect(func():MatchSetup.enemy_slot=-1;start_game())
 
+func open_collection() -> void:
+ open_decks()
+ if is_instance_valid(deck_layer):
+  var editor=deck_layer.get_child(0)
+  editor.collection_return_to_menu=true
+  editor.show_full_collection()
+
 func close_decks() -> void:
  if is_instance_valid(deck_layer):
   remove_child(deck_layer)
@@ -291,7 +306,7 @@ func show_credits() -> void:
   var content:=RichTextLabel.new()
   content.custom_minimum_size=Vector2(620,440)
   content.bbcode_enabled=true
-  content.text="[center][font_size=24]REALMRIFT[/font_size]\n\nCriação do jogo\n[b]Flavw[/b]\nAuxiliado pelo ChatGPT\n\nFonte\n[b]At-Dawn-Regular[/b]\nCriada por Aurora\n\nMúsica do menu\n[b]Moonlit Tavern[/b]\nflavioj · criada com Suno\n\nMúsica de combate\n[b]Chariots Of War[/b]\nAakash Gandhi\n\nAgradecimentos aos artistas e criadores cujos créditos acompanham os recursos usados no projeto.[/center]"
+  content.text="[center][font_size=24]REALMRIFT[/font_size]\n\nCriação do jogo\n[b]Flavw[/b]\nAuxiliado pelo ChatGPT\n\nFonte\n[b]At-Dawn-Regular[/b]\nCriada por Aurora\n\n[b]Source Serif 4[/b]\nFrank Grießhammer / Adobe · SIL Open Font License\n\nMúsica do menu\n[b]Moonlit Tavern[/b]\nflavioj · criada com Suno\n\nMúsica de combate\n[b]Chariots Of War[/b]\nAakash Gandhi\n\nAgradecimentos aos artistas e criadores cujos créditos acompanham os recursos usados no projeto.[/center]"
   credits_dialog.add_child(content)
   add_child(credits_dialog)
  credits_dialog.popup_centered(Vector2i(680,540))

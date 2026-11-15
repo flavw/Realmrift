@@ -1,18 +1,18 @@
 # Aldeia e Necrópole
 
-Atualização: [Ermos](ERMOS.md) agora complementa Horda e Necrópole. Lobo da Noite e Zumbi Serviçal pertencem aos Ermos; Necromante do Véu pertence à Necrópole. A versão de decks atual é 13; as notas de criação abaixo registram a versão 12.
+Atualização: [Ermos](ERMOS.md) agora complementa Ruína e Necrópole. Lobo da Noite e Zumbi Serviçal pertencem aos Ermos; Necromante do Véu pertence à Necrópole. A versão de decks atual é 13; as notas de criação abaixo registram a versão 12.
 
 Os antigos Neutros passam a se chamar **Aldeia**. Seu identificador numérico permanece 2 para preservar decks e expedições. Os campos de persistência legados `neutral_deck_only` e `neutral_deck` continuam compatíveis com os arquivos existentes.
 
 ## Composição
 
 - Vanguarda, Arcano, Submundo, Luminares e Selvagem aceitam Aldeia como complemento.
-- Horda não aceita nenhuma carta da Aldeia, incluindo criaturas não humanas e magias.
+- Ruína não aceita nenhuma carta da Aldeia, incluindo criaturas não humanas e magias.
 - Necrópole também não usa os Aldeia como complemento.
 - Decks exclusivamente da Aldeia continuam permitidos. Cartas exclusivas desses decks mantêm a restrição.
 - A aventura conserva sua regra própria: o protagonista pode recrutar de qualquer facção após o draft inicial.
 
-A coleção, os filtros, os símbolos, a construção, o salvamento e a validação de partidas usam as novas regras. O draft inicial e os inimigos da Horda na aventura também não usam Aldeia.
+A coleção, os filtros, os símbolos, a construção, o salvamento e a validação de partidas usam as novas regras. O draft inicial e os inimigos da Ruína na aventura também não usam Aldeia.
 
 ## Necrópole
 
@@ -27,10 +27,10 @@ Facção 7, cores verde espectral e símbolo de crânio. As duas primeiras carta
 
 O Sentinela mantém as regras existentes de Mortos-vivos: Cura causa dano mágico; não recebe imunidade automática a Veneno.
 
-## Adaptação da Horda
+## Adaptação da Ruína
 
-O Fungo da Ninhada passa a ser Horda, de acordo com sua identidade e seu texto de ambientação. O deck padrão continua com 22 cartas, substituindo Lobo da Noite por **Lobo dos Ermos** (mesmos atributos e Fúria 1) e Reconstrução da Vila por **Uivo de Guerra** (magia Horda de custo 1, concede +1 ataque aos Monstros aliados até o fim do turno). Os dois cards de apoio reaproveitam artes existentes.
+O Fungo da Ninhada passa a ser Ruína, de acordo com sua identidade e seu texto de ambientação. O deck padrão continua com 22 cartas, usando **Capataz das Minas** no lugar do antigo Lobo dos Ermos e Reconstrução da Vila por **Pintura de Guerra** (magia da Ruína de custo 2, concede +2 de ataque e Impulsivo permanentemente a uma criatura aliada alvo). Os dois cards de apoio reaproveitam artes existentes.
 
-Ao carregar decks anteriores à versão 12, essas duas substituições são feitas somente nas listas da Horda; nomes, espaços e seleção ativa são preservados. Outras composições antigas que se tornem incompatíveis continuam editáveis, mas precisam ser corrigidas antes de jogar. O Carniçal invocado pertence agora à Necrópole e continua sendo uma ficha não colecionável.
+Ao carregar decks anteriores à versão 12, essas duas substituições são feitas somente nas listas da Ruína; nomes, espaços e seleção ativa são preservados. Outras composições antigas que se tornem incompatíveis continuam editáveis, mas precisam ser corrigidas antes de jogar. O Carniçal invocado pertence agora à Necrópole e continua sendo uma ficha não colecionável.
 
 Artes e prompts: [Necrópole](art-prompts/necropolis.md). Verificação principal: `tests/test_villagers_necropolis.gd`.

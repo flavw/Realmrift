@@ -55,7 +55,7 @@ func apply_design() -> void:
  $CardCanvas/Ability.position.x=22
  $CardCanvas/Title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
  $CardCanvas/TypeLabel.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
- $CardCanvas/Title.add_theme_font_override("font",preload("res://assets/fonts/At-Dawn-Regular.otf"))
+ $CardCanvas/Title.add_theme_font_override("font",preload("res://assets/fonts/card_title_font.tres"))
  $CardCanvas/Cost.add_theme_font_size_override("font_size",32)
  $CardCanvas/Cost.size=Vector2(40,44)
  $CardCanvas/CostGem.hide()
@@ -426,6 +426,10 @@ func view_entries() -> Array[Dictionary]:
   entries.append({"name":"Bônus temporário","icon":"fury-icon","runtime":true,"description":"Recebe +%d de ataque até o fim deste turno." % int(ability_context.turn_attack)})
  if ability_context.get("turn_flying",false) and not card_data.flying:
   entries.append({"name":"Voo temporário","icon":"flying-icon","runtime":true,"description":"Ignora Bloqueio até o fim do turno."})
+ if ability_context.get("granted_impulsive",false) and not card_data.impulsive:
+  entries.append({"name":"Impulsivo","icon":"impulsive-icon","runtime":true,"description":"Ataca automaticamente ao encerrar seu turno, se estiver apto."})
+ if ability_context.get("turn_impulsive",false) and not card_data.impulsive and not ability_context.get("granted_impulsive",false):
+  entries.append({"name":"Impulsivo temporário","icon":"impulsive-icon","runtime":true,"description":"Até o fim deste turno, ataca automaticamente ao encerrar o turno se estiver apto."})
  if ability_context.get("turn_swift",false) and not card_data.swift:
   entries.append({"name":"Disparada temporária","icon":"swift-icon","runtime":true,"description":"Pode atacar no turno de invocação se ainda não tiver agido. Não permite agir novamente."})
  if ability_context.get("farm_blessing",false):entries.append({"name":"Bênção da fazenda","description":"+1 de vida atual e máxima em todos os combates restantes desta expedição. Grande presente à Camponesa Generosa." if ability_context.get("farm_blessing_persistent",false) else "+1 de vida atual e máxima durante este combate. Presente da Camponesa Generosa.","runtime":true})

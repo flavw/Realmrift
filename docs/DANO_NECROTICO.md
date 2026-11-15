@@ -16,7 +16,7 @@ A restauração necrótica é uma conversão do dano, não Cura comum: não caus
 
 Magia da Necrópole, custo 4, aplica 2 de energia necrótica a todas as criaturas inimigas e a todos os Mortos-vivos dos dois lados. Não atinge castelos. Aliados vivos não são afetados; Artefatos são ignorados. Pode ser usada apenas quando houver ao menos uma criatura elegível; a IA avalia a cura concedida aos Mortos-vivos inimigos antes de decidir conjurá-la.
 
-Arte: `assets/art/sepulchral_tide.png`. [Prompt completo](art-prompts/sepulchral-tide.md). Ícone: `assets/ui/necrotic-icon.svg`.
+Arte: `assets/art/sepulchral_tide.webp`. [Prompt completo](art-prompts/sepulchral-tide.md). Ícone: `assets/ui/necrotic-icon.svg`.
 
 ## Necromante das Cinzas
 

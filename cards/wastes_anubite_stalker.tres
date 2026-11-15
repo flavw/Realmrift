@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/wastes_anubite_stalker.webp" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 5
+attack = 5
+health = 3
+artwork = ExtResource("2")
+creature_type = 3
+faction = 8
+field_artwork_focus = Vector2(0.5, 0.3)
+lore = "A noite protege os segredos das dunas — e o caçador que os guarda."
+stealth = true
+title = "Caçador Anubita"

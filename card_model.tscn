@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3]
 [ext_resource type="Script" path="res://scripts/card_view.gd" id="1"]
 [ext_resource type="Resource" path="res://cards/warrior.tres" id="2"]
-[ext_resource type="FontFile" path="res://assets/fonts/At-Dawn-Regular.otf" id="3"]
+[ext_resource type="Font" path="res://assets/fonts/card_title_font.tres" id="3"]
 [ext_resource type="Script" path="res://scripts/stat_line.gd" id="stats"]
 [sub_resource type="SystemFont" id="NumberFont"]
 font_names=PackedStringArray("Noto Sans", "Segoe UI", "DejaVu Sans")

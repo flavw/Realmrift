@@ -2,7 +2,7 @@
 
 ## Revisão do Carniçal Faminto — devorando restos
 
-Solicitação: mostrar o carniçal devorando um cadáver antigo, usando ossos. Edição pela ferramenta integrada imagegen com a primeira arte como referência/alvo; o arquivo final continua em `assets/art/hungry_ghoul.png`.
+Solicitação: mostrar o carniçal devorando um cadáver antigo, usando ossos. Edição pela ferramenta integrada imagegen com a primeira arte como referência/alvo; o arquivo final continua em `assets/art/hungry_ghoul.webp`.
 
 Prompt exato da edição:
 
@@ -13,7 +13,7 @@ Artes geradas pela ferramenta integrada imagegen, sem imagens de referência. Í
 
 ## Carniçal Faminto
 
-Arquivo: `assets/art/hungry_ghoul.png`.
+Arquivo: `assets/art/hungry_ghoul.webp`.
 
 Prompt exato:
 
@@ -21,7 +21,7 @@ Use case: stylized-concept. Production illustration for Realmrift realistic pain
 
 ## Ogro Errante
 
-Arquivo: `assets/art/wandering_ogre.png`.
+Arquivo: `assets/art/wandering_ogre.webp`.
 
 Prompt exato:
 

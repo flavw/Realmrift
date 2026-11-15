@@ -18,7 +18,7 @@ func _ready() -> void:
    avatar.accept_event();progress_requested.emit())
  add_stat(row,"Vida","res://assets/ui/hud-life.svg","%d/%d" % [run.current_life,run.max_life()],"Vida atual / máxima")
  add_stat(row,"Ouro","res://assets/ui/adventure-gold-icon.svg",str(run.gold),"Ouro disponível")
- add_stat(row,"Dados","res://assets/ui/hud-dice.svg","—","Dados · mecânica futura")
+ add_stat(row,"Dados","res://assets/ui/hud-dice.svg",str(run.dice),"Dados disponíveis · gaste 1 para trocar ofertas de cartas, poderes ou itens")
 
 func add_stat(row: HBoxContainer,title: String,path: String,value: String,hint: String) -> void:
  var column:=VBoxContainer.new();column.name="HUD"+title;column.alignment=BoxContainer.ALIGNMENT_CENTER;column.custom_minimum_size.x=80;column.tooltip_text=hint;row.add_child(column)

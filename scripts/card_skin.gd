@@ -36,6 +36,7 @@ static func texture(asset: String) -> Texture2D:
 static func faction_color(faction: int) -> Color:
  return [Color("c87575"),Color("b08bd8"),Color("9ba5b1"),Color("6ab798"),Color("d7cba6"),Color("d69c63"),Color("77a56e"),Color("76aaa7"),Color("a89b78")][clampi(faction,0,8)]
 
-static func faction_symbol(faction: int) -> Texture2D:
+static func faction_symbol(faction: int, detailed: bool=false) -> Texture2D:
  if faction<0 or faction>8:return null
- return texture(["faction-warrior","faction-mage","faction-villagers","faction-rogue","faction-cleric","faction-horde","faction-wild","faction-necropolis","faction-wastes"][faction])
+ var names: Array=["warrior","mage","villagers","rogue","cleric","ruin","wild","necropolis","wastes"]
+ return texture(("faction-art-" if detailed else "faction-small-")+names[faction])

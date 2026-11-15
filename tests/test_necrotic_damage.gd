@@ -45,7 +45,7 @@ func verify() -> void:
   assert(m.act(side,0,1,true) and undead.health==2)
   caster.ready=true;before=JSON.stringify(m.players)
   assert(not m.act(side,0,2,true) and JSON.stringify(m.players)==before)
-  assert(m.apply_necrotic_damage(1-side,artifact,5)==0 and artifact.health==4)
+  assert(m.apply_necrotic_damage(1-side,artifact,5)==0 and artifact.health==5)
  # Amplify increases damage and restored life; Resonance fires once per cast.
  var m=fixture();var familiar=m.spawn_unit(0,"runic_familiar")
  var ally=m.spawn_unit(0,"crypt_zombie");ally.health=1;ally.max_health=5
@@ -102,7 +102,7 @@ func verify() -> void:
  assert(ally.health==2 and not caster.ready)
  await create_timer(0.8).timeout
  main.duel.players[0].hand=["sepulchral_tide"];main.duel.players[0].mana=10
- main.play(0);assert(main.duel.players[0].hand.is_empty() and victim.health==4 and artifact.health==4)
+ main.play(0);assert(main.duel.players[0].hand.is_empty() and victim.health==4 and artifact.health==5)
  await create_timer(1.3).timeout
  main.queue_free();await process_frame;await process_frame
  print("OK: dano necrótico, seis tipos, dois lados, Antimagia/imunidades, Amplificar, disparo/cura, IA, alvos e magia global na UI.")

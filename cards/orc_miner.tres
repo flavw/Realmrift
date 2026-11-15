@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/orc_miner.webp" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 1
+attack = 1
+health = 2
+artwork = ExtResource("2")
+collectible = false
+creature_type = 3
+faction = 5
+lore = "Cada golpe desperta um tremor que chega além das montanhas."
+title = "Orc Mineiro"
+turn_castle_damage = 1

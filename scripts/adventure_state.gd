@@ -5,8 +5,8 @@ const Match = preload("res://scripts/match.gd")
 const POWERS = {
  "all_trample":{"name":"Avanço imparável","description":"Todas as suas criaturas têm Atropelar durante cada combate."},
  "first_three_keywords":{"name":"Dons do destino","description":"As três primeiras criaturas jogadas da mão em cada combate recebem uma palavra-chave bônus aleatória: Envenenar 1, Voo, Antimagia 1, Disparada, Atropelar ou Alcance."},
- "bonus_spell":{"name":"Truque na manga","description":"No início de cada combate, receba na mão uma magia aleatória de qualquer facção. Ela vale apenas para esse combate e mantém seu custo normal."},
- "starting_allies":{"name":"Companhia inesperada","description":"No início de cada combate, invoque gratuitamente duas criaturas aleatórias de custo 1, de qualquer facção. Não consomem os Dons do destino."},
+ "bonus_spell":{"name":"Truque na manga","description":"No início de cada combate, receba na mão uma magia aleatória de qualquer facção."},
+ "starting_allies":{"name":"Companhia inesperada","description":"No início de cada combate, invoque gratuitamente duas criaturas aleatórias de custo 1, de qualquer facção."},
  "castle_armor":{"name":"Muralhas reforçadas","description":"Seu castelo tem Armadura 1: reduz em 1 cada ocorrência de dano físico. Não reduz dano mágico ou fadiga."},
  "battle_hardened":{"name":"Veterano","description":"+2 de vida máxima em cada duelo desta expedição."},
  "extra_draw":{"name":"Suprimentos","description":"Compre uma carta adicional no seu primeiro turno de cada duelo."},
@@ -15,6 +15,7 @@ const POWERS = {
  "starting_life": {"name":"Fortaleza", "description":"+5 de vida inicial em cada duelo."},
  "combat_gold": {"name":"Tesouro de guerra", "description":"+1 de ouro após cada vitória."},
 }
+const POWER_ICONS={"all_trample":"trample-icon","first_three_keywords":"aura-icon","bonus_spell":"necrotic-icon","starting_allies":"collective-icon","castle_armor":"armor-icon","battle_hardened":"vigor-icon","extra_draw":"draw-icon","first_mana":"ability-mana-diamond","draw_attack":"fury-icon","starting_life":"devotion-icon","combat_gold":"adventure-gold-icon"}
 const Items=preload("res://scripts/adventure_items.gd")
 const DECK_RULES="Você começa com 15 cartas. Durante a aventura, seu deck pode ultrapassar 22 cartas e ter mais de 2 cópias de cada carta. Você pode recrutar aliados de qualquer facção."
 const INTRO_TEXT="Uma fenda se abriu além das montanhas, e uma sombra alada passou a cobrir as ruínas da velha estrada. Na Vila do Vale, as caravanas deixaram de chegar e os campos já não parecem tão seguros. Você possui um dom raro: consegue reunir aliados de qualquer facção, mesmo entre povos que normalmente jamais lutariam juntos. O povo da vila deposita suas esperanças nessa união. Ao amanhecer, você parte pelos caminhos entre fazendas, pontes e bosques, reunindo companheiros e recursos para uma jornada que os guardas da vila não podem enfrentar sozinhos. Nas ruínas além dos últimos refúgios, o Dragão Negro guarda a fenda. Derrotá-lo é a única maneira de devolver a paz ao vale — mas cada escolha na estrada poderá decidir quem chegará vivo até lá."
@@ -46,6 +47,7 @@ var saved_duel: DuelMatch
 var faction := -1
 var deck: Array = []
 var powers: Array = []
+var dice := 2
 var gold := 1
 var current_life := 20
 var treasure_roll := 0
@@ -76,6 +78,7 @@ func _init(account=null) -> void:
  draft_curve=shuffled(CURVE)
  profile=account
  if profile!=null:
+  dice+=profile.initial_dice_bonus()
   var bonuses: Dictionary=profile.totals()
   account_life=int(bonuses.life)
   current_life+=account_life
@@ -107,6 +110,20 @@ func draft_options() -> Array:
  candidates.sort_custom(func(a,b): return absi(Match.CARD_DATA[a].cost-target) < absi(Match.CARD_DATA[b].cost-target))
  return shuffled(candidates.slice(0,3))
 
+func reroll_draft() -> bool:
+ if phase!="draft" or dice<=0 or faction<0 or deck.size()>=15:return false
+ var candidates: Array=[]
+ for key in Match.CARD_DATA:
+  var card: CardData=Match.CARD_DATA[key]
+  if not card.collectible or card.neutral_deck_only or not Match.faction_allowed(faction,card.faction):continue
+  candidates.append(key)
+ if candidates.size()<3:return false
+ var fresh: Array=candidates.filter(func(key):return key not in options)
+ if fresh.size()>=3:candidates=fresh
+ options=shuffled(candidates).slice(0,3)
+ dice-=1
+ return true
+
 func power_options() -> Array:
  var available := []
  for key in POWERS:
@@ -114,14 +131,20 @@ func power_options() -> Array:
  return shuffled(available).slice(0,3)
 
 # Opções de recompensa são geradas por uma etapa e preservadas pelo chamador.
-func reward_options(enemy_faction: int) -> Array:
+func reward_options(enemy_faction: int,excluded: Array = []) -> Array:
  var faction_cards := []
  var other_cards := []
  for key in Match.CARD_DATA:
   var card = Match.CARD_DATA[key]
-  if not card.collectible or card.neutral_deck_only:continue
+  if not card.collectible or card.neutral_deck_only or key in excluded:continue
   if card.faction == enemy_faction:faction_cards.append(key)
   else:other_cards.append(key)
+ # Keep the enemy-faction guarantee even if every such card was in the old offer.
+ if faction_cards.is_empty() and not excluded.is_empty():
+  for key in excluded:
+   if not Match.CARD_DATA.has(key):continue
+   var card: CardData=Match.CARD_DATA[key]
+   if card.collectible and not card.neutral_deck_only and card.faction==enemy_faction:faction_cards.append(key)
  faction_cards = shuffled(faction_cards)
  other_cards = shuffled(other_cards)
  if faction_cards.is_empty():return other_cards.slice(0,3)
@@ -130,6 +153,63 @@ func reward_options(enemy_faction: int) -> Array:
  other_cards = shuffled(other_cards)
  options.append_array(other_cards.slice(0,2))
  return shuffled(options)
+
+func rerollable_powers() -> Array:
+ var result: Array=[]
+ for key in POWERS:
+  if key not in powers and not (preparation_active and key=="combat_gold"):result.append(key)
+ return result
+
+func item_creatures() -> Array:
+ var result: Array=[]
+ var bases: Array=[]
+ for key in deck:
+  if not Match.CARD_DATA.has(key):continue
+  var base: String=Items.base_key(key)
+  if Match.CARD_DATA[key].card_type==CardData.CardType.CREATURE and base not in bases:
+   result.append(key);bases.append(base)
+ return result
+
+func can_reroll_offer() -> bool:
+ if dice<=0:return false
+ match phase:
+  "draft":return faction>=0 and deck.size()<15
+  "power","midpower":return rerollable_powers().any(func(key):return key not in options)
+  "reward":
+   for key in Match.CARD_DATA:
+    var card: CardData=Match.CARD_DATA[key]
+    if card.collectible and not card.neutral_deck_only and key not in options:return true
+   return false
+  "item":return not item_creatures().is_empty() and pending_item in ["charm","heart","sword","shield","boots"]
+ return false
+
+func reroll_offer() -> bool:
+ if not can_reroll_offer():return false
+ if phase=="draft":return reroll_draft()
+ match phase:
+  "power","midpower":
+   var available:=rerollable_powers()
+   var fresh: Array=shuffled(available.filter(func(key):return key not in options))
+   var chosen: Array=fresh.slice(0,3)
+   if chosen.size()<3:
+    var remaining: Array=shuffled(available.filter(func(key):return key not in chosen))
+    chosen.append_array(remaining.slice(0,3-chosen.size()))
+   options=shuffled(chosen)
+  "reward":
+   var replacement:=reward_options(enemy_faction,options)
+   if replacement.size()<3:replacement=reward_options(enemy_faction)
+   if replacement.is_empty():return false
+   options=replacement
+  "item":
+   var items: Array=["heart","sword","shield","boots"]
+   items.erase(pending_item)
+   if items.is_empty():return false
+   pending_item=shuffled(items)[0]
+   var creatures:=item_creatures()
+   if options.any(func(key):return key not in creatures):options=shuffled(creatures).slice(0,3)
+  _:return false
+ dice-=1
+ return true
 
 func gain_victory_gold(base_amount: int = 1) -> void:
  gold += maxi(0,base_amount) + (1 if "combat_gold" in powers else 0)

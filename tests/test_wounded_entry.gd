@@ -7,7 +7,7 @@ func fixture():
  return m
 func _initialize() -> void:
  var data: CardData=Match.CARD_DATA.scarred_troll
- assert(data.faction==CardData.Faction.HORDE and data.cost==3 and data.wounded_entry)
+ assert(data.faction==CardData.Faction.RUIN and data.cost==3 and data.wounded_entry)
  assert(data.attack==4 and data.health==5 and data.regeneration==1)
  assert(data.ability_entries().any(func(e):return e.badge=="WoundedEntry"))
  assert(not Match.faction_allowed(CardData.Faction.NECROPOLIS,data.faction))

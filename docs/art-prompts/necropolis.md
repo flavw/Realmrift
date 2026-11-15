@@ -4,15 +4,13 @@ Artes geradas com a ferramenta integrada imagegen, sem imagens de referência. O
 
 ## Necromante das Cinzas
 
-- Arquivo: `assets/art/ash_necromancer.png`
+- Arquivo: `assets/art/ash_necromancer_blonde.webp`
 - Card: `cards/ash_necromancer.tres`
-- Prompt exato:
-
-undefined
+- Nova arte: necromante adulta loira, trajes escuros, cinzas, magia necrótica em tons azul-esverdeados e ruínas de uma tumba; composição vertical com margem superior para o título.
 
 ## Sentinela da Cripta
 
-- Arquivo: `assets/art/crypt_sentinel.png`
+- Arquivo: `assets/art/crypt_sentinel.webp`
 - Card: `cards/crypt_sentinel.tres`
 - Prompt exato:
 

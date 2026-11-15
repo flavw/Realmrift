@@ -68,16 +68,18 @@ func render() -> void:
  if run.phase=="intro":
   body=null
   opening_story()
+  var top_controls:=HBoxContainer.new();top_controls.name="OpeningControls";top_controls.set_anchors_preset(Control.PRESET_TOP_RIGHT);top_controls.offset_left=-132;top_controls.offset_right=-16;top_controls.offset_top=16;top_controls.offset_bottom=70;add_child(top_controls);add_expedition_controls(top_controls)
   return
  var scroll=ScrollContainer.new();scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
  scroll.name="AdventureContentScroll";scroll.offset_left=40;scroll.offset_right=-470 if deck_open else -40;scroll.offset_top=24;scroll.offset_bottom=-24;add_child(scroll)
- body=VBoxContainer.new();body.size_flags_horizontal=Control.SIZE_EXPAND_FILL;body.add_theme_constant_override("separation",12);scroll.add_child(body)
+ body=VBoxContainer.new();body.size_flags_horizontal=Control.SIZE_EXPAND_FILL;body.size_flags_vertical=Control.SIZE_EXPAND_FILL;body.add_theme_constant_override("separation",12);scroll.add_child(body)
  var header:=HBoxContainer.new();header.name="AdventureHeader";body.add_child(header)
  var hud=preload("res://scripts/adventure_hud.gd").new();hud.configure(run);hud.progress_requested.connect(show_progress);header.add_child(hud)
  var spacer:=Control.new();spacer.size_flags_horizontal=Control.SIZE_EXPAND_FILL;header.add_child(spacer)
  if run.phase!="shop":
   var title:=Label.new();title.text="Da Vila à Fenda";title.add_theme_font_override("font",preload("res://assets/fonts/At-Dawn-Regular.otf"));title.add_theme_font_size_override("font_size",28);title.modulate=Color("ead09a");header.add_child(title)
  var deck_button:=Button.new();deck_button.name="AdventureDeckToggle";deck_button.icon=preload("res://assets/ui/deck-toggle-icon.svg");deck_button.expand_icon=true;deck_button.add_theme_constant_override("icon_max_width",36);deck_button.text=str(run.deck.size());deck_button.tooltip_text="Ocultar deck" if deck_open else "Mostrar deck";deck_button.custom_minimum_size=Vector2(96,54);deck_button.size_flags_vertical=Control.SIZE_SHRINK_CENTER;deck_button.pressed.connect(toggle_deck);header.add_child(deck_button)
+ add_expedition_controls(header)
  if deck_open:build_sidebar()
  if run.xp_animation_pending and not xp_payout_shown:call_deferred("show_xp_payout")
  if run.profile!=null:
@@ -109,18 +111,28 @@ func render() -> void:
   "faction":
    text("Uma fenda ameaça a pequena Vila do Vale. Escolha sua origem e reúna aliados.")
    text(State.DECK_RULES,18)
-   for f in [0,1,3,4,5,6]:action(Names.PT[f],choose_faction.bind(f))
+   for f in [0,1,3,4,5,6]:
+    var choice:=action(Names.PT[f],choose_faction.bind(f))
+    choice.icon=preload("res://scripts/card_skin.gd").faction_symbol(f)
+    choice.expand_icon=true
+    choice.add_theme_constant_override("icon_max_width",32)
   "draft":
    text("Recrute seu aliado %d/15. Escolha uma carta." % (run.deck.size()+1))
    text("O deck começa com 15 cartas e pode crescer além de 22, sem limite de cópias por carta.",16)
    if run.options.is_empty():run.options=run.draft_options()
    card_choices(run.options, "Recrutar", pick_card)
+   add_reroll_button("DraftReroll","Trocar as cartas · custa 1 dado")
   "power","midpower":
    encounter_art("power_event")
    text("O despertar do viajante — escolha um poder para esta expedição.")
    if run.options.is_empty():run.options=run.power_options()
-   for p in run.options:action(State.POWERS[p].name+" — "+State.POWERS[p].description,pick_power.bind(p))
+   for p in run.options:
+    var power_button:=action(State.POWERS[p].name+" — "+State.POWERS[p].description,pick_power.bind(p))
+    power_button.name="AdventurePower_"+p
+    power_button.icon=preload("res://scripts/card_skin.gd").texture(State.POWER_ICONS[p]);power_button.expand_icon=true;power_button.add_theme_constant_override("icon_max_width",38)
+   add_reroll_button("PowerReroll","Trocar os poderes · custa 1 dado")
   "map":
+   var map_spacer:=Control.new();map_spacer.name="AdventureMapTopSpace";map_spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL;body.add_child(map_spacer)
    var map_scroll:=preload("res://scripts/adventure_map_scroll.gd").new();map_scroll.name="AdventureMapScroll";map_scroll.custom_minimum_size.y=740;map_scroll.configure(run);body.add_child(map_scroll)
    var map=preload("res://scripts/adventure_map.gd").new();map.configure(run);map.route_selected.connect(choose_route);map_scroll.add_child(map)
   "combat":
@@ -143,6 +155,7 @@ func render() -> void:
    text("Vitória! +%d XP acumulado nesta expedição. Receba seu ouro e recrute um aliado de qualquer origem." % run.last_xp_gained)
    if not run.reward_message.is_empty():text(run.reward_message,22)
    card_choices(run.options, "Recrutar", pick_card)
+   add_reroll_button("RewardReroll","Trocar as cartas da vitória · custa 1 dado")
   "shop":
    text("O mercador dos caminhos",28)
    text(("Preparação final · " if run.preparation_active else "")+"Cartas de todos os reinos · 1 a 3 ouro, conforme o custo de mana")
@@ -160,6 +173,7 @@ func render() -> void:
    text(spec.name+" — "+spec.description)
    text("Escolha uma destas cartas: todas as cópias dela, atuais e futuras, receberão o item nesta expedição.",18)
    card_choices(run.options,"Aprimorar",equip)
+   add_reroll_button("ItemReroll","Trocar o item · custa 1 dado")
   "bridge":
    encounter_art("bridge")
    text("Bandidos bloquearam a ponte. Qual será sua decisão?")
@@ -172,7 +186,7 @@ func render() -> void:
    action("Abrir o baú",open_chest)
    action("Ir embora sem abrir",leave_chest)
   "event_result":
-   if run.event_art=="banquet":illustrated_story("res://assets/ui/adventure-farm-banquet.png","Um lugar à mesa",run.event_message)
+   if run.event_art=="banquet":illustrated_story("res://assets/ui/adventure-farm-banquet.webp","Um lugar à mesa",run.event_message)
    else:text(run.event_message)
    action("Prosseguir",finish_event)
   "retry":
@@ -184,8 +198,18 @@ func render() -> void:
    text("A fenda foi fechada. A vila está salva!" if run.phase=="victory" else "Você abandonou a expedição." if run.phase=="abandoned" else "A expedição terminou. Uma nova jornada espera por você.",30)
    action("Nova aventura",new_run)
 
- action("Salvar e voltar à seleção de aventuras",return_to_selection)
- if run.phase not in ["victory","defeat","abandoned"]:action("Abandonar expedição",confirm_abandon)
+func add_expedition_controls(header: HBoxContainer) -> void:
+ var save_button:=Button.new();save_button.name="SaveAndLeaveExpedition";save_button.icon=load("res://assets/ui/adventure-exit.svg");save_button.expand_icon=true;save_button.add_theme_constant_override("icon_max_width",30);save_button.custom_minimum_size=Vector2(54,54);save_button.tooltip_text="Salvar e sair";save_button.pressed.connect(return_to_selection);header.add_child(save_button)
+ if run.phase not in ["victory","defeat","abandoned"]:
+  var abandon:=Button.new();abandon.name="AbandonExpeditionIcon";abandon.icon=load("res://assets/ui/adventure-abandon.svg");abandon.expand_icon=true;abandon.add_theme_constant_override("icon_max_width",30);abandon.custom_minimum_size=Vector2(54,54);abandon.tooltip_text="Abandonar expedição";abandon.pressed.connect(confirm_abandon);header.add_child(abandon)
+
+func add_reroll_button(node_name: String,hint: String) -> void:
+ var button:=Button.new();button.name=node_name;button.icon=load("res://assets/ui/adventure-reroll-dice.webp");button.expand_icon=true;button.add_theme_constant_override("icon_max_width",48);button.custom_minimum_size=Vector2(70,60);button.size_flags_horizontal=Control.SIZE_SHRINK_BEGIN;button.tooltip_text=hint;button.disabled=not run.can_reroll_offer();button.pressed.connect(reroll_draft);body.add_child(button)
+
+func reroll_draft() -> void:
+ if selection_busy:return
+ if run.reroll_offer():render()
+
 func choose_faction(f: int) -> void:run.faction=f;run.phase="draft";render()
 func pick_card(key: String) -> void:
  flight_target_key=run.add_card_to_deck(key);run.options.clear()
@@ -275,19 +299,20 @@ func fight(f: int) -> void:
 func card_choices(keys: Array, _caption: String, callback: Callable, shopping: bool=false,price: int=-1,target_parent: Control=null) -> void:
  var grid:=GridContainer.new()
  grid.name="AdventureCardChoices"
+ if run.phase=="draft":grid.size_flags_horizontal=Control.SIZE_SHRINK_CENTER
  grid.columns=3
- grid.add_theme_constant_override("h_separation",18)
+ grid.add_theme_constant_override("h_separation",8 if run.phase=="draft" else 18)
  grid.add_theme_constant_override("v_separation",18)
  (body if target_parent==null else target_parent).add_child(grid)
  for key in keys:
   var card_price: int=run.market_price(key) if price<0 else price
   var column:=VBoxContainer.new()
-  column.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+  column.size_flags_horizontal=Control.SIZE_SHRINK_BEGIN if run.phase=="draft" else Control.SIZE_EXPAND_FILL
   grid.add_child(column)
   var card=CardScene.instantiate()
   card.name="AdventureCard_"+key
   card.set_card(Match.CARD_DATA[key])
-  card.custom_minimum_size=Vector2(280,374)
+  card.custom_minimum_size=Vector2(320,427) if run.phase=="draft" else Vector2(280,374)
   card.size_flags_horizontal=Control.SIZE_EXPAND_FILL
   column.add_child(card)
   var unavailable: bool=shopping and run.gold<card_price
@@ -384,7 +409,7 @@ func preview_card(key: String) -> void:
  dialog.canceled.connect(dialog.queue_free)
 
 func encounter_art(stage: String) -> void:
- var path: String={"intro":"res://assets/art/village_reconstruction.webp","farm":"res://assets/art/generous_peasant.webp","item":"res://assets/ui/adventure-items.png","bridge":"res://assets/art/lightning_rogue.webp","chest":"res://assets/ui/adventure-chest.png","healer":"res://assets/art/cleric.webp","treasure":"res://assets/art/wise_merchant.webp","event":"res://assets/art/generous_peasant.webp","shop":"res://assets/art/wise_merchant.webp","power_event":"res://assets/ui/adventure-power-sanctuary.png"}.get(stage,"")
+ var path: String={"intro":"res://assets/art/village_reconstruction.webp","farm":"res://assets/art/generous_peasant.webp","item":"res://assets/ui/adventure-items.webp","bridge":"res://assets/art/lightning_rogue.webp","chest":"res://assets/ui/adventure-chest.webp","healer":"res://assets/art/cleric.webp","treasure":"res://assets/art/wise_merchant.webp","event":"res://assets/art/generous_peasant.webp","shop":"res://assets/art/wise_merchant.webp","power_event":"res://assets/ui/adventure-power-sanctuary.webp"}.get(stage,"")
  if path.is_empty():return
  var art:=TextureRect.new()
  art.name="EncounterArtwork"
@@ -529,11 +554,11 @@ func market_display() -> void:
 
 func illustrated_story(path: String,title: String,story: String) -> void:
  var row:=HBoxContainer.new();row.name="IllustratedStory";row.add_theme_constant_override("separation",26);body.add_child(row)
- var frame:=PanelContainer.new();frame.custom_minimum_size=Vector2(620,400);frame.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ var frame:=PanelContainer.new();frame.custom_minimum_size=Vector2(800,450);frame.size_flags_horizontal=Control.SIZE_EXPAND_FILL
  frame.add_theme_stylebox_override("panel",preload("res://scripts/ui_theme.gd").panel(Color("142531"),Color("af915c"),8))
  row.add_child(frame)
  var art:=TextureRect.new();art.name="StoryArtwork";art.texture=load(path)
- art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;art.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;art.custom_minimum_size=Vector2(600,380)
+ art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;art.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;art.custom_minimum_size=Vector2(800,450)
  frame.add_child(art)
  var column:=VBoxContainer.new();column.alignment=BoxContainer.ALIGNMENT_CENTER;column.custom_minimum_size.x=450;column.size_flags_horizontal=Control.SIZE_EXPAND_FILL;column.add_theme_constant_override("separation",16);row.add_child(column)
  var heading:=Label.new();heading.text=title;heading.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
@@ -554,7 +579,7 @@ func opening_story() -> void:
   if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT and event.pressed:intro_continue()
   elif event.is_action_pressed("ui_accept"):intro_continue())
  frame.focus_mode=Control.FOCUS_ALL
- var art:=TextureRect.new();art.name="StoryArtwork";art.texture=preload("res://assets/ui/adventure-opening.png")
+ var art:=TextureRect.new();art.name="StoryArtwork";art.texture=preload("res://assets/ui/adventure-opening.webp")
  art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;art.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;art.mouse_filter=Control.MOUSE_FILTER_IGNORE;art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);frame.add_child(art)
  var margin:=MarginContainer.new();margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);margin.mouse_filter=Control.MOUSE_FILTER_IGNORE
  for edge in ["left","right","top","bottom"]:margin.add_theme_constant_override("margin_"+edge,40)
@@ -620,7 +645,8 @@ func checkpoint() -> void:
  if is_inside_tree():run.save_checkpoint()
 
 func return_to_selection() -> void:
- run.save_checkpoint()
+ if not run.save_checkpoint():
+  var warning:=AcceptDialog.new();warning.title="Não foi possível salvar";warning.dialog_text=Save.last_error;add_child(warning);warning.confirmed.connect(warning.queue_free);warning.popup_centered();return
  get_tree().change_scene_to_file("res://adventure_select.tscn")
 
 func confirm_abandon() -> void:

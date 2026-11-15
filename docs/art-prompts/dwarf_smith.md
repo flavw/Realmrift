@@ -1,5 +1,5 @@
 # Ferreiro das Brasas
 
-Modo: geração original com image_gen integrado. Destino: assets/art/dwarf_smith.png.
+Modo: geração original com image_gen integrado. Destino: assets/art/dwarf_smith.webp.
 
 Create a premium realistic painted fantasy trading card illustration, portrait 2:3, full bleed, no typography, no borders or UI. A stocky adult male DWARF BLACKSMITH with unmistakably short dwarven proportions, broad muscular shoulders, thick copper beard in braids, weathered kind face, working at an anvil in a medieval village forge of the Vanguard faction. He holds a heavy smithing hammer over an orange-hot sword on the anvil, sparks and warm forge glow, leather apron over simple steel and blue cloth armor. His face is clearly visible in upper center, below the top 12 percent. The top 7 percent is quiet smoky stone background reserved for game title overlays, no important objects there. Three-quarter view from thigh up, dynamic confident craftsmanship rather than fighting, beautiful detailed hands and tools, warm orange forge light contrasting cool daylight from the smithy window. Rich painterly realism, refined fantasy game art, legible silhouette. No letters, watermark or numbers.

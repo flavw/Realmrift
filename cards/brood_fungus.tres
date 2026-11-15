@@ -10,6 +10,6 @@ health = 3
 artwork = ExtResource("2")
 creature_type = 3
 faction = 5
-lore = "A Horda o chama de jardineiro. O jardineiro não parece se importar."
+lore = "A Ruína o chama de jardineiro. O jardineiro não parece se importar."
 spores = 1
 title = "Fungo da Ninhada"

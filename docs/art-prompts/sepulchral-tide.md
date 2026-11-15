@@ -2,7 +2,7 @@
 
 Arte gerada pela ferramenta integrada imagegen, sem imagens de referência.
 
-Arquivo final: `assets/art/sepulchral_tide.png`.
+Arquivo final: `assets/art/sepulchral_tide.webp`.
 
 Prompt exato:
 

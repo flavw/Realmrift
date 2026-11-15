@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/wastes_spitter.webp" id="2"]
+
+[resource]
+script = ExtResource("1")
+cost = 2
+attack = 1
+health = 2
+artwork = ExtResource("2")
+creature_type = 1
+entry_effect = 12
+entry_value = 1
+faction = 8
+lore = "Nos Ermos, até o silêncio pode cuspir uma ameaça."
+title = "Serpente Cuspidora"

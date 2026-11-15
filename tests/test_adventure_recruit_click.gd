@@ -24,7 +24,7 @@ func verify() -> void:
  State.current.step=4;State.current.phase="map";State.current.options.clear();view.render()
  await process_frame
  await process_frame
- assert(view.find_child("Route_4_0",true,false).get_child(0).texture.resource_path=="res://assets/ui/adventure-power-sanctuary.png")
+ assert(view.find_child("Route_4_0",true,false).get_child(0).texture.resource_path=="res://assets/ui/adventure-power-sanctuary.webp")
  if DisplayServer.get_name()!="headless":get_root().get_texture().get_image().save_png("res://.local/adventure-power-node.png")
  view.queue_free()
  await process_frame

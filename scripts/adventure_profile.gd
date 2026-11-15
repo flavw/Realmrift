@@ -42,14 +42,18 @@ func extra_lives() -> int:
 func initial_items() -> int:
  return 1 if level()>=5 else 0
 
+func initial_dice_bonus() -> int:
+ return int(level()>=4)+int(level()>=8)
+
 static func is_milestone(value: int) -> bool:
- return value in [3,5]
+ return value in [3,4,5,8]
 
 func ensure_offers() -> void:
  # Fixed milestones replace minor bonuses, including previous-version choices.
  for value in [3,5]:
   claimed.erase(str(value))
   offers.erase(str(value))
+ for value in [4,8]:offers.erase(str(value))
  for value in range(2,level()+1):
   var key:=str(value)
   if claimed.has(key) or is_milestone(value):continue
@@ -108,7 +112,7 @@ func load_saved() -> void:
  xp=clampi(int(data.xp),0,1000000)
  if data.get("claimed") is Dictionary:
   for key in data.claimed:
-   if String(key).is_valid_int() and int(key)>=2 and int(key)<=level() and not is_milestone(int(key)) and BONUSES.has(data.claimed[key]):claimed[String(key)]=data.claimed[key]
+   if String(key).is_valid_int() and int(key)>=2 and int(key)<=level() and int(key) not in [3,5] and BONUSES.has(data.claimed[key]):claimed[String(key)]=data.claimed[key]
  if data.get("offers") is Dictionary:offers=data.offers.duplicate(true)
  if data.get("credited_expeditions") is Dictionary:credited_expeditions=data.credited_expeditions.duplicate()
 

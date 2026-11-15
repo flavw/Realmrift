@@ -24,5 +24,5 @@ func _init() -> void:
  m=fixture();m.turn=1;m.players[1].hand=["secrets_dealer"];m.players[1].deck=["wolf"]
  var ally=m.spawn_unit(1,"rooftop_leaper")
  assert(m.ai_step() and ally.loot==1)
- print("OK: escolha, acúmulo, alvo aliado, sem aliado, exibição e IA; Sombra sem Saquear")
+ print("OK: escolha, acúmulo, alvo aliado, sem aliado, exibição e IA; Sombra sem Punga")
  quit()

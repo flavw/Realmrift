@@ -46,7 +46,7 @@ func verify() -> void:
  assert(card.hint_panel.visible)
  assert(card.hint_panel.position.x < card.position.x,"Explicação troca para esquerda perto da borda")
  assert(card.card_data.ability_entries(0)[0].name == "Bloqueio 0")
- assert(card.card_data.ability_entries(0)[0].description.contains("Recupera 1 no início do seu turno"))
+ assert(card.card_data.ability_entries(0)[0].description.contains("Recupera todas as cargas no início de cada turno"))
  var bounds: Rect2 = card.hint_panel.get_global_rect()
  assert(root.get_visible_rect().encloses(bounds),"Caixa fica dentro da tela")
  card.queue_free()

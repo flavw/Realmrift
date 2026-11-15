@@ -110,6 +110,10 @@ func refresh_ability_icons(attack: int, health: int) -> void:
  var entries:=card_data.ability_entries(block_value,int(context.get("magic_bonus",0)),int(get_meta("armor",card_data.armor)),bool(get_meta("vigor",false)),int(get_meta("poison",0)),int(context.get("aura_attack",0)),int(get_meta("antimagic",card_data.antimagic)))
  if context.get("turn_flying",false) and not card_data.flying:
   entries.append({"name":"Voo temporário","badge":"Flying","icon":"flying-icon","description":"Ignora Bloqueio até o fim do turno."})
+ if context.get("granted_impulsive",false) and not card_data.impulsive:
+  entries.append({"name":"Impulsivo","badge":"Impulsive","icon":"impulsive-icon","description":"Ataca automaticamente ao encerrar seu turno, se estiver apto."})
+ if context.get("turn_impulsive",false) and not card_data.impulsive and not context.get("granted_impulsive",false):
+  entries.append({"name":"Impulsivo temporário","badge":"Impulsive","icon":"impulsive-icon","description":"Até o fim deste turno, ataca automaticamente ao encerrar o turno se estiver apto."})
  if int(context.get("bleeding",0))>0:
   entries.append({"name":"Sangramento %d" % int(context.bleeding),"badge":"Bleeding","icon":"bleed-icon","value":int(context.bleeding),"description":"Após agir, perde vida igual ao Sangramento. Termina ao fim do turno do dono ou com Cura."})
  entries=entries.filter(func(e):return e.has("badge") and e.badge not in ["Entry","Swift","AuraBonus"])

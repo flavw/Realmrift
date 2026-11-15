@@ -7,7 +7,7 @@ func verify() -> void:
  var view=load("res://adventure.tscn").instantiate();root.add_child(view)
  await process_frame;await process_frame
  assert(view.find_child("ContinuousStory",true,false).text==State.INTRO_TEXT)
- assert(view.find_child("StoryArtwork",true,false).texture.resource_path=="res://assets/ui/adventure-opening.png")
+ assert(view.find_child("StoryArtwork",true,false).texture.resource_path=="res://assets/ui/adventure-opening.webp")
  assert(not view.deck_open and view.find_child("AdventureDeckSidebar",true,false)==null)
  assert(view.find_child("ContinuousStory",true,false).visible_characters<State.INTRO_TEXT.length())
  view.intro_continue()
@@ -32,7 +32,7 @@ func verify() -> void:
  assert(not run.gift_farmer(true) and run.gold==3 and not run.farm_blessing_all_run)
  run.gold=4;view.farm_gift(true)
  assert(run.gold==0 and run.phase=="event_result" and run.farm_blessing_all_run and not run.farm_blessing_pending)
- assert(view.find_child("StoryArtwork",true,false).texture.resource_path=="res://assets/ui/adventure-farm-banquet.png")
+ assert(view.find_child("StoryArtwork",true,false).texture.resource_path=="res://assets/ui/adventure-farm-banquet.webp")
  assert(not run.gift_farmer(true))
  await process_frame;await process_frame
  if DisplayServer.get_name()!="headless":get_root().get_texture().get_image().save_png("res://.local/adventure-banquet-result.png")
