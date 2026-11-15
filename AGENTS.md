@@ -15,4 +15,4 @@
 
 - Preferência visual para futuras artes de mulheres adultas: adotar um toque mais sensual, especialmente no desenho das armaduras, mantendo o estilo de fantasia e sem nudez explícita. Não aplicar essa orientação a menores de idade ou personagens com aparência infantil.
 
-- Para novas artes de cards, reserve aproximadamente 7% da altura no topo para o nome e o custo de mana, usando a arte da Camponesa Generosa como referência; evite cobrir o rosto ou detalhes importantes.
+- Para novas artes de cards, reserve aproximadamente 7% da altura no topo para o nome e o custo de mana, usando a arte da Camponesa Generosa como referência; evite cobrir o rosto ou detalhes importantes. Essa área deve fazer parte natural e contínua do cenário, com transição suave e coerente; evite faixas lisas, retângulos ou divisões horizontais visíveis.
