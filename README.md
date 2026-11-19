@@ -1,6 +1,8 @@
 # Realmrift — Duelo de Cartas
 
-Jogo de cartas de fantasia em Godot, com duelos contra IA e construção de decks. Projeto em desenvolvimento; PvP planejado.
+Jogo de cartas de fantasia em Godot, com duelos contra IA, Modo Aventura, construção de decks e multiplayer para dois jogadores por conexão direta de IP.
+
+Da Vila à Fenda agora tem mapa ampliado e assimétrico, duas lojas e uma travessia com escolha entre a ponte dos bandidos e o rio. O rio oferece 50% de contratempo, 25% de recrutamento exclusivo e 25% de tesouro. Peixe da Correnteza (1 mana, 1/1, Matilha 1) e Tartaruga do Remanso (2 mana, 0/4, Bloqueio 1) são companheiros sem facção exclusivos da aventura. Veja [ponte, rio e mapa](docs/AVENTURA_RIO_E_MAPA.md). A nova distribuição dos nodos vale para novas expedições.
 
 Os antigos Neutros agora são a facção **Aldeia**, complemento de Vanguarda, Arcano, Submundo, Luminares e Selvagem. **Ermos** é o complemento da Ruína e da Necrópole, com Lobo da Noite e Zumbi Serviçal. **Necrópole** reúne Necromante das Cinzas, Necromante do Véu e Sentinela da Cripta. Ruína e Necrópole não aceitam Aldeia. Veja [Ermos e transferências](docs/ERMOS.md) e [Aldeia e Necrópole](docs/ALDEOES_E_NECROPOLE.md).
 
@@ -10,7 +12,17 @@ A coleção reúne criaturas e magias de diferentes facções e cartas aldeãs. 
 
 1. Clone ou baixe este repositório.
 2. Importe `project.godot` no Godot 4.7 e aguarde a importação dos recursos.
-3. Pressione F5 para abrir a tela inicial. Escolha Jogar contra IA, Meus decks ou Como jogar.
+3. Pressione F5 para abrir a tela inicial. Escolha vs IA, Multiplayer, Modo Aventura ou Meus decks.
+
+### Multiplayer por IP
+
+No menu inicial, abra **Multiplayer**. Escolha um deck válido e seu nome. Um jogador clica em **Criar partida**. O outro informa o IP do anfitrião, mantém a mesma porta e clica em **Entrar pelo IP**. A porta padrão é **24567/UDP**. Para jogar no mesmo computador, abra duas instâncias e conecte a segunda a `127.0.0.1`.
+
+Na rede local, use um dos IPs mostrados no lobby. Pela internet, o anfitrião precisa liberar o aplicativo no firewall e encaminhar a porta UDP no roteador, ou os dois devem usar uma VPN de rede local. Conexões sob CGNAT podem precisar dessa VPN. O jogo não abre portas nem modifica o firewall automaticamente.
+
+Os dois jogadores precisam da mesma versão e usam os decks normais de 22 cartas. O anfitrião valida as jogadas e resolve a aleatoriedade; cada tela mostra seu jogador embaixo. Mãos adversárias, ordem dos baralhos e escolhas de armadilhas permanecem ocultas nas mensagens de estado. A aventura e sua progressão são independentes. Há opção de desistir e aviso de desconexão; esta primeira versão não tem reconexão automática nem matchmaking.
+
+Esta conexão usa ENet em aplicativos nativos. Um cliente no navegador exigirá uma versão web e outro transporte, como WebSocket ou WebRTC. Detalhes e testes em [Multiplayer](docs/MULTIPLAYER.md).
 
 Enter, Enter do teclado numérico ou numpad 0 passa o turno. Selecione uma criatura e clique no alvo permitido. Passe o mouse sobre uma carta para ver sua versão completa. O botão Regras abre o [manual](MANUAL.txt).
 

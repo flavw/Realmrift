@@ -36,6 +36,10 @@ var log_card_dialog: PopupPanel
 var log_card_view: Control
 var mana_preview_owner: Control
 var log_count: int=-1
+var network_mode:=false
+var network_queue: Array=[]
+var network_animating:=false
+const NetworkRules=preload("res://scripts/network_duel.gd")
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(log_dialog) and log_dialog.visible and log_count!=duel.history.size():
@@ -191,6 +195,7 @@ func _input(event: InputEvent) -> void:
 	end_turn()
 
 func playtest_win() -> bool:
+	if network_mode:return false
 	if duel==null or duel.winner!=-1 or busy or result_shown or is_instance_valid(deck_editor):return false
 	if is_instance_valid(mulligan_layer):
 		remove_child(mulligan_layer);mulligan_layer.queue_free();mulligan_layer=null;mulligan_view=null
@@ -231,6 +236,7 @@ func set_busy(value: bool) -> void:
 		get_viewport().gui_release_focus()
 
 func _ready() -> void:
+	network_mode=DuelNetwork.in_match
 	music=Music.ensure(get_tree())
 	music.play_combat()
 	muted=muted or music.muted
@@ -273,14 +279,22 @@ func _ready() -> void:
 		duel = Match.new(deck_store.active_cards(),enemy_deck,randi_range(0,1) if starting_player<0 else starting_player,true)
 	else:
 		duel = Match.new(deck_store.active_cards(),enemy_deck)
-	if Adventure.current!=null and Adventure.current.in_combat:
+	if not network_mode and Adventure.current!=null and Adventure.current.in_combat:
 		enemy_deck=Adventure.current.enemy
 		if Adventure.current.step==Adventure.STAGES.size()-1 and Adventure.current.encounter=="":Adventure.current.encounter="black_dragon"
 		if Adventure.current.saved_duel!=null:
 			duel=Adventure.current.saved_duel
 		else:
 			duel=Match.new(Adventure.current.deck,enemy_deck,randi_range(0,1) if starting_player<0 else starting_player,true,Adventure.current.rules())
+	if network_mode:
+		NetworkRules.apply_view(duel,DuelNetwork.latest_state)
+		DuelNetwork.state_received.connect(network_receive)
+		DuelNetwork.connection_lost.connect(network_disconnected)
+		DuelNetwork.command_rejected.connect(network_rejected)
 	redraw()
+	if network_mode:
+		if duel.opening:network_mulligan()
+		return
 	if not adventure_active() and not Match.valid_deck(deck_store.active_cards()):
 		needs_deck_fix=true
 		open_decks()
@@ -350,7 +364,7 @@ func latest_enemy_action() -> String:
 		if index>=duel.history_sides.size() or duel.history_sides[index]!=1:continue
 		var entry: String=duel.history[index]
 		if entry.begins_with("Turno da IA") or entry.begins_with("IA compra") or entry.begins_with("Seu turno") or entry.begins_with("Você compra"):continue
-		return "Última ação da IA: "+entry
+		return ("Última ação do oponente: " if network_mode else "Última ação da IA: ")+entry
 	return ""
 
 func redraw() -> void:
@@ -411,7 +425,7 @@ func redraw() -> void:
 	enemy_mana.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
 	enemy_mana.offset_left=-215;enemy_mana.offset_right=-50;enemy_mana.offset_top=3;enemy_mana.offset_bottom=37
 	enemy_mana.modulate=Color("a8cfe8")
-	enemy_mana.tooltip_text="Mana disponível da IA / reserva máxima"
+	enemy_mana.tooltip_text="Mana disponível do oponente / reserva máxima"
 	if duel.creature_boss_id>=0:
 		var objective:=label_text("CONDIÇÃO DE VITÓRIA: DERROTE O DRAGÃO" if duel.is_dragon_boss() else "CONDIÇÃO DE VITÓRIA: DERROTE O MÍMICO",22)
 		objective.name="CreatureBossObjective"
@@ -672,14 +686,18 @@ func animate_draws(events: Array) -> void:
 			flight.tween_property(ghost,"position",node.get_global_rect().position,0.25)
 			flight.tween_property(ghost,"scale",Vector2.ONE,0.25)
 			flight.tween_property(ghost,"modulate:a",1.0,0.25)
-			flight.finished.connect(func():
-				if is_instance_valid(node):node.modulate.a=1.0
-				if is_instance_valid(ghost):ghost.queue_free())
+			flight.finished.connect(finish_draw_flight.bind(weakref(node),weakref(ghost)))
 			continue
 		node.pivot_offset=node.size*0.5
 		node.scale=Vector2(0.82,0.82)
 		var tween:=create_tween()
 		tween.tween_property(node,"scale",Vector2.ONE,0.23).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+func finish_draw_flight(card_ref: WeakRef,ghost_ref: WeakRef) -> void:
+	var card=card_ref.get_ref()
+	var ghost=ghost_ref.get_ref()
+	if is_instance_valid(card):card.modulate.a=1.0
+	if is_instance_valid(ghost):ghost.queue_free()
 
 func animate_destroyed_draw(event: Dictionary) -> void:
 	var ghost: Control
@@ -719,7 +737,9 @@ func animate_destroyed_draw(event: Dictionary) -> void:
 	warning.queue_free()
 
 func opponent_label() -> String:
+	if network_mode:return "%s · %s" % [DuelNetwork.opponent_name,DuelNetwork.opponent_deck_name]
 	if duel.creature_boss_id>=0:return duel.creature_boss_name()+" · derrote a criatura para vencer"
+	if duel.adventure_rules.get("encounter","")=="fortune_ambush":return "Guardiões do Santuário · Necrópole"
 	var faction: int=Match.deck_faction(enemy_deck)
 	return "IA — "+preload("res://scripts/faction_names.gd").name_for(faction)
 
@@ -797,8 +817,9 @@ func open_combat_menu() -> void:
 	content.add_child(resume)
 	content.add_child(button("Início",combat_menu_action.bind("start"),not busy))
 	if adventure_active():content.add_child(button("Abandonar expedição",confirm_abandon_expedition,not busy))
-	content.add_child(button("Nova partida",combat_menu_action.bind("restart"),not busy and not adventure_active()))
-	content.add_child(button("Meus decks",combat_menu_action.bind("decks"),not busy and not adventure_active()))
+	if network_mode and duel.winner==-1:content.add_child(button("Desistir do duelo",network_surrender,not busy and DuelNetwork.connected))
+	content.add_child(button("Nova partida",combat_menu_action.bind("restart"),not busy and not adventure_active() and not network_mode))
+	content.add_child(button("Meus decks",combat_menu_action.bind("decks"),not busy and not adventure_active() and not network_mode))
 	var options:=button("Opções",show_options)
 	options.name="CombatOptions"
 	content.add_child(options)
@@ -824,6 +845,7 @@ func combat_menu_action(action: String) -> void:
 	close_combat_menu()
 	match action:
 		"start":
+			if network_mode:DuelNetwork.close()
 			if adventure_active() and duel.winner==-1:
 				Adventure.current.saved_duel=duel;Adventure.current.save_checkpoint()
 			get_tree().change_scene_to_file("res://start_menu.tscn")
@@ -832,8 +854,9 @@ func combat_menu_action(action: String) -> void:
 		"rules":show_rules()
 
 func can_act() -> bool:
+	if network_mode and (not DuelNetwork.active or not DuelNetwork.connected or DuelNetwork.pending):return false
 	if is_instance_valid(log_dialog) and log_dialog.visible:return false
-	return (adventure_active() or Match.valid_deck(deck_store.active_cards())) and not duel.opening and duel.turn == 0 and duel.winner == -1 and not busy and not is_instance_valid(deck_editor) and not ArtViewer.is_open(self) and not is_instance_valid(combat_menu_layer)
+	return (network_mode or adventure_active() or Match.valid_deck(deck_store.active_cards())) and not duel.opening and duel.turn == 0 and duel.winner == -1 and not busy and not is_instance_valid(deck_editor) and not ArtViewer.is_open(self) and not is_instance_valid(combat_menu_layer)
 
 func add_board(side: int) -> void:
 	var necrotic_aim: bool=magic and selected>=0 and selected<duel.players[0].board.size() and int(duel.players[0].board[selected].get("necrotic_damage",0))>0
@@ -1006,7 +1029,7 @@ func add_hero(side: int, parent: Node = null) -> void:
 	var castle_edge: Color=Color("c76d79") if side==1 else Color("70b7e7")
 	castle.add_theme_stylebox_override("normal",UiTheme.panel(castle_bg,castle_edge,6))
 	castle.add_theme_stylebox_override("disabled",UiTheme.panel(castle_bg,castle_edge.darkened(0.3),6))
-	castle.tooltip_text = "Ataque direto ao castelo da IA" if side == 1 else ("Curar seu castelo" if healing else "Seu castelo")
+	castle.tooltip_text = "Ataque direto ao castelo do oponente" if side == 1 else ("Curar seu castelo" if healing else "Seu castelo")
 	var castle_allowed: bool = (healing and duel.can_heal(0, selected, -1,0,quick_healing)) if side == 0 else (not healing and duel.can_target(0, selected, -1, magic))
 	if casting >= 0:
 		castle_allowed = duel.can_cast(0,casting,side,-1)
@@ -1171,6 +1194,7 @@ func play(index: int) -> void:
 		magic = false
 		redraw()
 		return
+	if network_mode:network_send({"kind":"play","hand":index});return
 	if not duel.play(0, index):
 		return
 	play_sound("summon")
@@ -1185,6 +1209,9 @@ func play(index: int) -> void:
 
 func target(index: int,target_side: int=-1) -> void:
 	if can_act() and selected >= 0 and not healing:
+		if network_mode:
+			if not duel.can_target(0,selected,index,magic,target_side):notify_blocked_attack(index);return
+			network_send({"kind":"act","index":selected,"target":index,"magical":magic,"target_side":target_side});return
 		var snapshot := field_nodes.duplicate()
 		if not duel.act(0, selected, index, magic,target_side):
 			notify_blocked_attack(index)
@@ -1203,6 +1230,7 @@ func can_attack_all() -> bool:
 
 func attack_all() -> void:
 	if not can_act() or not can_attack_all():return
+	if network_mode:network_send({"kind":"attack_all"});return
 	var attackers: Array=[]
 	for unit in duel.players[0].board:attackers.append(unit.id)
 	selected=-1;casting=-1;summoning=-1;magic=false;healing=false
@@ -1235,8 +1263,12 @@ func cast_target(target_side: int, index: int,trap_choice: int=0) -> void:
 			spell_targets.erase(choice);redraw();return
 		spell_targets.append(choice)
 		if spell_targets.size()<duel.spell_target_count(0,casting):redraw();return
+		if network_mode:network_send({"kind":"cast_multiple","hand":casting,"targets":spell_targets.duplicate(true)});return
 		if not duel.cast_multiple(0,casting,spell_targets):spell_targets.clear();redraw();return
 	else:
+		if network_mode:
+			if duel.can_cast(0,casting,target_side,index):network_send({"kind":"cast","hand":casting,"target_side":target_side,"target":index,"trap_choice":trap_choice})
+			return
 		if not duel.cast(0,casting,target_side,index,trap_choice):return
 	casting = -1
 	summoning = -1
@@ -1259,6 +1291,9 @@ func select_heal(quick: bool=false) -> void:
 func heal_target(index: int, target_side: int=0) -> void:
 	if not can_act() or not healing:
 		return
+	if network_mode:
+		if duel.can_heal(0,selected,index,target_side,quick_healing):network_send({"kind":"heal","index":selected,"target":index,"target_side":target_side,"quick":quick_healing})
+		return
 	var snapshot := field_nodes.duplicate()
 	if not duel.heal(0, selected, index,target_side,quick_healing):
 		return
@@ -1271,6 +1306,9 @@ func heal_target(index: int, target_side: int=0) -> void:
 	redraw()
 
 func use_fury() -> void:
+	if network_mode:
+		if can_act():network_send({"kind":"fury","index":selected})
+		return
 	var snapshot:=field_nodes.duplicate()
 	if can_act() and duel.fury(0, selected):
 		set_busy(true)
@@ -1284,6 +1322,7 @@ func use_fury() -> void:
 func end_turn() -> void:
 	if not can_act():
 		return
+	if network_mode:network_send({"kind":"end_turn"});return
 	casting = -1
 	summoning = -1
 	selected = -1
@@ -1307,6 +1346,7 @@ func end_turn() -> void:
 		redraw()
 
 func run_ai_turn() -> void:
+	if network_mode:return
 	set_busy(true)
 	await get_tree().create_timer(0.65).timeout
 	while duel.turn == 1 and duel.winner == -1:
@@ -1332,6 +1372,91 @@ func run_ai_turn() -> void:
 	set_busy(false)
 	redraw()
 	animate_turn_summons(duel.last_action)
+
+func network_send(command: Dictionary) -> void:
+	if not DuelNetwork.connected or DuelNetwork.pending:return
+	selected=-1;casting=-1;summoning=-1;magic=false;healing=false;quick_healing=false
+	spell_targets.clear()
+	set_busy(true)
+	DuelNetwork.submit(command)
+
+func network_receive(state: Dictionary) -> void:
+	if not network_mode or not is_inside_tree():return
+	network_queue.append(state)
+	set_busy(true)
+	if not network_animating:network_drain.call_deferred()
+
+func network_drain() -> void:
+	if network_animating or not is_inside_tree():return
+	network_animating=true
+	while not network_queue.is_empty() and is_inside_tree():
+		var snapshot: Array=field_nodes.duplicate()
+		var was_opening: bool=duel.opening
+		NetworkRules.apply_view(duel,network_queue.pop_front())
+		var action: Dictionary=duel.last_action.duplicate(true)
+		selected=-1;casting=-1;summoning=-1;magic=false;healing=false
+		spell_targets.clear()
+		if was_opening or duel.opening:
+			network_clear_mulligan()
+			redraw()
+			if duel.opening:network_mulligan()
+		else:
+			if action.get("kind","")=="spell" and int(action.get("side",0))==1:await show_enemy_spell(action)
+			if action.get("kind","")=="summon":
+				redraw()
+				await get_tree().process_frame
+				snapshot=field_nodes.duplicate()
+			await animate_action(action,snapshot)
+			redraw()
+			await animate_records(action.get("turn_castle_hits",[]),field_nodes,"arcane_area","castle")
+			animate_turn_summons(action)
+		await get_tree().process_frame
+	network_animating=false
+	set_busy(false)
+	redraw()
+
+func network_clear_mulligan() -> void:
+	if is_instance_valid(mulligan_layer):
+		remove_child(mulligan_layer);mulligan_layer.queue_free()
+	mulligan_layer=null;mulligan_view=null
+
+func network_mulligan() -> void:
+	network_clear_mulligan()
+	if not duel.mulligan_done[0]:show_mulligan();return
+	mulligan_layer=CanvasLayer.new();mulligan_layer.layer=50;add_child(mulligan_layer)
+	var shade:=ColorRect.new();shade.color=Color(0.025,0.045,0.075,0.96);shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);mulligan_layer.add_child(shade)
+	var center:=CenterContainer.new();center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);shade.add_child(center)
+	var column:=VBoxContainer.new();column.add_theme_constant_override("separation",22);center.add_child(column)
+	column.add_child(label_text("Mão confirmada · aguardando o oponente…",26))
+	column.add_child(button("Voltar ao multiplayer",network_leave))
+
+func network_rejected(message: String) -> void:
+	if not network_mode:return
+	if not network_animating:set_busy(false)
+	if duel.opening:network_mulligan()
+	var dialog:=AcceptDialog.new();dialog.title="Jogada não realizada";dialog.dialog_text=message;add_child(dialog);dialog.popup_centered()
+	redraw()
+
+func network_disconnected(message: String) -> void:
+	if not network_mode or duel.winner!=-1:return
+	network_clear_mulligan()
+	var layer:=CanvasLayer.new();layer.layer=100;layer.name="DisconnectedOverlay";add_child(layer)
+	var shade:=ColorRect.new();shade.color=Color(0.02,0.035,0.06,0.94);shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);layer.add_child(shade)
+	var center:=CenterContainer.new();center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);shade.add_child(center)
+	var column:=VBoxContainer.new();column.add_theme_constant_override("separation",22);center.add_child(column)
+	column.add_child(label_text("CONEXÃO ENCERRADA",28))
+	column.add_child(label_text(message,19))
+	column.add_child(button("Voltar ao multiplayer",network_leave))
+
+func network_surrender() -> void:
+	close_combat_menu()
+	var dialog:=ConfirmationDialog.new();dialog.title="Desistir do duelo";dialog.dialog_text="Desistir encerra a partida com vitória do oponente.";dialog.ok_button_text="Desistir";add_child(dialog)
+	dialog.confirmed.connect(func():network_send({"kind":"surrender"}))
+	dialog.popup_centered()
+
+func network_leave() -> void:
+	DuelNetwork.close()
+	get_tree().change_scene_to_file("res://multiplayer_lobby.tscn")
 
 func animate_impulsive_attacks(side: int) -> void:
 	for i in range(Match.MAX_BOARD):
@@ -1383,7 +1508,7 @@ func create_enemy_spell_preview(action: Dictionary) -> CanvasLayer:
 	content.add_theme_constant_override("separation",5)
 	content.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	panel.add_child(content)
-	var title:=label_text("MAGIA DA IA",15)
+	var title:=label_text("MAGIA DO OPONENTE" if network_mode else "MAGIA DA IA",15)
 	title.add_theme_color_override("font_color",Color("f1b3a7"))
 	title.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	content.add_child(title)
@@ -1750,9 +1875,10 @@ func animate_missile(attacker: Control, destination: Control) -> void:
 	await impact.finished
 
 func adventure_active() -> bool:
-	return Adventure.current!=null and Adventure.current.in_combat
+	return not network_mode and Adventure.current!=null and Adventure.current.in_combat
 
 func restart() -> void:
+	if network_mode:network_leave();return
 	if adventure_active():return
 	# Prevent an outstanding AI coroutine from entering the new match.
 	if busy:
@@ -1775,7 +1901,7 @@ func restart() -> void:
 	if duel.opening:show_mulligan()
 
 func open_decks() -> void:
-	if adventure_active():return
+	if adventure_active() or network_mode:return
 	if busy or is_instance_valid(deck_editor):
 		return
 	hide_preview()
@@ -1820,11 +1946,15 @@ func finish_if_needed() -> void:
 	result_layer.layer = 40
 	add_child(result_layer)
 	result_overlay = ResultScene.instantiate()
-	result_overlay.configure(duel.winner, deck_store.slots[deck_store.active].name, duel.players[0].hp)
+	result_overlay.configure(duel.winner, DuelNetwork.local_profile.deck_name if network_mode else deck_store.slots[deck_store.active].name, duel.players[0].hp)
 	result_layer.add_child(result_overlay)
 	result_overlay.replay_requested.connect(restart)
 	result_overlay.deck_requested.connect(func(): clear_result(); open_decks())
-	result_overlay.menu_requested.connect(func(): get_tree().change_scene_to_file("res://start_menu.tscn"))
+	result_overlay.menu_requested.connect(func():
+		if network_mode:DuelNetwork.close()
+		get_tree().change_scene_to_file("res://start_menu.tscn"))
+	if network_mode:
+		result_overlay.find_child("ReplayButton",true,false).text="Voltar ao multiplayer"
 	result_overlay.dismissed.connect(clear_result)
 	if duel.winner == 0:
 		play_sound("victory")
@@ -1948,6 +2078,9 @@ func show_mulligan() -> void:
 	mulligan_view.confirmed.connect(finish_mulligan)
 
 func finish_mulligan(indices: Array) -> void:
+	if network_mode:
+		if not DuelNetwork.pending and DuelNetwork.connected and not duel.mulligan_done[0]:network_send({"kind":"mulligan","indices":indices})
+		return
 	if not duel.mulligan(0,indices):return
 	while duel.opening and not duel.mulligan_done[1]:
 		var swaps: Array=[]
@@ -1973,6 +2106,7 @@ func summon_target(side: int,index: int,choice: String="") -> void:
 	if data.entry_effect==CardData.EntryEffect.GRANT_ROGUE_CHOICE and choice.is_empty():
 		show_rogue_choice(side,index)
 		return
+	if network_mode:network_send({"kind":"play","hand":summoning,"target":index,"choice":choice});return
 	if not duel.play(0,summoning,index,choice):return
 	play_sound("summon")
 	summoning=-1
@@ -2067,7 +2201,7 @@ func show_summon_feedback(action: Dictionary) -> void:
 
 func selection_hint() -> String:
 	if duel.winner!=-1:return ""
-	if duel.turn==1:return "Turno da IA · aguarde"
+	if duel.turn==1:return "Turno de %s · aguarde" % DuelNetwork.opponent_name if network_mode else "Turno da IA · aguarde"
 	if summoning>=0:
 		var summoning_card: Dictionary=Match.CARDS[duel.players[0].hand[summoning]]
 		if summoning_card.get("entry_human_only",false):return "Escolha outro Humano aliado"

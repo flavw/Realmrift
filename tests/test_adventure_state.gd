@@ -10,7 +10,7 @@ func _initialize() -> void:
   run.rng.seed=seed_value
   orders.append(run.shuffled(Adventure.CURVE))
  assert(orders.any(func(order):return order!=orders[0]))
- for faction in [0,1,3,4,5,6]:
+ for faction in Adventure.PRIMARY_FACTIONS:
   run.faction = faction
   run.deck.clear()
   for i in range(15):
@@ -19,7 +19,7 @@ func _initialize() -> void:
    assert(options[0] != options[1] and options[1] != options[2] and options[0] != options[2])
    for key in options:
     var card = DuelMatch.CARD_DATA[key]
-    assert(card.faction == faction or card.faction == CardData.Faction.VILLAGER)
+    assert(DuelMatch.faction_allowed(faction,card.faction))
    run.deck.append(options[0])
   assert(run.draft_options().is_empty())
  var choices: Array = run.power_options()

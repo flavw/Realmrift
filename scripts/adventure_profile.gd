@@ -24,12 +24,35 @@ static func xp_cost(current_level: int) -> int:
  return 5+3*n+int(n*(n-1)/2.0)
 
 func level() -> int:
+ return level_at_xp(xp)
+
+static func level_at_xp(total: int) -> int:
  var result:=1
- var remaining:=xp
+ var remaining:=maxi(0,total)
  while remaining>=xp_cost(result):
   remaining-=xp_cost(result)
   result+=1
  return result
+
+func reward_for_level(value: int) -> Dictionary:
+ match value:
+  3:return {"level":value,"title":"Uma nova chance","description":"+1 vida extra em cada nova expedição: permite tentar novamente após uma derrota.","icon":"item-heart","kind":"milestone"}
+  4,8:return {"level":value,"title":"Mais uma oportunidade","description":"+1 dado inicial em cada nova expedição, para trocar ofertas de cartas, poderes ou itens.","icon":"hud-dice","kind":"milestone"}
+  5:return {"level":value,"title":"Equipamento inicial","description":"+1 item aleatório no início de cada nova expedição, escolhido depois de montar o deck.","icon":"item-shield","kind":"milestone"}
+ if value<2:return {}
+ var chosen: String=String(claimed.get(str(value),""))
+ if BONUSES.has(chosen):
+  return {"level":value,"title":BONUSES[chosen].name,"description":BONUSES[chosen].description,"icon":"growth-icon","kind":"chosen"}
+ ensure_offers()
+ var options: Array=offers.get(str(value),[])
+ var names: PackedStringArray=[]
+ for key in options:names.append(BONUSES[key].name)
+ return {"level":value,"title":"Uma melhoria permanente à sua escolha","description":"Escolha entre "+" ou ".join(names)+". O bônus valerá nas próximas expedições.","icon":"growth-icon","kind":"choice"}
+
+func rewards_since(previous_xp: int) -> Array:
+ var rewards: Array=[]
+ for value in range(level_at_xp(previous_xp)+1,level()+1):rewards.append(reward_for_level(value))
+ return rewards
 
 func xp_in_level() -> int:
  var remaining:=xp

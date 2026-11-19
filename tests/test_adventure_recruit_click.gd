@@ -21,10 +21,10 @@ func verify() -> void:
  await create_timer(0.4).timeout
  assert(not view.selection_busy)
  assert(view.find_children("Choose_*","Button",true,false).is_empty())
- State.current.step=4;State.current.phase="map";State.current.options.clear();view.render()
+ State.current.step=State.STAGES.find("power_event");State.current.phase="map";State.current.options.clear();view.render()
  await process_frame
  await process_frame
- assert(view.find_child("Route_4_0",true,false).get_child(0).texture.resource_path=="res://assets/ui/adventure-power-sanctuary.webp")
+ assert(view.find_child("Route_%d_0" % State.current.step,true,false).get_child(0).texture.resource_path=="res://assets/ui/adventure-power-sanctuary.webp")
  if DisplayServer.get_name()!="headless":get_root().get_texture().get_image().save_png("res://.local/adventure-power-node.png")
  view.queue_free()
  await process_frame

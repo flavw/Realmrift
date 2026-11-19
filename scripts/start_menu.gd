@@ -20,6 +20,7 @@ var enemy_deck_picker: OptionButton
 const FACTION_NAMES=preload("res://scripts/faction_names.gd").PT
 
 func _ready() -> void:
+ if DuelNetwork.active or DuelNetwork.in_match:DuelNetwork.close()
  theme = UiTheme.build()
  Music.ensure(get_tree()).play_menu()
  var background := ColorRect.new()
@@ -61,14 +62,23 @@ func _ready() -> void:
  var space:=Control.new()
  space.custom_minimum_size.y=24
  left.add_child(space)
- play_button=menu_button("Jogar contra IA",show_deck_selector,"menu-play")
+ var duel_actions:=HBoxContainer.new();duel_actions.name="DuelModes";duel_actions.add_theme_constant_override("separation",12);left.add_child(duel_actions)
+ play_button=menu_button("vs IA",show_deck_selector,"menu-play")
  play_button.name="PlayAI"
- play_button.custom_minimum_size.y=78
- play_button.add_theme_font_size_override("font_size",27)
+ play_button.custom_minimum_size.y=60
+ play_button.custom_minimum_size.x=254
+ play_button.add_theme_font_size_override("font_size",19)
  play_button.add_theme_stylebox_override("normal",menu_style(Color("302b22"),Color("bf9a57")))
  play_button.add_theme_stylebox_override("hover",menu_style(Color("493b27"),Color("f4d994")))
- left.add_child(play_button)
- var adventure:=menu_button("Modo Aventura",func(): get_tree().change_scene_to_file("res://adventure_select.tscn"))
+ duel_actions.add_child(play_button)
+ var multiplayer_button:=menu_button("Multiplayer",func():get_tree().change_scene_to_file("res://multiplayer_lobby.tscn"),"menu-multiplayer")
+ multiplayer_button.name="PlayMultiplayer"
+ multiplayer_button.custom_minimum_size.y=60;multiplayer_button.add_theme_font_size_override("font_size",19)
+ multiplayer_button.custom_minimum_size.x=254
+ multiplayer_button.tooltip_text="Duelo com outro jogador por conexão direta de IP."
+ duel_actions.add_child(multiplayer_button)
+ var adventure:=menu_button("Modo Aventura",func(): get_tree().change_scene_to_file("res://adventure_select.tscn"),"menu-adventure")
+ adventure.name="PlayAdventure"
  left.add_child(adventure)
  var deck_actions:=HBoxContainer.new()
  deck_actions.add_theme_constant_override("separation",12)

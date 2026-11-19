@@ -3,6 +3,8 @@ const State=preload("res://scripts/adventure_state.gd")
 const Match=preload("res://scripts/match.gd")
 const Names=preload("res://scripts/faction_names.gd")
 var report: Array[String]=["# Simulação automática de aventura", "", "Duelos resolvidos pelo motor real, sem atribuir vitórias. Um agente heurístico joga pelo protagonista; o adversário usa a IA normal. Sem interface ou animações. Este resultado não demonstra equilíbrio de todas as campanhas.", ""]
+var boss_attempts:=0
+var losses_by_step: Dictionary={}
 func _initialize() -> void:call_deferred("simulate")
 func value(key: String) -> float:
  var c=Match.CARD_DATA[key]
@@ -18,11 +20,15 @@ func best_card(keys: Array,run) -> String:
  return pool[0]
 func pick_power(run) -> void:
  var options: Array=run.power_options()
- for preferred in ["starting_life","first_mana","draw_attack","combat_gold"]:
+ var selected: String=options[0]
+ for preferred in ["starting_allies","draw_attack","starting_life","first_mana","combat_gold"]:
   if preferred in options:
-   var previous: int=run.max_life();run.powers.append(preferred);run.heal(run.max_life()-previous)
-   report.append("Poder escolhido: **%s**." % State.POWERS[preferred].name)
-   return
+   selected=preferred
+   break
+ var previous: int=run.max_life()
+ run.powers.append(selected)
+ run.heal(run.max_life()-previous)
+ report.append("Poder escolhido: **%s**." % State.POWERS[selected].name)
 func player_step(m) -> bool:
  var p: Dictionary=m.players[0]
  for i in range(p.board.size()):
@@ -82,7 +88,9 @@ func player_step(m) -> bool:
  return false
 func combat(run,node: Dictionary) -> bool:
  var start: int=run.current_life
- if node.kind=="boss":run.encounter="black_dragon"
+ if node.kind=="boss":
+  run.encounter="black_dragon"
+  boss_attempts+=1
  var m=Match.new(run.deck,node.deck,randi_range(0,1),true,run.rules())
  for side in [0,1]:
   var swaps: Array=[]
@@ -99,9 +107,12 @@ func combat(run,node: Dictionary) -> bool:
  if m.winner==-1:report.append("  Limite de segurança alcançado; não foi considerado vitória.")
  run.enemy_faction=node.faction
  run.finish_combat(m.winner==0,m.players[0].hp)
- if m.winner!=0:return false
+ if m.winner!=0:
+  var stage: int=run.step+1
+  losses_by_step[stage]=int(losses_by_step.get(stage,0))+1
+  return false
  var key: String=best_card(run.options,run)
- run.deck.append(key);report.append("  Recruta: %s; vida após recuperação: %d/%d; ouro: %d." % [Match.CARD_DATA[key].title,run.current_life,run.max_life(),run.gold])
+ run.add_card_to_deck(key);report.append("  Recruta: %s; vida após recuperação: %d/%d; ouro: %d." % [Match.CARD_DATA[key].title,run.current_life,run.max_life(),run.gold])
  if run.extra_item_reward:
   run.extra_item_reward=false;run.pending_item="";run.prepare_item();run.apply_item(best_card(run.options,run))
  else:run.advance()
@@ -109,6 +120,7 @@ func combat(run,node: Dictionary) -> bool:
 func expedition(faction: int,seed_value: int) -> bool:
  seed(seed_value)
  var run=State.new();run.rng.seed=seed_value;run.faction=faction
+ run.draft_curve=run.shuffled(State.CURVE)
  report.append("## Tentativa · %s · semente %d" % [Names.PT[faction],seed_value])
  for i in range(15):run.deck.append(best_card(run.draft_options(),run))
  report.append("Deck inicial: "+", ".join(run.deck.map(func(k):return Match.CARD_DATA[k].title))+".")
@@ -128,19 +140,23 @@ func expedition(faction: int,seed_value: int) -> bool:
     if not combat(run,node):return false
    "healer":
     var paid: bool=run.current_life<run.max_life()*0.45 and run.gold>=run.healer_cost()
-    run.visit_healer(paid);run.grant_vitality();report.append("Cura %s; vida %d/%d, ouro %d." % ["total paga" if paid else "grátis",run.current_life,run.max_life(),run.gold]);run.advance()
+    run.visit_healer(paid);report.append("Cura %s; vida %d/%d, ouro %d." % ["total paga" if paid else "grátis",run.current_life,run.max_life(),run.gold]);run.advance()
    "power_event":pick_power(run);run.grant_vitality();run.advance()
    "item":
     run.prepare_item();var key: String=best_card(run.options,run);report.append("Item %s em %s." % [State.Items.DEFINITIONS[run.pending_item].name,Match.CARD_DATA[key].title]);run.apply_item(key)
    "shop":
-    if run.preparation_active:run.gold+=3
-    var offers: Array=run.shuffled(Match.CARD_DATA.keys().filter(func(k):return Match.CARD_DATA[k].collectible and not Match.CARD_DATA[k].neutral_deck_only)).slice(0,6)
-    while run.gold>=3 and not offers.is_empty():
+    run.generate_shop()
+    if not run.shop_premium_key.is_empty() and run.gold>=run.market_price(run.shop_premium_key,true)+1:
+     var special: String=run.shop_premium_key
+     if run.buy_premium_card(special):report.append("Compra aprimorada: %s." % Match.CARD_DATA[special].title)
+    var offers: Array=run.options.duplicate()
+    while run.gold>=1 and not offers.is_empty():
      var key: String=best_card(offers,run);offers.erase(key)
-     if run.buy_card(key,3):report.append("Compra: "+Match.CARD_DATA[key].title)
-    run.grant_vitality();run.advance()
+     var price: int=run.market_price(key)
+     if run.buy_card(key,price):report.append("Compra: %s (%d ouro)." % [Match.CARD_DATA[key].title,price])
+    run.advance()
    "treasure":
-    var amount: int=run.rng.randi_range(1,6);run.gold+=amount;run.grant_vitality();report.append("Tesouro: +%d ouro." % amount);run.advance()
+    var amount: int=run.rng.randi_range(1,6);run.gold+=amount;report.append("Tesouro: +%d ouro." % amount);run.advance()
    "chest":
     run.phase="chest";var outcome: String=run.resolve_chest();report.append("Resultado do baú: "+outcome)
     if outcome=="mimic":
@@ -148,9 +164,36 @@ func expedition(faction: int,seed_value: int) -> bool:
     elif outcome=="item":run.apply_item(best_card(run.options,run))
     else:run.advance()
    "bridge":
-    run.phase="bridge";run.resolve_bridge("pay");report.append(run.event_message);run.advance()
+    run.phase="bridge"
+    if run.gold>0:run.resolve_bridge("pay");report.append(run.event_message);run.advance()
+    else:resolve_river(run)
+   "river":resolve_river(run)
+   "fortune":
+    run.phase="fortune"
+    if not run.resolve_fortune():
+     report.append("Santuário ignorado por falta de ouro.")
+     run.leave_fortune()
+     continue
+    report.append("Oferenda: 1 ouro. "+run.event_message)
+    if run.start_fortune_ambush():
+     if not combat(run,{"kind":"fortune_ambush","faction":run.enemy_faction,"deck":run.enemy}):return false
+    elif run.extra_item_reward:
+     run.extra_item_reward=false;run.pending_item="";run.prepare_item();run.apply_item(best_card(run.options,run))
+    else:run.advance()
+   "farm":
+    run.phase="farm";run.visit_farm_recruits()
+    if run.phase=="farm_recruit":run.recruit_from_farm(best_card(run.options,run))
+    else:run.advance()
  report.append("**Aventura concluída. Vida %d/%d, ouro %d, deck com %d cartas.**" % [run.current_life,run.max_life(),run.gold,run.deck.size()])
  return true
+
+func resolve_river(run) -> void:
+ run.phase="river";run.resolve_river()
+ report.append("Travessia do rio: "+run.river_outcome+". "+run.event_message)
+ if run.phase=="river_recruit":run.recruit_from_river(best_card(run.options,run))
+ if run.extra_item_reward:
+  run.extra_item_reward=false;run.pending_item="";run.prepare_item();run.apply_item(best_card(run.options,run))
+ else:run.advance()
 func route_score(run,node: Dictionary) -> float:
  match node.kind:
   "healer":return 100 if run.current_life<run.max_life()*0.75 else 5
@@ -158,19 +201,26 @@ func route_score(run,node: Dictionary) -> float:
   "item":return 50
   "shop":return 55 if run.gold>=3 else 0
   "treasure":return 40
+  "fortune":return 35 if run.gold>=State.FORTUNE_PRICE else 0
   "chest":return 30
   "bridge":return 10
  return 20
 func simulate() -> void:
  var successes:=0;var attempts:=0
- for setup in [[0,4101],[1,4102],[4,4103],[6,4104],[3,4105],[5,4106]]:
-  attempts+=1
-  var won: bool=expedition(setup[0],setup[1])
-  print("Tentativa %d: %s" % [attempts,"CONCLUÍDA" if won else "DERROTA"])
-  if won:successes+=1;break
+ for trial in range(4):
+  for faction in State.STARTING_FACTIONS:
+   attempts+=1
+   var won: bool=expedition(faction,4100+attempts)
+   print("Tentativa %d · %s: %s" % [attempts,Names.PT[faction],"CONCLUÍDA" if won else "DERROTA"])
+   if won:successes+=1
  report.append("")
- report.append("Resultado: %d conclusão(ões) em %d tentativa(s). As sementes não foram repetidas para mudar compras ou resultados." % [successes,attempts])
+ report.append("Resultado de nível 1: %d de %d expedições concluídas. %d chegaram ao Dragão Negro. Foram usadas quatro sementes por origem inicial." % [successes,attempts,boss_attempts])
+ var stages: Array=losses_by_step.keys()
+ stages.sort()
+ var losses: PackedStringArray=[]
+ for stage in stages:losses.append("etapa %d (%d)" % [stage,losses_by_step[stage]])
+ report.append("Derrotas por etapa: "+", ".join(losses)+".")
  var file=FileAccess.open("res://docs/SIMULACAO_AVENTURA.md",FileAccess.WRITE);file.store_string("\n\n".join(report));file.close()
- print("SIMULACAO: %d/%d concluídas. Relatório: docs/SIMULACAO_AVENTURA.md" % [successes,attempts])
+ print("SIMULACAO: %d/%d concluídas; %d chegaram ao chefe; derrotas por etapa %s." % [successes,attempts,boss_attempts,losses_by_step])
  quit()
 

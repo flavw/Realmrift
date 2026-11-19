@@ -27,10 +27,25 @@ func verify() -> void:
  var field=load("res://field_card.tscn").instantiate();field.card_data=game.card_for_unit(unit);root.add_child(field)
  assert(field.find_child("AdventureItems",true,false)!=null)
  card.queue_free();field.queue_free()
+ run=State.new()
+ run.deck=["squire","squire","warrior","sentinel"]
+ run.grant_card_item("squire","poison_dagger")
+ var future: String=run.add_card_to_deck("squire")
+ assert(run.deck[0]==run.deck[1] and run.deck[0]==future and Match.CARD_DATA[future].envenom==1)
+ assert(Match.CARD_DATA.squire.envenom==0)
+ run.grant_card_item("squire","ward_cloak")
+ run.grant_card_item("squire","renewal_brooch")
+ var equipped: String=run.deck[0]
+ assert(Match.CARD_DATA[equipped].antimagic==1 and Match.CARD_DATA[equipped].regeneration==1)
+ assert(Items.entries(Match.CARD_DATA[equipped]).size()==3)
+ game=Match.new(run.deck,[],0,false,run.rules())
+ game.spawn_unit(0,equipped).ready=true
+ var defender=game.spawn_unit(1,"warrior")
+ assert(game.act(0,0,0) and defender.poison==1)
  run=State.new();run.phase="bridge";run.gold=5;run.current_life=10
  assert(run.resolve_bridge("pay") and run.gold==0 and run.current_life==12 and run.phase=="event_result")
  assert(not run.resolve_bridge("pay"))
- run.phase="bridge";assert(run.resolve_bridge("fight") and run.encounter=="bandits" and run.enemy.size()==20)
+ run.phase="bridge";assert(run.resolve_bridge("fight") and run.encounter=="bandits" and run.enemy.size()==18)
  run.finish_combat(true,10)
  assert(run.gold==3 and run.extra_item_reward)
  var mimic_count:=0;var item_count:=0;var gold_count:=0
@@ -56,7 +71,8 @@ func verify() -> void:
  mimic.draw(1);assert(mimic.players[1].fatigue==0)
  mimic.players[1].board[0].health=0;mimic.remove_dead();mimic.check_winner();assert(mimic.winner==0)
  run.ensure_routes()
- assert(run.route_rows[2].size()==4 and run.route_rows[7].size()==2)
+ assert(run.route_rows[2].size()==2)
+ assert(run.route_rows[State.STAGES.find("fortune")].any(func(node):return node.kind=="fortune"))
  for at in range(run.route_rows.size()-1):
   for target in range(run.route_rows[at+1].size()):
    var reachable:=false

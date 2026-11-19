@@ -56,11 +56,13 @@ var event_message := ""
 var pending_item := ""
 var extra_item_reward := false
 var reward_message := ""
+var victory_gold := 0
+var victory_recovery := 0
 var shop_premium_key := ""
-var shop_premium_price := 3
 var shop_premium_sold := false
 var shop_step := -1
 var shop_groups: Array = []
+const SHOP_GROUP_COUNTS=[3,3,2]
 var chest_result := ""
 var route_rows: Array = []
 var chosen_routes: Dictionary = {}
@@ -70,6 +72,27 @@ var card_item_grants: Dictionary = {}
 var item_variant_cache: Dictionary = {}
 var item_grant_serial := 0
 var map_scroll_position := 0.0
+var map_scroll_vertical := 0.0
+var river_outcome := ""
+var river_visits := 0
+var fortune_outcome := ""
+const FORTUNE_PRICE:=1
+const FORTUNE_GUARDIANS=[
+ "restless_skeleton","restless_skeleton","crypt_sentinel","crypt_sentinel",
+ "necropolis_ghost","necropolis_ghost","ash_necromancer","ash_necromancer",
+ "defiled_crypt","wastes_spitter","wolf","rotting_guardian",
+ "hungry_ghoul","hungry_ghoul","zombie_helper","sepulchral_tide",
+]
+const STARTING_FACTIONS=[
+ CardData.Faction.WARRIOR,CardData.Faction.MAGE,CardData.Faction.LADINO,
+ CardData.Faction.CLERIC,CardData.Faction.WILD,
+]
+const PRIMARY_FACTIONS=STARTING_FACTIONS+[CardData.Faction.RUIN,CardData.Faction.NECROPOLIS]
+const MERCHANTS=[
+ {"name":"Elara da Ponte","location":"Entreposto da margem","art":"res://assets/ui/adventure-merchant-elara.webp","greeting":"A estrada é longa. Escolha bons aliados antes de partir."},
+ {"name":"Orun, o Peregrino","location":"Entreposto das ruínas","art":"res://assets/ui/adventure-merchant-orun.webp","greeting":"Reuni estas ofertas entre as ruínas. As melhores peças chegam até aqui por pouco."},
+]
+var event_claimed := false
 var rng := RandomNumberGenerator.new()
 
 func _init(account=null) -> void:
@@ -97,30 +120,25 @@ func shuffled(values: Array) -> Array:
   result[j] = item
  return result
 
-func draft_options() -> Array:
- if faction < 0 or deck.size() >= 15:return []
+func draft_options(exclude: Array=[]) -> Array:
+ if faction<0 or deck.size()>=draft_curve.size():return []
  var candidates := []
  for key in Match.CARD_DATA:
   var card = Match.CARD_DATA[key]
-  if not card.collectible or not Match.faction_allowed(faction,card.faction):continue
-  if card.neutral_deck_only:continue
+  if not card.collectible or not Match.faction_allowed(faction,card.faction) or card.neutral_deck_only:continue
   candidates.append(key)
+ var fresh:=candidates.filter(func(key):return key not in exclude)
+ if fresh.size()>=3:candidates=fresh
  var target: int = draft_curve[deck.size()]
  candidates = shuffled(candidates)
  candidates.sort_custom(func(a,b): return absi(Match.CARD_DATA[a].cost-target) < absi(Match.CARD_DATA[b].cost-target))
  return shuffled(candidates.slice(0,3))
 
 func reroll_draft() -> bool:
- if phase!="draft" or dice<=0 or faction<0 or deck.size()>=15:return false
- var candidates: Array=[]
- for key in Match.CARD_DATA:
-  var card: CardData=Match.CARD_DATA[key]
-  if not card.collectible or card.neutral_deck_only or not Match.faction_allowed(faction,card.faction):continue
-  candidates.append(key)
- if candidates.size()<3:return false
- var fresh: Array=candidates.filter(func(key):return key not in options)
- if fresh.size()>=3:candidates=fresh
- options=shuffled(candidates).slice(0,3)
+ if phase!="draft" or dice<=0:return false
+ var replacement:=draft_options(options)
+ if replacement.size()!=3:return false
+ options=replacement
  dice-=1
  return true
 
@@ -180,7 +198,7 @@ func can_reroll_offer() -> bool:
     var card: CardData=Match.CARD_DATA[key]
     if card.collectible and not card.neutral_deck_only and key not in options:return true
    return false
-  "item":return not item_creatures().is_empty() and pending_item in ["charm","heart","sword","shield","boots"]
+  "item":return not item_creatures().is_empty() and (pending_item=="charm" or pending_item in Items.CREATURE_LOOT)
  return false
 
 func reroll_offer() -> bool:
@@ -201,7 +219,7 @@ func reroll_offer() -> bool:
    if replacement.is_empty():return false
    options=replacement
   "item":
-   var items: Array=["heart","sword","shield","boots"]
+   var items: Array=Items.CREATURE_LOOT.duplicate()
    items.erase(pending_item)
    if items.is_empty():return false
    pending_item=shuffled(items)[0]
@@ -229,12 +247,13 @@ var options: Array = []
 var enemy: Array = []
 var enemy_faction := 0
 var in_combat := false
-const STAGES = ["combat","combat","event","combat","power_event","combat","shop","combat","combat","preparation","preparation","boss"]
+const STAGES = ["combat","combat","event","shop","combat","power_event","combat","fortune","shop","combat","combat","preparation","preparation","boss"]
 
 func rules() -> Dictionary:
  return {"enabled":true,"powers":powers,"enemy_castle_life":enemy_castle_life(),"life_bonus":permanent_life+account_life+(2 if "battle_hardened" in powers else 0),"equipment":equipment,"current_life":current_life,"encounter":encounter,"farm_blessing":farm_blessing_pending or farm_blessing_all_run,"farm_blessing_persistent":farm_blessing_all_run}
 
 func enemy_castle_life() -> int:
+ if encounter=="fortune_ambush":return 16
  var duel_index:=0
  for at in range(mini(step,STAGES.size())):
   if STAGES[at]=="combat":duel_index+=1
@@ -245,6 +264,8 @@ func finish_combat(won: bool, remaining_life: int = -1) -> void:
  saved_duel=null
  victory_sound_pending=won
  reward_message=""
+ victory_gold=0
+ victory_recovery=0
  last_xp_gained=0
  if not won:
   phase="retry" if retries_left>0 else "defeat"
@@ -256,16 +277,22 @@ func finish_combat(won: bool, remaining_life: int = -1) -> void:
   xp_awarded_steps[step]=true
  farm_blessing_pending=false
  if remaining_life >= 0:current_life=clampi(remaining_life,1,max_life())
+ var surviving_life:=current_life
+ var previous_gold:=gold
  heal(ceili(max_life()*0.20))
  gain_victory_gold()
  if encounter=="mimic":
   gold+=3
   extra_item_reward=true
-  reward_message="Tesouro do mímico: 4 ouro, uma carta e um item garantido para aprimorar uma carta do deck."+(" +1 ouro de Tesouro de Guerra." if "combat_gold" in powers else "")
+  reward_message="Você recuperou o tesouro do mímico. Escolha uma carta e depois um equipamento."
  elif encounter=="bandits":
   gold+=2
   extra_item_reward=true
-  reward_message="Bandidos vencidos: +2 ouro e um item extras, além da recompensa normal."
+  reward_message="Os bandidos deixaram um equipamento para trás. Escolha uma carta antes de recolhê-lo."
+ elif encounter=="fortune_ambush":
+  reward_message="Os guardiões do santuário tombaram. A saída está livre."
+ victory_gold=gold-previous_gold
+ victory_recovery=current_life-surviving_life
  encounter=""
  phase="reward"
  options=reward_options(enemy_faction)
@@ -274,6 +301,7 @@ func advance() -> void:
  encounter=""
  pending_item=""
  event_art=""
+ event_claimed=false
  preparation_active=false
  step+=1
  options.clear()
@@ -306,8 +334,9 @@ func grant_vitality() -> void:
 
 func enemy_deck_for(f: int, at: int) -> Array:
  var style: int={0:0,3:1,1:2,4:3,5:5,6:6}.get(f,0)
- var meta: Array=Match.default_deck(style)
- if at>=7:return meta
+ var meta: Array=FORTUNE_GUARDIANS+["defiled_crypt","rotting_guardian","zombie_helper","sepulchral_tide","wastes_bat","wastes_sandstorm"] if f==CardData.Faction.NECROPOLIS else Match.default_deck(style)
+ var duel_number: int=STAGES.slice(0,mini(at+1,STAGES.size())).count("combat")
+ if duel_number>=5:return meta
  # Early opponents have short, low-impact lists; later tiers gain meta synergies.
  var pool: Array=[]
  for key in Match.CARD_DATA:
@@ -317,8 +346,8 @@ func enemy_deck_for(f: int, at: int) -> Array:
  pool=shuffled(pool)
  pool.sort_custom(func(a,b):return Match.CARD_DATA[a].cost<Match.CARD_DATA[b].cost)
  var result: Array=[]
- var target: int=15 if at<=1 else 18 if at<=3 else 20
- var meta_count: int=0 if at<=1 else 6 if at<=3 else 12
+ var target: int=15 if duel_number<=2 else 18 if duel_number<=3 else 20
+ var meta_count: int=0 if duel_number<=2 else 6 if duel_number<=3 else 12
  for key in meta:
   if result.size()>=meta_count:break
   if result.count(key)<Match.copy_limit(key):result.append(key)
@@ -350,7 +379,7 @@ func prepare_item() -> void:
   for key in deck:
    if key not in eligible:eligible.append(key)
   pending_item="charm"
- if pending_item.is_empty():pending_item=shuffled(["heart","sword","shield","boots"])[0]
+ if pending_item.is_empty():pending_item=shuffled(Items.CREATURE_LOOT)[0]
  options=shuffled(eligible).slice(0,3)
  phase="item"
 
@@ -366,24 +395,98 @@ func apply_item(key: String) -> bool:
 
 func resolve_bridge(choice: String) -> bool:
  if phase!="bridge":return false
+ if choice=="river":return resolve_river()
  match choice:
   "pay":
+   if gold<=0:return false
    var paid: int=gold;gold=0;heal(ceili(max_life()*0.10))
    event_message="Você pagou %d ouro e recuperou 10%% da vida máxima." % paid
-  "flee":
-   var damage: int=ceili(max_life()*0.10) if rng.randf()<0.5 else 0
-   current_life=maxi(1,current_life-damage)
-   var bonus: String="nenhum bônus desta vez"
-   if rng.randf()<0.5:
-    if rng.randf()<0.5:gold+=1;bonus="+1 ouro"
-    else:grant_vitality();bonus="+1 vida máxima"
-   event_message="Fuga: %d de dano (não letal); %s." % [damage,bonus]
+  "flee":return resolve_river()
   "fight":
    encounter="bandits";enemy_faction=3
    enemy=enemy_deck_for(3,5);in_combat=true;phase="combat"
    return true
   _:return false
  phase="event_result"
+ return true
+
+const RIVER_CREATURES=["adventure_river_fish","adventure_river_turtle"]
+
+static func river_outcome_for_roll(roll: int) -> String:
+ return "negative" if roll<50 else "positive" if roll<75 else "treasure"
+
+func resolve_river() -> bool:
+ if phase not in ["bridge","river"] or event_claimed:return false
+ event_claimed=true;river_visits+=1
+ river_outcome=river_outcome_for_roll(rng.randi_range(0,99))
+ event_art="river"
+ match river_outcome:
+  "negative":
+   if gold>0 and rng.randf()<0.5:
+    var lost: int=mini(gold,rng.randi_range(1,2));gold-=lost
+    event_message="A correnteza arranca uma bolsa de sua bagagem. Você perde %d ouro, mas todos alcançam a margem." % lost
+   else:
+    var lost: int=mini(maxi(0,current_life-1),ceili(max_life()*0.15));current_life-=lost
+    event_message="Pedras escorregadias tornam a travessia difícil. Você perde %d de vida. O dano nunca é letal." % lost
+  "positive":
+   options=RIVER_CREATURES.duplicate();phase="river_recruit"
+   event_message="Na margem tranquila, uma criatura do rio se aproxima. Escolha um companheiro sem facção para sua expedição."
+   return true
+  "treasure":
+   var found: int=rng.randi_range(4,6);gold+=found
+   extra_item_reward=true
+   event_message="Sob as raízes da margem, você encontra um cofre perdido: %d ouro e um item para aprimorar suas cartas." % found
+ phase="event_result"
+ return true
+
+func recruit_from_river(key: String) -> bool:
+ if phase!="river_recruit" or key not in options or key not in RIVER_CREATURES:return false
+ add_card_to_deck(key);apply_account_creature_bonuses()
+ event_message="%s se junta à expedição. Criaturas sem facção só são recrutadas em encontros e podem receber itens normalmente." % Match.CARD_DATA[key].title
+ options.clear();phase="event_result"
+ return true
+
+func resolve_fortune() -> bool:
+ if phase!="fortune" or event_claimed or gold<FORTUNE_PRICE:return false
+ gold-=FORTUNE_PRICE
+ event_claimed=true;event_art="fortune"
+ fortune_outcome="luck" if rng.randi_range(0,99)<50 else "setback"
+ var effect: int=rng.randi_range(0,2)
+ if fortune_outcome=="luck":
+  if effect==0:
+   var found: int=rng.randi_range(2,4);gold+=found
+   event_message="Sorte! Uma bolsa esquecida sob a pedra guarda %d ouro." % found
+  elif effect==1:
+   var recovered: int=mini(max_life()-current_life,ceili(max_life()*0.25));heal(recovered);dice+=1
+   event_message="Sorte! Uma brisa revigorante restaura %d de vida e você encontra +1 dado para trocar ofertas." % recovered
+  else:
+   extra_item_reward=true;gold+=1
+   event_message="Sorte! O santuário revela um equipamento preservado e 1 ouro. Escolha uma carta para receber o item."
+ else:
+  if effect==0:
+   fortune_outcome="ambush"
+   event_message="Revés! A oferenda desperta os guardiões mortos do santuário. Eles cercam a saída."
+  elif effect==1 and dice>0:
+   dice-=1
+   event_message="Revés! Um dado desaparece entre as raízes do santuário. Você perde 1 dado."
+  else:
+   var hurt: int=mini(maxi(0,current_life-1),ceili(max_life()*0.15));current_life-=hurt
+   event_message="Revés! A tempestade causa %d de dano à expedição." % hurt if hurt>0 else "Revés! A tempestade leva sua oferenda. Você escapa sem novos ferimentos."
+ phase="event_result"
+ return true
+
+func start_fortune_ambush() -> bool:
+ if phase!="event_result" or event_art!="fortune" or fortune_outcome!="ambush":return false
+ encounter="fortune_ambush"
+ enemy_faction=CardData.Faction.NECROPOLIS
+ enemy=FORTUNE_GUARDIANS.duplicate()
+ in_combat=true
+ phase="combat"
+ return true
+
+func leave_fortune() -> bool:
+ if phase!="fortune" or event_claimed:return false
+ advance()
  return true
 
 func resolve_chest() -> String:
@@ -406,9 +509,9 @@ func ensure_routes() -> void:
   if kind=="boss":
    row=[{"kind":"boss","faction":5,"deck":Match.default_deck(5),"portrait":"adventure_black_dragon"}]
   elif kind=="preparation":
-   row=[{"kind":"power_event","portrait":"","preparation":true},{"kind":"healer","portrait":"cleric","preparation":true},{"kind":"shop","portrait":"wise_merchant","preparation":true}] if at==9 else [{"kind":"item","portrait":"wall_smith","preparation":true},{"kind":"healer","portrait":"cleric","preparation":true}]
+   row=[{"kind":"power_event","portrait":"","preparation":true},{"kind":"healer","portrait":"cleric","preparation":true}] if at==STAGES.size()-3 else [{"kind":"item","portrait":"wall_smith","preparation":true},{"kind":"healer","portrait":"cleric","preparation":true}]
   elif kind=="combat":
-   for f in shuffled([0,1,3,4,5,6]).slice(0,2):
+   for f in shuffled(PRIMARY_FACTIONS).slice(0,2):
     var cards: Array=enemy_deck_for(f,at)
     var portrait: String=""
     for key in cards:
@@ -417,26 +520,30 @@ func ensure_routes() -> void:
     row.append({"kind":kind,"faction":f,"deck":cards,"portrait":portrait})
   elif kind=="power_event":row=[{"kind":"power_event","portrait":""},{"kind":"farm","portrait":"generous_peasant"}]
   elif kind=="shop":row=[{"kind":"shop","portrait":"wise_merchant"},{"kind":"healer","portrait":"cleric"}]
+  elif kind=="fortune":row=[{"kind":"fortune","portrait":""},{"kind":"healer","portrait":"cleric"},{"kind":"treasure","portrait":""}]
   else:row=[{"kind":"treasure","portrait":"generous_peasant"},{"kind":"healer","portrait":"cleric"}]
   # Wider branches in the first half, narrowing back to two paths near the end.
 
   if at==2:
-   row.append({"kind":"item","portrait":"wall_smith"})
-   row.append({"kind":"bridge","portrait":"lightning_rogue"})
+   row=[{"kind":"bridge","portrait":"lightning_rogue"},{"kind":"river","portrait":"adventure_river_fish"}]
 
-  if at==4:
+  if kind=="power_event":
    row.append({"kind":"chest","portrait":""})
    row.append({"kind":"item","portrait":"wall_smith"})
-  if at==6:row.append({"kind":"item","portrait":"wall_smith"})
 
   route_rows.append(row)
 
 func linked(at: int, source: int, target: int) -> bool:
+ if at<0 or at>=route_rows.size()-1:return false
  var a: int=route_rows[at].size();var b: int=route_rows[at+1].size()
+ if source<0 or source>=a or target<0 or target>=b:return false
+ if STAGES[at+1]=="fortune":return true
  # Each route has neighbours; expansion and convergence are actual connections.
- return target==clampi(roundi(float(source)*float(b-1)/maxi(1,a-1)),0,b-1) or absi(source-target)<=1
+ var nearest: int=clampi(roundi(float(source)*float(b-1)/maxi(1,a-1)),0,b-1)
+ return absi(target-nearest)<=1
 
 func route_available(index: int) -> bool:
+ if step<0 or step>=route_rows.size() or index<0 or index>=route_rows[step].size():return false
  if step==0 or not chosen_routes.has(step-1):return true
  return linked(step-1,int(chosen_routes[step-1]),index)
 
@@ -523,9 +630,11 @@ func generate_shop() -> void:
   var premium: Array=available.filter(func(key):return Match.CARD_DATA[key].card_type==CardData.CardType.CREATURE)
   premium=premium_pool_for_roll(premium,rng.randf())
   if not premium.is_empty():
-   shop_premium_key=Items.enhance(apply_card_items(shuffled(premium)[0]),shuffled(["heart","sword","shield","boots"])[0])
-   shop_premium_price=market_price(shop_premium_key,true)
+   shop_premium_key=Items.enhance(apply_card_items(shuffled(premium)[0]),shuffled(Items.CREATURE_LOOT)[0])
  phase="shop"
+
+static func merchant_at(at: int) -> Dictionary:
+ return MERCHANTS[0 if at<=STAGES.find("shop") else 1]
 
 func premium_pool_for_roll(available: Array,roll: float) -> Array:
  var initial: int=int(shop_groups[0].factions[0]) if not shop_groups.is_empty() else faction
@@ -551,24 +660,27 @@ func generate_shop_groups(available: Array) -> void:
  var extras: Array=[]
  for key in deck:
   var origin: int=Match.CARD_DATA[key].faction
-  if origin not in [initial,CardData.Faction.VILLAGER,CardData.Faction.WASTES] and origin not in extras:extras.append(origin)
+  if origin not in [initial,CardData.Faction.VILLAGER,CardData.Faction.WASTES,CardData.Faction.UNALIGNED] and origin not in extras:extras.append(origin)
  var initial_pool: Array=available.filter(func(key):return Match.CARD_DATA[key].faction==initial)
  var extra_pool: Array=available.filter(func(key):return Match.CARD_DATA[key].faction in extras)
  var other_pool: Array=available.filter(func(key):return Match.CARD_DATA[key].faction!=initial and Match.CARD_DATA[key].faction not in extras)
  var used: Array=[]
  shop_groups=[]
- for spec in [{"kind":"initial","factions":[initial],"pool":initial_pool,"novel":true},{"kind":"extra","factions":extras,"pool":extra_pool,"novel":true},{"kind":"other","factions":[],"pool":other_pool,"novel":false}]:
+ var groups: Array=[{"kind":"initial","factions":[initial],"pool":initial_pool,"novel":true},{"kind":"extra","factions":extras,"pool":extra_pool,"novel":true},{"kind":"other","factions":[],"pool":other_pool,"novel":false}]
+ for index in range(groups.size()):
+  var spec: Dictionary=groups[index]
+  var count: int=SHOP_GROUP_COUNTS[index]
   var pool: Array=spec.pool
   var fallback: bool=pool.is_empty()
   if fallback:pool=other_pool.filter(func(key):return Match.CARD_DATA[key].faction not in [CardData.Faction.VILLAGER,CardData.Faction.WASTES]) if spec.kind=="extra" else available
-  var cards:=shop_group_choices(pool,used,bool(spec.novel))
-  if cards.size()<3:
-   cards.append_array(shop_group_choices(available,used+cards,false,3-cards.size()))
+  var cards:=shop_group_choices(pool,used,bool(spec.novel),count)
+  if cards.size()<count:
+   cards.append_array(shop_group_choices(available,used+cards,false,count-cards.size()))
   used.append_array(cards)
   shop_groups.append({"kind":spec.kind,"factions":spec.factions.duplicate(),"fallback":fallback,"cards":cards})
  options=used
 
-func shop_group_choices(pool: Array,used: Array,novel: bool,count: int=3) -> Array:
+func shop_group_choices(pool: Array,used: Array,novel: bool,count: int) -> Array:
  var candidates:=shuffled(pool.filter(func(key):return key not in used))
  var result: Array=[]
  if novel:
@@ -579,8 +691,10 @@ func shop_group_choices(pool: Array,used: Array,novel: bool,count: int=3) -> Arr
  return shuffled(result)
 
 func buy_premium_card(key: String) -> bool:
- if phase!="shop" or shop_premium_sold or key.is_empty() or key!=shop_premium_key or gold<shop_premium_price:return false
- gold-=shop_premium_price
+ if phase!="shop" or shop_premium_sold or key.is_empty() or key!=shop_premium_key:return false
+ var price:=market_price(key,true)
+ if gold<price:return false
+ gold-=price
  var base: String=Items.base_key(key)
  var item: String=Match.CARD_DATA[key].get_meta("adventure_items").back()
  if item=="boots_attack":item="boots"
@@ -593,7 +707,9 @@ func buy_premium_card(key: String) -> bool:
 
 
 func market_price(key: String,with_item: bool=false) -> int:
- return mini(5,clampi(Match.CARD_DATA[key].cost,1,3)+(2 if with_item else 0))
+ var mana: int=Match.CARD_DATA[key].cost
+ var base_price:=1 if mana<=2 else 2 if mana<=4 else 3
+ return base_price+(2 if with_item else 0)
 
 func add_card_to_deck(key: String) -> String:
  var improved:=apply_card_items(key)

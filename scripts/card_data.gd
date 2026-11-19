@@ -2,7 +2,7 @@
 class_name CardData
 extends Resource
 
-enum Faction { WARRIOR, MAGE, VILLAGER, LADINO, CLERIC, RUIN, WILD, NECROPOLIS, WASTES }
+enum Faction { WARRIOR, MAGE, VILLAGER, LADINO, CLERIC, RUIN, WILD, NECROPOLIS, WASTES, UNALIGNED }
 enum CreatureType { HUMAN, BEAST, ARTIFACT, MONSTER, UNDEAD, ELF, DWARF }
 enum CardType { CREATURE, SPELL }
 enum SpellEffect { NONE, FORTIFY, ARCANE, SHADOW_STEP, RESTORE, VIGOR, CONDUCTIVE, RECONSTRUCT, AREA_ARCANE, RUIN_ROAR, MAGIC_MISSILES, ROOTS, NATURE_REGEN, GRANT_PACK, DRAGON_POISON, DRAGON_ACID, CASTLE_TRAP, SEPULCHRAL_TIDE, SANDSTORM, WAR_PAINT }
@@ -40,6 +40,11 @@ enum EntryEffect { NONE, BUFF_ALLY, ARMOR_ALLY, SUMMON, POISON_ENEMY, BUFF_OTHER
 @export_multiline var ability_text: String = "Sem habilidades":
  set(value):
   ability_text = value
+  emit_changed()
+
+@export var adventure_only: bool=false:
+ set(value):
+  adventure_only=value
   emit_changed()
 
 @export_range(0, 10) var antimagic: int = 0:
@@ -402,12 +407,12 @@ func combat_data() -> Dictionary:
 func ability_entries(remaining_block: int = -1, magic_bonus: int = 0, remaining_armor: int = -1, granted_vigor: bool = false, poison_stacks: int = 0, received_aura_attack: int = 0, remaining_antimagic: int = -1) -> Array[Dictionary]:
  var entries: Array[Dictionary] = []
  if collective:
-  entries.append({"name":"Multidão","icon":"collective-icon","badge":"Collective","value":attack,"description":"Ataque e vida base iguais ao número de aliados da Aldeia em campo, incluindo esta criatura. Herda as habilidades dos OUTROS ALIADOS DA ALDEIA, exceto Chamados. Valores compatíveis somam; habilidades únicas não acumulam. Atualiza enquanto as fontes estiverem em campo. Bônus permanentes e dano sofrido são preservados. Não copia outras Multidões nem raridade."})
+  entries.append({"name":"Multidão","icon":"collective-icon","badge":"Collective","value":attack,"description":"Ataque e vida base iguais ao número de aliados da Aldeia em campo. Herda as habilidades dos outros aliados da Aldeia. Valores compatíveis somam; habilidades únicas não acumulam."})
  if card_type == CardType.SPELL:
   var entry := {"cost":cost,"spell":true,"name":"Magia","description":"Escolha um efeito de magia no campo Spell Effect do Inspector."}
   match spell_effect:
    SpellEffect.CASTLE_TRAP:
-    entry.merge({"name":"Armadilha: %d de dano físico\nao 1º ou 2º atacante do castelo." % spell_value,"icon":"trap-icon","description":"Escolha secretamente o 1º ou o 2º próximo ataque de criatura ao seu castelo. Antes do golpe, a armadilha causa %d de dano físico ao atacante, reduzido por Armadura. Também conta Disparo Místico/Arcano. Se a criatura morrer, o golpe é cancelado. Permanece até disparar ou ser desarmada por um card; magias da mão e ataques a criaturas não contam." % spell_value},true)
+    entry.merge({"name":"Armadilha: %d de dano físico\nao 1º ou 2º atacante do castelo." % spell_value,"icon":"trap-icon","description":"Escolha secretamente o 1º ou o 2º próximo ataque de criatura ao seu castelo. Antes do golpe, a armadilha causa %d de dano físico ao atacante. Se a criatura morrer, o golpe é cancelado. Permanece até disparar ou ser desarmada por um card; magias da mão e ataques a criaturas não contam." % spell_value},true)
    SpellEffect.GRANT_PACK:
     entry.merge({"name":"Todas as criaturas ganham\nMatilha 1.","icon":"pack-icon","description":"Todas as criaturas em campo recebem Matilha 1, inclusive inimigas; criaturas imunes a magias não são afetadas."},true)
    SpellEffect.ROOTS:
@@ -426,7 +431,7 @@ func ability_entries(remaining_block: int = -1, magic_bonus: int = 0, remaining_
    SpellEffect.SANDSTORM:
     entry.merge({"name":"Cause %d de dano mágico a todos,\nexceto criaturas dos Ermos." % (spell_value+magic_bonus),"icon":"sandstorm-icon","description":"Cause %d de dano mágico aos dois castelos e a todas as criaturas, exceto as da facção Ermos, independentemente do lado. Ignora Armadura; Antimagia e imunidade a magia protegem. Amplificar aumenta o dano." % (spell_value+magic_bonus)},true)
    SpellEffect.SEPULCHRAL_TIDE:
-    entry.merge({"name":"Cause %d de dano necrótico aos inimigos.\nCure %d de todos os Mortos-vivos." % [spell_value+magic_bonus,spell_value+magic_bonus],"icon":"necrotic-icon","description":"Aplica %d de dano necrótico a todas as criaturas inimigas e a todos os Mortos-vivos dos dois lados. Dano necrótico restaura a vida de Mortos-vivos até o máximo, ignora Artefatos e causa dano aos demais tipos, ignorando Armadura. Amplificar aumenta o valor; Antimagia protege contra o dano e imunidade a magia impede o efeito. Não atinge castelos. A restauração não remove Veneno/Sangramento nem ativa Devoção." % (spell_value+magic_bonus)},true)
+    entry.merge({"name":"Cause %d de dano necrótico aos inimigos.\nCure %d de todos os Mortos-vivos." % [spell_value+magic_bonus,spell_value+magic_bonus],"icon":"necrotic-icon","description":"Aplica %d de dano necrótico a todas as criaturas inimigas e a todos os Mortos-vivos dos dois lados. Dano necrótico restaura a vida de Mortos-vivos até o máximo, ignora Artefatos e causa dano aos demais tipos, ignorando Armadura." % (spell_value+magic_bonus)},true)
    SpellEffect.AREA_ARCANE:
     entry.merge({"name":"Cause %d de dano mágico\na todas as criaturas inimigas." % (spell_value+magic_bonus),"icon":"arcane-icon","description":"Cause %d de dano mágico a todas as criaturas inimigas. Ignora Armadura, sem contra-ataque." % (spell_value+magic_bonus)},true)
    SpellEffect.RECONSTRUCT:
@@ -436,7 +441,7 @@ func ability_entries(remaining_block: int = -1, magic_bonus: int = 0, remaining_
    SpellEffect.CONDUCTIVE:
     entry.merge({"name":"Cause %d de dano mágico a uma\ncriatura; dobre se tiver Armadura." % (spell_value+magic_bonus),"icon":"lightning-icon","description":"Cause %d de dano mágico a uma criatura inimiga. Se ela tiver Armadura maior que zero, dobre o dano para %d. O bônus de Amplificar entra antes da multiplicação. Armadura não é subtraída do dano. Não atinge castelos e não há contra-ataque." % [spell_value+magic_bonus,(spell_value+magic_bonus)*2]},true)
    SpellEffect.FORTIFY:
-    entry.merge({"name":"Dê a um aliado +%d de ataque,\n%d de Armadura e 1 Bloqueio." % [spell_value,spell_secondary],"icon":"fortify-icon","description":"Um aliado ganha +%d de ataque, %d de Armadura e 1 de Bloqueio permanentemente. Bloqueio recupera todas as cargas no início de cada turno." % [spell_value,spell_secondary]},true)
+    entry.merge({"name":"Dê a um aliado +%d de ataque\ne %d de Armadura." % [spell_value,spell_secondary],"icon":"fortify-icon","description":"Um aliado ganha +%d de ataque e %d de Armadura permanentemente." % [spell_value,spell_secondary]},true)
    SpellEffect.ARCANE:
     entry.merge({"name":"Cause %d de dano mágico\na uma criatura ou castelo inimigo." % (spell_value+magic_bonus),"icon":"arcane-icon","description":"Cause %d de dano mágico a uma criatura ou ao castelo inimigo. Ignora Armadura e Bloqueio, sem contra-ataque." % (spell_value+magic_bonus)},true)
    SpellEffect.SHADOW_STEP:
@@ -549,7 +554,7 @@ func ability_entries(remaining_block: int = -1, magic_bonus: int = 0, remaining_
  if spores>0:
   entries.append({"name":"Esporos %d" % spores,"icon":"spores-icon","badge":"Spores","value":spores,"description":"No início do seu turno, todos os OUTROS Monstros e Feras aliados em campo ganham +%d de vida atual e máxima. Não afeta a própria fonte. Cada criatura recebe o bônus uma vez por fonte. Acumula; não é Cura nem Cultivo." % spores})
  if regeneration>0:
-  entries.append({"name":"Regeneração %d" % regeneration,"icon":"regeneration-icon","badge":"Regeneration","value":regeneration,"description":"No fim do seu turno, após o Veneno, recupera %d de vida até a vida máxima. Não é Cura: não ativa Devoção nem remove Veneno ou Sangramento." % regeneration})
+  entries.append({"name":"Regeneração %d" % regeneration,"icon":"regeneration-icon","badge":"Regeneration","value":regeneration,"description":"No fim do seu turno, após o Veneno, recupera %d de vida até a vida máxima." % regeneration})
  if resonance > 0:
   entries.append({"name":"Ressonância %d" % resonance,"icon":"resonance-icon","badge":"Resonance","value":resonance,"description":"Sempre que você conjurar uma magia ou usar uma habilidade de dano mágico ou necrótico, ganha +%d/+%d até o início do seu próximo turno. Os bônus acumulam e expiram juntos, preservando no mínimo 1 de vida atual. Ativa uma vez por ação, inclusive se o dano for anulado." % [resonance,resonance]})
  if rural_pride > 0:
@@ -574,7 +579,7 @@ func ability_entries(remaining_block: int = -1, magic_bonus: int = 0, remaining_
  if envenom > 0:
   entries.append({"name":"Envenenar %d" % envenom,"badge":"Envenom","value":envenom,"icon":"envenom-icon","description":"Ataques e contra-ataques físicos aplicam %d de Veneno a criaturas, mesmo se Armadura absorver o dano. No fim do turno do alvo, causa dano ignorando Armadura e termina. Magia não aplica Veneno." % envenom})
  if bleed > 0:
-  entries.append({"name":"Sangrar %d" % bleed,"badge":"Bleed","value":bleed,"icon":"bleed-icon","description":"Ao atacar ou contra-atacar, aplica %d de Sangramento à criatura adversária. Acumula. Após cada ação da criatura, ela perde essa quantidade de vida, ignorando Armadura. Dura até o fim do turno do dono; Cura remove. Muralhas são imunes." % bleed})
+  entries.append({"name":"Sangrar %d" % bleed,"badge":"Bleed","value":bleed,"icon":"bleed-icon","description":"Ao atacar ou contra-atacar, aplica %d de Sangramento à criatura adversária. Acumula. Após cada ação da criatura, ela perde essa quantidade de vida, ignorando Armadura. Dura até o fim do turno do dono." % bleed})
  if received_aura_attack>0:
   entries.append({"name":"Bônus de Aura","icon":"aura-icon","badge":"AuraBonus","value":"+%d" % received_aura_attack,"runtime":true,"description":"Recebe +%d de ataque de Auras aliadas. Esse bônus é temporário e desaparece quando as fontes correspondentes saem do campo." % received_aura_attack})
  if poison_stacks > 0:

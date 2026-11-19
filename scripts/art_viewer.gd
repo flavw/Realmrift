@@ -3,20 +3,32 @@ extends CanvasLayer
 var artwork: TextureRect
 var lore_title: Label
 var lore_text: Label
+var event_mode := false
+var event_caption: Label
 
 static func is_open(owner: Node) -> bool:
  var tree_root := owner.get_tree().root
  return tree_root.has_meta("card_art_viewer") and is_instance_valid(tree_root.get_meta("card_art_viewer"))
 
 static func open(owner: Node, data: CardData) -> void:
- if data == null or data.artwork == null or is_open(owner):
-  return
- var viewer = load("res://scripts/art_viewer.gd").new()
- owner.get_tree().root.add_child(viewer)
- viewer.artwork.texture = data.artwork
+ if data == null:return
+ var viewer = open_artwork(owner,data.artwork,false)
+ if viewer == null:return
  viewer.lore_title.text = data.title
  viewer.lore_text.text = data.lore
+
+static func open_event(owner: Node, texture: Texture2D, caption: String) -> void:
+ var viewer = open_artwork(owner,texture,true)
+ if viewer != null:viewer.event_caption.text = caption
+
+static func open_artwork(owner: Node, texture: Texture2D, for_event: bool):
+ if texture == null or is_open(owner):return null
+ var viewer = load("res://scripts/art_viewer.gd").new()
+ viewer.event_mode = for_event
+ owner.get_tree().root.add_child(viewer)
+ viewer.artwork.texture = texture
  owner.get_tree().root.set_meta("card_art_viewer",viewer)
+ return viewer
 
 func _ready() -> void:
  layer = 90
@@ -29,6 +41,9 @@ func _ready() -> void:
  artwork.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
  artwork.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
  artwork.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ if event_mode:
+  layout_event(backdrop)
+  return
  backdrop.add_child(artwork)
  artwork.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
  artwork.anchor_right=0.72
@@ -60,6 +75,29 @@ func _ready() -> void:
  lore_text.add_theme_font_size_override("font_size",20)
  lore_text.add_theme_color_override("font_color",Color("e0d9c9"))
  column.add_child(lore_text)
+
+func layout_event(backdrop: Control) -> void:
+ var layout := VBoxContainer.new()
+ layout.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ layout.add_theme_constant_override("separation",8)
+ backdrop.add_child(layout)
+ layout.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+ layout.offset_left = 16
+ layout.offset_right = -16
+ layout.offset_top = 12
+ layout.offset_bottom = -12
+ artwork.size_flags_vertical = Control.SIZE_EXPAND_FILL
+ layout.add_child(artwork)
+
+ event_caption = Label.new()
+ event_caption.name = "EventArtCaption"
+ event_caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ event_caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+ event_caption.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+ event_caption.add_theme_font_override("font",preload("res://assets/fonts/card_title_font.tres"))
+ event_caption.add_theme_font_size_override("font_size",22)
+ event_caption.add_theme_color_override("font_color",Color("e8d3ab"))
+ layout.add_child(event_caption)
 
 func _input(event: InputEvent) -> void:
  if event is InputEventMouseButton and event.pressed:

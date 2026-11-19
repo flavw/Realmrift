@@ -87,7 +87,7 @@ Prévia e ajuda surgem após 250 ms. Clique com o botão direito para ver a ilus
 MAGIAS E ARQUÉTIPOS
 A coleção agora tem 38 cartas: 30 criaturas e 8 magias. Magias são de uso único: clique na carta da magia e escolha o alvo permitido quando solicitado. Dano em área é automático; Reconstrução pede alvo quando houver Muralhas aliadas. Cancelar ou clicar num alvo inválido não gasta mana nem a carta. Magias não ocupam campo e funcionam mesmo com seis criaturas. Não têm ataque/vida.
 
-Postura de Ferro (Vanguarda, 2 mana): uma criatura aliada ganha +1 ataque, +1 Armadura e +1 Bloqueio permanentes, sem mudar sua prontidão.
+Postura de Ferro (Vanguarda, 2 mana): uma criatura aliada ganha +1 ataque e +1 Armadura permanentes, sem mudar sua prontidão.
 Chama Astral (Arcano, 3 mana): causa 3 de dano mágico a uma criatura inimiga, ignorando Armadura e Bloqueio e sem contra-ataque. Não atinge castelos.
 Passo das Sombras (Submundo, 1 mana): uma criatura aliada ganha +1 de ataque, Voo e Disparada até o fim do turno. Disparada permite que uma criatura recém-invocada ataque se ainda não tiver atacado ou usado uma habilidade que esgota. Fúria não impede a Disparada. Não deixa pronta uma criatura que já esgotou ao agir. Voo permite ignorar Bloqueio.
 Luz Restauradora (Luminares, 2 mana): cura até 4 de vida de uma criatura aliada ou seu castelo, respeitando a vida máxima. Não esgota criaturas. Alvos cheios ou inimigos não são permitidos.

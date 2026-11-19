@@ -8,6 +8,7 @@ func shortcut(ctrl: bool=true,shift: bool=true) -> InputEventKey:
 func cleanup_audio(main) -> void:
  for player in main.sounds.values():player.stop();player.stream=null
 func verify() -> void:
+ preload("res://scripts/adventure_save.gd").enabled=false
  var run=State.new();run.deck=Match.default_deck(0).slice(0,15);run.phase="map";run.step=6;State.current=run
  var view=load("res://adventure.tscn").instantiate();root.add_child(view)
  await process_frame;await process_frame;await process_frame
@@ -17,8 +18,7 @@ func verify() -> void:
    var kind: String=run.route_rows[at][branch].kind
    if kind not in found:continue
    var art=view.find_child("Route_%d_%d" % [at,branch],true,false).get_child(0)
-   assert(art.texture.resource_path=="res://assets/ui/adventure-%s-icon.svg" % ("merchant" if kind=="shop" else "healer"))
-   assert(art.material.get_shader_parameter("crop")==Vector2.ONE)
+   assert(art.texture.resource_path==(State.merchant_at(at).art if kind=="shop" else "res://assets/ui/adventure-healer-icon.svg"))
    found[kind]=true
  assert(found.shop and found.healer)
  if DisplayServer.get_name()!="headless":root.get_texture().get_image().save_png("res://.local/adventure-services-map.png")
@@ -32,7 +32,7 @@ func verify() -> void:
  assert(not main.playtest_win())
  cleanup_audio(main);main.queue_free();await process_frame;await process_frame
  for encounter in ["mimic","black_dragon"]:
-  run=State.new();run.deck=Match.default_deck(0).slice(0,15);run.enemy=Match.default_deck(1);run.step=11 if encounter=="black_dragon" else 4;run.current_life=8;run.encounter=encounter;run.phase="combat";run.in_combat=true;State.current=run
+  run=State.new();run.deck=Match.default_deck(0).slice(0,15);run.enemy=Match.default_deck(1);run.step=State.STAGES.size()-1 if encounter=="black_dragon" else State.STAGES.find("power_event");run.current_life=8;run.encounter=encounter;run.phase="combat";run.in_combat=true;State.current=run
   main=load("res://main.tscn").instantiate();main.starting_player=0;root.add_child(main)
   assert(main.duel.opening and main.mulligan_layer!=null)
   var boss: int=main.duel.creature_boss_id

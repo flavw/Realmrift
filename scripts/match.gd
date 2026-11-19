@@ -4,6 +4,8 @@ extends RefCounted
 const MAX_HAND_SIZE := 7
 
 static var CARD_DATA = {
+ "adventure_river_fish": preload("res://cards/adventure_river_fish.tres"),
+ "adventure_river_turtle": preload("res://cards/adventure_river_turtle.tres"),
  "gallant_farmer": preload("res://cards/gallant_farmer.tres"),
  "ruin_worg": preload("res://cards/ruin_worg.tres"),
  "wastes_anubite_stalker": preload("res://cards/wastes_anubite_stalker.tres"),
@@ -145,6 +147,7 @@ var first_player := 0
 var opening := false
 var mulligan_done: Array[bool] = [true,true]
 var mulligan_rounds: Array[int]=[0,0]
+var multiplayer_names: Array=[]
 
 const DECK_NAMES=["Baluarte das Cicatrizes", "Caçada das Brumas", "Círculo Arcano", "Aurora Vital", "União da Colheita", "Ruína dos Ermos", "Aliança da Floresta", "Ecos das Dunas"]
 static func default_deck_name(style: int=0) -> String:
@@ -252,7 +255,8 @@ static func valid_deck(cards: Array,enforce_faction: bool=true,required_size: in
    return false
  return not enforce_faction or (deck_faction(cards)!=-2 and restrictions_met(cards))
 
-func _init(player_deck: Array = [], ai_deck: Array = [], starting_side: int = 0, with_mulligan: bool = false, rules: Dictionary = {}) -> void:
+func _init(player_deck: Array = [], ai_deck: Array = [], starting_side: int = 0, with_mulligan: bool = false, rules: Dictionary = {}, names: Array = []) -> void:
+ multiplayer_names=names.duplicate()
  adventure_rules = rules.duplicate(true)
  first_player = clampi(starting_side,0,1)
  turn = first_player
@@ -262,7 +266,7 @@ func _init(player_deck: Array = [], ai_deck: Array = [], starting_side: int = 0,
  for side in range(2):
   var deck: Array[String] = []
   var supplied: Array = player_deck if side == 0 else ai_deck
-  var is_adventure_deck: bool = adventure_rules.get("enabled",false) and supplied.size() >= 15 and supplied.all(func(key):return CARD_DATA.has(key) and (side==1 or CARD_DATA[key].collectible or CARD_DATA[key].has_meta("adventure_items")))
+  var is_adventure_deck: bool = adventure_rules.get("enabled",false) and supplied.size() >= 15 and supplied.all(func(key):return CARD_DATA.has(key) and (side==1 or CARD_DATA[key].collectible or CARD_DATA[key].adventure_only or CARD_DATA[key].has_meta("adventure_items")))
   deck.assign(supplied if is_adventure_deck or valid_deck(supplied) else default_deck(side))
   deck.shuffle()
   players.append({"hp": 20, "mana": 0, "temporary_mana":0, "max_mana": 0, "deck": deck, "hand": [], "board": [], "fatigue": 0,"poison":0,"neutral_deck":deck_faction(deck)==-1})
@@ -303,17 +307,19 @@ func draw(side: int,resolve_result: bool=true) -> void:
   draw_events.append({"side":side,"key":p.hand.back()})
   if side == 0 and not opening and turn == 0 and "draw_attack" in adventure_rules.get("powers",[]):
    for unit in p.board:unit["turn_attack"] = int(unit.get("turn_attack",0)) + 1
-  log_event("%s compra %s." % [side_name(side),CARDS[p.hand.back()].name if side==0 else "uma carta"], side)
+  log_event("%s compra %s." % [side_name(side),CARDS[p.hand.back()].name if side==0 and multiplayer_names.is_empty() else "uma carta"], side)
  else:
   var key: String=p.deck.pop_back()
   draw_events.append({"side":side,"key":key,"destroyed":true})
-  log_event("%s: mão cheia, %s destruída." % [side_name(side),CARDS[key].name if side==0 else "carta"], side)
+  log_event("%s: mão cheia, %s destruída." % [side_name(side),CARDS[key].name if side==0 and multiplayer_names.is_empty() else "carta"], side)
  if resolve_result:check_winner()
 
 func side_name(side: int) -> String:
+ if multiplayer_names.size()==2:return multiplayer_names[side]
  return "Você" if side == 0 else "IA"
 
 func castle_name(side: int) -> String:
+ if multiplayer_names.size()==2:return "castelo de %s" % multiplayer_names[side]
  return "castelo aliado" if side == 0 else "castelo inimigo"
 
 func begin_turn() -> void:
@@ -344,7 +350,7 @@ func begin_turn() -> void:
  if turn == 0 and p.max_mana == 1 and "first_mana" in adventure_rules.get("powers",[]):
   p.mana += 1
   p.temporary_mana += 1
- log_event("Seu turno — %d mana." % p.mana if turn == 0 else "Turno da IA — %d mana." % p.mana)
+ log_event("Turno de %s — %d mana." % [side_name(turn),p.mana] if multiplayer_names.size()==2 else "Seu turno — %d mana." % p.mana if turn == 0 else "Turno da IA — %d mana." % p.mana)
  if second_first_turn:
   p.temporary_mana+=1
   p.mana+=1
@@ -1519,9 +1525,6 @@ func cast(side: int, hand_index: int, target_side: int, target: int,trap_choice:
   CardData.SpellEffect.FORTIFY:
    unit.attack += card.spell_value
    unit.armor += card.spell_secondary
-   if unit.get("collective",false):unit.granted_block=int(unit.get("granted_block",0))+1
-   unit.block_capacity = block_capacity(unit) + 1
-   unit.block = int(unit.get("block",0)) + 1
    last_action["armor_gain"]=int(card.spell_secondary)
   CardData.SpellEffect.ARCANE, CardData.SpellEffect.CONDUCTIVE:
    var total: int=spell_damage(side,card,unit)

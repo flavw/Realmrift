@@ -4,14 +4,18 @@ const Profile=preload("res://scripts/adventure_profile.gd")
 const State=preload("res://scripts/adventure_state.gd")
 const Match=preload("res://scripts/match.gd")
 const CardScene=preload("res://card_model.tscn")
+const ArtViewer=preload("res://scripts/art_viewer.gd")
+const TitleFont=preload("res://assets/fonts/card_title_font.tres")
 const Names=preload("res://scripts/faction_names.gd")
 const Save=preload("res://scripts/adventure_save.gd")
 var xp_payout_shown := false
 var run
 var body: VBoxContainer
 var selection_busy := false
+var recent_level_reward := ""
+var level_notice_serial := 0
 var flight_target_key := ""
-const DECK_CHOICE_PHASES=["draft","reward","farm_recruit","item","equip"]
+const DECK_CHOICE_PHASES=["draft","reward","farm_recruit","river_recruit","item","equip"]
 var deck_open := false
 var deck_tween: Tween
 var progress_dialog: AcceptDialog
@@ -34,27 +38,40 @@ func _ready() -> void:
  if run.victory_sound_pending:
   run.victory_sound_pending=false
   call_deferred("play_victory_sound")
-func text(value: String,size: int=22) -> void:
+
+func _unhandled_key_input(event: InputEvent) -> void:
+ if run==null or run.phase!="shop" or selection_busy:return
+ if not event is InputEventKey or not event.pressed or event.echo:return
+ if event.keycode!=KEY_F9 or not event.ctrl_pressed or not event.shift_pressed or event.alt_pressed or event.meta_pressed:return
+ get_viewport().set_input_as_handled()
+ run.gold+=5
+ refresh_market()
+
+func text(value: String,size: int=22,parent: Control=null) -> void:
  var label=Label.new()
  label.text=value
  label.add_theme_font_size_override("font_size",size)
  if size>=26:
-  label.add_theme_font_override("font",preload("res://assets/fonts/At-Dawn-Regular.otf"))
+  label.add_theme_font_override("font",TitleFont)
   label.add_theme_color_override("font_color",Color("ead09a"))
   label.add_theme_color_override("font_shadow_color",Color("050b12"))
   label.add_theme_constant_override("shadow_offset_y",2)
  label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
- body.add_child(label)
-func action(value: String,callback: Callable) -> Button:
+ (body if parent==null else parent).add_child(label)
+func action(value: String,callback: Callable,icon_name: String="",parent: Control=null) -> Button:
  var b=Button.new()
  b.text=value
+ b.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
  b.custom_minimum_size.y=62
+ if not icon_name.is_empty():
+  b.icon=preload("res://scripts/card_skin.gd").texture(icon_name);b.expand_icon=true;b.add_theme_constant_override("icon_max_width",28);b.add_theme_constant_override("h_separation",12)
  b.pressed.connect(callback)
- body.add_child(b)
+ (body if parent==null else parent).add_child(b)
  return b
 func card_label(key: String) -> String:
  var c=Match.CARD_DATA[key]
- return "%s · %s · Mana %d · %d/%d\n%s" % [c.title,Names.PT[c.faction],c.cost,c.attack,c.health,c.ability_text]
+ var rules: String=" · ".join(c.ability_entries().map(func(entry):return entry.get("summary",entry.name)))
+ return "%s · %s · Mana %d · %d/%d\n%s%s" % [c.title,Names.name_for(c.faction),c.cost,c.attack,c.health,"Sem habilidades" if rules.is_empty() else rules,"\nExclusivo da aventura" if c.adventure_only else ""]
 func render() -> void:
  stop_intro_typing()
  if run.phase in ["victory","defeat","abandoned"] and not run.xp_settled:run.settle_xp(run.phase)
@@ -74,14 +91,22 @@ func render() -> void:
  scroll.name="AdventureContentScroll";scroll.offset_left=40;scroll.offset_right=-470 if deck_open else -40;scroll.offset_top=24;scroll.offset_bottom=-24;add_child(scroll)
  body=VBoxContainer.new();body.size_flags_horizontal=Control.SIZE_EXPAND_FILL;body.size_flags_vertical=Control.SIZE_EXPAND_FILL;body.add_theme_constant_override("separation",12);scroll.add_child(body)
  var header:=HBoxContainer.new();header.name="AdventureHeader";body.add_child(header)
- var hud=preload("res://scripts/adventure_hud.gd").new();hud.configure(run);hud.progress_requested.connect(show_progress);header.add_child(hud)
+ if run.phase=="shop":
+  add_merchant_identity(header,State.merchant_at(run.step))
+  add_market_wallet(header)
+ else:
+  var hud=preload("res://scripts/adventure_hud.gd").new();hud.configure(run);hud.progress_requested.connect(show_progress);header.add_child(hud)
  var spacer:=Control.new();spacer.size_flags_horizontal=Control.SIZE_EXPAND_FILL;header.add_child(spacer)
  if run.phase!="shop":
   var title:=Label.new();title.text="Da Vila à Fenda";title.add_theme_font_override("font",preload("res://assets/fonts/At-Dawn-Regular.otf"));title.add_theme_font_size_override("font_size",28);title.modulate=Color("ead09a");header.add_child(title)
+ else:add_leave_market(header)
  var deck_button:=Button.new();deck_button.name="AdventureDeckToggle";deck_button.icon=preload("res://assets/ui/deck-toggle-icon.svg");deck_button.expand_icon=true;deck_button.add_theme_constant_override("icon_max_width",36);deck_button.text=str(run.deck.size());deck_button.tooltip_text="Ocultar deck" if deck_open else "Mostrar deck";deck_button.custom_minimum_size=Vector2(96,54);deck_button.size_flags_vertical=Control.SIZE_SHRINK_CENTER;deck_button.pressed.connect(toggle_deck);header.add_child(deck_button)
  add_expedition_controls(header)
  if deck_open:build_sidebar()
  if run.xp_animation_pending and not xp_payout_shown:call_deferred("show_xp_payout")
+ if not recent_level_reward.is_empty():
+  var receipt:=PanelContainer.new();receipt.name="LevelBonusReceipt";receipt.add_theme_stylebox_override("panel",preload("res://scripts/ui_theme.gd").panel(Color("193b35"),Color("8dbfa4"),12));body.add_child(receipt)
+  var message:=Label.new();message.text=recent_level_reward;message.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;message.add_theme_font_size_override("font_size",18);receipt.add_child(message)
  if run.profile!=null:
   if not run.profile.last_error.is_empty():text(run.profile.last_error,16)
   var choice: Dictionary=run.profile.pending_choice()
@@ -97,13 +122,12 @@ func render() -> void:
   "intro":
    opening_story()
   "farm":
-   encounter_art("farm")
-   text("Fazenda do Vale",28)
-   text("A família recebe sua visita entre os campos. Como você deseja retribuir a hospitalidade?")
-   action("Conversar com os moradores · sem custo",farm_recruits)
-   var gift:=action("Dar um presente · 2 ouro",farm_gift)
+   var choices:=illustrated_encounter("res://assets/ui/adventure-farm.webp","Fazenda do Vale","Pão fresco e conversa à porta da fazenda.")
+   text("A família recebe sua visita entre os campos. Como você deseja retribuir a hospitalidade?",22,choices)
+   action("Conversar com os moradores",farm_recruits,"",choices)
+   var gift:=action("Dar um presente · 2 ouro",farm_gift,"adventure-gold-icon",choices)
    gift.disabled=run.gold<2
-   var grand:=action("Dar um grande presente · 4 ouro",farm_gift.bind(true))
+   var grand:=action("Dar um grande presente · 4 ouro",farm_gift.bind(true),"adventure-gold-icon",choices)
    grand.disabled=run.gold<4
   "farm_recruit":
    text("Escolha uma destas criaturas da Aldeia para seu deck.")
@@ -111,7 +135,7 @@ func render() -> void:
   "faction":
    text("Uma fenda ameaça a pequena Vila do Vale. Escolha sua origem e reúna aliados.")
    text(State.DECK_RULES,18)
-   for f in [0,1,3,4,5,6]:
+   for f in State.STARTING_FACTIONS:
     var choice:=action(Names.PT[f],choose_faction.bind(f))
     choice.icon=preload("res://scripts/card_skin.gd").faction_symbol(f)
     choice.expand_icon=true
@@ -123,51 +147,63 @@ func render() -> void:
    card_choices(run.options, "Recrutar", pick_card)
    add_reroll_button("DraftReroll","Trocar as cartas · custa 1 dado")
   "power","midpower":
-   encounter_art("power_event")
-   text("O despertar do viajante — escolha um poder para esta expedição.")
+   var choices:=illustrated_encounter("res://assets/ui/adventure-power-sanctuary.webp","O despertar do viajante","Uma luz antiga desperta entre as pedras do santuário.")
+   text("Escolha um poder para esta expedição.",22,choices)
    if run.options.is_empty():run.options=run.power_options()
    for p in run.options:
-    var power_button:=action(State.POWERS[p].name+" — "+State.POWERS[p].description,pick_power.bind(p))
+    var power_button:=action(State.POWERS[p].name+"\n"+State.POWERS[p].description,pick_power.bind(p),"",choices)
+    power_button.custom_minimum_size.y=96
     power_button.name="AdventurePower_"+p
     power_button.icon=preload("res://scripts/card_skin.gd").texture(State.POWER_ICONS[p]);power_button.expand_icon=true;power_button.add_theme_constant_override("icon_max_width",38)
-   add_reroll_button("PowerReroll","Trocar os poderes · custa 1 dado")
+   add_reroll_button("PowerReroll","Trocar os poderes · custa 1 dado",choices)
   "map":
-   var map_spacer:=Control.new();map_spacer.name="AdventureMapTopSpace";map_spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL;body.add_child(map_spacer)
-   var map_scroll:=preload("res://scripts/adventure_map_scroll.gd").new();map_scroll.name="AdventureMapScroll";map_scroll.custom_minimum_size.y=740;map_scroll.configure(run);body.add_child(map_scroll)
+   var navigation:=HBoxContainer.new();navigation.add_theme_constant_override("separation",20);body.add_child(navigation)
+   var direction:=Label.new();direction.text=("Travessia obrigatória · ponte ou rio" if run.step==2 else "Arraste o mapa em qualquer direção")+" · etapa %d/%d" % [run.step+1,State.STAGES.size()];direction.add_theme_font_size_override("font_size",16);direction.modulate=Color("b4c9c1");direction.size_flags_horizontal=Control.SIZE_EXPAND_FILL;navigation.add_child(direction)
+   var map_spacer:=Control.new();map_spacer.name="AdventureMapTopSpace";map_spacer.custom_minimum_size.y=4;body.add_child(map_spacer)
+   var map_scroll:=preload("res://scripts/adventure_map_scroll.gd").new();map_scroll.name="AdventureMapScroll";map_scroll.custom_minimum_size.y=740;map_scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL;map_scroll.configure(run);body.add_child(map_scroll)
    var map=preload("res://scripts/adventure_map.gd").new();map.configure(run);map.route_selected.connect(choose_route);map_scroll.add_child(map)
+   var focus:=Button.new();focus.name="LocateAdventureRoute";focus.text="Localizar caminho";focus.pressed.connect(func():
+    var center:=Vector2.ZERO;var count:=0
+    for branch in range(run.route_rows[run.step].size()):
+     if run.route_available(branch):center+=map.node_center(run.step,branch);count+=1
+    center/=maxi(1,count);map_scroll.follow_stage(center.x,center.y+28.0))
+   navigation.add_child(focus)
   "combat":
    text("Há um confronto em andamento neste caminho.")
    action("Retomar confronto",resume_encounter)
   "healer":
-   encounter_art("healer")
-   text("Curandeira · Vida %d/%d" % [run.current_life,run.max_life()])
+   var choices:=illustrated_encounter("res://assets/ui/adventure-healer.webp","Curandeira","À sombra da tenda, a curandeira recebe os feridos.")
+   text("Vida atual: %d/%d" % [run.current_life,run.max_life()],22,choices)
    if run.preparation_active:
-    action("Preparação final · recuperar toda a vida grátis",heal_at_node.bind(false))
+    action("Recuperar toda a vida · grátis",heal_at_node.bind(false),"hud-life",choices)
    else:
-    action("Curar %d de vida · grátis" % ceili(run.max_life()*0.25),heal_at_node.bind(false))
-    var full_heal:=action("Recuperar toda a vida · %d ouro" % run.healer_cost(),heal_at_node.bind(true))
+    var heal_amount: int=mini(run.max_life()-run.current_life,ceili(run.max_life()*0.25))
+    action("Curar %d de vida · grátis" % heal_amount if heal_amount>0 else "Seguir viagem",heal_at_node.bind(false),"hud-life",choices)
+    var full_heal:=action("Recuperar toda a vida · %d ouro" % run.healer_cost(),heal_at_node.bind(true),"adventure-gold-icon",choices)
     full_heal.disabled=run.gold<run.healer_cost()
+    full_heal.visible=heal_amount>0 and run.current_life+heal_amount<run.max_life()
   "treasure":
-   encounter_art("treasure")
-   text("Você encontrou %d ouro no tesouro." % run.treasure_roll)
-   action("Prosseguir",finish_service_encounter)
+   var choices:=illustrated_encounter("res://assets/ui/adventure-chest.webp","Tesouro da estrada","O brilho do ouro denuncia o esconderijo.")
+   text("Você encontrou %d ouro no tesouro." % run.treasure_roll,22,choices)
+   action("Prosseguir",finish_service_encounter,"",choices)
   "reward":
-   text("Vitória! +%d XP acumulado nesta expedição. Receba seu ouro e recrute um aliado de qualquer origem." % run.last_xp_gained)
+   text("Vitória",32)
+   var rewards: Array[String]=["+"+str(run.victory_gold)+" ouro","+"+str(run.last_xp_gained)+" XP da expedição"]
+   if run.victory_recovery>0:rewards.append("+"+str(run.victory_recovery)+" de vida recuperada")
+   if run.extra_item_reward:rewards.append("1 equipamento")
+   text("  ·  ".join(rewards),20)
    if not run.reward_message.is_empty():text(run.reward_message,22)
+   text("Escolha uma carta para o deck",26)
    card_choices(run.options, "Recrutar", pick_card)
    add_reroll_button("RewardReroll","Trocar as cartas da vitória · custa 1 dado")
   "shop":
-   text("O mercador dos caminhos",28)
-   text(("Preparação final · " if run.preparation_active else "")+"Cartas de todos os reinos · 1 a 3 ouro, conforme o custo de mana")
    market_display()
-   action("Sair da loja",finish_service_encounter)
   "upgrade":
    text("Recompensa do encontro — escolha uma melhoria para toda a expedição.")
    action("Vitalidade · +1 vida inicial em cada duelo",upgrade_life)
 
    action("Bolsa de suprimentos · +2 ouro",upgrade_gold)
   "equip","item":
-   encounter_art("item")
    var spec: Dictionary=State.Items.DEFINITIONS[run.pending_item]
    var icon:=TextureRect.new();icon.texture=load(spec.icon);icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;icon.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;icon.custom_minimum_size=Vector2(64,64);body.add_child(icon)
    text(spec.name+" — "+spec.description)
@@ -175,42 +211,110 @@ func render() -> void:
    card_choices(run.options,"Aprimorar",equip)
    add_reroll_button("ItemReroll","Trocar o item · custa 1 dado")
   "bridge":
-   encounter_art("bridge")
-   text("Bandidos bloquearam a ponte. Qual será sua decisão?")
-   action("Pagar todo o ouro (%d) · recuperar 10%% da vida máxima" % run.gold,bridge_choice.bind("pay"))
-   action("Lutar · dificuldade mediana · +2 ouro e um item extras",bridge_choice.bind("fight"))
-   action("Fugir · 50% de sofrer 10% de dano não letal · 50% de ganhar +1 ouro ou vida máxima",bridge_choice.bind("flee"))
+   var choices:=illustrated_encounter("res://assets/ui/adventure-bridge.webp","A ponte está bloqueada","Os bandidos vigiam a passagem sobre o rio.")
+   text("O chefe dos bandidos exige sua bolsa. Mais abaixo, pedras rasas permitem cruzar o rio.",22,choices)
+   var toll:=action("Pagar %d ouro e recuperar 10%% de vida" % run.gold,bridge_choice.bind("pay"),"adventure-gold-icon",choices)
+   toll.disabled=run.gold<=0
+   action("Lutar · +2 ouro e um item extras",bridge_choice.bind("fight"),"fury-icon",choices)
+   action("Desviar pelo rio",show_river_crossing,"",choices)
+  "river":
+   var choices:=illustrated_encounter("res://assets/ui/adventure-river.webp","O vau da correnteza","As pedras rasas marcam a passagem para a outra margem.")
+   text("A água parece rasa, mas o fundo é traiçoeiro.",22,choices)
+   text("50% de contratempo\n25% de encontrar um companheiro\n25% de encontrar um tesouro",19,choices)
+   action("Cruzar o rio",cross_river,"",choices)
+  "river_recruit":
+   text("Um companheiro improvável",27)
+   text(run.event_message,18)
+   card_choices(run.options,"Recrutar",river_take_card)
+  "fortune":
+   fortune_panel()
   "chest":
-   encounter_art("chest")
-   text("Um baú fechado. Pode conter ouro, um item… ou um mímico (50%).")
-   action("Abrir o baú",open_chest)
-   action("Ir embora sem abrir",leave_chest)
+   var choices:=illustrated_encounter("res://assets/ui/adventure-chest.webp","Baú Misterioso","Entre as raízes, um baú antigo ainda guarda seu segredo.")
+   text("Um baú fechado. Pode conter ouro, um item… ou um mímico (50%).",22,choices)
+   action("Abrir o baú",open_chest,"",choices)
+   action("Ir embora sem abrir",leave_chest,"",choices)
   "event_result":
-   if run.event_art=="banquet":illustrated_story("res://assets/ui/adventure-farm-banquet.webp","Um lugar à mesa",run.event_message)
-   else:text(run.event_message)
-   action("Prosseguir",finish_event)
+   if run.event_art=="fortune":fortune_panel()
+   else:
+    var choices: Control=body
+    if run.event_art=="banquet":choices=illustrated_encounter("res://assets/ui/adventure-farm-banquet.webp","Um lugar à mesa","A família serve uma refeição para os viajantes.")
+    elif run.event_art=="river":choices=illustrated_encounter("res://assets/ui/adventure-river.webp","Do outro lado do rio","A correnteza fica para trás, e a trilha reaparece.")
+    text(run.event_message,22,choices)
+    action("Prosseguir",finish_event,"",choices)
   "retry":
    text("Seu castelo caiu. Você pode usar uma vida extra para repetir este mesmo confronto.",26)
    text("Vida ao tentar novamente: %d/%d · tentativas extras restantes: %d" % [run.current_life,run.max_life(),run.retries_left],18)
    action("Usar vida extra e tentar novamente",retry_combat)
    action("Encerrar expedição",decline_retry)
   "victory","defeat","abandoned":
-   text("A fenda foi fechada. A vila está salva!" if run.phase=="victory" else "Você abandonou a expedição." if run.phase=="abandoned" else "A expedição terminou. Uma nova jornada espera por você.",30)
-   action("Nova aventura",new_run)
+   if run.phase=="victory":
+    var epilogue:=illustrated_encounter("res://assets/ui/adventure-epilogue.webp","O retorno à Vila do Vale","Os sinos da vila anunciam a volta dos viajantes.")
+    text("Sem o dragão, a Fenda enfim se fecha. Quando os sinos anunciam a chegada da expedição, o povo da vila sai para receber quem reabriu a estrada.",22,epilogue)
+    action("Nova aventura",new_run,"",epilogue)
+   else:text("Você abandonou a expedição." if run.phase=="abandoned" else "A expedição terminou.",30)
+   expedition_summary()
+   if run.phase!="victory":action("Nova aventura",new_run)
+
+func fortune_panel() -> void:
+ var ambush: bool=run.phase=="event_result" and run.fortune_outcome=="ambush"
+ var path: String="res://assets/ui/adventure-fortune-ambush.webp" if ambush else "res://assets/ui/adventure-fortune.webp"
+ var caption: String="Os guardiões ergueram-se entre as ruínas." if ambush else "Uma moeda repousa entre o sol e a tempestade."
+ var column:=illustrated_encounter(path,"Guardiões do Santuário" if ambush else "Sorte ou Revés",caption)
+ if run.phase=="fortune":
+  text("Uma moeda antiga repousa ao pé do santuário. Deposite 1 ouro e o destino revelará o que aguarda na estrada.",22,column)
+  text("50% de sorte\nOuro, cura com um dado ou equipamento.",18,column)
+  text("50% de revés\nFerimentos, perda de um dado ou emboscada.",18,column)
+  var offering:=action("Fazer a oferenda · %d ouro" % State.FORTUNE_PRICE,reveal_fortune,"adventure-gold-icon",column)
+  offering.name="FortuneOffering"
+  offering.disabled=run.gold<State.FORTUNE_PRICE
+  if offering.disabled:offering.tooltip_text="Você precisa de 1 ouro."
+  action("Ir embora",leave_fortune,"",column)
+ else:
+  text(run.event_message,22,column)
+  if ambush:action("Enfrentar os guardiões",fight_fortune_guardians,"fury-icon",column)
+  else:action("Prosseguir",finish_event,"",column)
+
+func expedition_summary() -> void:
+ var panel:=PanelContainer.new()
+ panel.name="ExpeditionSummary"
+ panel.add_theme_stylebox_override("panel",preload("res://scripts/ui_theme.gd").panel(Color("152731"),Color("8f7951"),16))
+ body.add_child(panel)
+ var row:=HBoxContainer.new()
+ panel.add_child(row)
+ var stats: Array=[["Vitórias",run.xp_awarded_steps.size(),"fury-icon"],["Cartas no deck",run.deck.size(),"deck-toggle-icon"],["Equipamentos",run.equipment.size(),"armor-icon"],["XP recebido" if run.xp_settled else "XP acumulado",run.pending_xp,"vigor-icon"]]
+ for stat in stats:
+  var column:=VBoxContainer.new()
+  column.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+  row.add_child(column)
+  var icon:=TextureRect.new()
+  icon.texture=preload("res://scripts/card_skin.gd").texture(stat[2])
+  icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+  icon.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+  icon.custom_minimum_size.y=34
+  column.add_child(icon)
+  var value:=Label.new()
+  value.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+  value.text="%s\n%s" % [stat[1],stat[0]]
+  column.add_child(value)
 
 func add_expedition_controls(header: HBoxContainer) -> void:
- var save_button:=Button.new();save_button.name="SaveAndLeaveExpedition";save_button.icon=load("res://assets/ui/adventure-exit.svg");save_button.expand_icon=true;save_button.add_theme_constant_override("icon_max_width",30);save_button.custom_minimum_size=Vector2(54,54);save_button.tooltip_text="Salvar e sair";save_button.pressed.connect(return_to_selection);header.add_child(save_button)
+ var save_button:=Button.new();save_button.name="SaveAndLeaveExpedition";save_button.icon=load("res://assets/ui/adventure-exit.svg");save_button.expand_icon=true;save_button.add_theme_constant_override("icon_max_width",30);save_button.custom_minimum_size=Vector2(54,54);save_button.size_flags_vertical=Control.SIZE_SHRINK_CENTER;save_button.tooltip_text="Salvar e sair";save_button.pressed.connect(return_to_selection);header.add_child(save_button)
  if run.phase not in ["victory","defeat","abandoned"]:
-  var abandon:=Button.new();abandon.name="AbandonExpeditionIcon";abandon.icon=load("res://assets/ui/adventure-abandon.svg");abandon.expand_icon=true;abandon.add_theme_constant_override("icon_max_width",30);abandon.custom_minimum_size=Vector2(54,54);abandon.tooltip_text="Abandonar expedição";abandon.pressed.connect(confirm_abandon);header.add_child(abandon)
+  var abandon:=Button.new();abandon.name="AbandonExpeditionIcon";abandon.icon=load("res://assets/ui/adventure-abandon.svg");abandon.expand_icon=true;abandon.add_theme_constant_override("icon_max_width",30);abandon.custom_minimum_size=Vector2(54,54);abandon.size_flags_vertical=Control.SIZE_SHRINK_CENTER;abandon.tooltip_text="Abandonar expedição";abandon.pressed.connect(confirm_abandon);header.add_child(abandon)
 
-func add_reroll_button(node_name: String,hint: String) -> void:
- var button:=Button.new();button.name=node_name;button.icon=load("res://assets/ui/adventure-reroll-dice.webp");button.expand_icon=true;button.add_theme_constant_override("icon_max_width",48);button.custom_minimum_size=Vector2(70,60);button.size_flags_horizontal=Control.SIZE_SHRINK_BEGIN;button.tooltip_text=hint;button.disabled=not run.can_reroll_offer();button.pressed.connect(reroll_draft);body.add_child(button)
+func add_reroll_button(node_name: String,hint: String,parent: Control=null) -> void:
+ var button:=Button.new();button.name=node_name;button.icon=load("res://assets/ui/adventure-reroll-dice.webp");button.expand_icon=true;button.add_theme_constant_override("icon_max_width",48);button.custom_minimum_size=Vector2(70,60);button.size_flags_horizontal=Control.SIZE_SHRINK_BEGIN;button.tooltip_text=hint;button.disabled=not run.can_reroll_offer();button.pressed.connect(reroll_draft)
+ (body if parent==null else parent).add_child(button)
 
 func reroll_draft() -> void:
  if selection_busy:return
  if run.reroll_offer():render()
 
-func choose_faction(f: int) -> void:run.faction=f;run.phase="draft";render()
+func choose_faction(f: int) -> void:
+ if f not in State.STARTING_FACTIONS:return
+ run.faction=f
+ run.phase="draft"
+ render()
 func pick_card(key: String) -> void:
  flight_target_key=run.add_card_to_deck(key);run.options.clear()
  if run.deck.size()>=15:run.apply_account_creature_bonuses()
@@ -254,8 +358,11 @@ func equip(key: String) -> void:
 func open_shop() -> void:
  run.generate_shop();render()
 func purchase(key: String) -> void:
- if run.buy_card(key,run.market_price(key)):run.options.erase(key);flight_target_key=run.deck.back()
- render()
+ if run.phase!="shop" or key not in run.options:return
+ if run.buy_card(key,run.market_price(key)):
+  run.options.erase(key)
+  flight_target_key=run.deck.back()
+  refresh_market()
 func new_run() -> void:
  if not run.xp_settled and run.phase in ["victory","defeat","abandoned"]:run.settle_xp(run.phase)
  if not run.xp_settled:return
@@ -296,55 +403,60 @@ func fight(f: int) -> void:
  run.in_combat=true
  get_tree().change_scene_to_file("res://main.tscn")
 
-func card_choices(keys: Array, _caption: String, callback: Callable, shopping: bool=false,price: int=-1,target_parent: Control=null) -> void:
+func card_choices(keys: Array, _caption: String, callback: Callable) -> void:
  var grid:=GridContainer.new()
  grid.name="AdventureCardChoices"
  if run.phase=="draft":grid.size_flags_horizontal=Control.SIZE_SHRINK_CENTER
  grid.columns=3
  grid.add_theme_constant_override("h_separation",8 if run.phase=="draft" else 18)
  grid.add_theme_constant_override("v_separation",18)
- (body if target_parent==null else target_parent).add_child(grid)
+ body.add_child(grid)
  for key in keys:
-  var card_price: int=run.market_price(key) if price<0 else price
   var column:=VBoxContainer.new()
   column.size_flags_horizontal=Control.SIZE_SHRINK_BEGIN if run.phase=="draft" else Control.SIZE_EXPAND_FILL
   grid.add_child(column)
-  var card=CardScene.instantiate()
-  card.name="AdventureCard_"+key
-  card.set_card(Match.CARD_DATA[key])
+  var card:=choice_card(key,callback)
   card.custom_minimum_size=Vector2(320,427) if run.phase=="draft" else Vector2(280,374)
   card.size_flags_horizontal=Control.SIZE_EXPAND_FILL
   column.add_child(card)
-  var unavailable: bool=shopping and run.gold<card_price
-  card.focus_mode=Control.FOCUS_ALL
-  card.mouse_default_cursor_shape=Control.CURSOR_ARROW if unavailable else Control.CURSOR_POINTING_HAND
-  if unavailable:card.modulate=Color(0.55,0.55,0.6)
-  card.gui_input.connect(card_choice_input.bind(key,card,callback,unavailable))
-  if shopping:
-   var cost:=Label.new();cost.text="%d ouro" % card_price+(" · Inédita no deck" if run.card_copies(key)==0 else "");cost.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;column.add_child(cost)
 
-func card_choice_input(event: InputEvent, key: String, card: Control, callback: Callable, unavailable: bool) -> void:
+func previewable_card(key: String) -> Control:
+ var card=CardScene.instantiate()
+ card.name="AdventureCard_"+key
+ card.set_card(Match.CARD_DATA[key])
+ card.focus_mode=Control.FOCUS_ALL
+ card.mouse_default_cursor_shape=Control.CURSOR_POINTING_HAND
+ return card
+
+func choice_card(key: String,callback: Callable) -> Control:
+ var card:=previewable_card(key)
+ card.gui_input.connect(card_choice_input.bind(key,card,callback))
+ return card
+
+func card_choice_input(event: InputEvent,key: String,card: Control,callback: Callable) -> void:
  var clicked: bool=event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT and event.pressed
  if event.is_action_pressed("ui_accept") or clicked:
-  if unavailable or selection_busy:return
-  selection_busy=true
+  if selection_busy:return
   card.accept_event()
-  var source:=card.get_global_rect()
-  flight_target_key=key
-  callback.call(key)
+  commit_card_choice(key,card.get_global_rect(),callback)
+
+func commit_card_choice(key: String,source: Rect2,callback: Callable) -> void:
+ selection_busy=true
+ flight_target_key=key
+ callback.call(key)
+ await get_tree().process_frame
+ await get_tree().process_frame
+ var target: Control=find_child("AdventureDeckCard_"+flight_target_key,true,false)
+ if not is_instance_valid(target):target=find_child("AdventureDeckToggle",true,false)
+ if is_instance_valid(target):
+  var scroll: ScrollContainer=find_child("AdventureDeckListScroll",true,false)
+  if is_instance_valid(scroll) and scroll.is_ancestor_of(target):scroll.ensure_control_visible(target)
   await get_tree().process_frame
-  await get_tree().process_frame
-  var target: Control=find_child("AdventureDeckCard_"+flight_target_key,true,false)
-  if not is_instance_valid(target):target=find_child("AdventureDeckToggle",true,false)
-  if is_instance_valid(target):
-   var scroll: ScrollContainer=find_child("AdventureDeckListScroll",true,false)
-   if is_instance_valid(scroll) and scroll.is_ancestor_of(target):scroll.ensure_control_visible(target)
-   await get_tree().process_frame
-   var layer:=CanvasLayer.new();layer.layer=40;add_child(layer)
-   var tween: Tween=preload("res://scripts/card_add_flight.gd").play(layer,Match.CARD_DATA[flight_target_key],source,target.get_global_rect())
-   await tween.finished
-   layer.queue_free()
-  selection_busy=false
+  var layer:=CanvasLayer.new();layer.layer=40;add_child(layer)
+  var tween: Tween=preload("res://scripts/card_add_flight.gd").play(layer,Match.CARD_DATA[flight_target_key],source,target.get_global_rect())
+  await tween.finished
+  layer.queue_free()
+ selection_busy=false
 func build_sidebar() -> void:
  var panel:=PanelContainer.new()
  panel.name="AdventureDeckSidebar"
@@ -408,31 +520,6 @@ func preview_card(key: String) -> void:
  dialog.confirmed.connect(dialog.queue_free)
  dialog.canceled.connect(dialog.queue_free)
 
-func encounter_art(stage: String) -> void:
- var path: String={"intro":"res://assets/art/village_reconstruction.webp","farm":"res://assets/art/generous_peasant.webp","item":"res://assets/ui/adventure-items.webp","bridge":"res://assets/art/lightning_rogue.webp","chest":"res://assets/ui/adventure-chest.webp","healer":"res://assets/art/cleric.webp","treasure":"res://assets/art/wise_merchant.webp","event":"res://assets/art/generous_peasant.webp","shop":"res://assets/art/wise_merchant.webp","power_event":"res://assets/ui/adventure-power-sanctuary.webp"}.get(stage,"")
- if path.is_empty():return
- var art:=TextureRect.new()
- art.name="EncounterArtwork"
- art.texture=load(path)
- art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
- art.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_COVERED
- art.custom_minimum_size.y=240
- if stage=="farm":
-  art.custom_minimum_size.y=300
-  art.stretch_mode=TextureRect.STRETCH_SCALE
-  var material:=ShaderMaterial.new()
-  material.shader=preload("res://scripts/artwork.gdshader")
-  material.set_shader_parameter("source_aspect",float(art.texture.get_width())/art.texture.get_height())
-  material.set_shader_parameter("view_aspect",4.5)
-  material.set_shader_parameter("artwork_focus",Vector2(0.5,0.24))
-  art.material=material
-  art.resized.connect(func():material.set_shader_parameter("view_aspect",art.size.x/maxf(1.0,art.size.y)))
- if stage=="power_event":
-  art.custom_minimum_size.y=340
-  art.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
- art.mouse_filter=Control.MOUSE_FILTER_IGNORE
- body.add_child(art)
-
 func choose_route(index: int) -> void:
  if run.phase!="map" or not run.route_available(index):return
  var node: Dictionary=run.route_rows[run.step][index]
@@ -445,7 +532,9 @@ func choose_route(index: int) -> void:
    get_tree().change_scene_to_file("res://main.tscn")
   "farm":run.phase="farm";render()
   "item":run.pending_item="";run.prepare_item();render()
-  "bridge":run.phase="bridge";render()
+  "bridge":run.phase="bridge";run.event_claimed=false;render()
+  "river":run.phase="river";run.event_claimed=false;render()
+  "fortune":run.phase="fortune";run.event_claimed=false;render()
   "chest":run.phase="chest";run.chest_result="";render()
   "power_event":open_midpower()
   "shop":open_shop()
@@ -459,22 +548,49 @@ func heal_at_node(full: bool) -> void:
 
 func bridge_choice(choice: String) -> void:
  if not run.resolve_bridge(choice):return
- if run.in_combat:get_tree().change_scene_to_file("res://main.tscn")
+ if run.in_combat:resume_encounter()
  else:render()
+
+func show_river_crossing() -> void:
+ if run.phase!="bridge":return
+ run.chosen_routes[run.step]=1
+ run.phase="river"
+ render()
 
 func open_chest() -> void:
  if run.phase!="chest":return
  run.resolve_chest()
- if run.in_combat:get_tree().change_scene_to_file("res://main.tscn")
+ if run.in_combat:resume_encounter()
  else:render()
 
 func finish_event() -> void:
  if run.phase!="event_result":return
+ if run.event_art=="fortune" and run.fortune_outcome=="ambush":return
+ if run.event_art in ["river","fortune"] and run.extra_item_reward:
+  run.extra_item_reward=false;run.pending_item="";run.prepare_item();render();return
  run.advance();render()
+
+func cross_river() -> void:
+ if run.resolve_river():render()
+
+func river_take_card(key: String) -> void:
+ if run.recruit_from_river(key):render()
+
+func reveal_fortune() -> void:
+ if run.resolve_fortune():
+  run.save_checkpoint()
+  render()
+
+func fight_fortune_guardians() -> void:
+ if run.start_fortune_ambush():resume_encounter()
+
+func leave_fortune() -> void:
+ if run.leave_fortune():render()
 
 
 func resume_encounter() -> void:
  run.in_combat=true
+ run.save_checkpoint()
  get_tree().change_scene_to_file("res://main.tscn")
 
 
@@ -483,13 +599,22 @@ func resume_encounter() -> void:
 
 func choose_level_bonus(key: String) -> void:
  if run.profile==null or not run.profile.choose_bonus(key):return
+ recent_level_reward="Melhoria recebida · %s\n%s" % [Profile.BONUSES[key].name,Profile.BONUSES[key].description]
  if run.phase in ["intro","faction"] and run.deck.is_empty():
   State.current=State.new(run.profile)
   run=State.current
  render()
+ level_notice_serial+=1
+ get_tree().create_timer(6.0).timeout.connect(clear_level_notice.bind(level_notice_serial))
+
+func clear_level_notice(serial: int) -> void:
+ if serial!=level_notice_serial:return
+ recent_level_reward=""
+ var receipt:=find_child("LevelBonusReceipt",true,false)
+ if is_instance_valid(receipt):receipt.queue_free()
 
 func retry_combat() -> void:
- if run.use_extra_life():get_tree().change_scene_to_file("res://main.tscn")
+ if run.use_extra_life():resume_encounter()
 
 func decline_retry() -> void:
  run.decline_retry();render()
@@ -524,46 +649,281 @@ func play_victory_sound() -> void:
 
 
 func purchase_premium(key: String) -> void:
- if run.buy_premium_card(key):flight_target_key=run.deck.back();render()
+ if run.buy_premium_card(key):
+  flight_target_key=run.deck.back()
+  refresh_market()
+
+func add_market_wallet(header: HBoxContainer) -> void:
+ var wallet:=market_gold(run.gold,false,27)
+ wallet.name="MarketWallet"
+ wallet.size_flags_vertical=Control.SIZE_SHRINK_CENTER
+ wallet.mouse_filter=Control.MOUSE_FILTER_PASS
+ header.add_child(wallet)
+ wallet.tooltip_text="Ouro disponível: %d" % run.gold
+
+func market_gold(amount: int,unavailable: bool,icon_size: int) -> PanelContainer:
+ var badge:=PanelContainer.new()
+ badge.add_theme_stylebox_override("panel",preload("res://scripts/ui_theme.gd").panel(Color("121c28"),Color("9c6c65") if unavailable else Color("a6854d"),5))
+ badge.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ var row:=HBoxContainer.new()
+ row.add_theme_constant_override("separation",5)
+ row.alignment=BoxContainer.ALIGNMENT_CENTER
+ row.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ badge.add_child(row)
+ var coin:=TextureRect.new()
+ coin.texture=load("res://assets/ui/market-coin.svg")
+ coin.custom_minimum_size=Vector2(icon_size,icon_size)
+ coin.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+ coin.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+ coin.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ row.add_child(coin)
+ var gold:=Label.new()
+ gold.text=str(amount)
+ gold.add_theme_font_size_override("font_size",icon_size)
+ gold.add_theme_color_override("font_color",Color("d5a3a1") if unavailable else Color("eed39a"))
+ row.add_child(gold)
+ return badge
+
+const MARKET_CARD_SIZE:=Vector2(228,304)
+const MARKET_ASIDE_WIDTH:=420
+const MARKET_GAP:=10
+
+func market_card(key: String,price: int,premium: bool=false) -> Control:
+ var unavailable: bool=run.gold<price
+ var card:=previewable_card(key)
+ card.gui_input.connect(func(event: InputEvent):
+  var clicked: bool=event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT and event.pressed
+  if not selection_busy and (event.is_action_pressed("ui_accept") or clicked):
+   card.accept_event()
+   show_market_offer(key,price,premium,card.get_global_rect()))
+ card.custom_minimum_size=MARKET_CARD_SIZE
+ var badge:=market_gold(price,unavailable,20)
+ badge.name="MarketPrice"
+ card.add_child(badge)
+ badge.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+ badge.offset_left=-62
+ badge.offset_right=-8
+ badge.offset_top=36
+ badge.offset_bottom=73
+ return card
+
+func show_market_offer(key: String,price: int,premium: bool,source: Rect2) -> void:
+ if find_child("MarketOfferPreview",true,false)!=null:return
+ var dialog:=ConfirmationDialog.new()
+ dialog.name="MarketOfferPreview"
+ dialog.title=Match.CARD_DATA[key].title
+ dialog.ok_button_text="Comprar"
+ dialog.cancel_button_text="Voltar"
+ dialog.add_theme_stylebox_override("panel",preload("res://scripts/ui_theme.gd").panel(Color("142431"),Color("8f7951"),16))
+ var content:=VBoxContainer.new()
+ content.add_theme_constant_override("separation",12)
+ dialog.add_child(content)
+ var card=CardScene.instantiate()
+ card.set_card(Match.CARD_DATA[key])
+ card.custom_minimum_size=Vector2(420,560)
+ content.add_child(card)
+ var price_row:=HBoxContainer.new()
+ price_row.alignment=BoxContainer.ALIGNMENT_CENTER
+ content.add_child(price_row)
+ price_row.add_child(market_gold(price,run.gold<price,22))
+ var balance:=Label.new()
+ balance.text="Saldo insuficiente" if run.gold<price else "Saldo: %d" % run.gold
+ price_row.add_child(balance)
+ add_child(dialog)
+ dialog.get_ok_button().disabled=run.gold<price
+ dialog.canceled.connect(dialog.queue_free)
+ dialog.confirmed.connect(func():
+  dialog.queue_free()
+  if run.phase!="shop" or run.gold<price:return
+  if premium and key!=run.shop_premium_key:return
+  if not premium and key not in run.options:return
+  var callback: Callable=purchase_premium if premium else purchase
+  commit_card_choice(key,source,callback))
+ dialog.popup_centered()
+
+func refresh_market() -> void:
+ var previous:=find_child("AdventureContentScroll",true,false) as ScrollContainer
+ var position:=previous.scroll_vertical
+ render()
+ var next:=find_child("AdventureContentScroll",true,false) as ScrollContainer
+ await get_tree().process_frame
+ if is_instance_valid(next):next.scroll_vertical=position
+
+func add_merchant_identity(header: HBoxContainer,merchant: Dictionary) -> void:
+ var heading_column:=VBoxContainer.new()
+ heading_column.add_theme_constant_override("separation",0)
+ header.add_child(heading_column)
+ var identity:=HBoxContainer.new()
+ identity.add_theme_constant_override("separation",10)
+ heading_column.add_child(identity)
+ var icon:=TextureRect.new()
+ icon.texture=preload("res://assets/ui/adventure-merchant-icon.svg")
+ icon.custom_minimum_size=Vector2(35,35)
+ icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+ icon.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+ identity.add_child(icon)
+ var merchant_name:=Label.new()
+ merchant_name.text=merchant.name
+ merchant_name.add_theme_font_override("font",TitleFont)
+ merchant_name.add_theme_font_size_override("font_size",28)
+ merchant_name.add_theme_color_override("font_color",Color("ead09a"))
+ identity.add_child(merchant_name)
+ var location:=Label.new()
+ location.text=merchant.location
+ location.add_theme_font_size_override("font_size",15)
+ heading_column.add_child(location)
+
+func add_leave_market(header: HBoxContainer) -> void:
+ var leave:=Button.new()
+ leave.name="LeaveMarket"
+ leave.text="Voltar ao mapa"
+ leave.custom_minimum_size=Vector2(205,52)
+ leave.size_flags_vertical=Control.SIZE_SHRINK_CENTER
+ leave.pressed.connect(finish_service_encounter)
+ header.add_child(leave)
 
 func market_display() -> void:
- var market:=HBoxContainer.new();market.name="AdventureMarket";market.add_theme_constant_override("separation",22);body.add_child(market)
- var regular:=VBoxContainer.new();regular.size_flags_horizontal=Control.SIZE_EXPAND_FILL;market.add_child(regular)
- var heading:=Label.new();heading.text="9 RECRUTAS · 1 A 3 OURO";regular.add_child(heading)
- if run.shop_groups.is_empty():card_choices(run.options,"Comprar",purchase,true,-1,regular)
+ var merchant:=State.merchant_at(run.step)
+ var market:=HBoxContainer.new()
+ market.name="AdventureMarket"
+ market.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ market.add_theme_constant_override("separation",24)
+ body.add_child(market)
+ var regular:=GridContainer.new()
+ regular.name="MarketOffers"
+ regular.columns=4
+ regular.add_theme_constant_override("h_separation",MARKET_GAP)
+ regular.add_theme_constant_override("v_separation",MARKET_GAP)
+ market.add_child(regular)
+ var stock: Array=run.options.duplicate()
+ if not run.shop_groups.is_empty():
+  stock.clear()
+  var groups: Array=run.shop_groups
+  for row in range(State.SHOP_GROUP_COUNTS.max()):
+   for column in range(groups.size()):
+    var index: int=(row+column)%groups.size()
+    var cards: Array=groups[index].cards
+    if row<mini(cards.size(),State.SHOP_GROUP_COUNTS[index]):stock.append(cards[row])
+ for key in stock:
+  if key in run.options:
+   regular.add_child(market_card(key,run.market_price(key)))
+  else:
+   var sold:=PanelContainer.new()
+   sold.custom_minimum_size=MARKET_CARD_SIZE
+   sold.add_theme_stylebox_override("panel",preload("res://scripts/ui_theme.gd").panel(Color("14232c"),Color("35414a"),10))
+   var label:=Label.new()
+   label.text="Vendido"
+   label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+   label.modulate=Color("a0abb2")
+   sold.add_child(label)
+   regular.add_child(sold)
+ var aside:=VBoxContainer.new()
+ aside.custom_minimum_size.x=MARKET_ASIDE_WIDTH
+ aside.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ aside.add_theme_constant_override("separation",MARKET_GAP)
+ market.add_child(aside)
+ var introduction:=VBoxContainer.new()
+ introduction.add_theme_constant_override("separation",12)
+ aside.add_child(introduction)
+ var portrait:=TextureRect.new()
+ portrait.name="MerchantPortrait"
+ portrait.texture=load(merchant.art)
+ portrait.size_flags_vertical=Control.SIZE_EXPAND_FILL
+ portrait.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+ portrait.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+ introduction.add_child(portrait)
+ enable_art_preview(portrait,"%s · %s" % [merchant.name,merchant.location])
+ var greeting:=Label.new()
+ greeting.text=merchant.greeting
+ greeting.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+ greeting.add_theme_color_override("font_color",Color("ddd4c5"))
+ introduction.add_child(greeting)
+ var title:=Label.new()
+ title.text="OFERTA ESPECIAL"
+ title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+ title.add_theme_color_override("font_color",Color("eed39a"))
+ introduction.add_child(title)
+ var special: Control
+ if not run.shop_premium_key.is_empty():
+  special=market_card(run.shop_premium_key,run.market_price(run.shop_premium_key,true),true)
+  var outline:=Panel.new()
+  outline.mouse_filter=Control.MOUSE_FILTER_IGNORE
+  outline.show_behind_parent=true
+  var glow:=StyleBoxFlat.new()
+  glow.draw_center=false
+  glow.set_corner_radius_all(10)
+  glow.set_border_width_all(2)
+  glow.border_color=Color("f5d284")
+  glow.shadow_color=Color(1.0,0.72,0.28,0.42)
+  glow.shadow_size=12
+  outline.add_theme_stylebox_override("panel",glow)
+  special.add_child(outline)
+  outline.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+  outline.offset_left=-1
+  outline.offset_top=-1
+  outline.offset_right=1
+  outline.offset_bottom=1
  else:
-  for group in run.shop_groups:
-   var title:=Label.new();title.name="ShopGroup_"+group.kind;title.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;title.add_theme_font_size_override("font_size",18)
-   var origins: String=", ".join(group.factions.map(func(origin):return Names.PT[origin]))
-   title.text=("SUA FACÇÃO · "+origins) if group.kind=="initial" else ("NOVAS FACÇÕES · ainda sem facções extras recrutadas" if group.fallback else "FACÇÕES RECRUTADAS · "+origins) if group.kind=="extra" else "OUTRAS FACÇÕES E ALDEIA"
-   regular.add_child(title)
-   var remaining: Array=group.cards.filter(func(key):return key in run.options)
-   if remaining.is_empty():
-    var sold:=Label.new();sold.text="Todas as ofertas deste grupo foram compradas.";regular.add_child(sold)
-   else:card_choices(remaining,"Comprar",purchase,true,-1,regular)
- var frame:=PanelContainer.new();frame.custom_minimum_size.x=310;market.add_child(frame)
- frame.add_theme_stylebox_override("panel",preload("res://scripts/ui_theme.gd").panel(Color("172b33"),Color("d6b56c"),12))
- var special:=VBoxContainer.new();special.add_theme_constant_override("separation",12);frame.add_child(special)
- var title:=Label.new();title.text="OFERTA ESPECIAL · %d OURO" % run.shop_premium_price;title.add_theme_font_size_override("font_size",18);special.add_child(title)
- var detail:=Label.new();detail.text="Uma criatura com item. O item beneficia todas as cópias desta carta na expedição.";detail.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;special.add_child(detail)
- if not run.shop_premium_key.is_empty():card_choices([run.shop_premium_key],"Comprar aprimorada",purchase_premium,true,run.shop_premium_price,special)
- else:
-  var sold:=Label.new();sold.text="Oferta vendida" if run.shop_premium_sold else "Sem oferta elegível";special.add_child(sold)
+  var sold:=Label.new()
+  sold.text="Oferta vendida" if run.shop_premium_sold else "Sem oferta elegível"
+  sold.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+  sold.vertical_alignment=VERTICAL_ALIGNMENT_CENTER
+  special=sold
+ special.name="MarketSpecialOffer"
+ special.size_flags_horizontal=Control.SIZE_SHRINK_CENTER
+ aside.add_child(special)
+ var scroll:=find_child("AdventureContentScroll",true,false) as ScrollContainer
+ scroll.resized.connect(fit_market_grid.bind(scroll,regular,introduction,special))
+ fit_market_grid.call_deferred(scroll,regular,introduction,special)
+
+func fit_market_grid(scroll: ScrollContainer,grid: GridContainer,introduction: Control,special: Control) -> void:
+ if not is_instance_valid(grid):return
+ var width: float=scroll.size.x-MARKET_ASIDE_WIDTH-24-scroll.get_v_scroll_bar().get_combined_minimum_size().x
+ var card_width:=maxf(1.0,floorf((width-(grid.columns-1)*MARKET_GAP)/grid.columns))
+ var card_size:=Vector2(card_width,card_width*4.0/3.0)
+ for card in grid.get_children():card.custom_minimum_size=card_size
+ introduction.custom_minimum_size.y=card_size.y
+ special.custom_minimum_size=card_size
 
 
 
-func illustrated_story(path: String,title: String,story: String) -> void:
- var row:=HBoxContainer.new();row.name="IllustratedStory";row.add_theme_constant_override("separation",26);body.add_child(row)
- var frame:=PanelContainer.new();frame.custom_minimum_size=Vector2(800,450);frame.size_flags_horizontal=Control.SIZE_EXPAND_FILL
- frame.add_theme_stylebox_override("panel",preload("res://scripts/ui_theme.gd").panel(Color("142531"),Color("af915c"),8))
+func illustrated_encounter(path: String,title: String,caption: String) -> VBoxContainer:
+ var row:=HBoxContainer.new()
+ row.name="IllustratedEncounter"
+ row.size_flags_vertical=Control.SIZE_EXPAND_FILL
+ row.add_theme_constant_override("separation",24)
+ body.add_child(row)
+ var frame:=PanelContainer.new()
+ frame.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ frame.add_theme_stylebox_override("panel",preload("res://scripts/ui_theme.gd").panel(Color("0c1721"),Color("534b3d"),8))
  row.add_child(frame)
- var art:=TextureRect.new();art.name="StoryArtwork";art.texture=load(path)
- art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;art.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;art.custom_minimum_size=Vector2(800,450)
+ var art:=TextureRect.new()
+ art.name="EncounterArtwork"
+ art.texture=load(path)
+ art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+ art.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+ art.custom_minimum_size=Vector2(570,625)
  frame.add_child(art)
- var column:=VBoxContainer.new();column.alignment=BoxContainer.ALIGNMENT_CENTER;column.custom_minimum_size.x=450;column.size_flags_horizontal=Control.SIZE_EXPAND_FILL;column.add_theme_constant_override("separation",16);row.add_child(column)
- var heading:=Label.new();heading.text=title;heading.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
- heading.add_theme_font_override("font",preload("res://assets/fonts/At-Dawn-Regular.otf"));heading.add_theme_font_size_override("font_size",27);heading.modulate=Color("ead09a");column.add_child(heading)
- var paragraph:=Label.new();paragraph.name="ContinuousStory";paragraph.text=story;paragraph.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;paragraph.add_theme_font_size_override("font_size",20);column.add_child(paragraph)
+ enable_art_preview(art,caption)
+ var panel:=PanelContainer.new()
+ panel.custom_minimum_size.x=508
+ panel.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ panel.size_flags_stretch_ratio=0.26
+ panel.add_theme_stylebox_override("panel",preload("res://scripts/ui_theme.gd").panel(Color("182a36"),Color("8f7951"),24))
+ row.add_child(panel)
+ var column:=VBoxContainer.new()
+ column.alignment=BoxContainer.ALIGNMENT_CENTER
+ column.add_theme_constant_override("separation",16)
+ panel.add_child(column)
+ text(title,32,column)
+ return column
+
+func enable_art_preview(art: TextureRect,caption: String) -> void:
+ art.mouse_filter=Control.MOUSE_FILTER_PASS
+ art.gui_input.connect(func(event: InputEvent):
+  if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_RIGHT and event.pressed:
+   art.accept_event()
+   ArtViewer.open_event(self,art.texture,caption))
 
 func stop_intro_typing() -> void:
  if is_instance_valid(intro_label):
@@ -580,7 +940,8 @@ func opening_story() -> void:
   elif event.is_action_pressed("ui_accept"):intro_continue())
  frame.focus_mode=Control.FOCUS_ALL
  var art:=TextureRect.new();art.name="StoryArtwork";art.texture=preload("res://assets/ui/adventure-opening.webp")
- art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;art.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;art.mouse_filter=Control.MOUSE_FILTER_IGNORE;art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);frame.add_child(art)
+ art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;art.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);frame.add_child(art)
+ enable_art_preview(art,"O amanhecer marca a partida da Vila do Vale.")
  var margin:=MarginContainer.new();margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);margin.mouse_filter=Control.MOUSE_FILTER_IGNORE
  for edge in ["left","right","top","bottom"]:margin.add_theme_constant_override("margin_"+edge,40)
  frame.add_child(margin)
@@ -590,7 +951,7 @@ func opening_story() -> void:
  var dialogue:=PanelContainer.new();dialogue.name="OpeningDialogue";dialogue.mouse_filter=Control.MOUSE_FILTER_IGNORE;intro_overlay.add_child(dialogue)
  dialogue.add_theme_stylebox_override("panel",preload("res://scripts/ui_theme.gd").panel(Color(0.04,0.08,0.12,0.82),Color("af915c"),20))
  var column:=VBoxContainer.new();column.add_theme_constant_override("separation",10);dialogue.add_child(column)
- var heading:=Label.new();heading.text="Um chamado ao amanhecer";heading.add_theme_font_override("font",preload("res://assets/fonts/At-Dawn-Regular.otf"));heading.add_theme_font_size_override("font_size",26);heading.modulate=Color("ead09a");column.add_child(heading)
+ var heading:=Label.new();heading.text="Um chamado ao amanhecer";heading.add_theme_font_override("font",TitleFont);heading.add_theme_font_size_override("font_size",26);heading.modulate=Color("ead09a");column.add_child(heading)
  intro_label=Label.new();intro_label.name="ContinuousStory";intro_label.text=State.INTRO_TEXT;intro_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;intro_label.add_theme_font_size_override("font_size",20);column.add_child(intro_label)
  var total:=State.INTRO_TEXT.length()
  intro_label.visible_characters=mini(intro_characters,total)

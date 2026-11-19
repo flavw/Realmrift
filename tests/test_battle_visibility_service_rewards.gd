@@ -28,20 +28,21 @@ func verify() -> void:
   for unit in main.duel.players[side].board:assert(not main.field_nodes[side][unit.id].get_node("Canvas/Exhausted").visible)
  for player in main.sounds.values():player.stop();player.stream=null
  main.queue_free();await process_frame;await process_frame
- var run=State.new();run.deck=Match.default_deck(0).slice(0,15);run.phase="map";run.step=2;State.current=run
+ var fortune_step: int=State.STAGES.find("fortune")
+ var run=State.new();run.deck=Match.default_deck(0).slice(0,15);run.phase="map";run.step=fortune_step;State.current=run
  var view=load("res://adventure.tscn").instantiate();root.add_child(view)
- view.choose_route(0)
+ view.choose_route(run.route_rows[fortune_step].find_custom(func(node):return node.kind=="treasure"))
  assert(run.phase=="treasure" and run.gold==1+run.treasure_roll)
  var gold: int=run.gold
  var deck: int=run.deck.size()
  view.finish_service_encounter()
- assert(run.phase=="map" and run.step==3 and run.gold==gold and run.permanent_life==0 and run.deck.size()==deck and run.equipment.is_empty())
+ assert(run.phase=="map" and run.step==fortune_step+1 and run.gold==gold and run.permanent_life==0 and run.deck.size()==deck and run.equipment.is_empty())
  run.phase="healer";run.current_life=1;view.heal_at_node(false)
- assert(run.phase=="map" and run.step==4 and run.current_life==6 and run.gold==gold and run.permanent_life==0)
- run.step=6;run.gold=10;view.open_shop()
- assert(run.shop_premium_price==run.market_price(run.shop_premium_key,true))
+ assert(run.phase=="map" and run.step==fortune_step+2 and run.current_life==6 and run.gold==gold and run.permanent_life==0)
+ var first_shop: int=State.STAGES.find("shop")
+ run.step=first_shop;run.gold=10;view.open_shop()
  var premium: String=run.shop_premium_key
- var premium_price: int=run.shop_premium_price
+ var premium_price: int=run.market_price(run.shop_premium_key,true)
  view.purchase_premium(premium)
  assert(run.gold==10-premium_price and State.Items.base_key(run.deck.back())==State.Items.base_key(premium))
  var regular: String=""
@@ -52,13 +53,14 @@ func verify() -> void:
  view.purchase(regular);assert(run.gold==expected_gold and run.deck.size()==deck+2)
  var equipment: int=run.equipment.size()
  view.finish_service_encounter()
- assert(run.phase=="map" and run.step==7 and run.gold==expected_gold and run.permanent_life==0 and run.equipment.size()==equipment)
- run.step=9;run.phase="map";run.gold=1;run.chosen_routes.clear();view.render();view.choose_route(2)
- assert(run.phase=="shop" and run.preparation_active and run.gold==1)
+ assert(run.phase=="map" and run.step==first_shop+1 and run.gold==expected_gold and run.permanent_life==0 and run.equipment.size()==equipment)
+ var second_shop: int=State.STAGES.rfind("shop")
+ run.step=second_shop;run.gold=1;run.chosen_routes.clear();view.render();view.choose_route(0)
+ assert(run.phase=="shop" and run.gold==1)
  await process_frame;await process_frame
  if DisplayServer.get_name()!="headless":root.get_texture().get_image().save_png("res://.local/adventure-shop-prices.png")
  view.open_upgrade()
- assert(run.phase=="map" and run.step==10 and run.gold==1 and run.permanent_life==0)
+ assert(run.phase=="map" and run.step==second_shop+1 and run.gold==1 and run.permanent_life==0)
  view.queue_free();await process_frame;await process_frame;State.current=null
  print("OK: cartas claras dos dois lados, ícones por turno, preços por custo de mana e serviços sem bônus adicionais")
  quit()

@@ -9,7 +9,7 @@ func verify() -> void:
   if data.collectible and not data.neutral_deck_only:
    for i in range(3):run.deck.append(key)
  assert(run.reward_options(0).size()==3)
- run.generate_shop();assert(run.options.size()==9 and not run.shop_premium_key.is_empty())
+ run.generate_shop();assert(run.options.size()==8 and not run.shop_premium_key.is_empty())
  var key: String=run.options[0]
  var before: int=run.card_copies(key)
  assert(before>=3 and run.buy_card(key,run.market_price(key)) and run.card_copies(key)==before+1)

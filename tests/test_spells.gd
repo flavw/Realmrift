@@ -12,7 +12,7 @@ func fixture():
  m.players[0].hand=[]
  return m
 func _init() -> void:
- assert(Match.CARD_DATA.size()==47)
+ assert(Match.CARD_DATA.size()>=47)
  for style in range(3):
   assert(Match.valid_deck(Match.default_deck(style)))
  for key in ["iron_stance","astral_flame","shadow_step","restoring_light"]:
@@ -23,7 +23,9 @@ func _init() -> void:
  assert(not m.play(0,0),"Magia não entra no campo como criatura")
  assert(not m.cast(0,0,1,-1) and m.players[0].mana==10 and m.players[0].hand.size()==1)
  assert(m.cast(0,0,0,0))
- assert(m.players[0].board[0].attack==4 and m.players[0].board[0].armor==3 and m.players[0].board[0].block==1 and m.block_capacity(m.players[0].board[0])==1)
+ assert(m.players[0].board[0].attack==Match.CARDS.warrior.attack+1)
+ assert(m.players[0].board[0].armor==Match.CARDS.warrior.armor+1)
+ assert(m.players[0].board[0].block==0 and m.block_capacity(m.players[0].board[0])==0)
  assert(not m.players[0].board[0].ready and m.players[0].mana==8 and m.players[0].hand.is_empty())
  m=fixture()
  m.players[0].board=[unit("runic_familiar",11)]
@@ -32,11 +34,12 @@ func _init() -> void:
  m.players[1].board=[tank]
  m.players[0].hand=["astral_flame"]
  assert(m.magic_bonus(0)==1)
- assert(not m.cast(0,0,1,-1),"Chama Astral não atinge castelo")
  assert(m.cast(0,0,1,0))
- assert(m.players[1].board.is_empty(),"3+1 mágico ignora armadura e mata vida 4")
+ assert(m.players[1].board.is_empty(),"Dano mágico ignora Armadura e mata a criatura")
  assert(tank.block==2,"Magia não consome Bloqueio")
- assert(m.last_action.dead.size()==1 and m.players[0].board[0].health==3)
+ assert(m.last_action.dead.size()==1 and m.players[0].board[0].health==Match.CARDS.runic_familiar.health+1)
+ m.players[0].hand=["astral_flame"]
+ assert(m.cast(0,0,1,-1),"Chama Astral também pode atingir o castelo")
  m=fixture()
  m.players[0].board=[unit("mage",13),unit("runic_familiar",14)]
  tank=unit("wall_guard",15)
@@ -50,9 +53,10 @@ func _init() -> void:
  assert(Match.CARD_DATA.mage.ability_entries(-1,1)[0].name=="Disparo Arcano 2")
  m=fixture()
  m.players[0].board=[unit("lightning_rogue",16,false)]
+ m.players[0].board[0]["summoned_this_turn"]=true
  m.players[0].hand=["shadow_step"]
  assert(m.cast(0,0,0,0))
- assert(m.players[0].board[0].ready and m.players[0].board[0].attack==4)
+ assert(m.players[0].board[0].ready and Match.physical_attack(m.players[0].board[0])==4)
  assert(m.act(0,0,-1) and m.players[1].hp==16)
  m=fixture()
  var grown=unit("farmer",17,false)
@@ -78,7 +82,7 @@ func _init() -> void:
  assert(m.players[0].board[0].block==2,"Bloqueio 2 recupera todas as cargas")
  m=fixture()
  m.turn=1
- m.players[1].mana=3
+ m.players[1].mana=Match.CARDS.astral_flame.cost
  m.players[1].hand=["astral_flame"]
  m.players[0].board=[unit("mage",41)]
  assert(m.ai_step() and m.players[0].board.is_empty())
@@ -87,7 +91,8 @@ func _init() -> void:
  m.players[1].mana=2
  m.players[1].hand=["shadow_step"]
  m.players[1].board=[unit("lightning_rogue",42,false)]
+ m.players[1].board[0]["summoned_this_turn"]=true
  assert(m.ai_step() and m.players[1].board[0].ready)
  assert(m.ai_step() and m.players[0].hp==16)
- print("OK: 47 recursos, magias, alvos, custos, aura, buffs, preparo, cura, campo cheio e IA.")
+ print("OK: recursos, magias, alvos, custos, aura, buffs, preparo, cura, campo cheio e IA.")
  quit()

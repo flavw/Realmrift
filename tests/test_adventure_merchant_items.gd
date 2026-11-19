@@ -23,12 +23,13 @@ func verify() -> void:
  assert(run.phase=="item" and run.options.size()==3)
  view.equip(run.options[0]);assert(run.equipment.size()==1 and run.step==5)
  run.step=6;run.gold=3;view.open_shop()
- assert(not run.shop_premium_key.is_empty() and run.shop_premium_price==run.market_price(run.shop_premium_key,true))
+ assert(not run.shop_premium_key.is_empty())
  var key: String=run.shop_premium_key
+ var price: int=run.market_price(key,true)
  assert(Match.CARD_DATA[key].has_meta("adventure_items"))
- run.gold=run.shop_premium_price-1
- assert(not run.buy_premium_card(key) and run.gold==run.shop_premium_price-1)
- run.gold=run.shop_premium_price
+ run.gold=price-1
+ assert(not run.buy_premium_card(key) and run.gold==price-1)
+ run.gold=price
  var before: int=run.deck.size()
  assert(run.buy_premium_card(key) and run.gold==0 and run.deck.size()==before+1 and run.shop_premium_sold)
  assert(not run.buy_premium_card(key))

@@ -18,6 +18,7 @@ config/features=PackedStringArray("4.7")
 
 GameMusic="*res://scripts/game_music.gd"
 GameDisplay="*res://scripts/game_display.gd"
+DuelNetwork="*res://scripts/duel_network.gd"
 
 [display]
 

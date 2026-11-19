@@ -1,0 +1,5 @@
+# adventure-river-fish
+
+Geração original. image_gen integrado; conversão para WebP no Godot, qualidade 0,90. Destino: assets/art/adventure-river-fish.webp.
+
+Original portrait 2:3 full bleed realistic painted fantasy trading card illustration. A beautiful small silver and turquoise river fish swimming in clear moving river water, one fish prominently foreground and a small school of same species behind to suggest pack cooperation. Natural freshwater fish anatomy, fine scales catching ordinary daylight from surface, pebbles and submerged roots, a medieval stone bridge barely visible through the water surface high in background. Charming but grounded realistic fantasy card art, premium painterly detail, no anthropomorphism. Subject face and body clearly below top 12 percent; uppermost 7 percent quiet continuous watery scenery for title and mana overlays, not a flat strip. No typography, borders, icons, watermark. Strong readable fish silhouette in upper-middle and open lower quarter for card ability overlays.

@@ -5,9 +5,11 @@ const Items=preload("res://scripts/adventure_items.gd")
 func _initialize() -> void:call_deferred("verify")
 func verify() -> void:
  var run=State.new()
+ var prices_by_mana: Array[int]=[1,1,1,2,2,3]
  for key in Match.CARD_DATA:
-  assert(run.market_price(key)==clampi(Match.CARD_DATA[key].cost,1,3))
-  assert(run.market_price(key,true)==mini(5,clampi(Match.CARD_DATA[key].cost,1,3)+2))
+  var expected: int=prices_by_mana[mini(Match.CARD_DATA[key].cost,5)]
+  assert(run.market_price(key)==expected)
+  assert(run.market_price(key,true)==expected+2)
  run.deck=["warrior","warrior","squire"]
  run.phase="item";run.options=["warrior"];run.pending_item="heart"
  assert(run.apply_item("warrior"))
@@ -22,7 +24,7 @@ func verify() -> void:
  assert(Match.CARD_DATA[run.deck[0]].health==Match.CARD_DATA.warrior.health+2)
  var normal=Match.new();assert(normal.spawn_unit(0,"warrior").health==Match.CARD_DATA.warrior.health)
  run=State.new();run.deck=["squire"];run.phase="shop";run.gold=10
- run.shop_premium_key=Items.enhance("squire","boots");run.shop_premium_price=run.market_price(run.shop_premium_key,true)
+ run.shop_premium_key=Items.enhance("squire","boots")
  assert(run.buy_premium_card(run.shop_premium_key) and run.gold==7)
  assert(run.deck.size()==2 and run.deck.all(func(key):return Match.CARD_DATA[key].swift))
  assert(run.deck.all(func(key):return Match.CARD_DATA[key].attack==Match.CARD_DATA.squire.attack))
@@ -46,8 +48,8 @@ func verify() -> void:
  await process_frame;await process_frame;await create_timer(0.55).timeout
  scroll=view.find_child("AdventureMapScroll",true,false)
  assert(scroll.scroll_horizontal>300 and run.map_scroll_position>300)
- run.step=4;view.render();await process_frame;await process_frame;await create_timer(0.55).timeout
- var chest: Control=view.find_child("Route_4_2",true,false)
+ run.step=State.STAGES.find("power_event");view.render();await process_frame;await process_frame;await create_timer(0.55).timeout
+ var chest: Control=view.find_child("Route_%d_2" % run.step,true,false)
  assert(chest.get_child(0).material.get_shader_parameter("focus")==Vector2(0.40,0.49))
  assert(chest.get_child(0).material.get_shader_parameter("crop")==Vector2(0.42,0.58))
  if DisplayServer.get_name()!="headless":root.get_texture().get_image().save_png("res://.local/adventure-drag-chest.png")

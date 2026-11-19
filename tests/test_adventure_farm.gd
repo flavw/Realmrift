@@ -9,8 +9,8 @@ func verify() -> void:
  assert(run.phase=="intro")
  view.advance_intro()
  assert(run.phase=="faction")
- run.deck=Match.default_deck(0).slice(0,15);run.phase="map";run.step=4;run.ensure_routes();view.render()
- assert(run.route_rows[4][1].kind=="farm")
+ run.deck=Match.default_deck(0).slice(0,15);run.phase="map";run.step=State.STAGES.find("power_event");run.ensure_routes();view.render()
+ assert(run.route_rows[run.step][1].kind=="farm")
  view.choose_route(1);assert(run.phase=="farm")
  if DisplayServer.get_name()!="headless":
   await process_frame;await process_frame
@@ -21,7 +21,7 @@ func verify() -> void:
  for key in run.options:
   assert(Match.CARD_DATA[key].faction==CardData.Faction.VILLAGER and Match.CARD_DATA[key].card_type==CardData.CardType.CREATURE)
  var count: int=run.deck.size()
- assert(run.recruit_from_farm(run.options[0]) and run.deck.size()==count+1 and run.step==5)
+ assert(run.recruit_from_farm(run.options[0]) and run.deck.size()==count+1 and run.step==State.STAGES.find("power_event")+1)
  assert(not run.gift_farmer())
  run.phase="farm";run.gold=2
  assert(run.gift_farmer() and run.gold==0 and run.farm_blessing_pending)

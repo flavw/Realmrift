@@ -16,12 +16,15 @@ func verify() -> void:
  run.current_life=20;run.finish_combat(true,20)
  assert(run.current_life==21)
  run.powers.append("combat_gold");run.gold=0;run.gain_victory_gold();assert(run.gold==2)
- for f in [0,1,3,4,5,6]:
+ for f in State.PRIMARY_FACTIONS:
   var early: Array=run.enemy_deck_for(f,0)
-  var late: Array=run.enemy_deck_for(f,8)
+  var late: Array=run.enemy_deck_for(f,State.STAGES.rfind("combat"))
   assert(early.size()==15 and late.size()==22)
   for key in early:assert(DuelMatch.CARD_DATA[key].cost<=3)
- var combat_steps: Array=[0,1,3,5,7,8]
+  assert(DuelMatch.valid_deck(late))
+ var combat_steps: Array=[]
+ for at in range(State.STAGES.size()):
+  if State.STAGES[at]=="combat":combat_steps.append(at)
  var castle_lives: Array=[12,15,17,18,19,20]
  for i in range(combat_steps.size()):
   run.step=combat_steps[i]
@@ -32,7 +35,7 @@ func verify() -> void:
  run.step=0
  run.ensure_routes()
  assert(run.route_rows.size()==State.STAGES.size())
- for at in [2,6,9]:assert(run.route_rows[at][1].kind=="healer")
+ for at in [3,State.STAGES.find("fortune"),State.STAGES.size()-3]:assert(run.route_rows[at].any(func(node):return node.kind=="healer"))
  for row in run.route_rows:
   assert(row.size()>=2 or row[0].kind=="boss")
   for node in row:
@@ -51,7 +54,7 @@ func verify() -> void:
  run.step=2;view.render();await process_frame
  var before: int=run.gold
  view.choose_route(0)
- assert(run.treasure_roll>=1 and run.treasure_roll<=6 and run.gold==before+run.treasure_roll)
+ assert(run.phase=="bridge" and run.gold==before)
  var after: int=run.gold
  view.choose_route(0)
  assert(run.gold==after)

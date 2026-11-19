@@ -1,5 +1,6 @@
 extends RefCounted
 const Match=preload("res://scripts/match.gd")
+const CREATURE_LOOT=["heart","sword","shield","boots","poison_dagger","ward_cloak","renewal_brooch"]
 const DEFINITIONS={
  "boots":{"name":"Botas da Disparada","description":"Concede Disparada: pode atacar no turno de entrada. Se já tiver Disparada, recebe +1 de ataque.","icon":"res://assets/ui/item-boots.svg"},
  "boots_attack":{"name":"Botas da Disparada · ataque","description":"Esta criatura já tinha Disparada: recebeu +1 de ataque permanente em todas as cópias desta carta na expedição.","icon":"res://assets/ui/item-boots.svg"},
@@ -8,7 +9,10 @@ const DEFINITIONS={
  "charm":{"name":"Talismã de mana","description":"Custo de mana reduzido em 1 em todas as cópias desta carta (mínimo 0).","icon":"res://assets/ui/item-charm.svg"},
  "heart":{"name":"Amuleto vital","description":"+2 de vida permanente em todas as cópias desta carta na expedição.","icon":"res://assets/ui/item-heart.svg"},
  "sword":{"name":"Lâmina afiada","description":"+1 de ataque permanente em todas as cópias desta carta na expedição.","icon":"res://assets/ui/item-sword.svg"},
- "shield":{"name":"Broquel de ferro","description":"+1 de Armadura permanente em todas as cópias desta carta na expedição.","icon":"res://assets/ui/item-shield.svg"}
+ "shield":{"name":"Broquel de ferro","description":"+1 de Armadura permanente em todas as cópias desta carta na expedição.","icon":"res://assets/ui/item-shield.svg"},
+ "poison_dagger":{"name":"Adaga envenenada","description":"+1 de Envenenar em todas as cópias desta carta. Ataques e contra-ataques físicos aplicam 1 Veneno adicional a criaturas.","icon":"res://assets/ui/item-poison-dagger.svg"},
+ "ward_cloak":{"name":"Manto rúnico","description":"+1 de Antimagia em todas as cópias desta carta.","icon":"res://assets/ui/item-ward-cloak.svg"},
+ "renewal_brooch":{"name":"Broche da renovação","description":"+1 de Regeneração em todas as cópias desta carta.","icon":"res://assets/ui/item-renewal-brooch.svg"}
 }
 static var serial:=0
 static func base_key(key: String) -> String:
@@ -30,6 +34,9 @@ static func enhance(key: String,item: String) -> String:
   "heart":data.health+=2
   "sword":data.attack+=1
   "shield":data.armor+=1
+  "poison_dagger":data.envenom+=1
+  "ward_cloak":data.antimagic+=1
+  "renewal_brooch":data.regeneration+=1
  var applied: Array=data.get_meta("adventure_items",[]).duplicate()
  applied.append(applied_item)
  data.set_meta("adventure_items",applied)

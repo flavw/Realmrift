@@ -48,7 +48,7 @@ func verify() -> void:
  payout.confirmed.emit();await process_frame
  assert(not ended.xp_animation_pending)
  view.queue_free();await process_frame;await process_frame;State.current=null
- var completed=State.new(reloaded_profile);completed.deck=Match.default_deck(0).slice(0,15);completed.step=11
+ var completed=State.new(reloaded_profile);completed.deck=Match.default_deck(0).slice(0,15);completed.step=State.STAGES.size()-1
  completed.finish_combat(true,10)
  assert(completed.pending_xp==3 and reloaded_profile.xp==2)
  completed.advance();assert(completed.phase=="victory" and reloaded_profile.xp==5 and completed.xp_animation_pending)
